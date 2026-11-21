@@ -1,3 +1,4 @@
+@if (!hidden()) {
 <nav class="dock" aria-label="Navigation principale">
   @for (item of items; track item.path) {
     <a
@@ -19,3 +20,4 @@
     </a>
   }
 </nav>
+}

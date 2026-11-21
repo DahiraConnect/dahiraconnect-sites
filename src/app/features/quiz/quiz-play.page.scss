@@ -1,0 +1,572 @@
+@use 'styles/mixins' as m;
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: 0 var(--gutter);
+
+  @include m.desktop {
+    max-width: 760px;
+    margin-inline: auto;
+    padding-top: var(--space-6);
+  }
+}
+
+.hero__back {
+  @include m.flex-row(6px);
+  align-self: flex-start;
+  min-height: var(--tap-min);
+  color: var(--color-text-on-dark-soft);
+  font-weight: 600;
+
+  &:hover {
+    color: var(--color-text-on-dark);
+  }
+}
+
+.hero__title {
+  @include m.display(var(--fs-hero), var(--lh-tight));
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.progress__track {
+  flex: 1;
+  height: 10px;
+  border-radius: var(--radius-pill);
+  background: rgb(244 239 227 / 0.15);
+  overflow: hidden;
+}
+
+.progress__bar {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-brand));
+  transition: width var(--dur-slow) var(--ease-out);
+}
+
+.progress__count {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-gold-line);
+}
+
+.sheet {
+  @include m.overlap-sheet;
+  padding: var(--space-6) var(--space-3) var(--space-11);
+
+  // Place pour le bandeau « Continuer » en bas de l'écran
+  &--answered {
+    padding-bottom: 240px;
+  }
+
+  @include m.desktop {
+    margin-top: -64px;
+    padding: 64px var(--gutter) 112px;
+
+    &--answered {
+      padding-bottom: 200px;
+    }
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 760px;
+  margin-inline: auto;
+  padding: var(--space-6) var(--space-4);
+  border-radius: var(--radius-card);
+  background: var(--color-surface-card);
+  box-shadow: var(--shadow-float);
+  animation: card-in var(--dur-base) var(--ease-out);
+
+  @include m.desktop {
+    padding: var(--space-10);
+  }
+}
+
+.source {
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+// Arabe : police lisible du téléphone (pas la calligraphie du titre), texte plus grand
+.is-ar {
+  font-family: var(--font-arabic-text);
+
+  .question__text,
+  .intro__desc,
+  .done__title {
+    font-family: inherit;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  .choice {
+    font-size: 21px;
+    text-align: right;
+  }
+
+  .choices--pair .choice {
+    font-size: 26px;
+    text-align: center;
+  }
+
+  .intro__how {
+    text-align: right;
+  }
+}
+
+.hero__title[lang='ar'] {
+  font-family: var(--font-arabic-text);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+// Choix de la langue (thèmes malikites)
+.lang {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+  width: 100%;
+  max-width: 360px;
+  padding: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-muted);
+}
+
+.lang__btn {
+  @include m.focus-ring;
+  min-height: 52px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-weight: 700;
+  font-size: var(--fs-body-lg);
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast),
+    color var(--dur-fast);
+
+  &[lang='ar'] {
+    font-family: var(--font-arabic-text);
+    font-size: 20px;
+  }
+
+  &[aria-pressed='true'] {
+    background: var(--color-primary);
+    color: var(--color-text-on-dark);
+  }
+}
+
+// ——— Intro ———
+.intro {
+  align-items: center;
+  text-align: center;
+}
+
+.intro__icon {
+  display: grid;
+  place-items: center;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-gold-line);
+  font-size: 44px;
+}
+
+.intro__desc {
+  @include m.display(24px, 1.2);
+}
+
+// Mode d'emploi en 3 gestes, avec icônes
+.intro__how {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  text-align: left;
+
+  li {
+    @include m.flex-row(var(--space-3));
+    font-size: var(--fs-body-lg);
+  }
+
+  .ph {
+    flex-shrink: 0;
+    font-size: 26px;
+    color: var(--color-primary-mid);
+  }
+}
+
+.intro__meta {
+  font-weight: 600;
+  color: var(--color-gold-text);
+}
+
+.intro__start {
+  min-width: 240px;
+  min-height: var(--btn-h-lg);
+  font-size: 20px;
+}
+
+// ——— Question ———
+.question__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.question__text {
+  @include m.display(26px, 1.2);
+  outline: none;
+
+  @include m.desktop {
+    font-size: 32px;
+  }
+}
+
+// Lecture à voix haute
+.listen {
+  @include m.focus-ring;
+  @include m.flex-row(8px);
+  align-self: flex-start;
+  min-height: var(--tap-min);
+  padding: 0 var(--space-4);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-weight: 700;
+  cursor: pointer;
+
+  .ph {
+    font-size: 22px;
+  }
+
+  &.is-on {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-text-on-dark);
+  }
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+
+  // « Farata » / « Sunna » : deux grandes tuiles côte à côte
+  &--pair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    .choice {
+      flex-direction: column;
+      justify-content: center;
+      min-height: 120px;
+      text-align: center;
+    }
+  }
+}
+
+.choice {
+  @include m.focus-ring;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 68px;
+  padding: var(--space-3) var(--space-4);
+  border: 3px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color var(--dur-fast),
+    background-color var(--dur-fast),
+    transform var(--dur-fast),
+    opacity var(--dur-base);
+
+  &:hover:not(:disabled) {
+    border-color: var(--color-primary);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+
+  &.is-correct {
+    border-color: var(--color-brand);
+    background: rgb(27 177 62 / 0.14);
+    animation: pop-ok 400ms var(--ease-spring);
+  }
+
+  &.is-wrong {
+    border-color: var(--color-danger);
+    background: rgb(192 57 43 / 0.1);
+    animation: shake 400ms ease;
+  }
+
+  // Les autres réponses s'effacent une fois la réponse donnée
+  &:disabled:not(.is-correct):not(.is-wrong) {
+    opacity: 0.45;
+  }
+}
+
+// Rond vide → ✓ vert ou ✗ rouge
+.choice__dot {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-surface-card);
+  font-size: 20px;
+
+  .is-correct & {
+    border-color: var(--color-brand);
+    background: var(--color-brand);
+    color: var(--color-on-brand);
+  }
+
+  .is-wrong & {
+    border-color: var(--color-danger);
+    background: var(--color-danger);
+    color: var(--color-surface-card);
+  }
+}
+
+.choice__text {
+  flex: 1;
+}
+
+// ——— Bandeau réponse (bas de l'écran) ———
+.answer {
+  position: fixed;
+  z-index: 80;
+  inset: auto 0 0;
+  transform: translateY(110%);
+  transition: transform var(--dur-base) var(--ease-out);
+
+  &.is-open {
+    transform: none;
+  }
+}
+
+.answer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--gutter) calc(var(--space-5) + env(safe-area-inset-bottom));
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  background: var(--color-danger-soft);
+  box-shadow: 0 -12px 40px rgb(6 39 17 / 0.18);
+
+  .is-right & {
+    background: var(--color-success-soft);
+  }
+
+  @include m.desktop {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 760px;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  }
+}
+
+.answer__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.answer__verdict {
+  @include m.flex-row(var(--space-2));
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--color-danger-text);
+
+  .ph {
+    font-size: 28px;
+  }
+
+  .is-right & {
+    color: var(--color-primary-mid);
+  }
+}
+
+.answer__explain {
+  color: var(--color-text-secondary);
+}
+
+.answer__next {
+  @include m.btn-base(var(--btn-h-lg));
+  width: 100%;
+  background: var(--color-danger-text);
+  color: var(--color-surface-card);
+  font-size: 20px;
+
+  .is-right & {
+    background: var(--color-primary);
+  }
+
+  .ph {
+    font-size: 22px;
+  }
+
+  @include m.desktop {
+    width: auto;
+    min-width: 240px;
+  }
+}
+
+// ——— Fin ———
+.done {
+  align-items: center;
+  text-align: center;
+}
+
+.done__score {
+  @include m.display(96px, 1);
+  color: var(--color-primary);
+  animation: pop-ok 700ms var(--ease-spring);
+
+  span {
+    font-size: 48px;
+    color: var(--color-text-muted);
+  }
+}
+
+.done__title {
+  @include m.display(var(--fs-h2), 1.15);
+}
+
+.done__best {
+  font-weight: 600;
+  color: var(--color-gold-text);
+}
+
+.done__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.done__share {
+  background: var(--color-brand);
+  color: var(--color-on-brand);
+
+  &:hover {
+    color: var(--color-on-brand);
+    filter: brightness(1.08);
+  }
+}
+
+.review {
+  width: 100%;
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  text-align: left;
+
+  summary {
+    @include m.focus-ring;
+    display: flex;
+    align-items: center;
+    min-height: var(--tap-min);
+    font-weight: 700;
+    cursor: pointer;
+  }
+}
+
+.review__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.review__item {
+  display: flex;
+  gap: var(--space-3);
+
+  > .ph {
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-size: 20px;
+    color: var(--color-danger-text);
+  }
+
+  &.is-correct > .ph {
+    color: var(--color-primary-mid);
+  }
+
+  > span {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+}
+
+.review__q {
+  font-weight: 600;
+}
+
+.review__a {
+  font-size: var(--fs-small);
+  color: var(--color-text-secondary);
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes pop-ok {
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+@keyframes shake {
+  20%,
+  60% {
+    transform: translateX(-6px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(6px);
+  }
+}

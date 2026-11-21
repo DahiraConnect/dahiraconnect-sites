@@ -1,0 +1,160 @@
+@use 'styles/mixins' as m;
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--gutter) 0;
+
+  @include m.desktop {
+    padding-top: var(--space-10);
+  }
+}
+
+.hero__overline {
+  color: var(--color-gold-line);
+}
+
+.hero__title {
+  @include m.display(var(--fs-hero-xl), 0.95);
+}
+
+.hero__lead {
+  max-width: 48ch;
+  font-size: var(--fs-body-lg);
+  color: var(--color-text-on-dark-soft);
+}
+
+.sheet {
+  @include m.overlap-sheet;
+  padding: var(--space-8) var(--gutter) var(--space-11);
+
+  @include m.desktop {
+    margin-top: -64px;
+    padding: 64px var(--gutter) 112px;
+  }
+}
+
+.themes {
+  display: grid;
+  gap: var(--space-4);
+
+  @include m.desktop {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+}
+
+.theme {
+  @include m.focus-ring;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  height: 100%;
+  padding: var(--space-5);
+  border-radius: var(--radius-card);
+  background: var(--color-surface-card);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+
+  &:hover {
+    color: var(--color-text-primary);
+  }
+
+  @include m.hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-float);
+
+    .theme__play .ph {
+      transform: translateX(4px);
+    }
+  }
+
+  @include m.desktop {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-5);
+    padding: var(--space-8) var(--space-6);
+  }
+}
+
+.theme__icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-gold-line);
+  font-size: 28px;
+
+  @include m.desktop {
+    width: 72px;
+    height: 72px;
+    font-size: 34px;
+  }
+}
+
+.theme__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.theme__title {
+  @include m.display(22px, 1.15);
+}
+
+.theme__ar {
+  font-family: var(--font-arabic-text);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--color-gold-text);
+  text-align: left;
+}
+
+.theme__badge {
+  white-space: nowrap;
+}
+
+.theme__desc {
+  color: var(--color-text-secondary);
+}
+
+.theme__meta {
+  margin-top: var(--space-1);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--color-gold-text);
+}
+
+.theme__play {
+  @include m.flex-row(6px);
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--color-primary-mid);
+
+  .ph {
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  // Mobile : flèche seule, la carte entière est cliquable
+  @include m.mobile-only {
+    font-size: 0;
+
+    .ph {
+      font-size: 22px;
+    }
+  }
+}
+
+.empty {
+  font-size: var(--fs-body-lg);
+  color: var(--color-text-secondary);
+}

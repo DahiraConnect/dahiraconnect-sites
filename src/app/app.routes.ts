@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { eventExistsGuard, eventSeoResolver, eventTitleResolver } from './features/agenda/agenda.resolvers';
 import { albumExistsGuard, albumSeoResolver, albumTitleResolver } from './features/gallery/gallery.resolvers';
+import { quizExistsGuard, quizSeoResolver, quizTitleResolver } from './features/quiz/quiz.resolvers';
 
 export const routes: Routes = [
   { path: 'admin', loadChildren: () => import('./features/admin/admin.routes') },
@@ -64,6 +65,19 @@ export const routes: Routes = [
         canActivate: [albumExistsGuard],
         title: albumTitleResolver,
         resolve: { seo: albumSeoResolver },
+      },
+      {
+        path: 'quiz',
+        loadComponent: () => import('./features/quiz/quiz.page'),
+        title: 'Quiz',
+        data: { seo: { description: 'Testez vos connaissances sur le dahira, sa lignée et sa charte.' } },
+      },
+      {
+        path: 'quiz/:theme',
+        loadComponent: () => import('./features/quiz/quiz-play.page'),
+        canActivate: [quizExistsGuard],
+        title: quizTitleResolver,
+        resolve: { seo: quizSeoResolver },
       },
       {
         path: 'rejoindre',

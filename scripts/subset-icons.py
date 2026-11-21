@@ -2,7 +2,7 @@
 """
 Sous-ensemble des icônes Phosphor réellement utilisées (perf 3G).
 
-Scanne src/app (.html, .ts) pour `ph-<nom>` (graisse regular) et `ph-fill ph-<nom>` (fill),
+Scanne src/app (.html, .ts) et src/assets/mock (.json) pour `ph-<nom>` (graisse regular) et `ph-fill ph-<nom>` (fill),
 puis génère :
   - src/assets/fonts/phosphor-regular.woff2, phosphor-fill.woff2
   - src/styles/_icons.scss
@@ -30,11 +30,14 @@ WEIGHTS = {
 
 
 def used_icons():
-    """`ph ph-x` (gabarits) ou `icon: 'ph-x'` (TS) → regular ; `ph-fill ph-x` → fill."""
-    text = '\n'.join(
-        p.read_text(encoding='utf-8') for p in SRC.rglob('*') if p.suffix in {'.html', '.ts'}
-    )
-    regular = set(re.findall(r"(?:\bph |icon: ')ph-([a-z0-9-]+)", text))
+    """Icônes citées dans le code (gabarits, TS) et dans les données (src/assets/mock/*.json).
+
+    regular : `ph ph-x`, ou un nom entre guillemets ('ph-x', "ph-x") ; fill : `ph-fill ph-x`.
+    """
+    files = [p for p in SRC.rglob('*') if p.suffix in {'.html', '.ts'}]
+    files += list((ROOT / 'src' / 'assets' / 'mock').glob('*.json'))
+    text = '\n'.join(p.read_text(encoding='utf-8') for p in files)
+    regular = set(re.findall(r"(?:\bph |['\"])ph-([a-z0-9-]+)", text)) - {'fill'}
     fill = set(re.findall(r'\bph-fill ph-([a-z0-9-]+)', text))
     return regular, fill
 

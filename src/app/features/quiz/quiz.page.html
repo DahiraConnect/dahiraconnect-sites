@@ -1,0 +1,45 @@
+<app-dark-hero>
+  <div class="hero">
+    <p class="overline hero__overline rise">Apprendre en jouant</p>
+    <h1 class="hero__title rise" style="--i: 1">Quiz du dahira</h1>
+    @if (quiz(); as q) {
+      <p class="hero__lead rise" style="--i: 2">{{ q.intro }}</p>
+    }
+  </div>
+</app-dark-hero>
+
+<div class="sheet container">
+  @if (themes().length) {
+    <ul class="themes">
+      @for (t of themes(); track t.id; let i = $index) {
+        <li appReveal [appRevealDelay]="i * 90">
+          <a class="theme" [routerLink]="['/quiz', t.id]">
+            <span class="theme__icon" aria-hidden="true"><i class="ph {{ t.icon || 'ph-question' }}"></i></span>
+            <span class="theme__body">
+              <span class="theme__title">{{ t.title }}</span>
+              @if (t.ar) {
+                <span class="theme__ar" lang="ar" dir="rtl">{{ t.ar.title }}</span>
+              }
+              <span class="theme__desc">{{ t.description }}</span>
+              <span class="theme__meta">
+                {{ plural(t.questions.length, 'question') }}
+                @if (hasArabic(t)) {
+                  · <span class="theme__badge">FR · <span lang="ar">عربي</span></span>
+                }
+                @if (best()[t.id] !== null && best()[t.id] !== undefined) {
+                  · Meilleur score : {{ best()[t.id] }}/{{ t.questions.length }}
+                }
+              </span>
+            </span>
+            <span class="theme__play">
+              Jouer
+              <i class="ph ph-arrow-right" aria-hidden="true"></i>
+            </span>
+          </a>
+        </li>
+      }
+    </ul>
+  } @else {
+    <p class="empty">Le quiz arrive bientôt.</p>
+  }
+</div>

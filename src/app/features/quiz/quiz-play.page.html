@@ -1,0 +1,174 @@
+@if (data(); as d) {
+  <app-dark-hero>
+    <div class="hero">
+      <a class="hero__back" routerLink="/quiz" [attr.lang]="lang()" [attr.dir]="isAr() ? 'rtl' : null">
+        <i class="ph {{ isAr() ? 'ph-arrow-right' : 'ph-arrow-left' }}" aria-hidden="true"></i>
+        {{ t()['back'] }}
+      </a>
+      <h1 class="hero__title" [attr.lang]="lang()" [attr.dir]="isAr() ? 'rtl' : null">{{ title() }}</h1>
+      @if (step() === 'question') {
+        <div class="progress">
+          <div class="progress__track" role="progressbar" [attr.aria-valuenow]="index() + 1" aria-valuemin="1" [attr.aria-valuemax]="total()" [attr.aria-label]="'Question ' + (index() + 1) + ' sur ' + total()">
+            <span class="progress__bar" [style.width.%]="progress()"></span>
+          </div>
+          <span class="progress__count" aria-hidden="true">{{ index() + 1 }} / {{ total() }}</span>
+        </div>
+      }
+    </div>
+  </app-dark-hero>
+
+  <div
+    class="sheet container"
+    [class.sheet--answered]="step() === 'question' && picked() !== null"
+    [class.is-ar]="isAr()"
+    [attr.lang]="lang()"
+    [attr.dir]="isAr() ? 'rtl' : null"
+  >
+    @switch (step()) {
+      @case ('intro') {
+        <section class="card intro">
+          <span class="intro__icon" aria-hidden="true"><i class="ph {{ d.icon || 'ph-question' }}"></i></span>
+          @if (arabicAvailable()) {
+            <div class="lang" role="group" [attr.aria-label]="t()['language']">
+              <button type="button" class="lang__btn" lang="fr" dir="ltr" [attr.aria-pressed]="!isAr()" (click)="setLang('fr')">
+                Français
+              </button>
+              <button type="button" class="lang__btn" lang="ar" dir="rtl" [attr.aria-pressed]="isAr()" (click)="setLang('ar')">
+                العربية
+              </button>
+            </div>
+          }
+          <p class="intro__desc">{{ description() }}</p>
+          <ol class="intro__how">
+            <li><i class="ph ph-hand-tap" aria-hidden="true"></i> {{ t()['how1'] }}</li>
+            <li><i class="ph ph-check-circle" aria-hidden="true"></i> {{ t()['how2'] }}</li>
+            <li><i class="ph {{ isAr() ? 'ph-arrow-left' : 'ph-arrow-right' }}" aria-hidden="true"></i> {{ t()['how3'] }}</li>
+          </ol>
+          <p class="intro__meta">
+            {{ d.questions.length }} {{ d.questions.length > 1 ? t()['questions'] : t()['question'] }}
+            @if (best() !== null) {
+              · {{ t()['best'] }} : {{ best() }}/{{ d.questions.length }}
+            }
+          </p>
+          <button type="button" class="btn btn--dark intro__start" (click)="start()">
+            <i class="ph-fill ph-play" aria-hidden="true"></i>
+            {{ t()['start'] }}
+          </button>
+          @if (source()) {
+            <p class="source">{{ t()['source'] }} {{ source() }}.</p>
+          }
+        </section>
+      }
+
+      @case ('question') {
+        @if (current(); as q) {
+          <section class="card question" aria-labelledby="question-text">
+            <div class="question__head">
+              <h2 id="question-text" class="question__text" tabindex="-1" #questionHeading>{{ q.question }}</h2>
+              @if (canSpeak()) {
+                <button type="button" class="listen" [class.is-on]="speaking()" (click)="speak()" [attr.aria-pressed]="speaking()">
+                  <i class="ph {{ speaking() ? 'ph-stop' : 'ph-speaker-high' }}" aria-hidden="true"></i>
+                  {{ speaking() ? t()['stop'] : t()['listen'] }}
+                </button>
+              }
+            </div>
+
+            <ul class="choices" [class.choices--pair]="q.choices.length === 2">
+              @for (choice of q.choices; track choice; let i = $index) {
+                <li>
+                  <button
+                    type="button"
+                    class="choice"
+                    [class.is-correct]="picked() !== null && i === q.answer"
+                    [class.is-wrong]="picked() === i && i !== q.answer"
+                    [disabled]="picked() !== null"
+                    [attr.aria-pressed]="picked() === i"
+                    (click)="choose(i)"
+                  >
+                    <span class="choice__dot" aria-hidden="true">
+                      @if (picked() !== null && i === q.answer) {
+                        <i class="ph ph-check"></i>
+                      } @else if (picked() === i) {
+                        <i class="ph ph-x"></i>
+                      }
+                    </span>
+                    <span class="choice__text">{{ choice }}</span>
+                  </button>
+                </li>
+              }
+            </ul>
+          </section>
+
+          <!-- Bandeau du bas : verdict + Continuer, toujours visible sans défiler -->
+          <div class="answer" [class.is-open]="picked() !== null" [class.is-right]="isRight()" aria-live="polite">
+            @if (picked() !== null) {
+              <div class="answer__inner container">
+                <div class="answer__text">
+                  <p class="answer__verdict">
+                    <i class="ph {{ isRight() ? 'ph-check-circle' : 'ph-x-circle' }}" aria-hidden="true"></i>
+                    @if (isRight()) {
+                      {{ t()['right'] }}
+                    } @else {
+                      {{ t()['answerIs'] }} {{ q.choices[q.answer] }}
+                    }
+                  </p>
+                  @if (q.explanation) {
+                    <p class="answer__explain">{{ q.explanation }}</p>
+                  }
+                </div>
+                <button type="button" class="answer__next" (click)="next()" #continueBtn>
+                  {{ isLast() ? t()['seeScore'] : t()['continue'] }}
+                  <i class="ph {{ isAr() ? 'ph-arrow-left' : 'ph-arrow-right' }}" aria-hidden="true"></i>
+                </button>
+              </div>
+            }
+          </div>
+        }
+      }
+
+      @case ('done') {
+        <section class="card done" aria-labelledby="done-title">
+          <p class="done__score" aria-hidden="true">{{ score() }}<span>/{{ total() }}</span></p>
+          <h2 id="done-title" class="done__title">
+            <span class="sr-only">Votre score : {{ score() }} sur {{ total() }}. </span>{{ message() }}
+          </h2>
+          @if (best() !== null) {
+            <p class="done__best">{{ t()['best'] }} : {{ best() }}/{{ total() }}</p>
+          }
+          <div class="done__actions">
+            <a class="btn done__share" [href]="shareUrl()" target="_blank" rel="noopener">
+              <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+              {{ t()['share'] }}
+            </a>
+            <button type="button" class="btn btn--outline" (click)="start()">
+              <i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i>
+              {{ t()['replay'] }}
+            </button>
+            <a class="link-more" routerLink="/quiz">{{ t()['others'] }}&nbsp;<span aria-hidden="true">{{ isAr() ? '←' : '→' }}</span></a>
+          </div>
+
+          <details class="review">
+            <summary>{{ t()['review'] }}</summary>
+            <ol class="review__list">
+              @for (q of questions(); track q.question; let i = $index) {
+                <li class="review__item" [class.is-correct]="picks()[i] === q.answer">
+                  <i class="ph {{ picks()[i] === q.answer ? 'ph-check' : 'ph-x' }}" aria-hidden="true"></i>
+                  <span>
+                    <span class="review__q">{{ q.question }}</span>
+                    <span class="review__a">
+                      <span class="sr-only">{{ picks()[i] === q.answer ? 'Juste' : 'Faux' }} — </span>
+                      {{ t()['answer'] }} : {{ q.choices[q.answer] }}
+                    </span>
+                  </span>
+                </li>
+              }
+            </ol>
+          </details>
+          @if (source()) {
+            <p class="source">{{ t()['source'] }} {{ source() }}.</p>
+          }
+        </section>
+      }
+    }
+  </div>
+}

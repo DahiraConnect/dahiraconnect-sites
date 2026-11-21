@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { filter, map, startWith } from 'rxjs';
 
 interface DockItem {
   path: string;
@@ -18,6 +20,19 @@ interface DockItem {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DockNav {
+  private readonly router = inject(Router);
+
+  /** Pendant une partie de quiz, le dock est masqué (rien à toucher par erreur) */
+  protected readonly hidden = toSignal(
+    this.router.events.pipe(
+      filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+      map((e) => e.urlAfterRedirects),
+      startWith(this.router.url),
+      map((url) => /^\/quiz\/[^/?#]+/.test(url)),
+    ),
+    { initialValue: false },
+  );
+
   protected readonly items: DockItem[] = [
     { path: '/', label: 'Accueil', icon: 'ph-house', exact: true },
     { path: '/le-dahira', label: 'Le dahira', icon: 'ph-users-three' },

@@ -84,6 +84,28 @@
     </section>
   }
 
+  @if (quizThemes().length) {
+    <section class="block quiz" aria-labelledby="quiz-title" appReveal>
+      <div class="quiz__intro">
+        <span class="quiz__icon" aria-hidden="true"><i class="ph ph-question"></i></span>
+        <div>
+          <h2 id="quiz-title" class="quiz__title">Quiz du dahira</h2>
+          <p class="quiz__text">Testez vos connaissances et partagez votre score.</p>
+        </div>
+      </div>
+      <ul class="quiz__themes">
+        @for (t of quizThemes(); track t.id) {
+          <li>
+            <a class="quiz__chip" [routerLink]="['/quiz', t.id]">
+              <i class="ph {{ t.icon || 'ph-question' }}" aria-hidden="true"></i>
+              {{ t.title }}
+            </a>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+
   @if (dahira().support; as support) {
     <section class="block support" aria-labelledby="support-title" appReveal>
       <div class="support__intro">

@@ -1,0 +1,54 @@
+import { QuizLang } from '../../core/models';
+
+/** Libellés de l'écran de jeu, en français et en arabe. */
+export const QUIZ_TEXT: Record<QuizLang, Record<string, string>> = {
+  fr: {
+    back: 'Tous les thèmes',
+    how1: 'Touchez la bonne réponse.',
+    how2: 'Vous voyez tout de suite si c’est juste.',
+    how3: 'Touchez « Continuer ».',
+    question: 'question',
+    questions: 'questions',
+    best: 'Meilleur score',
+    start: 'Commencer',
+    listen: 'Écouter',
+    stop: 'Arrêter',
+    right: 'Bonne réponse !',
+    answerIs: 'Bonne réponse :',
+    continue: 'Continuer',
+    seeScore: 'Voir mon score',
+    share: 'Partager mon score',
+    replay: 'Rejouer',
+    others: 'Autres thèmes',
+    review: 'Revoir les réponses',
+    answer: 'Réponse',
+    source: 'Réponses d’après le',
+    language: 'Langue du quiz',
+  },
+  ar: {
+    back: 'كل المواضيع',
+    how1: 'المس الإجابة الصحيحة.',
+    how2: 'تعرف فورا إن كانت صحيحة.',
+    how3: 'المس «استمر».',
+    question: 'سؤال',
+    questions: 'أسئلة',
+    best: 'أفضل نتيجة',
+    start: 'ابدأ',
+    listen: 'استمع',
+    stop: 'توقف',
+    right: 'إجابة صحيحة!',
+    answerIs: 'الإجابة الصحيحة:',
+    continue: 'استمر',
+    seeScore: 'النتيجة',
+    share: 'شارك نتيجتي',
+    replay: 'أعد اللعب',
+    others: 'مواضيع أخرى',
+    review: 'مراجعة الإجابات',
+    answer: 'الإجابة',
+    source: 'الإجابات من',
+    language: 'لغة الأسئلة',
+  },
+};
+
+/** Nom de la source en arabe */
+export const SOURCE_AR = 'مختصر الأخضري (المذهب المالكي)';

@@ -1,4 +1,4 @@
-import { Album, Board, Dahira, DahiraEvent, PageContent } from '../models';
+import { Album, Board, Dahira, DahiraEvent, PageContent, Quiz } from '../models';
 
 /** Tout le contenu public d'un dahira. V1 : JSON de démo ; ensuite : Supabase. */
 export interface TenantBundle {
@@ -7,17 +7,20 @@ export interface TenantBundle {
   albums: Album[];
   board: Board;
   content: PageContent;
+  /** Quiz (facultatif) */
+  quiz?: Quiz;
 }
 
 type Loader = () => Promise<TenantBundle>;
 
 const moutahabina: Loader = async () => {
-  const [dahira, events, albums, board, content] = await Promise.all([
+  const [dahira, events, albums, board, content, quiz] = await Promise.all([
     import('../../../assets/mock/tenant.json'),
     import('../../../assets/mock/events.json'),
     import('../../../assets/mock/albums.json'),
     import('../../../assets/mock/board.json'),
     import('../../../assets/mock/content.json'),
+    import('../../../assets/mock/quiz.json'),
   ]);
   return {
     dahira: dahira.default as unknown as Dahira,
@@ -25,6 +28,7 @@ const moutahabina: Loader = async () => {
     albums: albums.default as unknown as Album[],
     board: board.default as Board,
     content: content.default as PageContent,
+    quiz: quiz.default as Quiz,
   };
 };
 
