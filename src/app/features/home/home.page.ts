@@ -14,6 +14,7 @@ import { SectionHeading } from '../../shared/ui/section-heading/section-heading'
 import { WaButton } from '../../shared/ui/wa-button/wa-button';
 import { groupPayments } from '../../core/utils/payments';
 import { QuizService } from '../../core/data/quiz.service';
+import { plural } from '../../core/utils/plural';
 import { Reveal } from '../../shared/motion/reveal.directive';
 
 @Component({
@@ -43,4 +44,5 @@ export default class HomePage {
   /** Un seul numéro à copier quand Wave et Orange Money partagent le même */
   protected readonly payments = computed(() => groupPayments(this.dahira().support));
   protected readonly quizThemes = inject(QuizService).themes;
+  protected readonly plural = plural;
 }

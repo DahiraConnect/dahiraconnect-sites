@@ -90,19 +90,13 @@
         <span class="quiz__icon" aria-hidden="true"><i class="ph ph-question"></i></span>
         <div>
           <h2 id="quiz-title" class="quiz__title">Quiz du dahira</h2>
-          <p class="quiz__text">Testez vos connaissances et partagez votre score.</p>
+          <p class="quiz__text">{{ plural(quizThemes().length, 'thème') }} pour apprendre en jouant, en français et en arabe.</p>
         </div>
       </div>
-      <ul class="quiz__themes">
-        @for (t of quizThemes(); track t.id) {
-          <li>
-            <a class="quiz__chip" [routerLink]="['/quiz', t.id]">
-              <i class="ph {{ t.icon || 'ph-question' }}" aria-hidden="true"></i>
-              {{ t.title }}
-            </a>
-          </li>
-        }
-      </ul>
+      <a class="btn btn--light quiz__play" routerLink="/quiz">
+        <i class="ph-fill ph-play" aria-hidden="true"></i>
+        Jouer
+      </a>
     </section>
   }
 
