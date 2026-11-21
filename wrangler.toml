@@ -1,4 +1,11 @@
-# Cloudflare Pages : site statique pré-généré
+# Cloudflare Workers — site statique pré-généré (npm run build)
+# Le nom doit être celui du Worker créé dans le tableau de bord Cloudflare.
 name = "dahiraconnect"
-pages_build_output_dir = "dist/dahiraconnect/browser"
-compatibility_date = "2026-11-01"
+compatibility_date = "2026-11-13"
+
+[assets]
+directory = "./dist/dahiraconnect/browser"
+# Adresse inconnue : 404.html avec le statut 404
+not_found_handling = "404-page"
+# /agenda/index.html servi sur /agenda/
+html_handling = "auto-trailing-slash"

@@ -13,28 +13,28 @@ Angular 20 (standalone, signals, OnPush) + SSR. Brief complet : [Claude.md](Clau
 | `npm run deploy` | Build puis déploiement direct sur Cloudflare Pages (Wrangler) |
 | `npm run icons` | Régénère le sous-ensemble d'icônes Phosphor (nécessite `pip install fonttools brotli`) |
 
-## Déploiement (Cloudflare Pages)
+## Déploiement (Cloudflare)
 
 Site **statique** : chaque page (y compris chaque événement et album) est générée au build
 pour le dahira par défaut. Après une modification des données (`src/assets/mock`), un nouveau
-déploiement régénère les pages.
+déploiement régénère les pages. Chaque `git push` sur `main` redéploie le site.
 
-Réglages du projet Cloudflare Pages (connecté au dépôt GitHub) :
+Deux façons d'héberger, avec les mêmes fichiers :
 
-| Réglage | Valeur |
-| --- | --- |
-| Framework preset | None |
-| Build command | `npm run build` |
-| Build output directory | `dist/dahiraconnect/browser` |
-| Version de Node | 22 (fichier `.node-version`) |
+| | Cloudflare **Pages** | Cloudflare **Workers** |
+| --- | --- | --- |
+| Build command | `npm run build` | `npm run build` |
+| Output / config | Build output directory : `dist/dahiraconnect/browser` | `wrangler.toml` (deploy command : `npx wrangler deploy`) |
+| Sous-domaine dont le DNS est chez OVH | CNAME vers `<projet>.pages.dev` | Impossible : le domaine doit être géré par Cloudflare |
 
 - `public/_headers` : cache long pour les fichiers du build, pas de cache pour le service worker.
-- `404.html` est créé par `scripts/postbuild.mjs` : Cloudflare le sert pour toute adresse inconnue.
+- `404.html` est créé par `scripts/postbuild.mjs` et servi pour toute adresse inconnue.
 - Adresse publique (aperçus WhatsApp) : `siteUrl` dans `tenant.json`.
+- Version de Node : 22 (fichier `.node-version`).
 
 Plus tard, plusieurs dahiras par sous-domaine : repasser en rendu serveur
 (`outputMode: "server"` dans `angular.json`, `RenderMode.Server` dans `app.routes.server.ts`),
-sur un hébergement qui exécute le serveur (Cloudflare Workers, Node). `src/server.ts` est conservé pour cela.
+sur Cloudflare Workers. `src/server.ts` est conservé pour cela.
 
 ## Repères
 
