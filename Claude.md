@@ -261,7 +261,7 @@ export interface Dahira {
   slug: string;                 // 'moutahabina'
   name: string;                 // 'Dahira Moutahabina Fillahi'
   shortName: string;            // 'MOUTAHABINA'
-  nameArabic?: string;          // 'المتحابين في الله'
+  nameArabic?: string;          // 'دائرة المتحبن في اللّه'
   nameMeaning?: string;         // « ceux qui s'aiment pour Dieu »
   motto: string;                // « S'aimer pour Dieu, servir ensemble. »
   ringText: string;             // texte de l'anneau du médaillon
@@ -527,7 +527,7 @@ Fond `--color-primary-deep`, nom en arabe en filigrane (opacité .06), nom, adre
   "slug": "moutahabina",
   "name": "Dahira Moutahabina Fillahi",
   "shortName": "MOUTAHABINA",
-  "nameArabic": "المتحابين في الله",
+  "nameArabic": "دائرة المتحبن في اللّه",
   "nameMeaning": "ceux qui s'aiment pour Dieu",
   "motto": "S'aimer pour Dieu, servir ensemble.",
   "ringText": "S'AIMER POUR DIEU • SERVIR ENSEMBLE • DEPUIS 1999 •",
