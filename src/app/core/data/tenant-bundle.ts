@@ -1,11 +1,11 @@
-import { Album, BoardMember, Dahira, DahiraEvent, PageContent } from '../models';
+import { Album, Board, Dahira, DahiraEvent, PageContent } from '../models';
 
 /** Tout le contenu public d'un dahira. V1 : JSON de démo ; ensuite : Supabase. */
 export interface TenantBundle {
   dahira: Dahira;
   events: DahiraEvent[];
   albums: Album[];
-  board: BoardMember[];
+  board: Board;
   content: PageContent;
 }
 
@@ -23,7 +23,7 @@ const moutahabina: Loader = async () => {
     dahira: dahira.default as unknown as Dahira,
     events: events.default as DahiraEvent[],
     albums: albums.default as unknown as Album[],
-    board: board.default as BoardMember[],
+    board: board.default as Board,
     content: content.default as PageContent,
   };
 };

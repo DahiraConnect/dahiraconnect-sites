@@ -42,11 +42,12 @@
     <section class="block" aria-labelledby="board-title">
       <div class="block__head" appReveal>
         <h2 id="board-title" class="block__title">Le bureau</h2>
+        <a class="link-more" routerLink="bureau">Tout le bureau et les commissions&nbsp;<span aria-hidden="true">→</span></a>
       </div>
       @defer (on viewport) {
         <ul class="board">
-          @for (member of members(); track member.id; let i = $index) {
-            <li appReveal [appRevealDelay]="i * 80"><app-member-card [member]="member" [tone]="tone(i)" /></li>
+          @for (seat of members(); track seat.person.id; let i = $index) {
+            <li appReveal [appRevealDelay]="i * 80"><app-member-card [seat]="seat" [tone]="tone(i)" /></li>
           }
         </ul>
       } @placeholder {

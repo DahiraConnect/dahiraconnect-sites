@@ -1,8 +1,266 @@
-[
-  { "id": "m1", "name": "Djamil Fall", "role": "Président", "order": 1 },
-  { "id": "m2", "name": "Aminata Ndiaye", "role": "Vice-présidente", "order": 2 },
-  { "id": "m3", "name": "Baye Moussa Niang", "role": "Secrétaire général", "order": 3 },
-  { "id": "m4", "name": "Coumbis Siby", "role": "Trésorière", "order": 4 },
-  { "id": "m5", "name": "Abou Ndiaye", "role": "Communication", "order": 5 }
-]
-
+{
+  "people": [
+    {
+      "id": "p01",
+      "name": "Djamil Fall"
+    },
+    {
+      "id": "p02",
+      "name": "Aminata Ndiaye"
+    },
+    {
+      "id": "p03",
+      "name": "Baye Moussa Niang"
+    },
+    {
+      "id": "p04",
+      "name": "Coumbis Siby"
+    },
+    {
+      "id": "p05",
+      "name": "Abou Ndiaye"
+    },
+    {
+      "id": "p06",
+      "name": "Mamadou Sarr"
+    },
+    {
+      "id": "p07",
+      "name": "Fatou Diop"
+    },
+    {
+      "id": "p08",
+      "name": "Ousmane Ba"
+    },
+    {
+      "id": "p09",
+      "name": "Khady Faye"
+    },
+    {
+      "id": "p10",
+      "name": "Modou Gueye"
+    },
+    {
+      "id": "p11",
+      "name": "Awa Sy"
+    },
+    {
+      "id": "p12",
+      "name": "Cheikh Mbaye"
+    },
+    {
+      "id": "p13",
+      "name": "Ndeye Seck"
+    },
+    {
+      "id": "p14",
+      "name": "Ibrahima Diallo"
+    },
+    {
+      "id": "p15",
+      "name": "Mariama Cissé"
+    },
+    {
+      "id": "p16",
+      "name": "Pape Thiam"
+    },
+    {
+      "id": "p17",
+      "name": "Astou Ndour"
+    },
+    {
+      "id": "p18",
+      "name": "Moustapha Kane"
+    },
+    {
+      "id": "p19",
+      "name": "Bineta Sow"
+    },
+    {
+      "id": "p20",
+      "name": "Alioune Diouf"
+    },
+    {
+      "id": "p21",
+      "name": "Sokhna Mbengue"
+    },
+    {
+      "id": "p22",
+      "name": "Lamine Touré"
+    },
+    {
+      "id": "p23",
+      "name": "Rokhaya Diagne"
+    },
+    {
+      "id": "p24",
+      "name": "Serigne Lo"
+    },
+    {
+      "id": "p25",
+      "name": "Coumba Ndiaye"
+    },
+    {
+      "id": "p26",
+      "name": "Babacar Samb"
+    },
+    {
+      "id": "p27",
+      "name": "Yacine Gaye"
+    },
+    {
+      "id": "p28",
+      "name": "Assane Wade"
+    }
+  ],
+  "executive": [
+    {
+      "personId": "p01",
+      "role": "Président"
+    },
+    {
+      "personId": "p02",
+      "role": "Vice-présidente"
+    },
+    {
+      "personId": "p03",
+      "role": "Secrétaire général"
+    },
+    {
+      "personId": "p04",
+      "role": "Trésorière"
+    }
+  ],
+  "commissions": [
+    {
+      "id": "organisation",
+      "name": "Organisation",
+      "description": "Prépare les dahiras, l'accueil, la sonorisation et les déplacements comme la ziar.",
+      "members": [
+        {
+          "personId": "p03",
+          "role": "Responsable"
+        },
+        {
+          "personId": "p06",
+          "role": "Adjoint"
+        },
+        {
+          "personId": "p07"
+        },
+        {
+          "personId": "p08"
+        },
+        {
+          "personId": "p09"
+        },
+        {
+          "personId": "p10"
+        },
+        {
+          "personId": "p11"
+        }
+      ]
+    },
+    {
+      "id": "sociale",
+      "name": "Sociale",
+      "description": "Accompagne les membres lors des baptêmes, mariages, maladies et deuils.",
+      "members": [
+        {
+          "personId": "p02",
+          "role": "Responsable"
+        },
+        {
+          "personId": "p13",
+          "role": "Adjointe"
+        },
+        {
+          "personId": "p04"
+        },
+        {
+          "personId": "p15"
+        },
+        {
+          "personId": "p17"
+        },
+        {
+          "personId": "p19"
+        }
+      ]
+    },
+    {
+      "id": "culturelle",
+      "name": "Culturelle et religieuse",
+      "description": "Prépare les récitals de khassaïdes, les conférences et les nabiens.",
+      "members": [
+        {
+          "personId": "p12",
+          "role": "Responsable"
+        },
+        {
+          "personId": "p14",
+          "role": "Adjoint"
+        },
+        {
+          "personId": "p05"
+        },
+        {
+          "personId": "p16"
+        },
+        {
+          "personId": "p18"
+        },
+        {
+          "personId": "p20"
+        },
+        {
+          "personId": "p24"
+        }
+      ]
+    },
+    {
+      "id": "communication",
+      "name": "Communication",
+      "description": "Annonce les rendez-vous, gère le site, le groupe WhatsApp et les réseaux sociaux.",
+      "members": [
+        {
+          "personId": "p05",
+          "role": "Responsable"
+        },
+        {
+          "personId": "p21"
+        },
+        {
+          "personId": "p22"
+        },
+        {
+          "personId": "p23"
+        }
+      ]
+    },
+    {
+      "id": "finances",
+      "name": "Finances",
+      "description": "Suit les cotisations et tient les comptes du dahira.",
+      "members": [
+        {
+          "personId": "p04",
+          "role": "Responsable"
+        },
+        {
+          "personId": "p25"
+        },
+        {
+          "personId": "p26"
+        },
+        {
+          "personId": "p27"
+        },
+        {
+          "personId": "p28"
+        }
+      ]
+    }
+  ]
+}

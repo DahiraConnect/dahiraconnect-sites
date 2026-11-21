@@ -1,0 +1,252 @@
+@use 'styles/mixins' as m;
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0 var(--gutter);
+
+  @include m.desktop {
+    padding-top: var(--space-6);
+  }
+}
+
+.hero__back {
+  @include m.flex-row(6px);
+  align-self: flex-start;
+  min-height: var(--tap-min);
+  color: var(--color-text-on-dark-soft);
+  font-weight: 600;
+
+  &:hover {
+    color: var(--color-text-on-dark);
+  }
+}
+
+.hero__title {
+  @include m.display(var(--fs-hero), var(--lh-tight));
+
+  @include m.desktop {
+    font-size: 80px;
+  }
+}
+
+.hero__lead {
+  max-width: 44ch;
+  font-size: var(--fs-body-lg);
+  color: var(--color-text-on-dark-soft);
+}
+
+// Raccourcis vers chaque commission
+.hero__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.chip {
+  @include m.chip-on-dark;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-text-on-dark);
+  }
+}
+
+.sheet {
+  @include m.overlap-sheet;
+  padding: var(--space-8) 0 var(--space-11);
+
+  @include m.desktop {
+    margin-top: -64px;
+    padding: 64px var(--gutter) 112px;
+  }
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding-inline: var(--gutter);
+  scroll-margin-top: calc(var(--header-h) + var(--space-4));
+
+  & + & {
+    margin-top: 56px;
+  }
+
+  @include m.desktop {
+    padding-inline: 0;
+
+    & + & {
+      margin-top: 80px;
+    }
+  }
+}
+
+.block__title {
+  @include m.display(var(--fs-h2), 1.1);
+}
+
+// ——— Bureau exécutif ———
+.executive {
+  @include m.h-scroll;
+
+  & {
+    margin-inline: calc(-1 * var(--gutter));
+  }
+
+  @include m.desktop {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+  }
+}
+
+.also {
+  max-width: 196px;
+  margin-top: var(--space-2);
+  padding-inline: var(--space-2);
+  font-size: var(--fs-small);
+  color: var(--color-text-secondary);
+
+  @include m.desktop {
+    max-width: none;
+  }
+}
+
+// ——— Commissions ———
+.commission {
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.commission__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-6);
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+}
+
+.commission__desc {
+  max-width: 56ch;
+  color: var(--color-text-secondary);
+}
+
+.commission__count {
+  @include m.badge(var(--color-surface-muted), var(--color-text-secondary));
+}
+
+.people {
+  display: grid;
+  gap: var(--space-2);
+
+  @include m.tablet {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  @include m.desktop {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.person {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-card);
+
+  // Responsable : mis en avant, sur toute la largeur
+  &--lead {
+    grid-column: 1 / -1;
+    padding: var(--space-4);
+    background: var(--color-primary);
+    color: var(--color-text-on-dark);
+
+    .person__avatar {
+      width: 64px;
+      height: 64px;
+      background: var(--color-gold);
+      color: var(--color-primary);
+      font-size: 20px;
+    }
+
+    .person__name {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 22px;
+    }
+
+    .person__role {
+      color: var(--color-gold-line);
+    }
+
+    .person__also {
+      color: var(--color-text-on-dark-soft);
+    }
+
+    @include m.tablet {
+      grid-column: auto / span 2;
+    }
+
+    @include m.desktop {
+      grid-column: auto / span 1;
+    }
+  }
+}
+
+.person__avatar {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--color-surface-muted);
+  color: var(--color-text-secondary);
+  font-weight: 700;
+  font-size: 16px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.person__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.person__name {
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.person__role {
+  @include m.overline;
+}
+
+.person__also {
+  font-size: var(--fs-small);
+  color: var(--color-text-secondary);
+}

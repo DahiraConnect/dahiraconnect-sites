@@ -1,6 +1,6 @@
 import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { BoardMember } from '../../../core/models';
+import { Seat } from '../../../core/data/board';
 
 /** Membre du bureau : photo en arche (silhouette si absente), rôle, nom. */
 @Component({
@@ -11,7 +11,7 @@ import { BoardMember } from '../../../core/models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MemberCard {
-  readonly member = input.required<BoardMember>();
+  readonly seat = input.required<Seat>();
   /** Couleur de l'aplat quand il n'y a pas de photo */
   readonly tone = input<'green' | 'mid' | 'blue' | 'gold'>('green');
 }

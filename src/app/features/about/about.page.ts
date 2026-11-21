@@ -21,7 +21,7 @@ const TONES = ['green', 'mid', 'blue', 'gold'] as const;
 export default class AboutPage {
   protected readonly dahira = inject(TenantService).dahira;
   protected readonly content = inject(ContentService).about;
-  protected readonly members = inject(BoardService).members;
+  protected readonly members = inject(BoardService).executive;
   protected readonly tone = (i: number) => TONES[i % TONES.length];
   /** 'Dahira Moutahabina Fillahi' → 'Moutahabina Fillahi' */
   protected readonly shortTitle = () => this.dahira().name.replace(/^Dahira\s+/i, '');

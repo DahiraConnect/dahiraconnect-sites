@@ -1,0 +1,73 @@
+<app-dark-hero>
+  <div class="hero">
+    <a class="hero__back" routerLink="/le-dahira">
+      <i class="ph ph-arrow-left" aria-hidden="true"></i>
+      Le dahira
+    </a>
+    <h1 class="hero__title rise">Le bureau</h1>
+    <p class="hero__lead rise" style="--i: 1">
+      {{ board().peopleCount }} membres au service du dahira, répartis en
+      {{ board().commissions.length }} commissions.
+    </p>
+    @if (board().commissions.length) {
+      <nav class="hero__nav rise" style="--i: 2" aria-label="Commissions">
+        @for (c of board().commissions; track c.id) {
+          <a class="chip" routerLink="." [fragment]="c.id">{{ c.name }}</a>
+        }
+      </nav>
+    }
+  </div>
+</app-dark-hero>
+
+<div class="sheet container">
+  @if (board().executive.length) {
+    <section class="block" aria-labelledby="exec-title">
+      <h2 id="exec-title" class="block__title">Bureau exécutif</h2>
+      <ul class="executive">
+        @for (seat of board().executive; track seat.person.id; let i = $index) {
+          <li appReveal [appRevealDelay]="i * 80">
+            <app-member-card [seat]="seat" [tone]="tone(i)" />
+            @if (seat.otherRoles.length) {
+              <p class="also">Aussi : {{ seat.otherRoles.join(', ') }}</p>
+            }
+          </li>
+        }
+      </ul>
+    </section>
+  }
+
+  @for (c of board().commissions; track c.id) {
+    <section class="block commission" [id]="c.id" [attr.aria-labelledby]="c.id + '-title'" appReveal>
+      <header class="commission__head">
+        <div>
+          <h2 [id]="c.id + '-title'" class="block__title">{{ c.name }}</h2>
+          <p class="commission__desc">{{ c.description }}</p>
+        </div>
+        <span class="commission__count">{{ c.count }} membres</span>
+      </header>
+
+      <ul class="people">
+        @for (seat of seatsOf(c); track seat.person.id) {
+          <li class="person" [class.person--lead]="seat === c.lead">
+            <span class="person__avatar" aria-hidden="true">
+              @if (seat.person.photoUrl; as photo) {
+                <img [ngSrc]="photo" alt="" width="64" height="64" />
+              } @else {
+                {{ initials(seat.person.name) }}
+              }
+            </span>
+            <span class="person__text">
+              <span class="person__name">{{ seat.person.name }}</span>
+              @if (seat.role) {
+                <span class="person__role">{{ seat.role }}</span>
+              }
+              @if (seat.otherRoles.length) {
+                <span class="person__also">Aussi : {{ seat.otherRoles.join(', ') }}</span>
+              }
+            </span>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+</div>

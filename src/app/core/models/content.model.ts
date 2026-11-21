@@ -1,9 +1,31 @@
-export interface BoardMember {
+/** Une personne, décrite une seule fois même si elle occupe plusieurs postes */
+export interface Person {
   id: string;
   name: string;
-  role: string;
+  /** Photo (carrée conseillée) — uniquement avec l'accord de la personne */
   photoUrl?: string;
-  order: number;
+}
+
+/** Un poste : une personne + son rôle ('Président', 'Responsable'…) */
+export interface Position {
+  personId: string;
+  /** Absent = simple membre de la commission */
+  role?: string;
+}
+
+export interface Commission {
+  /** Ancre de la page : /le-dahira/bureau#organisation */
+  id: string;
+  name: string;
+  description: string;
+  members: Position[];
+}
+
+/** Bureau : bureau exécutif + commissions */
+export interface Board {
+  people: Person[];
+  executive: Position[];
+  commissions: Commission[];
 }
 
 export interface HistoryStep {

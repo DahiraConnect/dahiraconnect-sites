@@ -26,6 +26,12 @@ export const routes: Routes = [
         data: { seo: { description: 'Notre guide et sa lignée.' } },
       },
       {
+        path: 'le-dahira/bureau',
+        loadComponent: () => import('./features/about/board/board.page'),
+        title: 'Le bureau',
+        data: { seo: { description: 'Le bureau du dahira et ses commissions.' } },
+      },
+      {
         path: 'le-dahira/charte',
         loadComponent: () => import('./features/about/charter/charter.page'),
         title: 'Notre charte',
