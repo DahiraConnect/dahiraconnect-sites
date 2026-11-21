@@ -1,0 +1,24 @@
+<a class="album-card__link" [routerLink]="['/galerie', album().slug]">
+  <app-arch-photo
+    class="album-card__photo"
+    [src]="cover()"
+    [alt]="''"
+    [sizes]="size() === 'lg' ? '(min-width: 1024px) 55vw, 100vw' : '(min-width: 1024px) 30vw, 50vw'"
+    [fallback]="album().fallback ?? 'green'"
+    [badge]="badge()"
+    [play]="album().kind === 'video'"
+  />
+  @if (size() === 'lg') {
+    <span class="album-card__title album-card__title--display">{{ album().title }}</span>
+    <span class="album-card__meta">{{ meta() }}</span>
+  } @else {
+    <span class="album-card__title">{{ album().title }}</span>
+  }
+</a>
+@if (size() === 'lg') {
+  <a class="album-card__share btn btn--outline btn--sm" [href]="shareUrl()" target="_blank" rel="noopener">
+    <i class="ph ph-share-network" aria-hidden="true"></i>
+    Partager l'album
+    <span class="sr-only">sur WhatsApp</span>
+  </a>
+}

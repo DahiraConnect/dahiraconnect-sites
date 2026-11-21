@@ -1,0 +1,153 @@
+@use 'styles/mixins' as m;
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 10px 22px 0;
+
+  @include m.desktop {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+    gap: var(--space-10);
+    padding: var(--space-6) var(--gutter) 0;
+  }
+}
+
+.hero__text {
+  display: contents;
+
+  @include m.desktop {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+}
+
+.hero__back {
+  @include m.flex-row(6px);
+  align-self: flex-start;
+  min-height: var(--tap-min);
+  color: var(--color-text-on-dark-soft);
+  font-weight: 600;
+  font-size: 15px;
+
+  .ph {
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  &:hover {
+    color: var(--color-text-on-dark);
+
+    .ph {
+      transform: translateX(-4px);
+    }
+  }
+}
+
+// Mobile : médaillon entre le surtitre et le nom (ordre de la maquette)
+.hero__medallion {
+  order: 2;
+  align-self: center;
+  margin: var(--space-1) 0 var(--space-3);
+
+  @include m.desktop {
+    order: 0;
+    justify-self: center;
+    margin: 0;
+    --medallion-scale: 1.5;
+  }
+}
+
+.hero__title,
+.hero__lead,
+.hero__bio {
+  order: 3;
+}
+
+.hero__title {
+  @include m.display(44px, 0.98);
+  max-width: 10ch;
+
+  @include m.desktop {
+    font-size: 72px;
+  }
+}
+
+.hero__lead {
+  font-size: var(--fs-body-lg);
+  color: var(--color-text-on-dark-soft);
+}
+
+.hero__bio {
+  font-size: 15px;
+  color: var(--color-text-on-dark-soft);
+
+  &--todo {
+    padding: 14px var(--space-4);
+    border: 1px dashed rgb(217 178 76 / 0.6);
+    border-radius: var(--space-4);
+    color: var(--color-gold-soft);
+  }
+}
+
+.sheet {
+  @include m.overlap-sheet;
+  padding: var(--space-9) 0 var(--space-10);
+
+  @include m.desktop {
+    margin-top: -64px;
+    padding: 72px var(--gutter) 96px;
+  }
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-inline: var(--gutter);
+
+  @include m.desktop {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    align-items: start;
+    gap: var(--space-11);
+    padding-inline: 0;
+  }
+}
+
+.block__intro-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  @include m.desktop {
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-8));
+    gap: var(--space-4);
+  }
+}
+
+.block__title {
+  @include m.display(var(--fs-h2-lg));
+  max-width: 15ch;
+}
+
+.block__intro {
+  margin-bottom: 14px;
+  color: var(--color-text-secondary);
+}
+
+.sources {
+  margin-top: 56px;
+  padding: var(--space-5) var(--gutter) 0;
+  border-top: 1px solid var(--color-border);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+
+  @include m.desktop {
+    margin-top: 96px;
+    padding-inline: 0;
+  }
+}

@@ -1,0 +1,46 @@
+<dialog
+  #dialog
+  class="lightbox"
+  [attr.aria-label]="title() || 'Visionneuse de photos'"
+  (close)="index.set(null)"
+  (keydown)="onKeydown($event)"
+  (click)="onBackdrop($event)"
+>
+  <div class="lightbox__bar">
+    <p class="lightbox__count" aria-live="polite">
+      @if (index() !== null) {
+        {{ index()! + 1 }} / {{ photos().length }}
+      }
+    </p>
+    <button type="button" class="lightbox__btn" (click)="index.set(null)" aria-label="Fermer">
+      <i class="ph ph-x" aria-hidden="true"></i>
+    </button>
+  </div>
+
+  <figure
+    class="lightbox__stage"
+    (pointerdown)="onPointerDown($event)"
+    (pointerup)="onPointerUp($event)"
+  >
+    @for (photo of frame(); track photo.url) {
+      <img
+        class="lightbox__img"
+        [src]="photo.url"
+        [alt]="photo.alt"
+        [width]="photo.width"
+        [height]="photo.height"
+        draggable="false"
+      />
+      <figcaption class="lightbox__caption">{{ photo.alt }}</figcaption>
+    }
+  </figure>
+
+  @if (photos().length > 1) {
+    <button type="button" class="lightbox__btn lightbox__nav lightbox__nav--prev" (click)="go(-1)" aria-label="Photo précédente">
+      <i class="ph ph-caret-left" aria-hidden="true"></i>
+    </button>
+    <button type="button" class="lightbox__btn lightbox__nav lightbox__nav--next" (click)="go(1)" aria-label="Photo suivante">
+      <i class="ph ph-caret-right" aria-hidden="true"></i>
+    </button>
+  }
+</dialog>

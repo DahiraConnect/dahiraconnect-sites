@@ -1,0 +1,7 @@
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<div class="progress" [class.is-loading]="loading()" role="progressbar" aria-label="Chargement de la page" [attr.aria-hidden]="!loading()"></div>
+<app-site-header />
+<main id="contenu" tabindex="-1"><router-outlet /></main>
+<app-site-footer />
+<app-dock-nav />
+<app-install-banner />

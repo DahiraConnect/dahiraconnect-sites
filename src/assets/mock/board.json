@@ -1,0 +1,8 @@
+[
+  { "id": "m1", "name": "Djamil Fall", "role": "Président", "order": 1 },
+  { "id": "m2", "name": "Aminata Ndiaye", "role": "Vice-présidente", "order": 2 },
+  { "id": "m3", "name": "Baye Moussa Niang", "role": "Secrétaire général", "order": 3 },
+  { "id": "m4", "name": "Coumbis Siby", "role": "Trésorière", "order": 4 },
+  { "id": "m5", "name": "Abou Ndiaye", "role": "Communication", "order": 5 }
+]
+

@@ -1,0 +1,23 @@
+@if (logos().length) {
+  <span class="copy__logos" [class.copy__logos--many]="logos().length > 1" aria-hidden="true">
+    @for (logo of logos(); track logo) {
+      <img [ngSrc]="logo" alt="" width="44" height="44" />
+    }
+  </span>
+}
+<div class="copy__text">
+  <span class="copy__label">{{ label() }}</span>
+  <span class="copy__number">{{ number() }}</span>
+</div>
+<button type="button" class="copy__btn" (click)="copy()">
+  @if (copied()) {
+    Copié <i class="ph ph-check" aria-hidden="true"></i>
+  } @else {
+    Copier <span class="sr-only">le numéro {{ label() }}</span>
+  }
+</button>
+<span class="sr-only" aria-live="polite">
+  @if (copied()) {
+    Numéro {{ label() }} copié.
+  }
+</span>

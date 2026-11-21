@@ -1,0 +1,76 @@
+{
+  "home": {
+    "aboutTitle": "Apprendre, prier et servir, ensemble.",
+    "aboutText": "Né à Yeumbeul en 1999 sous la guidance de Serigne Mansour Sy « Borom Daaraji », le dahira est guidé depuis 2012 par son fils, Serigne Mame Malick Sy."
+  },
+  "about": {
+    "heroTitle": "Une famille née à Yeumbeul en 1999.",
+    "history": [
+      {
+        "year": "1999",
+        "title": "Naissance à Yeumbeul",
+        "text": "Des fidèles de Yeumbeul fondent le dahira sous la guidance de Serigne Mansour Sy « Borom Daaraji »."
+      },
+      {
+        "year": "2012",
+        "title": "Une guidance qui continue",
+        "text": "Après le rappel à Dieu de Serigne Mansour Sy, le dahira poursuit son chemin avec son fils, Serigne Mame Malick Sy."
+      },
+      {
+        "year": "Aujourd'hui",
+        "title": "Une grande famille",
+        "text": "Près de 150 membres, à Yeumbeul, à Dakar et dans la diaspora, réunis pour apprendre, prier et servir.",
+        "highlight": true
+      }
+    ]
+  },
+  "guide": {
+    "intro": "Fils de Serigne Mansour Sy « Borom Daaraji », il guide le dahira depuis 2012, à la suite de son père qui l'accompagnait depuis sa fondation en 1999.",
+    "bio": "[Présentation de Serigne Mame Malick Sy : parcours, enseignement, lien avec le dahira. À rédiger et valider par le bureau.]",
+    "lineageTitle": "Quatre générations au service du savoir",
+    "lineageIntro": "De Tivaouane à aujourd'hui, une même école : celle de Seydi El Hadji Malick Sy.",
+    "lineage": [
+      {
+        "relation": "Arrière-grand-père",
+        "name": "Seydi El Hadji Malick Sy",
+        "alias": "Maodo",
+        "years": "† 27 juin 1922",
+        "text": "Figure majeure de la Tijaniyya au Sénégal. Il fonde à Tivaouane la hadra et le grand daara où se forment des générations d'érudits.",
+        "photoUrl": "/assets/tenants/moutahabina/exemples/lignee/seydi-el-hadji-malick-sy.svg"
+      },
+      {
+        "relation": "Grand-père",
+        "name": "Serigne Babacar Sy",
+        "alias": "Borom bonnet carré",
+        "years": "1885 – 1957",
+        "text": "Né à Saint-Louis, premier Khalife général des Tidianes de 1922 à 1957. Il initie les premiers dahiras.",
+        "photoUrl": "/assets/tenants/moutahabina/exemples/lignee/serigne-babacar-sy.svg"
+      },
+      {
+        "relation": "Père",
+        "name": "Serigne Mansour Sy",
+        "alias": "Borom Daaraji",
+        "years": "1925 – 2012",
+        "text": "Né à Tivaouane, il tient le grand daara fondé par son grand-père. Khalife général des Tidianes de 1997 à 2012, il guide notre dahira dès sa fondation en 1999.",
+        "photoUrl": "/assets/tenants/moutahabina/exemples/lignee/serigne-mansour-sy.svg"
+      },
+      {
+        "relation": "Notre guide",
+        "name": "Serigne Mame Malick Sy",
+        "text": "Guide du dahira depuis 2012. [Quelques lignes à fournir par le bureau.]",
+        "highlight": true,
+        "photoUrl": "/assets/tenants/moutahabina/exemples/lignee/serigne-mame-malick-sy.svg"
+      }
+    ],
+    "didYouKnow": "Les premiers dahiras ont été initiés par Serigne Babacar Sy. Ils sont devenus des piliers de solidarité et d'éducation.",
+    "sources": "Textes établis d'après Le Soleil, Seneweb et Senego. À faire relire et valider par le bureau."
+  },
+  "join": {
+    "intro": "Pas de formulaire. Un message sur WhatsApp, et un responsable vous répond.",
+    "steps": [
+      "Vous appuyez sur « Rejoindre sur WhatsApp ».",
+      "Vous envoyez le message déjà écrit.",
+      "Un responsable vous répond et vous ajoute au groupe du dahira."
+    ]
+  }
+}

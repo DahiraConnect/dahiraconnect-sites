@@ -1,0 +1,56 @@
+{
+  "id": "dahira-moutahabina",
+  "slug": "moutahabina",
+  "name": "Dahira Moutahabina Fillahi",
+  "shortName": "MOUTAHABINA",
+  "nameArabic": "المتحابين في الله",
+  "nameMeaning": "ceux qui s'aiment pour Dieu",
+  "motto": "S'aimer pour Dieu, servir ensemble.",
+  "ringText": "S'AIMER POUR DIEU • SERVIR ENSEMBLE • DEPUIS 1999 •",
+  "guideName": "Serigne Mame Malick Sy",
+  "guidePhotoUrl": "/assets/tenants/moutahabina/exemples/lignee/serigne-mame-malick-sy.svg",
+  "foundedYear": 1999,
+  "foundedPlace": "Yeumbeul",
+  "membersApprox": 150,
+  "logoUrl": "/assets/tenants/moutahabina/logo.webp",
+  "logoAlt": "Médaillon du dahira avec le portrait de Serigne Mame Malick Sy",
+  "theme": {},
+  "contact": {
+    "address": "Yeumbeul, Dakar",
+    "phone": "+221 77 440 44 36"
+  },
+  "join": {
+    "mode": "chat",
+    "whatsappNumber": "221774404436",
+    "prefilledMessage": "Assalamou aleykoum, je souhaite rejoindre le Dahira Moutahabina Fillahi.",
+    "callNumber": "+221774404436"
+  },
+  "support": {
+    "text": "Votre soutien finance nos activités et nos actions sociales.",
+    "wave": "77 440 44 36",
+    "orangeMoney": "77 440 44 36",
+    "blessing": "Qu'Allah vous le rende."
+  },
+  "social": [
+    {
+      "platform": "tiktok",
+      "url": "https://www.tiktok.com/@dahiramoutahabina",
+      "handle": "@dahiramoutahabina"
+    },
+    {
+      "platform": "facebook",
+      "url": "https://www.facebook.com/dahiramoutahabina",
+      "handle": "Dahira Moutahabina"
+    },
+    {
+      "platform": "instagram",
+      "url": "https://www.instagram.com/dahiramoutahabina",
+      "handle": "@dahiramoutahabina"
+    },
+    {
+      "platform": "youtube",
+      "url": "https://www.youtube.com/@dahiramoutahabina",
+      "handle": "@dahiramoutahabina"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+<section class="optin" aria-labelledby="optin-title">
+  <div class="optin__intro">
+    <h2 id="optin-title" class="optin__title">Être prévenu</h2>
+    <p class="optin__text">Une notification à chaque événement, et un rappel la veille.</p>
+  </div>
+  <div class="optin__actions">
+    <button type="button" class="btn btn--dark btn--sm" (click)="onActivate()">
+      <i class="ph ph-bell" aria-hidden="true"></i>
+      Activer les rappels
+    </button>
+    <button
+      type="button"
+      class="optin__toggle"
+      [attr.aria-expanded]="emailOpen()"
+      aria-controls="optin-email"
+      (click)="emailOpen.set(!emailOpen())"
+    >
+      Plutôt par e-mail
+    </button>
+  </div>
+  @if (emailOpen()) {
+    <form id="optin-email" class="optin__form" (submit)="onSubmit($event)">
+      <label for="optin-email-input">Votre adresse e-mail</label>
+      <div class="optin__row">
+        <input
+          id="optin-email-input"
+          type="email"
+          name="email"
+          autocomplete="email"
+          inputmode="email"
+          required
+          [value]="email()"
+          (input)="email.set($any($event.target).value)"
+        />
+        <button type="submit" class="btn btn--dark btn--sm">M'inscrire</button>
+      </div>
+    </form>
+  }
+  <p class="optin__status" aria-live="polite">{{ status() }}</p>
+</section>

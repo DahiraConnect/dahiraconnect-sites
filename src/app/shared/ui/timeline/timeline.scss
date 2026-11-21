@@ -1,0 +1,278 @@
+@use 'styles/mixins' as m;
+
+:host {
+  display: block;
+}
+
+li {
+  position: relative;
+}
+
+// Fil doré entre deux étapes
+@mixin thread($left, $top) {
+  &:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: $left;
+    top: $top;
+    bottom: -6px;
+    width: 2px;
+    background: var(--color-gold-line);
+  }
+}
+
+// ——— Histoire ———
+.history {
+  @include thread(7px, 22px);
+  padding: 0 0 30px 34px;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+}
+
+.history__dot {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-gold-line);
+  box-shadow: 0 0 0 5px var(--color-surface);
+}
+
+.history__year {
+  display: block;
+  @include m.display(52px, 1);
+}
+
+.history__title {
+  margin-top: var(--space-2);
+  font: 700 18px / 1.3 var(--font-body);
+  letter-spacing: 0;
+}
+
+.history__text {
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+}
+
+.history--now {
+  .history__dot {
+    background: var(--color-brand);
+  }
+
+  .history__year {
+    font-size: 34px;
+    color: var(--color-primary-mid);
+  }
+}
+
+// ——— Lignée ———
+.lineage {
+  display: flex;
+  gap: 14px;
+  padding-bottom: 22px;
+
+  @include thread(35px, 76px);
+
+  // Portraits plus grands à partir de la tablette
+  @include m.tablet {
+    &:has(.lineage__portrait):not(:last-child)::after {
+      left: 51px;
+      top: 108px;
+    }
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+
+  &::after {
+    bottom: 0 !important;
+  }
+}
+
+.lineage__relation {
+  flex: 0 0 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  padding: 6px;
+  border: 2px solid var(--color-gold-line);
+  border-radius: 50%;
+  background: var(--color-surface-card);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.lineage__portrait {
+  flex: 0 0 72px;
+  height: 72px;
+  border: 3px solid var(--color-gold-line);
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--color-surface-card);
+  box-shadow: 0 0 0 5px var(--color-surface);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--dur-slow) var(--ease-out);
+  }
+
+  @include m.tablet {
+    flex-basis: 104px;
+    height: 104px;
+  }
+}
+
+.lineage__tag {
+  @include m.overline;
+}
+
+.lineage__card {
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 16px 18px;
+  border-radius: 22px;
+  background: var(--color-surface-card);
+}
+
+.lineage__years {
+  font-size: var(--fs-small);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.lineage__name {
+  font-size: var(--fs-title);
+  line-height: var(--lh-snug);
+}
+
+.lineage__alias {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-gold-text);
+}
+
+.lineage__text {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+}
+
+.lineage--now {
+  .lineage__relation {
+    background: var(--color-gold);
+  }
+
+  .lineage__portrait {
+    border-color: var(--color-gold);
+  }
+
+  .lineage__tag {
+    color: var(--color-gold-line);
+  }
+
+  .lineage__card {
+    background: var(--color-primary);
+    color: var(--color-text-on-dark);
+  }
+
+  .lineage__text {
+    color: var(--color-text-on-dark-soft);
+  }
+}
+
+// ——— Agenda ———
+.agenda {
+  @include thread(31px, 64px);
+
+  &::after {
+    bottom: 0 !important;
+  }
+}
+
+.agenda__link {
+  @include m.focus-ring;
+  display: flex;
+  gap: var(--space-4);
+  padding-bottom: var(--space-6);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  text-decoration: none;
+
+  &:hover .agenda__title {
+    text-decoration: underline;
+  }
+
+  .agenda:last-child & {
+    padding-bottom: 0;
+  }
+}
+
+.agenda__date {
+  flex: 0 0 64px;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-gold-line);
+  border-radius: 50%;
+  background: var(--color-surface-card);
+}
+
+.agenda__day {
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.agenda__month {
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.agenda__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-top: var(--space-2);
+}
+
+.agenda__title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.agenda__meta {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+}
+
+.agenda__badge {
+  @include m.badge(var(--color-gold), var(--color-primary));
+  align-self: flex-start;
+  margin-top: var(--space-1);
+}
+
+
+.agenda--major .agenda__date {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-text-on-dark);
+}

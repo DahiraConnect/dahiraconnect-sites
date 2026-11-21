@@ -1,0 +1,107 @@
+@use 'styles/mixins' as m;
+
+:host {
+  @include m.desktop {
+    display: none;
+  }
+}
+
+.dock {
+  view-transition-name: dock;
+  animation: dock-in var(--dur-slow) var(--ease-spring) 200ms both;
+  position: fixed;
+  z-index: 50;
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  inset-inline: 14px;
+  max-width: 480px;
+  height: var(--dock-h);
+  margin-inline: auto;
+  padding: 0 6px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: center;
+  border-radius: var(--radius-pill);
+  background: rgb(6 39 17 / 0.94);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-dock);
+}
+
+.dock__item {
+  @include m.focus-ring;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 56px;
+  border-radius: var(--radius-md);
+  color: var(--color-text-on-dark-soft);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+
+  > .ph {
+    font-size: 22px;
+    transition: transform var(--dur-base) var(--ease-spring);
+  }
+
+  &:hover {
+    color: var(--color-text-on-dark);
+  }
+
+  &:active > .ph {
+    transform: scale(0.85);
+  }
+
+  &.is-active {
+    color: var(--color-brand);
+    font-weight: 700;
+
+    > .ph {
+      transform: translateY(-2px) scale(1.12);
+    }
+  }
+
+  &--primary {
+    margin-top: -30px;
+    color: var(--color-text-on-dark);
+    font-weight: 700;
+
+    &.is-active,
+    &:hover {
+      color: var(--color-text-on-dark);
+    }
+  }
+}
+
+.dock__bubble {
+  display: grid;
+  place-items: center;
+  width: var(--btn-h-lg);
+  height: var(--btn-h-lg);
+  border: 4px solid var(--color-surface);
+  border-radius: 50%;
+  background: var(--color-brand);
+  color: var(--color-on-brand);
+  transition: transform var(--transition-base);
+
+  .ph {
+    font-size: 26px;
+  }
+
+  .dock__item--primary:hover & {
+    transform: translateY(-2px);
+  }
+
+  .dock__item--primary:active & {
+    transform: scale(0.96);
+  }
+}
+
+@keyframes dock-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+}

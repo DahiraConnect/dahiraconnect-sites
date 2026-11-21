@@ -1,0 +1,99 @@
+// Mouvement : entrées, apparitions au défilement, transitions de page.
+// Tout est désactivé par `prefers-reduced-motion` (voir _reset.scss).
+
+html {
+  scroll-behavior: smooth;
+}
+
+// ——— Entrée des héros : <el class="rise" style="--i: 2"> ———
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.86) rotate(-8deg);
+  }
+}
+
+.rise {
+  animation: rise var(--dur-slow) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 90ms + 60ms);
+}
+
+.pop {
+  animation: pop 900ms var(--ease-spring) both;
+}
+
+// ——— Apparition au défilement (directive appReveal) ———
+.reveal-pending {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.reveal-in {
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+// ——— Transitions entre pages (View Transitions API) ———
+@keyframes page-out {
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+::view-transition-old(root) {
+  animation: page-out var(--dur-fast) ease-in both;
+}
+
+::view-transition-new(root) {
+  animation: page-in var(--dur-base) var(--ease-out) both;
+}
+
+// Barre de navigation et dock restent immobiles pendant la transition
+::view-transition-group(site-header),
+::view-transition-group(dock) {
+  animation: none;
+}
+
+::view-transition-old(site-header),
+::view-transition-old(dock) {
+  display: none;
+}
+
+::view-transition-new(site-header),
+::view-transition-new(dock) {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+
+  .reveal-pending {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,71 @@
+@use 'styles/mixins' as m;
+
+:host {
+  @include m.dark-hero;
+  display: block;
+  overflow: hidden;
+
+  @include m.desktop {
+    padding-top: var(--space-11);
+    padding-bottom: 120px;
+  }
+}
+
+.dark-hero__inner {
+  position: relative;
+}
+
+// Sur ordinateur, la barre de navigation globale remplace celle du hero
+.dark-hero__bar {
+  @include m.flex-row;
+  justify-content: space-between;
+  padding: 18px var(--gutter);
+
+  @include m.desktop {
+    display: none !important;
+  }
+}
+
+.dark-hero__brand {
+  @include m.flex-row(10px);
+  min-height: var(--tap-min);
+  color: var(--color-text-on-dark);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-gold-soft);
+  }
+}
+
+.dark-hero__name {
+  font-family: var(--font-display);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+}
+
+.dark-hero__remind {
+  @include m.flex-row;
+  @include m.focus-ring;
+  height: var(--tap-min);
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-border-on-dark);
+  border-radius: var(--radius-pill);
+  color: var(--color-text-on-dark);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: background-color var(--transition-base);
+
+  .ph {
+    font-size: 18px;
+  }
+
+  &:hover {
+    color: var(--color-text-on-dark);
+    background: rgb(244 239 227 / 0.1);
+  }
+
+  &:active {
+    background: rgb(244 239 227 / 0.18);
+  }
+}

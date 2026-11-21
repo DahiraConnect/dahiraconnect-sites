@@ -1,0 +1,66 @@
+<app-dark-hero>
+  <div class="hero">
+    <h1 class="hero__title rise" style="--i: 0">Agenda</h1>
+    @if (months().length > 1) {
+      <div class="hero__chips rise" style="--i: 1" role="group" aria-label="Filtrer par mois">
+        <button type="button" class="chip" [attr.aria-pressed]="month() === null" (click)="month.set(null)">
+          Tout
+        </button>
+        @for (m of months(); track m.key) {
+          <button type="button" class="chip" [attr.aria-pressed]="month() === m.key" (click)="toggle(m.key)">
+            {{ m.label }}
+          </button>
+        }
+      </div>
+    }
+  </div>
+</app-dark-hero>
+
+<div class="content container">
+  <div class="content__main">
+    @if (next(); as event) {
+      <app-event-feature class="content__feature rise" style="--i: 2" [event]="event" />
+    } @else {
+      <p class="content__empty">Pas de rendez-vous annoncé pour le moment. Revenez bientôt !</p>
+    }
+  </div>
+
+  <div class="content__side">
+    @if (filtered().length) {
+      <section class="block" aria-labelledby="later-title">
+        <h2 id="later-title" class="block__title">Ensuite</h2>
+        <app-timeline variant="agenda" [events]="filtered()" />
+      </section>
+    } @else if (month()) {
+      <p class="block block__empty">Aucun autre rendez-vous ce mois-ci.</p>
+    }
+
+    @if (lastPast(); as past) {
+      <section class="block" aria-labelledby="past-title" appReveal>
+        <h2 id="past-title" class="block__title">C'était hier</h2>
+        <a class="past" [routerLink]="['/galerie', past.event.albumSlug]">
+          <app-arch-photo
+            class="past__photo"
+            [src]="past.cover"
+            sizes="(min-width: 1024px) 10vw, 25vw"
+            [fallback]="past.album?.fallback ?? 'gold'"
+          />
+          <span class="past__body">
+            <span class="past__title">{{ past.event.title }}</span>
+            <span class="past__date">{{ past.date }}</span>
+            <span class="past__more">
+              @if (past.count) {
+                Voir les {{ past.count }} photos
+              } @else {
+                Voir l'album
+              }
+              <span aria-hidden="true">→</span>
+            </span>
+          </span>
+        </a>
+      </section>
+    }
+  </div>
+
+  <app-notify-optin id="rappels" class="content__optin" appReveal />
+</div>

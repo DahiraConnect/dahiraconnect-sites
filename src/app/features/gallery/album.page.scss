@@ -1,0 +1,238 @@
+@use 'styles/mixins' as m;
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0 var(--gutter);
+
+  @include m.desktop {
+    padding-top: var(--space-6);
+  }
+}
+
+.hero__row {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  @include m.desktop {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.hero__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.hero__back {
+  @include m.flex-row(6px);
+  align-self: flex-start;
+  min-height: var(--tap-min);
+  color: var(--color-text-on-dark-soft);
+  font-weight: 600;
+
+  &:hover {
+    color: var(--color-text-on-dark);
+  }
+}
+
+.hero__title {
+  @include m.display(40px, 1);
+
+  @include m.desktop {
+    font-size: 64px;
+  }
+}
+
+.hero__meta {
+  color: var(--color-text-on-dark-soft);
+}
+
+.hero__share {
+  align-self: flex-start;
+
+  @include m.desktop {
+    align-self: auto;
+  }
+}
+
+.sheet {
+  @include m.overlap-sheet;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-7) var(--gutter) var(--space-10);
+
+  @include m.desktop {
+    margin-top: -64px;
+    padding: 56px var(--gutter) 96px;
+  }
+}
+
+// Mosaïque façon « maçonnerie » : respecte le format de chaque photo
+.photos {
+  columns: 2;
+  column-gap: var(--space-2);
+
+  @include m.tablet {
+    columns: 3;
+    column-gap: var(--space-3);
+  }
+
+  @include m.desktop {
+    columns: 4;
+    column-gap: var(--space-4);
+  }
+}
+
+.photos__item {
+  break-inside: avoid;
+  margin-bottom: var(--space-2);
+
+  @include m.tablet {
+    margin-bottom: var(--space-3);
+  }
+
+  @include m.desktop {
+    margin-bottom: var(--space-4);
+  }
+}
+
+.photos__btn {
+  @include m.focus-ring;
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-surface-muted);
+  cursor: zoom-in;
+
+  img {
+    width: 100%;
+    height: auto;
+    transition: transform 1s var(--ease-out);
+  }
+
+  @include m.hover {
+    img {
+      transform: scale(1.05);
+    }
+
+  }
+}
+
+.video {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--color-accent-blue);
+  color: var(--color-text-on-dark);
+}
+
+.video__img {
+  object-fit: cover;
+}
+
+.video__play {
+  @include m.focus-ring;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-size: 34px;
+  transition: transform var(--dur-base) var(--ease-spring);
+
+  &:hover {
+    color: var(--color-primary);
+    transform: scale(1.1);
+  }
+}
+
+.video__soon {
+  position: relative;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-pill);
+  background: rgb(6 39 17 / 0.7);
+  font-weight: 700;
+}
+
+.placeholder {
+  height: 360px;
+}
+
+.empty {
+  font-size: var(--fs-body-lg);
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.more {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+
+  @include m.desktop {
+    margin-top: 72px;
+  }
+}
+
+.more__title {
+  @include m.display(var(--fs-h2), 1.1);
+}
+
+.more__list {
+  display: grid;
+  gap: var(--space-2);
+
+  @include m.tablet {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+}
+
+.more__link {
+  @include m.focus-ring;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 64px;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-card);
+  color: var(--color-text-primary);
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background-color var(--dur-fast),
+    color var(--dur-fast);
+
+  .ph {
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  &:hover {
+    background: var(--color-primary);
+    color: var(--color-text-on-dark);
+
+    .ph {
+      transform: translateX(4px);
+    }
+  }
+}

@@ -1,0 +1,33 @@
+<app-dark-hero>
+  <div class="hero">
+    <div class="hero__text">
+      <a class="hero__back" routerLink="/le-dahira">
+        <i class="ph ph-arrow-left" aria-hidden="true"></i>
+        Le dahira
+      </a>
+      <h1 class="hero__title rise" style="--i: 1">{{ dahira().guideName }}</h1>
+      <p class="hero__lead rise" style="--i: 2">{{ content().intro }}</p>
+      <p class="hero__bio rise" style="--i: 3" [class.hero__bio--todo]="bioIsPlaceholder()">{{ content().bio }}</p>
+    </div>
+    <app-medallion
+      class="hero__medallion pop"
+      [logoUrl]="dahira().logoUrl"
+      [alt]="dahira().logoAlt"
+      [text]="ringText()"
+      [size]="260"
+      [priority]="true"
+    />
+  </div>
+</app-dark-hero>
+
+<div class="sheet container">
+  <section class="block" aria-labelledby="lineage-title">
+    <div class="block__intro-col" appReveal>
+      <h2 id="lineage-title" class="block__title">{{ content().lineageTitle }}</h2>
+      <p class="block__intro">{{ content().lineageIntro }}</p>
+    </div>
+    <app-timeline class="block__timeline" variant="lineage" [lineage]="content().lineage" />
+  </section>
+
+  <p class="sources">{{ content().sources }}</p>
+</div>

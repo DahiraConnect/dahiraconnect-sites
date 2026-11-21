@@ -1,0 +1,200 @@
+@use 'styles/mixins' as m;
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: 18px 22px 0;
+
+  @include m.desktop {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    align-items: end;
+    gap: var(--space-10);
+    padding: var(--space-10) var(--gutter) 0;
+  }
+}
+
+.hero__main,
+.hero__side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.hero__title {
+  @include m.display(var(--fs-hero), var(--lh-tight));
+  max-width: 11ch;
+
+  @include m.desktop {
+    font-size: 80px;
+  }
+}
+
+.hero__arabic {
+  margin-top: var(--space-1);
+  font-size: var(--fs-arabic);
+  color: var(--color-gold-line);
+  text-align: left;
+
+  @include m.desktop {
+    font-size: 48px;
+  }
+}
+
+.hero__lead {
+  font-size: var(--fs-body-lg);
+  color: var(--color-text-on-dark-soft);
+}
+
+.sheet {
+  @include m.overlap-sheet;
+  padding: var(--space-9) 0 var(--space-10);
+
+  @include m.desktop {
+    margin-top: -64px;
+    padding: 72px 0 96px;
+  }
+}
+
+// Histoire + carte du guide
+.story {
+  @include m.desktop {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    align-items: start;
+    gap: var(--space-10);
+    padding-right: var(--gutter);
+  }
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: var(--space-11);
+
+  @include m.desktop {
+    gap: var(--space-6);
+    margin-top: 96px;
+  }
+
+  &--padded {
+    padding-inline: 22px;
+
+    @include m.desktop {
+      padding-inline: var(--gutter) 0;
+    }
+  }
+
+  .story & {
+    margin-top: 0;
+    gap: 22px;
+  }
+}
+
+.block__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-inline: 22px;
+
+  @include m.desktop {
+    padding-inline: var(--gutter);
+  }
+}
+
+.block__title {
+  @include m.display(var(--fs-h2), 1.1);
+
+  &--lg {
+    font-size: var(--fs-h2-lg);
+  }
+}
+
+.guide {
+  @include m.inset-card;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-11);
+  padding: var(--space-6) var(--space-5);
+
+  @include m.desktop {
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-6));
+    flex-direction: column;
+    text-align: center;
+    margin: 0;
+    padding: var(--space-10) var(--space-8);
+  }
+
+  @include m.lift;
+}
+
+.guide__medallion {
+  @include m.desktop {
+    --medallion-scale: 1.9;
+  }
+}
+
+.guide__body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  @include m.desktop {
+    align-items: center;
+    gap: var(--space-3);
+  }
+}
+
+.guide__overline {
+  color: var(--color-gold-line);
+}
+
+.guide__name {
+  @include m.display(22px);
+
+  @include m.desktop {
+    font-size: 32px;
+  }
+}
+
+.guide__link {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  color: var(--color-text-on-dark);
+  font-weight: 700;
+  font-size: 15px;
+
+  &:hover {
+    color: var(--color-gold-soft);
+  }
+
+  @include m.desktop {
+    align-self: center;
+  }
+}
+
+.board {
+  @include m.h-scroll;
+
+  & {
+    padding-inline: 22px;
+  }
+
+  @include m.desktop {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--space-4);
+    padding-inline: var(--gutter);
+    overflow: visible;
+  }
+
+  &--placeholder {
+    height: 320px;
+  }
+}

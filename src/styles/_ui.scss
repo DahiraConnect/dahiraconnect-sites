@@ -1,0 +1,110 @@
+@use 'mixins' as m;
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Colonne centrée : pleine largeur sur mobile, limitée sur grand écran
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+}
+
+.overline {
+  @include m.overline;
+}
+
+.note {
+  font-size: 13px;
+  line-height: var(--lh-body);
+  color: var(--color-text-muted);
+  padding-inline: var(--gutter);
+}
+
+// Boutons communs
+.btn {
+  @include m.btn-base;
+
+  &--dark {
+    background: var(--color-primary);
+    color: var(--color-text-on-dark);
+
+    &:hover {
+      background: var(--color-primary-mid);
+      color: var(--color-text-on-dark);
+    }
+  }
+
+  &--outline {
+    background: transparent;
+    color: var(--color-primary);
+    box-shadow: inset 0 0 0 2px var(--color-primary);
+
+    &:hover {
+      background: var(--color-primary);
+      color: var(--color-text-on-dark);
+    }
+  }
+
+  &--light {
+    background: var(--color-surface);
+    color: var(--color-primary);
+
+    &:hover {
+      background: var(--color-surface-card);
+      color: var(--color-primary);
+    }
+  }
+
+  &--sm {
+    min-height: 50px;
+    font-size: var(--fs-body);
+  }
+}
+
+// Surcouche des boutons : léger reflet au survol
+.btn,
+.link-more {
+  -webkit-tap-highlight-color: transparent;
+}
+
+// Lien « Voir plus → » en tête de section
+.link-more {
+  @include m.focus-ring;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  min-height: var(--tap-min);
+  font-weight: 700;
+  font-size: var(--fs-body);
+  white-space: nowrap;
+
+  span[aria-hidden] {
+    display: inline-block;
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  @include m.hover {
+    span[aria-hidden] {
+      transform: translateX(4px);
+    }
+  }
+}
+
+// Bloc de page : espacement vertical régulier
+.page-section {
+  padding-inline: var(--gutter);
+}
+
+.ph {
+  line-height: 1;
+}

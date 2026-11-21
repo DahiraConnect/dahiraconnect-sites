@@ -1,0 +1,85 @@
+@use 'styles/mixins' as m;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.album-card__link {
+  @include m.focus-ring;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-text-primary);
+
+    .album-card__title {
+      text-decoration: underline;
+    }
+  }
+
+  &:active .album-card__photo {
+    transform: scale(0.99);
+  }
+}
+
+.album-card__photo {
+  transition: transform var(--transition-base);
+}
+
+.album-card__title {
+  font-weight: 700;
+  font-size: var(--fs-body-lg);
+  line-height: 1.25;
+
+  &--display {
+    @include m.display(24px, 1.15);
+  }
+}
+
+.album-card__meta {
+  margin-top: -6px;
+  font-size: 15px;
+  color: var(--color-text-secondary);
+}
+
+.album-card__share {
+  align-self: flex-start;
+  min-height: 48px;
+  font-size: 15px;
+}
+
+:host(.album-card--lg) .album-card__photo {
+  height: 440px;
+  --arch-bottom: 22px;
+
+  @include m.desktop {
+    height: 560px;
+  }
+}
+
+:host(.album-card--md) {
+  width: 220px;
+
+  @include m.desktop {
+    width: auto;
+  }
+
+  .album-card__photo {
+    height: 290px;
+  }
+}
+
+:host(.album-card--sm) .album-card__photo {
+  height: 230px;
+  --arch-bottom: 22px;
+
+  @include m.tablet {
+    height: 320px;
+  }
+}

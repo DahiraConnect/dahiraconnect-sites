@@ -1,0 +1,62 @@
+<ol class="timeline timeline--{{ variant() }}">
+  @switch (variant()) {
+    @case ('history') {
+      @for (step of history(); track step.year) {
+        <li class="history" [class.history--now]="step.highlight" appReveal [appRevealDelay]="$index * 90">
+          <span class="history__dot" aria-hidden="true"></span>
+          <span class="history__year">{{ step.year }}</span>
+          <h3 class="history__title">{{ step.title }}</h3>
+          <p class="history__text">{{ step.text }}</p>
+        </li>
+      }
+    }
+    @case ('lineage') {
+      @for (step of lineage(); track step.name) {
+        <li class="lineage" [class.lineage--now]="step.highlight" appReveal [appRevealDelay]="$index * 90">
+          @if (step.photoUrl) {
+            <span class="lineage__portrait">
+              <img [ngSrc]="step.photoUrl" [alt]="'Portrait de ' + step.name" width="120" height="120" />
+            </span>
+          } @else {
+            <span class="lineage__relation">{{ step.relation }}</span>
+          }
+          <div class="lineage__card">
+            @if (step.photoUrl) {
+              <span class="lineage__tag">{{ step.relation }}</span>
+            }
+            @if (step.years) {
+              <span class="lineage__years">{{ step.years }}</span>
+            }
+            <h3 class="lineage__name">{{ step.name }}</h3>
+            @if (step.alias) {
+              <span class="lineage__alias">« {{ step.alias }} »</span>
+            }
+            <p class="lineage__text">{{ step.text }}</p>
+          </div>
+        </li>
+      }
+    }
+    @case ('agenda') {
+      @for (event of events(); track event.id) {
+        <li class="agenda" [class.agenda--major]="event.isMajor" appReveal [appRevealDelay]="$index * 70">
+          <a class="agenda__link" [routerLink]="['/agenda', event.slug]">
+            <span class="agenda__date" aria-hidden="true">
+              <span class="agenda__day">{{ fmtDay(event.startsAt) }}</span>
+              <span class="agenda__month">{{ fmtMonthShort(event.startsAt) }}</span>
+            </span>
+            <span class="agenda__body">
+              <span class="agenda__title">{{ event.title }}</span>
+              <span class="sr-only">, le {{ fmtDay(event.startsAt) }} {{ fmtMonthShort(event.startsAt) }}</span>
+              <span class="agenda__meta">
+                {{ fmtTimeRange(event.startsAt, event.endsAt) }} · {{ event.place }}
+              </span>
+              @if (event.isMajor) {
+                <span class="agenda__badge">Grand événement</span>
+              }
+            </span>
+          </a>
+        </li>
+      }
+    }
+  }
+</ol>

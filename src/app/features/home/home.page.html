@@ -1,0 +1,98 @@
+<app-dark-hero>
+  <div class="hero">
+    <app-medallion
+      class="hero__medallion pop"
+      [logoUrl]="dahira().logoUrl"
+      [alt]="dahira().logoAlt"
+      [text]="dahira().ringText"
+      [size]="300"
+      [priority]="true"
+    />
+    <div class="hero__text">
+      @if (dahira().nameArabic) {
+        <p class="hero__arabic rise" style="--i: 0" lang="ar" dir="rtl">{{ dahira().nameArabic }}</p>
+      }
+      <h1 class="hero__title rise" style="--i: 1">{{ dahira().motto }}</h1>
+      <p class="hero__lead rise" style="--i: 2">
+        Le {{ dahira().name }}, sous la guidance de {{ dahira().guideName }}.
+      </p>
+      <app-wa-button class="hero__join rise" style="--i: 3" label="Nous rejoindre" />
+    </div>
+  </div>
+</app-dark-hero>
+
+<div class="sheet container">
+  @if (nextEvent(); as event) {
+    <section class="block next" aria-labelledby="next-title" appReveal>
+      <app-section-heading
+        class="next__head"
+        headingId="next-title"
+        title="Prochain rendez-vous"
+        link="/agenda"
+        linkLabel="Agenda"
+      />
+      <app-event-ticket class="next__ticket" [event]="event" />
+    </section>
+  }
+
+  <section class="block about" aria-labelledby="about-title" appReveal>
+    @if (dahira().guidePhotoUrl; as photo) {
+      <figure class="about__figure">
+        <div class="about__photo">
+          <img [ngSrc]="photo" [alt]="'Portrait de ' + dahira().guideName" fill sizes="(min-width: 1024px) 34vw, 90vw" />
+        </div>
+        <figcaption class="about__caption">{{ dahira().guideName }}, guide du dahira</figcaption>
+      </figure>
+    }
+    <div class="about__body">
+      <h2 id="about-title" class="about__title">{{ content().aboutTitle }}</h2>
+      <p class="about__text">{{ content().aboutText }}</p>
+      <div class="about__links">
+        <a class="btn btn--dark btn--sm" routerLink="/le-dahira">Notre histoire</a>
+        <a class="link-more" routerLink="/le-dahira/notre-guide">Notre guide&nbsp;<span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  @if (moments().length) {
+    <section class="block block--wide" aria-labelledby="moments-title" appReveal>
+      <app-section-heading
+        class="block__head"
+        headingId="moments-title"
+        title="Nos moments"
+        link="/galerie"
+        linkLabel="Galerie"
+      />
+      @defer (on viewport) {
+        <ul class="moments">
+          @for (album of moments(); track album.id) {
+            <li><app-album-card [album]="album" size="md" /></li>
+          }
+        </ul>
+      } @placeholder {
+        <div class="moments moments--placeholder" aria-hidden="true"></div>
+      }
+    </section>
+  }
+
+  @if (dahira().support; as support) {
+    <section class="block support" aria-labelledby="support-title" appReveal>
+      <div class="support__intro">
+        <h2 id="support-title" class="support__title">Soutenir le dahira</h2>
+        <p class="support__text">{{ support.text }}</p>
+        @if (support.blessing) {
+          <p class="support__blessing">{{ support.blessing }}</p>
+        }
+      </div>
+      <div class="support__numbers">
+        @for (group of payments(); track group.number) {
+          <app-copy-number
+            [label]="group.label"
+            [number]="group.number"
+            [logos]="group.logos"
+          />
+        }
+      </div>
+    </section>
+  }
+</div>

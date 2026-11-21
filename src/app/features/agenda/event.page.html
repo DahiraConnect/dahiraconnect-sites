@@ -1,0 +1,47 @@
+<app-dark-hero>
+  <div class="hero">
+    <a class="hero__back" routerLink="/agenda">
+      <i class="ph ph-arrow-left" aria-hidden="true"></i>
+      Agenda
+    </a>
+    @if (event()?.isMajor) {
+      <span class="hero__badge">Grand événement</span>
+    }
+  </div>
+</app-dark-hero>
+
+@if (event(); as e) {
+  <div class="content container">
+    <app-event-feature class="content__feature rise" [event]="e" [headingLevel]="1" />
+
+    <div class="content__side">
+      @if (e.description) {
+        <p class="content__text" appReveal>{{ e.description }}</p>
+      }
+
+      @if (images().length) {
+        <section class="media" aria-labelledby="media-title" appReveal>
+          <h2 id="media-title" class="media__title">{{ images().length > 1 ? 'Images' : 'Affiche' }}</h2>
+          <ul class="media__grid" [class.media__grid--single]="images().length === 1">
+            @for (img of images(); track img.url; let i = $index) {
+              <li>
+                <button type="button" class="media__item" (click)="viewing.set(i)">
+                  <img [ngSrc]="img.url" [alt]="img.alt" [width]="img.width" [height]="img.height" sizes="(min-width: 1024px) 40vw, 90vw" [priority]="i === 0" />
+                </button>
+              </li>
+            }
+          </ul>
+        </section>
+        <app-lightbox [photos]="images()" [title]="e.title" [(index)]="viewing" />
+      }
+
+      @if (isPast() && e.albumSlug) {
+        <a class="btn btn--outline content__album" [routerLink]="['/galerie', e.albumSlug]">
+          <i class="ph ph-images" aria-hidden="true"></i>
+          Voir les photos
+        </a>
+      }
+
+    </div>
+  </div>
+}

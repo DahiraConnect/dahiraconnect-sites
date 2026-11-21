@@ -1,0 +1,32 @@
+@if (text()) {
+  <svg
+    class="medallion__ring"
+    [class.medallion__ring--spin]="spin()"
+    [attr.viewBox]="'0 0 ' + size() + ' ' + size()"
+    aria-hidden="true"
+  >
+    <defs><path [attr.id]="pathId" [attr.d]="path()" /></defs>
+    <circle
+      class="medallion__dash"
+      [attr.cx]="center()"
+      [attr.cy]="center()"
+      [attr.r]="dashRadius()"
+    />
+    <text
+      class="medallion__text"
+      [attr.font-size]="fontSize()"
+      [attr.textLength]="textLength()"
+      lengthAdjust="spacing"
+    >
+      <textPath [attr.href]="'#' + pathId">{{ text() }}</textPath>
+    </text>
+  </svg>
+}
+<img
+  class="medallion__logo"
+  [ngSrc]="logoUrl()"
+  [alt]="alt()"
+  [width]="logoSize()"
+  [height]="logoSize()"
+  [priority]="priority()"
+/>

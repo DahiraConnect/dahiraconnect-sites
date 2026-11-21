@@ -1,0 +1,59 @@
+@use 'styles/mixins' as m;
+
+:host {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 14px var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-card);
+}
+
+.copy__logos {
+  display: flex;
+  flex-shrink: 0;
+
+  img {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    box-shadow: 0 0 0 3px var(--color-surface-card);
+  }
+
+  // Logos qui se chevauchent quand le numéro est partagé
+  &--many img + img {
+    margin-left: -12px;
+  }
+}
+
+.copy__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.copy__label {
+  font-size: var(--fs-small);
+  font-weight: 600;
+}
+
+.copy__number {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 0.02em;
+}
+
+.copy__btn {
+  @include m.btn-base(var(--tap-min));
+  min-width: 96px;
+  padding: 0 var(--space-4);
+  background: var(--color-primary);
+  color: var(--color-text-on-dark);
+  font-size: 15px;
+
+  &:hover {
+    background: var(--color-primary-mid);
+  }
+}

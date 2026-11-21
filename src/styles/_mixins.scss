@@ -1,0 +1,219 @@
+// Mixins partagés — @use 'styles/mixins' as m;
+
+// ——— Points de rupture (mobile first) ———
+
+$bp-tablet: 720px;
+$bp-desktop: 1024px;
+
+@mixin tablet {
+  @media (min-width: $bp-tablet) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $bp-desktop) {
+    @content;
+  }
+}
+
+@mixin mobile-only {
+  @media (max-width: #{$bp-desktop - 1px}) {
+    @content;
+  }
+}
+
+// Survol uniquement sur les appareils qui le permettent (pas de survol « collé » au doigt)
+@mixin hover {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+// Carte qui se soulève au survol
+@mixin lift($distance: -4px) {
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+
+  @include hover {
+    transform: translateY($distance);
+    box-shadow: var(--shadow-float);
+  }
+}
+
+// ——— Utilitaires de base ———
+
+@mixin flex-row($gap: var(--space-2), $align: center) {
+  display: flex;
+  align-items: $align;
+  gap: $gap;
+}
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+}
+
+@mixin overline($color: var(--color-gold-text)) {
+  font: 700 var(--fs-overline) / 1 var(--font-body);
+  letter-spacing: var(--ls-overline);
+  text-transform: uppercase;
+  color: $color;
+}
+
+@mixin display($size: var(--fs-h2), $line-height: 1.05) {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: $size;
+  line-height: $line-height;
+  letter-spacing: var(--ls-display);
+}
+
+// Bouton pilule (lien ou <button>) avec tous les états
+@mixin btn-base($height: var(--btn-h)) {
+  @include flex-row(10px);
+  @include focus-ring;
+  justify-content: center;
+  min-height: $height;
+  padding: 0 var(--space-5);
+  border: 0;
+  border-radius: var(--radius-pill);
+  font: 700 var(--fs-body-lg) / 1.2 var(--font-body);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base),
+    transform var(--transition-base),
+    filter var(--transition-base);
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:disabled,
+  &[aria-disabled='true'] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+// Chip de filtre (fond sombre) : actif = or
+@mixin chip-on-dark {
+  @include focus-ring;
+  min-height: var(--tap-min);
+  padding: 0 18px;
+  border: 1px solid var(--color-border-on-dark);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text-on-dark);
+  font: 600 15px / 1 var(--font-body);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base);
+
+  &:hover {
+    background: rgb(244 239 227 / 0.1);
+  }
+
+  &[aria-pressed='true'] {
+    border-color: transparent;
+    background: var(--color-gold);
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+}
+
+// Badge pilule
+@mixin badge($bg: var(--color-surface), $color: var(--color-primary)) {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: $bg;
+  color: $color;
+  font: 700 var(--fs-small) / 1.2 var(--font-body);
+}
+
+// Carrousel horizontal sans barre de défilement
+@mixin h-scroll($gap: var(--space-3)) {
+  display: flex;
+  gap: $gap;
+  overflow-x: auto;
+  padding-inline: var(--gutter);
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  > * {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+}
+
+@mixin truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// ——— Signature « Le médaillon » ———
+
+// Motif étoilé or en filigrane (8 branches), à poser sur un fond sombre
+@mixin pattern-star($opacity: 0.22) {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: $opacity;
+    background-image: url('/assets/patterns/star-gold.svg'); // tuile 48×48
+    background-size: 48px 48px;
+    pointer-events: none;
+  }
+}
+
+// Cadre en arche (photos)
+@mixin arch($radius-bottom: 20px) {
+  border-radius: 999px 999px $radius-bottom $radius-bottom;
+  overflow: hidden;
+}
+
+// Hero sombre + raccord arrondi de la section suivante
+@mixin dark-hero {
+  @include pattern-star;
+  background: var(--color-primary);
+  color: var(--color-text-on-dark);
+  padding-bottom: 76px;
+}
+
+@mixin overlap-sheet {
+  position: relative;
+  margin-top: -40px;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  background: var(--color-surface);
+}
+
+// Carte sombre / or en retrait des bords
+@mixin inset-card($bg: var(--color-primary), $color: var(--color-text-on-dark)) {
+  margin-inline: var(--space-4);
+  padding: 26px 22px;
+  border-radius: 30px;
+  background: $bg;
+  color: $color;
+}

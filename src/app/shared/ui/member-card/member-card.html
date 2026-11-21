@@ -1,0 +1,16 @@
+<article class="member">
+  <div class="member__photo member__photo--{{ tone() }}">
+    @if (member().photoUrl; as photo) {
+      <img [ngSrc]="photo" [alt]="'Portrait de ' + member().name" fill sizes="(min-width: 1024px) 18vw, 50vw" />
+    } @else {
+      <svg class="member__silhouette" viewBox="0 0 120 120" aria-hidden="true">
+        <circle cx="60" cy="44" r="24" />
+        <path d="M14 120c4-30 22-44 46-44s42 14 46 44z" />
+      </svg>
+    }
+  </div>
+  <div class="member__body">
+    <p class="member__role">{{ member().role }}</p>
+    <h3 class="member__name">{{ member().name }}</h3>
+  </div>
+</article>

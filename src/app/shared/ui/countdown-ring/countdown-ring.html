@@ -1,0 +1,16 @@
+<svg viewBox="0 0 92 92" aria-hidden="true">
+  <circle class="ring__track" cx="46" cy="46" [attr.r]="r" />
+  <circle
+    class="ring__value"
+    cx="46"
+    cy="46"
+    [attr.r]="r"
+    [attr.stroke-dasharray]="circumference"
+    [attr.stroke-dashoffset]="offset()"
+    transform="rotate(-90 46 46)"
+  />
+</svg>
+<p class="ring__label">
+  <span class="ring__days">{{ days() }}</span>
+  <span class="ring__unit">{{ unit() }}</span>
+</p>

@@ -1,0 +1,38 @@
+<header class="header">
+  <div class="header__inner container">
+    <a class="header__brand" routerLink="/" [attr.aria-label]="'Accueil — ' + dahira().name">
+      <img [ngSrc]="dahira().logoUrl" alt="" width="48" height="48" />
+      <span class="header__name">
+        <span class="header__short">{{ dahira().shortName }}</span>
+        @if (dahira().nameArabic) {
+          <span class="header__arabic" lang="ar" dir="rtl">{{ dahira().nameArabic }}</span>
+        }
+      </span>
+    </a>
+
+    <nav class="header__nav" aria-label="Navigation principale">
+      @for (link of links; track link.path) {
+        <a
+          class="header__link"
+          [routerLink]="link.path"
+          routerLinkActive="is-active"
+          ariaCurrentWhenActive="page"
+          [routerLinkActiveOptions]="{ exact: link.exact }"
+        >
+          {{ link.label }}
+        </a>
+      }
+    </nav>
+
+    <div class="header__actions">
+      <a class="header__remind" routerLink="/agenda" fragment="rappels">
+        <i class="ph ph-bell" aria-hidden="true"></i>
+        Rappels
+      </a>
+      <a class="header__join" routerLink="/rejoindre" routerLinkActive="is-active">
+        <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+        Rejoindre
+      </a>
+    </div>
+  </div>
+</header>

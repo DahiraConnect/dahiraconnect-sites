@@ -1,0 +1,70 @@
+[
+  {
+    "id": "evt-1",
+    "slug": "recital-mensuel-decembre-2026",
+    "title": "Récital mensuel de khassaïdes",
+    "startsAt": "2026-12-05T20:30:00Z",
+    "place": "Siège du dahira, Yeumbeul",
+    "description": "Chaque mois, le dahira se réunit pour réciter les khassaïdes. Venez avec votre famille.",
+    "images": [
+      {
+        "url": "/assets/tenants/moutahabina/exemples/events/recital-mensuel-decembre-2026/affiche.svg",
+        "alt": "Affiche du récital mensuel de khassaïdes (exemple)",
+        "width": 900,
+        "height": 1200
+      }
+    ]
+  },
+  {
+    "id": "evt-2",
+    "slug": "conference-fraternite-en-islam",
+    "title": "Conférence « La fraternité en Islam »",
+    "startsAt": "2026-12-19T16:00:00Z",
+    "place": "Salle polyvalente de Yeumbeul"
+  },
+  {
+    "id": "evt-3",
+    "slug": "journee-set-setal-janvier-2027",
+    "title": "Journée set setal",
+    "startsAt": "2027-01-10T08:00:00Z",
+    "place": "Départ du siège"
+  },
+  {
+    "id": "evt-4",
+    "slug": "journee-culturelle-2027",
+    "title": "Journée culturelle annuelle",
+    "startsAt": "2027-02-14T10:00:00Z",
+    "endsAt": "2027-02-14T22:00:00Z",
+    "place": "Esplanade de Yeumbeul",
+    "isMajor": true,
+    "images": [
+      {
+        "url": "/assets/tenants/moutahabina/exemples/events/journee-culturelle-2027/image-1.svg",
+        "alt": "Journée culturelle — image 1 (exemple)",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/assets/tenants/moutahabina/exemples/events/journee-culturelle-2027/image-2.svg",
+        "alt": "Journée culturelle — image 2 (exemple)",
+        "width": 1200,
+        "height": 900
+      },
+      {
+        "url": "/assets/tenants/moutahabina/exemples/events/journee-culturelle-2027/image-3.svg",
+        "alt": "Journée culturelle — image 3 (exemple)",
+        "width": 1200,
+        "height": 900
+      }
+    ],
+    "description": "Une journée de partage ouverte à tous : conférences, récitals, repas et animations pour les enfants."
+  },
+  {
+    "id": "evt-0",
+    "slug": "don-de-sang-octobre-2026",
+    "title": "Journée de don de sang",
+    "startsAt": "2026-10-25T09:00:00Z",
+    "place": "Siège du dahira, Yeumbeul",
+    "albumSlug": "don-de-sang-octobre-2026"
+  }
+]

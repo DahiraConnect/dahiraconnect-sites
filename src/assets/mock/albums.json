@@ -1,0 +1,164 @@
+[
+  {
+    "id": "alb-1",
+    "slug": "journee-culturelle-2026",
+    "title": "Journée culturelle 2026",
+    "date": "2026-02-14",
+    "place": "Yeumbeul",
+    "kind": "photos",
+    "fallback": "green",
+    "featured": true,
+    "coverUrl": "/assets/tenants/moutahabina/exemples/albums/journee-culturelle-2026/couverture.svg",
+    "photos": [
+      {
+        "url": "/assets/tenants/moutahabina/exemples/albums/journee-culturelle-2026/photo-01.svg",
+        "width": 1200,
+        "height": 900,
+        "alt": "Journée culturelle 2026 — photo 1 (exemple)"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/exemples/albums/journee-culturelle-2026/photo-02.svg",
+        "width": 900,
+        "height": 1200,
+        "alt": "Journée culturelle 2026 — photo 2 (exemple)"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/exemples/albums/journee-culturelle-2026/photo-03.svg",
+        "width": 1200,
+        "height": 900,
+        "alt": "Journée culturelle 2026 — photo 3 (exemple)"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/exemples/albums/journee-culturelle-2026/photo-04.svg",
+        "width": 1200,
+        "height": 1200,
+        "alt": "Journée culturelle 2026 — photo 4 (exemple)"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/exemples/albums/journee-culturelle-2026/photo-05.svg",
+        "width": 900,
+        "height": 1200,
+        "alt": "Journée culturelle 2026 — photo 5 (exemple)"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/exemples/albums/journee-culturelle-2026/photo-06.svg",
+        "width": 1200,
+        "height": 800,
+        "alt": "Journée culturelle 2026 — photo 6 (exemple)"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/exemples/albums/journee-culturelle-2026/photo-07.svg",
+        "width": 1200,
+        "height": 900,
+        "alt": "Journée culturelle 2026 — photo 7 (exemple)"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/exemples/albums/journee-culturelle-2026/photo-08.svg",
+        "width": 900,
+        "height": 1200,
+        "alt": "Journée culturelle 2026 — photo 8 (exemple)"
+      }
+    ]
+  },
+  {
+    "id": "alb-2",
+    "slug": "don-de-sang-octobre-2026",
+    "title": "Don de sang, octobre 2026",
+    "date": "2026-10-25",
+    "place": "Yeumbeul",
+    "kind": "photos",
+    "fallback": "gold",
+    "coverUrl": "/assets/tenants/moutahabina/exemples/albums/don-de-sang-octobre-2026/couverture.svg",
+    "photos": [
+      {
+        "url": "/assets/tenants/moutahabina/exemples/albums/don-de-sang-octobre-2026/photo-01.svg",
+        "width": 1200,
+        "height": 900,
+        "alt": "Don de sang — photo 1 (exemple)"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/exemples/albums/don-de-sang-octobre-2026/photo-02.svg",
+        "width": 900,
+        "height": 1200,
+        "alt": "Don de sang — photo 2 (exemple)"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/exemples/albums/don-de-sang-octobre-2026/photo-03.svg",
+        "width": 1200,
+        "height": 900,
+        "alt": "Don de sang — photo 3 (exemple)"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/exemples/albums/don-de-sang-octobre-2026/photo-04.svg",
+        "width": 1200,
+        "height": 1200,
+        "alt": "Don de sang — photo 4 (exemple)"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/exemples/albums/don-de-sang-octobre-2026/photo-05.svg",
+        "width": 900,
+        "height": 1200,
+        "alt": "Don de sang — photo 5 (exemple)"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/exemples/albums/don-de-sang-octobre-2026/photo-06.svg",
+        "width": 1200,
+        "height": 800,
+        "alt": "Don de sang — photo 6 (exemple)"
+      }
+    ]
+  },
+  {
+    "id": "alb-3",
+    "slug": "set-setal-du-quartier",
+    "title": "Set setal du quartier",
+    "date": "2026-07-12",
+    "place": "Yeumbeul",
+    "kind": "photos",
+    "fallback": "sage",
+    "coverUrl": "/assets/tenants/moutahabina/exemples/albums/set-setal-du-quartier/couverture.svg",
+    "photos": [
+      {
+        "url": "/assets/tenants/moutahabina/exemples/albums/set-setal-du-quartier/photo-01.svg",
+        "width": 1200,
+        "height": 900,
+        "alt": "Set setal du quartier — photo 1 (exemple)"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/exemples/albums/set-setal-du-quartier/photo-02.svg",
+        "width": 900,
+        "height": 1200,
+        "alt": "Set setal du quartier — photo 2 (exemple)"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/exemples/albums/set-setal-du-quartier/photo-03.svg",
+        "width": 1200,
+        "height": 900,
+        "alt": "Set setal du quartier — photo 3 (exemple)"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/exemples/albums/set-setal-du-quartier/photo-04.svg",
+        "width": 1200,
+        "height": 1200,
+        "alt": "Set setal du quartier — photo 4 (exemple)"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/exemples/albums/set-setal-du-quartier/photo-05.svg",
+        "width": 900,
+        "height": 1200,
+        "alt": "Set setal du quartier — photo 5 (exemple)"
+      }
+    ]
+  },
+  {
+    "id": "alb-4",
+    "slug": "recital-khassaides-novembre-2026",
+    "title": "Récital de khassaïdes",
+    "date": "2026-11-07",
+    "place": "Siège du dahira, Yeumbeul",
+    "kind": "video",
+    "fallback": "blue",
+    "coverUrl": "/assets/tenants/moutahabina/exemples/albums/recital-khassaides-novembre-2026/vignette.svg",
+    "durationMin": 42
+  }
+]

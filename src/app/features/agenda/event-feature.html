@@ -1,0 +1,50 @@
+<article class="feature">
+  <div class="feature__top">
+    <p class="feature__date">
+      <span class="feature__day">{{ day() }}</span>
+      <span class="feature__line">{{ dateLine() }}</span>
+    </p>
+    <span class="feature__chip">{{ countdown() }}</span>
+  </div>
+
+  <div class="feature__head">
+    @if (headingLevel() === 1) {
+      <h1 class="feature__title">{{ event().title }}</h1>
+    } @else {
+      <h2 class="feature__title">{{ event().title }}</h2>
+    }
+    <p class="feature__meta">
+      {{ time() }} · {{ event().place }}
+      <a class="feature__route" [href]="mapUrl()" target="_blank" rel="noopener">
+        <i class="ph ph-map-pin" aria-hidden="true"></i>Itinéraire
+      </a>
+    </p>
+  </div>
+
+  @if (images().length) {
+    <div class="feature__media">
+      <ul class="feature__thumbs">
+        @for (img of images().slice(0, 3); track img.url; let i = $index) {
+          <li>
+            <button type="button" class="feature__thumb" (click)="viewing.set(i)">
+              <img [ngSrc]="img.url" [alt]="img.alt" fill sizes="(min-width: 1024px) 8vw, 20vw" [priority]="i === 0" />
+            </button>
+          </li>
+        }
+      </ul>
+      <button type="button" class="feature__media-btn" (click)="viewing.set(0)">{{ mediaLabel() }}</button>
+    </div>
+    <app-lightbox [photos]="images()" [title]="event().title" [(index)]="viewing" />
+  }
+
+  <div class="feature__actions">
+    <a class="feature__btn feature__btn--share" [href]="shareUrl()" target="_blank" rel="noopener">
+      <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+      Partager
+    </a>
+    <a class="feature__btn feature__btn--remind" [href]="icsUrl()" [attr.download]="icsName()">
+      <i class="ph ph-calendar-plus" aria-hidden="true"></i>
+      Ajouter à l'agenda
+    </a>
+  </div>
+</article>

@@ -1,0 +1,133 @@
+// Design tokens — valeurs par défaut = charte Moutahabina.
+// ThemeInitializer surcharge ces variables par dahira (voir core/tenant/theme.initializer.ts).
+
+:root {
+  /* Couleurs */
+  --color-primary: #0a3a1b; // vert profond : hero, cartes sombres, texte
+  --color-primary-deep: #062711; // footer, dock
+  --color-primary-mid: #0f5c27; // aplats photo, liens hover
+  --color-brand: #1bb13e; // vert du logo : bouton WhatsApp, actif dock
+  --color-on-brand: #062711; // texte sur vert vif
+  --color-gold: #e2b743; // aplats or (soutien, badges, chips actifs)
+  --color-gold-deep: #b8901f; // aplat or foncé (cartes membres)
+  --color-gold-line: #d9b24c; // filets, anneau, motif étoilé, fils de frise
+  --color-gold-text: #8a6a12; // or lisible sur ivoire (surtitres)
+  --color-gold-soft: #e8d9a8; // texte or pâle sur fond sombre
+  --color-accent-blue: #2c3ba8; // aplats vidéo (bleu du boubou)
+  --color-accent-blue-soft: #dce0f7; // texte secondaire sur bleu
+  --color-sage: #c9ddc9; // aplat vert sauge
+  --color-surface: #f4efe3; // ivoire (fond)
+  --color-surface-card: #ffffff;
+  --color-surface-muted: #efe8d6;
+  --color-surface-veil: rgb(255 255 255 / 0.55); // lignes sur carte or
+  --color-border: #d8cdb2;
+  --color-border-dashed: #e9dfc4;
+  --color-border-on-dark: rgb(244 239 227 / 0.35);
+  --color-text-primary: #0a3a1b;
+  --color-text-secondary: #3d5444;
+  --color-text-muted: #6a6152;
+  --color-text-on-dark: #f4efe3;
+  --color-text-on-dark-soft: #cfe0d3;
+  --color-text-on-dark-faint: #8fb39a;
+
+  /* Maquette WhatsApp */
+  --color-wa-wallpaper: #e7dfd3;
+  --color-wa-bubble: #d9fdd3;
+  --color-wa-text: #1f2a22;
+  --color-wa-hint: #5c5346;
+
+  /* Typo */
+  --font-display: 'Young Serif', Georgia, serif; // 1 seule graisse (400)
+  --font-body: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+  --font-arabic: 'Aref Ruqaa', serif;
+
+  --fs-hero: 46px; // h1 pages
+  --fs-hero-xl: 54px; // h1 Agenda / Galerie
+  --fs-h2: 26px;
+  --fs-h2-lg: 30px;
+  --fs-title: 20px;
+  --fs-body-lg: 17px;
+  --fs-body: 16px;
+  --fs-small: 14px;
+  --fs-overline: 13px; // surtitres en capitales, letter-spacing .16em
+  --fs-micro: 11.5px; // libellés du dock / médaillons de frise
+  --fs-arabic: 30px;
+  --lh-tight: 0.96;
+  --lh-snug: 1.15;
+  --lh-body: 1.5;
+  --ls-display: -0.01em;
+  --ls-overline: 0.16em;
+
+  /* Espacements (base 4) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-9: 36px;
+  --space-10: 40px;
+  --space-11: 44px;
+  --gutter: 20px;
+
+  /* Rayons */
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --radius-card: 28px;
+  --radius-xl: 36px; // raccord hero → contenu
+  --radius-pill: 999px;
+  --radius-arch: 999px 999px 20px 20px;
+
+  /* Ombres / transitions */
+  --shadow-float: 0 18px 40px rgb(10 58 27 / 0.12);
+  --shadow-dock: 0 10px 30px rgb(6 39 17 / 0.35);
+  --transition-base: 0.15s ease;
+
+  /* Focus */
+  --focus-ring-width: 3px;
+  --focus-ring-color: #e2b743;
+  --focus-ring-offset: 2px;
+
+  /* Tailles tactiles */
+  --tap-min: 44px;
+  --btn-h: 56px;
+  --btn-h-lg: 62px;
+
+  /* Mise en page */
+  --container-max: 1200px;
+  --header-h: 76px; // barre de navigation ordinateur
+  --dock-h: 72px;
+  --dock-reserve: 132px; // espace réservé sous le footer pour le dock (mobile)
+
+  /* Mouvement */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --dur-fast: 180ms;
+  --dur-base: 320ms;
+  --dur-slow: 700ms;
+}
+
+// Tablette : un peu plus d'air
+@media (min-width: 720px) {
+  :root {
+    --gutter: 32px;
+    --fs-h2: 30px;
+    --fs-h2-lg: 34px;
+  }
+}
+
+// Ordinateur : typographie plus ample, pas de dock
+@media (min-width: 1024px) {
+  :root {
+    --gutter: 40px;
+    --fs-hero: 64px;
+    --fs-hero-xl: 76px;
+    --fs-h2: 36px;
+    --fs-h2-lg: 42px;
+    --fs-body-lg: 18px;
+    --dock-reserve: 48px;
+  }
+}

@@ -1,0 +1,33 @@
+@if (pwa.offline()) {
+  <p class="offline" role="status">
+    <i class="ph ph-wifi-slash" aria-hidden="true"></i>
+    Hors ligne : vous voyez les pages déjà enregistrées.
+  </p>
+}
+
+@if (pwa.installMode(); as mode) {
+  <section class="install" role="dialog" aria-labelledby="install-title" aria-describedby="install-text">
+    <img class="install__icon" [ngSrc]="icon()" alt="" width="56" height="56" />
+    <div class="install__body">
+      <h2 id="install-title" class="install__title">Installer l'application</h2>
+      @if (mode === 'android') {
+        <p id="install-text" class="install__text">
+          Retrouvez le dahira sur votre écran d'accueil, même avec peu de réseau.
+        </p>
+      } @else {
+        <p id="install-text" class="install__text">
+          Touchez <i class="ph ph-export" aria-label="Partager"></i> en bas de l'écran, puis
+          « Sur l'écran d'accueil ».
+        </p>
+      }
+      <div class="install__actions">
+        @if (mode === 'android') {
+          <button type="button" class="btn btn--dark btn--sm" (click)="pwa.install()">Installer</button>
+        }
+        <button type="button" class="install__later" (click)="pwa.dismiss()">
+          {{ mode === 'android' ? 'Plus tard' : "J'ai compris" }}
+        </button>
+      </div>
+    </div>
+  </section>
+}

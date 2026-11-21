@@ -1,0 +1,135 @@
+@use 'styles/mixins' as m;
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 0 var(--gutter);
+}
+
+.hero__back {
+  @include m.flex-row(6px);
+  min-height: var(--tap-min);
+  color: var(--color-text-on-dark-soft);
+  font-weight: 600;
+
+  &:hover {
+    color: var(--color-text-on-dark);
+  }
+}
+
+.hero__badge {
+  @include m.badge(var(--color-gold), var(--color-primary));
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-bottom: var(--space-10);
+
+  @include m.desktop {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 56px;
+    padding: 0 var(--gutter) 96px;
+  }
+}
+
+.content__feature {
+  position: relative;
+  display: block;
+  margin: -40px var(--space-4) 0;
+
+  @include m.desktop {
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-6));
+    margin: -80px 0 0;
+  }
+}
+
+.content__side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+
+  @include m.desktop {
+    padding-top: var(--space-8);
+  }
+}
+
+.content__text {
+  padding-inline: var(--gutter);
+  font-size: var(--fs-body-lg);
+  color: var(--color-text-secondary);
+
+  @include m.desktop {
+    padding: 0;
+    font-size: 20px;
+  }
+}
+
+.content__album {
+  margin-inline: var(--gutter);
+
+  @include m.desktop {
+    margin: 0;
+    align-self: flex-start;
+  }
+}
+
+.media {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-inline: var(--gutter);
+
+  @include m.desktop {
+    padding: 0;
+  }
+}
+
+.media__title {
+  @include m.display(var(--fs-h2), 1.1);
+}
+
+.media__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+
+  li:first-child {
+    grid-column: 1 / -1;
+  }
+
+  &--single li {
+    max-width: 420px;
+  }
+}
+
+.media__item {
+  @include m.focus-ring;
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-surface-muted);
+  cursor: zoom-in;
+
+  img {
+    width: 100%;
+    height: auto;
+    transition: transform 1s var(--ease-out);
+  }
+
+  @include m.hover {
+    img {
+      transform: scale(1.04);
+    }
+  }
+}

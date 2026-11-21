@@ -1,0 +1,49 @@
+@use 'styles/mixins' as m;
+
+:host {
+  display: block;
+}
+
+.wa-btn {
+  @include m.btn-base;
+  width: 100%;
+
+  .ph {
+    font-size: 24px;
+  }
+
+  &--lg {
+    min-height: var(--btn-h-lg);
+    font-size: 18px;
+  }
+
+  &--brand {
+    background: var(--color-brand);
+    color: var(--color-on-brand);
+
+    &:hover {
+      color: var(--color-on-brand);
+      filter: brightness(1.08);
+    }
+  }
+
+  &--dark {
+    background: var(--color-primary);
+    color: var(--color-text-on-dark);
+
+    &:hover {
+      background: var(--color-primary-mid);
+      color: var(--color-text-on-dark);
+    }
+  }
+
+  &--light {
+    background: var(--color-surface);
+    color: var(--color-primary);
+
+    &:hover {
+      background: var(--color-surface-card);
+      color: var(--color-primary);
+    }
+  }
+}

@@ -1,0 +1,38 @@
+<footer class="footer">
+  <div class="footer__inner container">
+    @if (watermark()) {
+      <span class="footer__watermark" lang="ar" dir="rtl" aria-hidden="true">{{ watermark() }}</span>
+    }
+
+    <div class="footer__identity">
+      <p class="footer__name">{{ dahira().name }}</p>
+      <p class="footer__motto">{{ dahira().motto }}</p>
+    </div>
+
+    <div class="footer__col">
+      <h2 class="footer__heading">Nous trouver</h2>
+      <address class="footer__contact">
+        <span>Siège : {{ dahira().contact.address }}</span>
+        <a [href]="tel()">{{ dahira().contact.phone }}</a>
+      </address>
+    </div>
+
+    <nav class="footer__col footer__nav" aria-label="Liens du pied de page">
+      <h2 class="footer__heading">Le site</h2>
+      <a routerLink="/le-dahira">Qui sommes-nous</a>
+      <a routerLink="/le-dahira/notre-guide">Notre guide</a>
+      <a routerLink="/agenda">Agenda</a>
+      <a routerLink="/galerie">Galerie</a>
+      <a routerLink="/rejoindre">Nous rejoindre</a>
+    </nav>
+
+    @if (dahira().social?.length) {
+      <div class="footer__col">
+        <h2 class="footer__heading">Suivez-nous</h2>
+        <app-social-links />
+      </div>
+    }
+
+    <p class="footer__credit">© {{ year }} {{ dahira().name }} · Propulsé par DahiraConnect</p>
+  </div>
+</footer>

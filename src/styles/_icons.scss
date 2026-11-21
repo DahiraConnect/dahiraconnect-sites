@@ -1,0 +1,114 @@
+// Généré par scripts/subset-icons.py — ne pas modifier à la main.
+
+@font-face {
+  font-family: 'Phosphor';
+  src: url('/assets/fonts/phosphor-regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.ph {
+  font-family: 'Phosphor' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ph.ph-arrow-left::before {
+  content: "\e058";
+}
+.ph.ph-arrow-right::before {
+  content: "\e06c";
+}
+.ph.ph-arrow-up-right::before {
+  content: "\e092";
+}
+.ph.ph-bell::before {
+  content: "\e0ce";
+}
+.ph.ph-calendar-blank::before {
+  content: "\e10a";
+}
+.ph.ph-calendar-plus::before {
+  content: "\e714";
+}
+.ph.ph-caret-left::before {
+  content: "\e138";
+}
+.ph.ph-caret-right::before {
+  content: "\e13a";
+}
+.ph.ph-check::before {
+  content: "\e182";
+}
+.ph.ph-export::before {
+  content: "\eaf0";
+}
+.ph.ph-facebook-logo::before {
+  content: "\e226";
+}
+.ph.ph-house::before {
+  content: "\e2c2";
+}
+.ph.ph-images::before {
+  content: "\e836";
+}
+.ph.ph-instagram-logo::before {
+  content: "\e2d0";
+}
+.ph.ph-map-pin::before {
+  content: "\e316";
+}
+.ph.ph-phone::before {
+  content: "\e3b8";
+}
+.ph.ph-share-network::before {
+  content: "\e408";
+}
+.ph.ph-tiktok-logo::before {
+  content: "\eaf2";
+}
+.ph.ph-users-three::before {
+  content: "\e68e";
+}
+.ph.ph-whatsapp-logo::before {
+  content: "\e5d0";
+}
+.ph.ph-wifi-slash::before {
+  content: "\e4f2";
+}
+.ph.ph-x::before {
+  content: "\e4f6";
+}
+.ph.ph-x-logo::before {
+  content: "\e4bc";
+}
+.ph.ph-youtube-logo::before {
+  content: "\e4fc";
+}
+
+@font-face {
+  font-family: 'Phosphor Fill';
+  src: url('/assets/fonts/phosphor-fill.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.ph-fill {
+  font-family: 'Phosphor Fill' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+}
+
+.ph-fill.ph-play::before {
+  content: "\e3d0";
+}

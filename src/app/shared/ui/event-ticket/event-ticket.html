@@ -1,0 +1,12 @@
+<a class="ticket" [routerLink]="['/agenda', event().slug]">
+  <span class="ticket__date">
+    <span class="ticket__day">{{ day() }}</span>
+    <span class="ticket__month">{{ month() }}</span>
+    <span class="ticket__weekday">{{ weekday() }}</span>
+  </span>
+  <span class="ticket__body">
+    <span class="ticket__chip">{{ countdown() }}</span>
+    <span class="ticket__title">{{ event().title }}</span>
+    <span class="ticket__meta">{{ time() }} · {{ event().place }}</span>
+  </span>
+</a>

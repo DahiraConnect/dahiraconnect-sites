@@ -1,0 +1,56 @@
+<app-dark-hero>
+  <div class="hero">
+    <div class="hero__main">
+      <h1 class="hero__title rise" style="--i: 1">{{ content().heroTitle }}</h1>
+    </div>
+    <div class="hero__side">
+      @if (dahira().nameArabic) {
+        <p class="hero__arabic rise" style="--i: 2" lang="ar" dir="rtl">{{ dahira().nameArabic }}</p>
+      }
+      @if (dahira().nameMeaning) {
+        <p class="hero__lead rise" style="--i: 3">{{ shortTitle() }} : « {{ dahira().nameMeaning }} ».</p>
+      }
+    </div>
+  </div>
+</app-dark-hero>
+
+<div class="sheet container">
+  <div class="story">
+    <section class="block block--padded" aria-labelledby="history-title">
+      <h2 id="history-title" class="block__title block__title--lg" appReveal>Notre histoire</h2>
+      <app-timeline variant="history" [history]="content().history" />
+    </section>
+
+    <section class="guide" aria-labelledby="guide-title" appReveal>
+      <app-medallion
+        class="guide__medallion"
+        [logoUrl]="dahira().logoUrl"
+        [alt]="dahira().logoAlt"
+        [size]="104"
+        [priority]="true"
+      />
+      <div class="guide__body">
+        <p class="overline guide__overline">Notre guide</p>
+        <h2 id="guide-title" class="guide__name">{{ dahira().guideName }}</h2>
+        <a class="guide__link" routerLink="notre-guide">Sa lignée&nbsp;<span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </div>
+
+  @if (members().length) {
+    <section class="block" aria-labelledby="board-title">
+      <div class="block__head" appReveal>
+        <h2 id="board-title" class="block__title">Le bureau</h2>
+      </div>
+      @defer (on viewport) {
+        <ul class="board">
+          @for (member of members(); track member.id; let i = $index) {
+            <li appReveal [appRevealDelay]="i * 80"><app-member-card [member]="member" [tone]="tone(i)" /></li>
+          }
+        </ul>
+      } @placeholder {
+        <div class="board board--placeholder" aria-hidden="true"></div>
+      }
+    </section>
+  }
+</div>

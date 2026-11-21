@@ -1,0 +1,99 @@
+@use 'styles/mixins' as m;
+
+.ticket {
+  @include m.focus-ring;
+  display: flex;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-surface-card);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+
+  &:hover {
+    color: var(--color-text-primary);
+  }
+
+  @include m.hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-float);
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
+}
+
+.ticket__date {
+  position: relative;
+  flex: 0 0 112px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 0;
+  background: var(--color-gold);
+
+  // Perforation : deux demi-cercles couleur du fond
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    right: -11px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--color-surface);
+  }
+
+  &::before {
+    top: -11px;
+  }
+
+  &::after {
+    bottom: -11px;
+  }
+}
+
+.ticket__day {
+  @include m.display(64px, 0.9);
+}
+
+.ticket__month {
+  margin-top: 6px;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.14em;
+}
+
+.ticket__weekday {
+  margin-top: 2px;
+  font-size: var(--fs-small);
+}
+
+.ticket__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 18px 18px 22px;
+  border-left: 2px dashed var(--color-border-dashed);
+}
+
+.ticket__chip {
+  @include m.badge(var(--color-primary), var(--color-text-on-dark));
+  align-self: flex-start;
+}
+
+.ticket__title {
+  font-family: var(--font-display);
+  font-size: 21px;
+  line-height: var(--lh-snug);
+}
+
+.ticket__meta {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+}

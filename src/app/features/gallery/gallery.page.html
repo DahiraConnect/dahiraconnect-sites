@@ -1,0 +1,62 @@
+<app-dark-hero>
+  <div class="hero">
+    <h1 class="hero__title rise" style="--i: 0">Nos moments<br />ensemble</h1>
+    <div class="hero__chips rise" style="--i: 1" role="group" aria-label="Filtrer la galerie">
+      @for (f of filters; track f.value) {
+        <button type="button" class="chip" [attr.aria-pressed]="filter() === f.value" (click)="filter.set(f.value)">
+          {{ f.label }}
+        </button>
+      }
+    </div>
+  </div>
+</app-dark-hero>
+
+<div class="sheet container">
+  <div class="layout">
+    @if (featured(); as album) {
+      <app-album-card class="featured rise" style="--i: 2" [album]="album" size="lg" />
+    }
+
+    @defer (on viewport) {
+      @if (grid().length) {
+        <ul class="grid" aria-label="Autres albums">
+          @for (album of grid(); track album.id) {
+            <li appReveal [appRevealDelay]="$index * 100"><app-album-card [album]="album" size="sm" /></li>
+          }
+        </ul>
+      }
+    } @placeholder {
+      <div class="grid grid--placeholder" aria-hidden="true"></div>
+    }
+  </div>
+
+  @if (videos().length) {
+    @defer (on viewport) {
+      <ul class="videos" aria-label="Vidéos">
+        @for (video of videos(); track video.id) {
+          <li appReveal [appRevealDelay]="$index * 100">
+            <a class="video" [routerLink]="['/galerie', video.slug]">
+              @if (video.coverUrl; as cover) {
+                <img class="video__img" [ngSrc]="cover" alt="" fill sizes="(min-width: 1024px) 86vw, (min-width: 720px) 50vw, 100vw" />
+              }
+              <span class="video__play" aria-hidden="true"><i class="ph-fill ph-play"></i></span>
+              <span class="video__title">{{ video.title }}</span>
+              <span class="video__meta">
+                Vidéo · {{ fmtMonthYear(video.date) }}
+                @if (video.durationMin) {
+                  · {{ video.durationMin }} min
+                }
+              </span>
+            </a>
+          </li>
+        }
+      </ul>
+    } @placeholder {
+      <div class="videos videos--placeholder" aria-hidden="true"></div>
+    }
+  }
+
+  @if (!featured() && !videos().length) {
+    <p class="empty">Rien à afficher pour ce filtre pour le moment.</p>
+  }
+</div>

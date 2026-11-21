@@ -1,0 +1,21 @@
+<nav class="dock" aria-label="Navigation principale">
+  @for (item of items; track item.path) {
+    <a
+      class="dock__item"
+      [class.dock__item--primary]="item.primary"
+      [routerLink]="item.path"
+      routerLinkActive="is-active"
+      ariaCurrentWhenActive="page"
+      [routerLinkActiveOptions]="{ exact: !!item.exact }"
+    >
+      @if (item.primary) {
+        <span class="dock__bubble">
+          <i class="ph {{ item.icon }}" aria-hidden="true"></i>
+        </span>
+      } @else {
+        <i class="ph {{ item.icon }}" aria-hidden="true"></i>
+      }
+      {{ item.label }}
+    </a>
+  }
+</nav>

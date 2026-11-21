@@ -1,0 +1,66 @@
+// Taille de base `size`, agrandie par le parent via --medallion-scale (ex. hero ordinateur)
+:host {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: calc(var(--size) * var(--medallion-scale, 1));
+  height: calc(var(--size) * var(--medallion-scale, 1));
+  flex-shrink: 0;
+}
+
+.medallion__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 50%;
+
+  &--spin {
+    animation: medallion-spin 40s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &--spin {
+      animation: none;
+    }
+  }
+}
+
+.medallion__dash {
+  fill: none;
+  stroke: var(--color-gold-line);
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+}
+
+.medallion__text {
+  font-family: var(--font-body);
+  font-weight: 700;
+  fill: var(--color-gold-line);
+}
+
+// Jamais recadré ni déformé
+.medallion__logo {
+  position: relative;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: transform var(--dur-slow) var(--ease-spring);
+
+  :host(.has-ring) & {
+    width: 70%;
+  }
+}
+
+// Le portrait « respire » légèrement au survol
+@media (hover: hover) {
+  :host(:hover) .medallion__logo {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes medallion-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

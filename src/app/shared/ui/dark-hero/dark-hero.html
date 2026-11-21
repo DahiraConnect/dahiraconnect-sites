@@ -1,0 +1,13 @@
+<div class="dark-hero__inner container">
+  <header class="dark-hero__bar">
+    <a class="dark-hero__brand" routerLink="/" [attr.aria-label]="'Accueil — ' + dahira().name">
+      <img [ngSrc]="dahira().logoUrl" alt="" width="40" height="40" />
+      <span class="dark-hero__name">{{ dahira().shortName }}</span>
+    </a>
+    <a class="dark-hero__remind" routerLink="/agenda" fragment="rappels">
+      <i class="ph ph-bell" aria-hidden="true"></i>
+      Rappels
+    </a>
+  </header>
+  <ng-content />
+</div>

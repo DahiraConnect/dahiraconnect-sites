@@ -1,0 +1,76 @@
+{
+  "id": "/",
+  "name": "Dahira Moutahabina Fillahi",
+  "short_name": "Moutahabina",
+  "description": "S'aimer pour Dieu, servir ensemble.",
+  "lang": "fr",
+  "dir": "ltr",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0A3A1B",
+  "theme_color": "#0A3A1B",
+  "categories": [
+    "lifestyle",
+    "social"
+  ],
+  "icons": [
+    {
+      "src": "/assets/tenants/moutahabina/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/tenants/moutahabina/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/tenants/moutahabina/icons/maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/tenants/moutahabina/icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Agenda",
+      "url": "/agenda",
+      "icons": [
+        {
+          "src": "/assets/tenants/moutahabina/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Galerie",
+      "url": "/galerie",
+      "icons": [
+        {
+          "src": "/assets/tenants/moutahabina/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Rejoindre",
+      "url": "/rejoindre",
+      "icons": [
+        {
+          "src": "/assets/tenants/moutahabina/icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

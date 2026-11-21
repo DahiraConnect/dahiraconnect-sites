@@ -1,0 +1,60 @@
+<app-dark-hero>
+  <div class="hero">
+    <app-medallion
+      class="hero__medallion pop"
+      [logoUrl]="dahira().logoUrl"
+      [alt]="dahira().logoAlt"
+      [text]="ringText()"
+      [size]="240"
+      [priority]="true"
+    />
+    <div class="hero__text">
+      <h1 class="hero__title rise" style="--i: 0">Rejoignez<br />la famille.</h1>
+      <p class="hero__lead rise" style="--i: 1">{{ content().intro }}</p>
+      <app-wa-button class="hero__cta rise" style="--i: 2" size="lg" />
+      @if (tel()) {
+        <a class="hero__call rise" style="--i: 3" [href]="tel()">
+          <i class="ph ph-phone" aria-hidden="true"></i>
+          Ou appeler le responsable
+        </a>
+      }
+    </div>
+  </div>
+</app-dark-hero>
+
+<div class="sheet container">
+  <div class="grid">
+    @if (dahira().join.mode === 'chat') {
+      <section class="block" aria-labelledby="msg-title" appReveal>
+        <h2 id="msg-title" class="block__title">Le message est déjà écrit</h2>
+        <figure class="chat">
+          <blockquote class="chat__bubble">{{ dahira().join.prefilledMessage }}</blockquote>
+          <figcaption class="chat__hint">
+            <i class="ph ph-check" aria-hidden="true"></i>
+            Il suffit d'appuyer sur Envoyer
+          </figcaption>
+        </figure>
+      </section>
+    }
+
+    <section class="block" aria-labelledby="steps-title" appReveal [appRevealDelay]="120">
+      <h2 id="steps-title" class="block__title">Comment ça se passe</h2>
+      <ol class="steps">
+        @for (step of content().steps; track $index) {
+          <li class="steps__item" appReveal [appRevealDelay]="$index * 120">
+            <span class="steps__num" aria-hidden="true">{{ $index + 1 }}</span>
+            <span class="steps__text">{{ step }}</span>
+          </li>
+        }
+      </ol>
+    </section>
+  </div>
+
+  @if (dahira().social?.length) {
+    <section class="block block--social" aria-labelledby="social-title" appReveal>
+      <h2 id="social-title" class="block__title">Suivez-nous aussi</h2>
+      <p class="block__intro">Nos vidéos, récitals et annonces sur les réseaux sociaux.</p>
+      <app-social-links variant="list" tone="light" />
+    </section>
+  }
+</div>

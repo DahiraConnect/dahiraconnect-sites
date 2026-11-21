@@ -1,0 +1,9 @@
+@if (src(); as src) {
+  <img [ngSrc]="src" [alt]="alt()" fill [sizes]="sizes()" />
+}
+@if (play()) {
+  <span class="arch__play" aria-hidden="true"><i class="ph-fill ph-play"></i></span>
+}
+@if (badge()) {
+  <span class="arch__badge" [class.arch__badge--dark]="darkBadge()">{{ badge() }}</span>
+}

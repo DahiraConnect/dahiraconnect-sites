@@ -1,0 +1,67 @@
+@use 'styles/mixins' as m;
+
+:host {
+  @include m.arch(var(--arch-bottom, 20px));
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-4);
+  isolation: isolate;
+}
+
+:host(.arch--green) {
+  @include m.pattern-star(0.3);
+  background: var(--color-primary-mid);
+}
+
+:host(.arch--gold) {
+  background: var(--color-gold);
+}
+
+:host(.arch--blue) {
+  background: var(--color-accent-blue);
+}
+
+:host(.arch--sage) {
+  background: var(--color-sage);
+}
+
+img {
+  object-fit: cover;
+  z-index: 0;
+  transition: transform 1.2s var(--ease-out);
+}
+
+// Zoom lent de la photo au survol de la carte parente
+@media (hover: hover) {
+  :host-context(a:hover) img {
+    transform: scale(1.06);
+  }
+}
+
+.arch__play {
+  z-index: 1;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-size: 26px;
+}
+
+.arch__badge {
+  @include m.badge;
+  position: relative;
+  z-index: 1;
+
+  &--dark {
+    background: var(--color-primary);
+    color: var(--color-text-on-dark);
+  }
+}
+

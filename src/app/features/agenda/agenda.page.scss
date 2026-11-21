@@ -1,0 +1,150 @@
+@use 'styles/mixins' as m;
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 18px var(--gutter) 0;
+
+  @include m.desktop {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-top: var(--space-10);
+  }
+}
+
+.hero__title {
+  @include m.display(var(--fs-hero-xl), 0.95);
+
+  @include m.desktop {
+    font-size: 96px;
+  }
+}
+
+.hero__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip {
+  @include m.chip-on-dark;
+}
+
+.content {
+  padding-bottom: var(--space-10);
+
+  @include m.desktop {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 56px;
+    padding: 0 var(--gutter) 96px;
+  }
+}
+
+.content__main {
+  @include m.desktop {
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-6));
+    margin-top: -80px;
+  }
+}
+
+.content__feature {
+  position: relative;
+  display: block;
+  margin: -40px var(--space-4) 0;
+
+  @include m.desktop {
+    margin: 0;
+  }
+}
+
+.content__optin {
+  margin: 56px var(--gutter) 0;
+  scroll-margin-top: calc(var(--header-h) + var(--space-6));
+
+  @include m.desktop {
+    grid-column: 1 / -1;
+    margin: var(--space-10) 0 0;
+  }
+}
+
+.content__empty {
+  @include m.overlap-sheet;
+  padding: var(--space-8) var(--gutter) 0;
+  font-size: var(--fs-body-lg);
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: var(--space-11) var(--gutter) 0;
+
+  @include m.desktop {
+    padding-inline: 0;
+  }
+}
+
+.block__title {
+  @include m.display(var(--fs-h2), 1.1);
+}
+
+.block__empty {
+  color: var(--color-text-secondary);
+}
+
+.past {
+  @include m.focus-ring;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-card);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition:
+    box-shadow var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+
+  &:hover {
+    color: var(--color-text-primary);
+  }
+
+  @include m.hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-float);
+  }
+}
+
+.past__photo {
+  flex: 0 0 88px;
+  height: 112px;
+  --arch-bottom: 14px;
+}
+
+.past__body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.past__title {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.past__date {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+}
+
+.past__more {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--color-primary-mid);
+}
