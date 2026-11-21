@@ -22,6 +22,11 @@ svg {
   max-width: 100%;
 }
 
+// Une image réduite par max-width garde ses proportions (jamais étirée)
+img {
+  height: auto;
+}
+
 p,
 ol,
 ul,

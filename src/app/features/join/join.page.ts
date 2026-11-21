@@ -19,6 +19,8 @@ import { RouterLink } from '@angular/router';
 export default class JoinPage {
   protected readonly dahira = inject(TenantService).dahira;
   protected readonly content = inject(ContentService).join;
+  private readonly charter = inject(ContentService).charter;
+  protected readonly hasCharter = computed(() => !!this.charter());
   protected readonly ringText = computed(() => `BIENVENUE • ${this.dahira().ringText}`);
   protected readonly tel = computed(() => {
     const n = this.dahira().join.callNumber;

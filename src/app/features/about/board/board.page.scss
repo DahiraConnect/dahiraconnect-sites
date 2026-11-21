@@ -149,6 +149,11 @@
   @include m.badge(var(--color-surface-muted), var(--color-text-secondary));
 }
 
+.commission__empty {
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
 .people {
   display: grid;
   gap: var(--space-2);

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Album, albumCover, albumPhotoCount } from '../../../core/models';
+import { Album, albumCover, albumPhotoCount, albumVideoLabel } from '../../../core/models';
 import { TenantService } from '../../../core/tenant/tenant.service';
 import { fmtDayMonth } from '../../../core/utils/dates';
 import { buildWaShare } from '../../../core/utils/whatsapp';
@@ -24,7 +24,7 @@ export class AlbumCard {
   protected readonly cover = computed(() => albumCover(this.album()));
   protected readonly badge = computed(() => {
     const a = this.album();
-    if (a.kind === 'video') return a.durationMin ? `Vidéo · ${a.durationMin} min` : 'Vidéo';
+    if (a.kind === 'video') return ['Vidéo', albumVideoLabel(a)].filter(Boolean).join(' · ');
     const n = albumPhotoCount(a);
     return n ? `${n} photo${n > 1 ? 's' : ''}` : '';
   });

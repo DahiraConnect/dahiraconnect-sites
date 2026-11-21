@@ -114,24 +114,34 @@
   }
 }
 
-.guide {
-  @include m.inset-card;
+// Colonne de droite : carte du guide + lien vers la charte
+.aside {
   display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  margin-top: var(--space-11);
-  padding: var(--space-6) var(--space-5);
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: var(--space-11) var(--space-4) 0;
 
   @include m.desktop {
     position: sticky;
     top: calc(var(--header-h) + var(--space-6));
+    margin: 0;
+  }
+}
+
+.guide {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-6) var(--space-5);
+  border-radius: 30px;
+  background: var(--color-primary);
+  color: var(--color-text-on-dark);
+
+  @include m.desktop {
     flex-direction: column;
     text-align: center;
-    margin: 0;
-    padding: var(--space-10) var(--space-8);
+    padding: var(--space-10) var(--space-8) var(--space-8);
   }
-
-  @include m.lift;
 }
 
 .guide__medallion {
@@ -143,11 +153,12 @@
 .guide__body {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 6px;
 
   @include m.desktop {
     align-items: center;
-    gap: var(--space-3);
+    gap: var(--space-2);
   }
 }
 
@@ -163,22 +174,103 @@
   }
 }
 
-.guide__link {
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  min-height: var(--tap-min);
-  color: var(--color-text-on-dark);
-  font-weight: 700;
-  font-size: 15px;
+// Action principale : bouton clair, flèche qui glisse au survol
+.guide__cta {
+  @include m.btn-base(var(--tap-min));
+  margin-top: var(--space-2);
+  padding: 0 var(--space-5);
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-size: var(--fs-body);
+
+  .ph {
+    font-size: 18px;
+    transition: transform var(--dur-base) var(--ease-out);
+  }
 
   &:hover {
-    color: var(--color-gold-soft);
+    color: var(--color-primary);
+    background: var(--color-gold);
+
+    .ph {
+      transform: translateX(4px);
+    }
   }
 
   @include m.desktop {
-    align-self: center;
+    min-height: 50px;
+    margin-top: var(--space-4);
+    padding: 0 var(--space-6);
   }
+}
+
+// Lien vers la charte : carte claire avec icône et explication
+.charter {
+  @include m.focus-ring;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-card);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition:
+    background-color var(--dur-fast),
+    color var(--dur-fast),
+    transform var(--dur-base) var(--ease-out);
+
+  &:hover {
+    background: var(--color-gold);
+    color: var(--color-primary);
+
+    .charter__icon {
+      background: var(--color-surface);
+    }
+
+    .charter__arrow {
+      transform: translateX(4px);
+    }
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
+}
+
+.charter__icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-surface-muted);
+  color: var(--color-gold-text);
+  font-size: 24px;
+  transition: background-color var(--dur-fast);
+}
+
+.charter__text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.charter__title {
+  font-weight: 700;
+  font-size: var(--fs-body-lg);
+}
+
+.charter__desc {
+  font-size: var(--fs-small);
+  color: var(--color-text-secondary);
+}
+
+.charter__arrow {
+  font-size: 20px;
+  transition: transform var(--dur-base) var(--ease-out);
 }
 
 .board {

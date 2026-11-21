@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { BoardService } from '../../core/data/board.service';
 import { ContentService } from '../../core/data/content.service';
@@ -22,6 +22,13 @@ export default class AboutPage {
   protected readonly dahira = inject(TenantService).dahira;
   protected readonly content = inject(ContentService).about;
   protected readonly members = inject(BoardService).executive;
+  private readonly guideContent = inject(ContentService).guide;
+  private readonly charter = inject(ContentService).charter;
+  protected readonly hasCharter = computed(() => !!this.charter());
+  /** Portrait du guide (dernière étape de la lignée), sinon le logo du dahira */
+  protected readonly guidePhoto = computed(
+    () => this.guideContent().lineage.find((step) => step.highlight)?.photoUrl,
+  );
   protected readonly tone = (i: number) => TONES[i % TONES.length];
   /** 'Dahira Moutahabina Fillahi' → 'Moutahabina Fillahi' */
   protected readonly shortTitle = () => this.dahira().name.replace(/^Dahira\s+/i, '');

@@ -1,39 +1,39 @@
-import { ChangeDetectionStrategy, Component, RESPONSE_INIT, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, RESPONSE_INIT, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { EventService } from '../../core/data/event.service';
+import { fmtDayMonth } from '../../core/utils/dates';
+import { Reveal } from '../../shared/motion/reveal.directive';
 import { DarkHero } from '../../shared/ui/dark-hero/dark-hero';
 
 /** Adresse inconnue (ex. lien mal copié dans WhatsApp) : on explique et on propose des chemins. */
 @Component({
   selector: 'app-not-found-page',
-  imports: [RouterLink, DarkHero],
-  template: `
-    <app-dark-hero>
-      <div class="hero">
-        <h1 class="hero__title rise">Page introuvable</h1>
-        <p class="hero__lead rise" style="--i: 1">
-          Le lien est peut-être incomplet, ou la page a été déplacée.
-        </p>
-      </div>
-    </app-dark-hero>
-    <nav class="links container" aria-label="Pages principales">
-      <a class="btn btn--dark" routerLink="/">Retour à l'accueil</a>
-      <a class="link-more" routerLink="/agenda">Agenda&nbsp;<span aria-hidden="true">→</span></a>
-      <a class="link-more" routerLink="/galerie">Galerie&nbsp;<span aria-hidden="true">→</span></a>
-    </nav>
-  `,
-  styles: `
-    @use 'styles/mixins' as m;
-    .hero { display: flex; flex-direction: column; gap: var(--space-4); padding: var(--space-6) var(--gutter) 0; }
-    .hero__title { @include m.display(var(--fs-hero), var(--lh-tight)); }
-    .hero__lead { font-size: var(--fs-body-lg); color: var(--color-text-on-dark-soft); max-width: 40ch; }
-    .links {
-      display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-6);
-      padding: var(--space-10) var(--gutter) 72px;
-    }
-  `,
+  imports: [RouterLink, DarkHero, Reveal],
+  templateUrl: './not-found.page.html',
+  styleUrl: './not-found.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class NotFoundPage {
+  private readonly next = inject(EventService).next;
+
+  /** Raccourcis : le prochain rendez-vous en premier, s'il y en a un */
+  protected readonly shortcuts = computed(() => {
+    const event = this.next();
+    return [
+      event
+        ? {
+            path: ['/agenda', event.slug],
+            icon: 'ph-calendar-check',
+            title: 'Prochain rendez-vous',
+            text: `${event.title} — ${fmtDayMonth(event.startsAt)}`,
+          }
+        : { path: ['/agenda'], icon: 'ph-calendar-blank', title: 'Agenda', text: 'Les rendez-vous du dahira' },
+      { path: ['/galerie'], icon: 'ph-images', title: 'Galerie', text: 'Photos et vidéos de nos moments' },
+      { path: ['/le-dahira'], icon: 'ph-users-three', title: 'Le dahira', text: 'Notre histoire, notre guide, le bureau' },
+      { path: ['/rejoindre'], icon: 'ph-whatsapp-logo', title: 'Nous rejoindre', text: 'Un message sur WhatsApp suffit' },
+    ];
+  });
+
   constructor() {
     // Rendu serveur : vrai code 404 (moteurs de recherche, aperçus de liens)
     const response = inject(RESPONSE_INIT, { optional: true });

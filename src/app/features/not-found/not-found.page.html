@@ -1,0 +1,34 @@
+<app-dark-hero>
+  <div class="hero">
+    <div class="hero__arch pop" aria-hidden="true">
+      <span>404</span>
+    </div>
+    <div class="hero__text">
+      <h1 class="hero__title rise">Cette page est introuvable</h1>
+      <p class="hero__lead rise" style="--i: 1">
+        Le lien est peut-être incomplet, ou la page a été déplacée. Voici où aller :
+      </p>
+      <a class="btn btn--light hero__home rise" style="--i: 2" routerLink="/">
+        <i class="ph ph-house" aria-hidden="true"></i>
+        Retour à l'accueil
+      </a>
+    </div>
+  </div>
+</app-dark-hero>
+
+<nav class="sheet container" aria-label="Pages principales">
+  <ul class="shortcuts">
+    @for (s of shortcuts(); track s.title; let i = $index) {
+      <li appReveal [appRevealDelay]="i * 80">
+        <a class="shortcut" [routerLink]="s.path">
+          <span class="shortcut__icon" aria-hidden="true"><i class="ph {{ s.icon }}"></i></span>
+          <span class="shortcut__text">
+            <span class="shortcut__title">{{ s.title }}</span>
+            <span class="shortcut__desc">{{ s.text }}</span>
+          </span>
+          <i class="ph ph-arrow-right shortcut__arrow" aria-hidden="true"></i>
+        </a>
+      </li>
+    }
+  </ul>
+</nav>

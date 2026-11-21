@@ -256,3 +256,24 @@
   flex-direction: column;
   gap: var(--space-3);
 }
+
+// Aucun rendez-vous à venir
+.next__empty {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  padding: var(--space-5);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-secondary);
+
+  .ph {
+    font-size: 28px;
+    color: var(--color-gold-text);
+  }
+
+  p {
+    flex: 1 1 200px;
+  }
+}

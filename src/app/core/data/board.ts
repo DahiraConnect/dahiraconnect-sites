@@ -11,7 +11,7 @@ export interface Seat {
 export interface CommissionView {
   id: string;
   name: string;
-  description: string;
+  description?: string;
   lead?: Seat;
   members: Seat[];
   count: number;
@@ -25,6 +25,11 @@ export interface BoardView {
 }
 
 const LEAD_ROLE = /^responsable/i;
+
+/** 'Secrétaire général' / 'Secrétariat général' → même racine : on n'affiche que le rôle */
+const stem = (s: string) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().slice(0, 6);
+const postLabel = (role: string | undefined, section: string) =>
+  !role ? section : stem(role) === stem(section) ? role : `${role} · ${section}`;
 
 /**
  * Relie les postes aux personnes et repère les cumuls de postes.
@@ -41,7 +46,7 @@ export function buildBoardView(board: Board): BoardView {
   for (const pos of board.executive) addPost(pos.personId, 'executive', pos.role ?? 'Bureau');
   for (const c of board.commissions) {
     for (const pos of c.members) {
-      addPost(pos.personId, c.id, pos.role ? `${pos.role} · ${c.name}` : `Commission ${c.name.toLowerCase()}`);
+      addPost(pos.personId, c.id, postLabel(pos.role, c.name));
     }
   }
 
@@ -57,7 +62,11 @@ export function buildBoardView(board: Board): BoardView {
 
   const commissions = board.commissions.map((c) => {
     const seats = c.members.map((m) => seat(m.personId, m.role, c.id)).filter(present);
-    const leadIndex = seats.findIndex((s) => s.role && LEAD_ROLE.test(s.role));
+    const flagged = c.members.findIndex((m) => m.lead && people.has(m.personId));
+    const leadIndex =
+      flagged >= 0
+        ? c.members.slice(0, flagged).filter((m) => people.has(m.personId)).length
+        : seats.findIndex((s) => s.role && LEAD_ROLE.test(s.role));
     const lead = leadIndex >= 0 ? seats[leadIndex] : undefined;
     return {
       id: c.id,

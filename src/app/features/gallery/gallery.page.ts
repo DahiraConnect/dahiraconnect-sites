@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { Reveal } from '../../shared/motion/reveal.directive';
 import { AlbumService } from '../../core/data/album.service';
 import { fmtMonthYear } from '../../core/utils/dates';
+import { albumCover, albumVideoLabel } from '../../core/models';
 import { AlbumCard } from '../../shared/ui/album-card/album-card';
 import { DarkHero } from '../../shared/ui/dark-hero/dark-hero';
 
@@ -34,5 +35,8 @@ export default class GalleryPage {
   protected readonly videos = computed(() =>
     this.filter() === 'photos' ? [] : this.albums.all().filter((a) => a.kind === 'video'),
   );
+  protected readonly hasAny = computed(() => this.albums.all().length > 0);
   protected readonly fmtMonthYear = fmtMonthYear;
+  protected readonly albumCover = albumCover;
+  protected readonly albumVideoLabel = albumVideoLabel;
 }

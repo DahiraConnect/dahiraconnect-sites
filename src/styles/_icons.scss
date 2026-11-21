@@ -24,6 +24,9 @@
 .ph.ph-arrow-right::before {
   content: "\e06c";
 }
+.ph.ph-arrow-up::before {
+  content: "\e08e";
+}
 .ph.ph-arrow-up-right::before {
   content: "\e092";
 }
@@ -32,6 +35,9 @@
 }
 .ph.ph-calendar-blank::before {
   content: "\e10a";
+}
+.ph.ph-calendar-check::before {
+  content: "\e712";
 }
 .ph.ph-calendar-plus::before {
   content: "\e714";

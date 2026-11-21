@@ -36,16 +36,17 @@
         @for (video of videos(); track video.id) {
           <li appReveal [appRevealDelay]="$index * 100">
             <a class="video" [routerLink]="['/galerie', video.slug]">
-              @if (video.coverUrl; as cover) {
+              @if (albumCover(video); as cover) {
                 <img class="video__img" [ngSrc]="cover" alt="" fill sizes="(min-width: 1024px) 86vw, (min-width: 720px) 50vw, 100vw" />
               }
               <span class="video__play" aria-hidden="true"><i class="ph-fill ph-play"></i></span>
               <span class="video__title">{{ video.title }}</span>
               <span class="video__meta">
-                Vidéo · {{ fmtMonthYear(video.date) }}
-                @if (video.durationMin) {
-                  · {{ video.durationMin }} min
+                Vidéo
+                @if (albumVideoLabel(video); as label) {
+                  · {{ label }}
                 }
+                · {{ fmtMonthYear(video.date) }}
               </span>
             </a>
           </li>
@@ -57,6 +58,17 @@
   }
 
   @if (!featured() && !videos().length) {
-    <p class="empty">Rien à afficher pour ce filtre pour le moment.</p>
+    <p class="empty">
+      <i class="ph ph-images" aria-hidden="true"></i>
+      @if (hasAny()) {
+        @if (filter() === 'video') {
+          Aucune vidéo pour le moment.
+        } @else {
+          Aucun album photo pour le moment.
+        }
+      } @else {
+        Les photos et vidéos du dahira arrivent bientôt.
+      }
+    </p>
   }
 </div>

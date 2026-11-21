@@ -1,40 +1,62 @@
 <footer class="footer">
   <div class="footer__inner container">
+    <div class="footer__top">
+      <a class="footer__brand" routerLink="/" [attr.aria-label]="'Accueil — ' + dahira().name">
+        <img [ngSrc]="dahira().logoUrl" alt="" width="64" height="64" />
+        <span class="footer__identity">
+          <span class="footer__name">{{ dahira().name }}</span>
+          <span class="footer__motto">{{ dahira().motto }}</span>
+        </span>
+      </a>
+      <app-wa-button class="footer__join" label="Nous rejoindre" />
+    </div>
+
+    <div class="footer__grid">
+      <section class="footer__col" aria-labelledby="footer-contact">
+        <h2 id="footer-contact" class="footer__heading">Nous trouver</h2>
+        <ul class="footer__contact">
+          <li>
+            <i class="ph ph-map-pin" aria-hidden="true"></i>
+            <span>Siège : {{ dahira().contact.address }}</span>
+          </li>
+          <li>
+            <a [href]="tel()">
+              <i class="ph ph-phone" aria-hidden="true"></i>
+              {{ dahira().contact.phone }}
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <nav class="footer__col" aria-labelledby="footer-site">
+        <h2 id="footer-site" class="footer__heading">Le dahira</h2>
+        <ul class="footer__links">
+          @for (link of links(); track link.path) {
+            <li><a [routerLink]="link.path">{{ link.label }}</a></li>
+          }
+        </ul>
+      </nav>
+
+      @if (dahira().social?.length) {
+        <section class="footer__col" aria-labelledby="footer-social">
+          <h2 id="footer-social" class="footer__heading">Suivez-nous</h2>
+          <p class="footer__hint">Récitals, vidéos et annonces du dahira.</p>
+          <app-social-links />
+        </section>
+      }
+    </div>
+
+    <div class="footer__bottom">
+      <p>© {{ year }} {{ dahira().name }}</p>
+      <p class="footer__credit">Propulsé par DahiraConnect</p>
+      <button type="button" class="footer__top-btn" (click)="toTop()">
+        Haut de page
+        <i class="ph ph-arrow-up" aria-hidden="true"></i>
+      </button>
+    </div>
+
     @if (watermark()) {
       <span class="footer__watermark" lang="ar" dir="rtl" aria-hidden="true">{{ watermark() }}</span>
     }
-
-    <div class="footer__identity">
-      <p class="footer__name">{{ dahira().name }}</p>
-      <p class="footer__motto">{{ dahira().motto }}</p>
-    </div>
-
-    <div class="footer__col">
-      <h2 class="footer__heading">Nous trouver</h2>
-      <address class="footer__contact">
-        <span>Siège : {{ dahira().contact.address }}</span>
-        <a [href]="tel()">{{ dahira().contact.phone }}</a>
-      </address>
-    </div>
-
-    <nav class="footer__col footer__nav" aria-label="Liens du pied de page">
-      <h2 class="footer__heading">Le site</h2>
-      <a routerLink="/le-dahira">Qui sommes-nous</a>
-      <a routerLink="/le-dahira/notre-guide">Notre guide</a>
-      <a routerLink="/le-dahira/bureau">Le bureau</a>
-      <a routerLink="/le-dahira/charte">Notre charte</a>
-      <a routerLink="/agenda">Agenda</a>
-      <a routerLink="/galerie">Galerie</a>
-      <a routerLink="/rejoindre">Nous rejoindre</a>
-    </nav>
-
-    @if (dahira().social?.length) {
-      <div class="footer__col">
-        <h2 class="footer__heading">Suivez-nous</h2>
-        <app-social-links />
-      </div>
-    }
-
-    <p class="footer__credit">© {{ year }} {{ dahira().name }} · Propulsé par DahiraConnect</p>
   </div>
 </footer>

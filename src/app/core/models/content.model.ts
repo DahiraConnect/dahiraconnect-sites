@@ -11,13 +11,15 @@ export interface Position {
   personId: string;
   /** Absent = simple membre de la commission */
   role?: string;
+  /** Mis en avant en tête de la commission (sinon : rôle « Responsable… ») */
+  lead?: boolean;
 }
 
 export interface Commission {
   /** Ancre de la page : /le-dahira/bureau#organisation */
   id: string;
   name: string;
-  description: string;
+  description?: string;
   members: Position[];
 }
 
@@ -47,6 +49,8 @@ export interface LineageStep {
   highlight?: boolean;
   /** Portrait (carré conseillé) */
   photoUrl?: string;
+  /** Repères datés : { year: '1922', label: 'Premier Khalife général' } */
+  milestones?: { year: string; label: string }[];
 }
 
 export interface CharterRule {
@@ -90,6 +94,7 @@ export interface PageContent {
     lineage: LineageStep[];
     didYouKnow: string;
     sources: string;
+    sourceLinks?: { label: string; url: string }[];
   };
   join: {
     intro: string;

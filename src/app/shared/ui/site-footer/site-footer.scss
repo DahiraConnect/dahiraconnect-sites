@@ -9,58 +9,99 @@
 
 .footer__inner {
   position: relative;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: var(--space-8);
-  padding: 48px var(--gutter) calc(var(--dock-reserve) + env(safe-area-inset-bottom));
-
-  @include m.tablet {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+  padding: var(--space-10) var(--gutter) calc(var(--dock-reserve) + env(safe-area-inset-bottom));
 
   @include m.desktop {
-    grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
-    padding-top: 72px;
+    gap: var(--space-10);
+    padding-top: 64px;
   }
 
-  > * {
+  > :not(.footer__watermark) {
     position: relative;
+    z-index: 1;
   }
 }
 
-.footer__watermark {
-  position: absolute !important;
-  top: 6px;
-  right: -10px;
-  font-size: 88px;
-  line-height: 1.2;
-  color: var(--color-text-on-dark);
-  opacity: 0.06;
-  white-space: nowrap;
-  pointer-events: none;
+// ——— Identité + rejoindre ———
+.footer__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding-bottom: var(--space-8);
+  border-bottom: 1px solid rgb(244 239 227 / 0.1);
+}
 
-  @include m.desktop {
-    font-size: 160px;
+.footer__brand {
+  @include m.focus-ring;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  border-radius: var(--radius-md);
+  color: var(--color-text-on-dark);
+  text-decoration: none;
+
+  img {
+    flex-shrink: 0;
+    transition: transform var(--dur-slow) var(--ease-spring);
+  }
+
+  @include m.hover {
+    color: var(--color-text-on-dark);
+
+    img {
+      transform: rotate(-10deg);
+    }
   }
 }
 
 .footer__identity {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: 2px;
 }
 
 .footer__name {
   font-family: var(--font-display);
   font-size: 22px;
-  color: var(--color-text-on-dark);
+  line-height: 1.15;
 
   @include m.desktop {
-    font-size: 28px;
+    font-size: 26px;
   }
 }
 
 .footer__motto {
   color: var(--color-gold-soft);
+}
+
+// Sur mobile, le dock porte déjà « Rejoindre »
+.footer__join {
+  display: none;
+
+  @include m.desktop {
+    display: block;
+    width: 260px;
+  }
+}
+
+// ——— Colonnes ———
+.footer__grid {
+  display: grid;
+  gap: var(--space-8);
+
+  @include m.tablet {
+    grid-template-columns: 1fr 1.4fr;
+  }
+
+  @include m.desktop {
+    grid-template-columns: 1fr 1.3fr 1fr;
+    gap: var(--space-10);
+  }
 }
 
 .footer__col {
@@ -79,19 +120,37 @@
 .footer__contact {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
-  font-style: normal;
+
+  li,
+  a {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: var(--tap-min);
+  }
+
+  .ph {
+    font-size: 20px;
+    color: var(--color-gold-line);
+  }
+}
+
+// Liens sur deux colonnes : compacts, cibles tactiles conservées
+.footer__links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--space-5);
 }
 
 .footer__contact a,
-.footer__nav a {
+.footer__links a {
+  @include m.focus-ring;
   display: inline-flex;
   align-items: center;
   min-height: var(--tap-min);
-  align-self: flex-start;
   color: var(--color-text-on-dark-soft);
   text-decoration: none;
-  background: linear-gradient(currentcolor, currentcolor) 0 100% / 0 1px no-repeat;
+  background: linear-gradient(currentcolor, currentcolor) 0 calc(100% - 10px) / 0 1px no-repeat;
   transition:
     color var(--dur-fast),
     background-size var(--dur-base) var(--ease-out);
@@ -102,19 +161,74 @@
   }
 }
 
-.footer__nav {
-  gap: 0;
-
-  // Sur mobile, le dock suffit
-  @include m.mobile-only {
-    display: none;
-  }
+.footer__hint {
+  margin-bottom: var(--space-1);
 }
 
-.footer__credit {
-  grid-column: 1 / -1;
+// ——— Bas de page ———
+.footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-6);
   padding-top: var(--space-6);
   border-top: 1px solid rgb(244 239 227 / 0.1);
   font-size: 13px;
   color: var(--color-text-on-dark-faint);
+}
+
+.footer__credit {
+  @include m.desktop {
+    margin-right: auto;
+  }
+}
+
+.footer__top-btn {
+  @include m.focus-ring;
+  @include m.flex-row(6px);
+  min-height: var(--tap-min);
+  margin-left: auto;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-border-on-dark);
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--color-text-on-dark);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--dur-fast);
+
+  .ph {
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  @include m.hover {
+    background: rgb(244 239 227 / 0.1);
+
+    .ph {
+      transform: translateY(-3px);
+    }
+  }
+
+  @include m.desktop {
+    margin-left: 0;
+  }
+}
+
+// Nom arabe en filigrane, en bas à droite (derrière le bas de page)
+.footer__watermark {
+  position: absolute;
+  right: var(--gutter);
+  bottom: calc(var(--dock-reserve) - 20px);
+  font-size: 120px;
+  line-height: 1;
+  color: var(--color-text-on-dark);
+  opacity: 0.04;
+  white-space: nowrap;
+  pointer-events: none;
+
+  @include m.desktop {
+    bottom: 10px;
+    font-size: 200px;
+  }
 }

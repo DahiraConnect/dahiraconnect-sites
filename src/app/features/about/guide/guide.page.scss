@@ -139,6 +139,19 @@
   color: var(--color-text-secondary);
 }
 
+.sources__list {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--space-2);
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap-min);
+    color: var(--color-text-secondary);
+  }
+}
+
 .sources {
   margin-top: 56px;
   padding: var(--space-5) var(--gutter) 0;

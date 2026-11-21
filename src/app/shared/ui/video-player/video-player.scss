@@ -1,0 +1,79 @@
+@use 'styles/mixins' as m;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.player {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--color-accent-blue);
+  color: var(--color-text-on-dark);
+
+  // TikTok, Shorts : format portrait, centré
+  &--vertical {
+    width: min(100%, 380px);
+    aspect-ratio: 9 / 16;
+    max-height: 78dvh;
+  }
+}
+
+.player__poster {
+  object-fit: cover;
+}
+
+.player__brand {
+  position: absolute;
+  top: var(--space-5);
+  left: var(--space-5);
+  font-size: 40px;
+  opacity: 0.7;
+}
+
+.player__play {
+  @include m.focus-ring;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 88px;
+  height: 88px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-size: 34px;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 0.25);
+  cursor: pointer;
+  transition: transform var(--dur-base) var(--ease-spring);
+
+  &:hover {
+    color: var(--color-primary);
+    transform: scale(1.08);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.player__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.player__open {
+  .ph {
+    font-size: 20px;
+  }
+}

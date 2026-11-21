@@ -5,10 +5,7 @@
       Le dahira
     </a>
     <h1 class="hero__title rise">Le bureau</h1>
-    <p class="hero__lead rise" style="--i: 1">
-      {{ board().peopleCount }} membres au service du dahira, répartis en
-      {{ board().commissions.length }} commissions.
-    </p>
+    <p class="hero__lead rise" style="--i: 1">{{ summary() }}</p>
     @if (board().commissions.length) {
       <nav class="hero__nav rise" style="--i: 2" aria-label="Commissions">
         @for (c of board().commissions; track c.id) {
@@ -41,11 +38,18 @@
       <header class="commission__head">
         <div>
           <h2 [id]="c.id + '-title'" class="block__title">{{ c.name }}</h2>
-          <p class="commission__desc">{{ c.description }}</p>
+          @if (c.description) {
+            <p class="commission__desc">{{ c.description }}</p>
+          }
         </div>
-        <span class="commission__count">{{ c.count }} membres</span>
+        @if (c.count) {
+          <span class="commission__count">{{ plural(c.count, 'membre') }}</span>
+        }
       </header>
 
+      @if (!c.count) {
+        <p class="commission__empty">Les membres de cette commission seront bientôt indiqués.</p>
+      }
       <ul class="people">
         @for (seat of seatsOf(c); track seat.person.id) {
           <li class="person" [class.person--lead]="seat === c.lead">

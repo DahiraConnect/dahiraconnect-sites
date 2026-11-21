@@ -21,21 +21,37 @@
       <app-timeline variant="history" [history]="content().history" />
     </section>
 
-    <section class="guide" aria-labelledby="guide-title" appReveal>
-      <app-medallion
-        class="guide__medallion"
-        [logoUrl]="dahira().logoUrl"
-        [alt]="dahira().logoAlt"
-        [size]="104"
-        [priority]="true"
-      />
-      <div class="guide__body">
-        <p class="overline guide__overline">Notre guide</p>
-        <h2 id="guide-title" class="guide__name">{{ dahira().guideName }}</h2>
-        <a class="guide__link" routerLink="notre-guide">Sa lignée&nbsp;<span aria-hidden="true">→</span></a>
-        <a class="guide__link" routerLink="charte">Notre charte&nbsp;<span aria-hidden="true">→</span></a>
-      </div>
-    </section>
+    <div class="aside">
+      <section class="guide" aria-labelledby="guide-title" appReveal>
+        <app-medallion
+          class="guide__medallion"
+          [logoUrl]="guidePhoto() ?? dahira().logoUrl"
+          [alt]="guidePhoto() ? 'Portrait de ' + dahira().guideName : dahira().logoAlt"
+          [photo]="!!guidePhoto()"
+          [size]="104"
+          [priority]="true"
+        />
+        <div class="guide__body">
+          <p class="overline guide__overline">Notre guide</p>
+          <h2 id="guide-title" class="guide__name">{{ dahira().guideName }}</h2>
+          <a class="guide__cta" routerLink="notre-guide">
+            Sa lignée
+            <i class="ph ph-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </section>
+
+      @if (hasCharter()) {
+      <a class="charter" routerLink="charte" appReveal [appRevealDelay]="120">
+        <span class="charter__icon" aria-hidden="true"><i class="ph ph-scroll"></i></span>
+        <span class="charter__text">
+          <span class="charter__title">Notre charte</span>
+          <span class="charter__desc">Les engagements des membres et le déroulement d'un dahira.</span>
+        </span>
+        <i class="ph ph-arrow-right charter__arrow" aria-hidden="true"></i>
+      </a>
+      }
+    </div>
   </div>
 
   @if (members().length) {

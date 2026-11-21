@@ -8,13 +8,15 @@ import { buildWaShare } from '../../core/utils/whatsapp';
 import { ArchPhoto } from '../../shared/ui/arch-photo/arch-photo';
 import { DarkHero } from '../../shared/ui/dark-hero/dark-hero';
 import { Lightbox } from '../../shared/ui/lightbox/lightbox';
+import { VideoPlayer } from '../../shared/ui/video-player/video-player';
+import { parseVideo } from '../../core/utils/video';
 import { Reveal } from '../../shared/motion/reveal.directive';
 import { albumPhotoCount } from '../../core/models';
 
 /** Album photo ou vidéo (/galerie/:album). Slug inconnu : redirigé par le résolveur de titre. */
 @Component({
   selector: 'app-album-page',
-  imports: [RouterLink, NgOptimizedImage, DarkHero, ArchPhoto, Lightbox, Reveal],
+  imports: [RouterLink, NgOptimizedImage, DarkHero, ArchPhoto, Lightbox, Reveal, VideoPlayer],
   templateUrl: './album.page.html',
   styleUrl: './album.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,10 +32,19 @@ export default class AlbumPage {
     const a = this.data();
     if (!a) return '';
     const n = albumPhotoCount(a);
-    const kind = a.kind === 'video' ? 'Vidéo' : n ? `${n} photo${n > 1 ? 's' : ''}` : 'Photos';
+    const kind =
+      a.kind === 'video'
+        ? ['Vidéo', this.video()?.label].filter(Boolean).join(' · ')
+        : n
+          ? `${n} photo${n > 1 ? 's' : ''}`
+          : 'Photos';
     return [kind, fmtDate(a.date), a.place].filter(Boolean).join(' · ');
   });
   protected readonly photos = computed(() => this.data()?.photos ?? []);
+  protected readonly video = computed(() => {
+    const url = this.data()?.videoUrl;
+    return url ? parseVideo(url) : null;
+  });
   /** Photo ouverte dans la visionneuse (null = fermée) */
   protected readonly viewing = signal<number | null>(null);
   /** Albums voisins pour continuer la visite */

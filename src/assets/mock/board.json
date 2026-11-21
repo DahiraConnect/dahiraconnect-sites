@@ -2,7 +2,7 @@
   "people": [
     {
       "id": "p01",
-      "name": "Djamil Fall"
+      "name": "Seydi Djamil Fall"
     },
     {
       "id": "p02",
@@ -10,107 +10,115 @@
     },
     {
       "id": "p03",
-      "name": "Baye Moussa Niang"
+      "name": "Lamine Dièmè"
     },
     {
       "id": "p04",
-      "name": "Coumbis Siby"
+      "name": "Ndeye Coure Gueye"
     },
     {
       "id": "p05",
-      "name": "Abou Ndiaye"
+      "name": "Baye Moussa Niang"
     },
     {
       "id": "p06",
-      "name": "Mamadou Sarr"
+      "name": "Souleymane Kandé"
     },
     {
       "id": "p07",
-      "name": "Fatou Diop"
+      "name": "Sophia Kandé"
     },
     {
       "id": "p08",
-      "name": "Ousmane Ba"
+      "name": "Khoudia Diouf"
     },
     {
       "id": "p09",
-      "name": "Khady Faye"
+      "name": "Mouhamed Fall"
     },
     {
       "id": "p10",
-      "name": "Modou Gueye"
+      "name": "Bada Sarr"
     },
     {
       "id": "p11",
-      "name": "Awa Sy"
+      "name": "Mandou Konaté"
     },
     {
       "id": "p12",
-      "name": "Cheikh Mbaye"
+      "name": "Astou Mbène Faye"
     },
     {
       "id": "p13",
-      "name": "Ndeye Seck"
+      "name": "Mouhaned Diatta"
     },
     {
       "id": "p14",
-      "name": "Ibrahima Diallo"
+      "name": "Hawa Touré"
     },
     {
       "id": "p15",
-      "name": "Mariama Cissé"
+      "name": "Mbarka Ndiaye"
     },
     {
       "id": "p16",
-      "name": "Pape Thiam"
+      "name": "Djamile Niang"
     },
     {
       "id": "p17",
-      "name": "Astou Ndour"
+      "name": "Aïda Mbaye Niang"
     },
     {
       "id": "p18",
-      "name": "Moustapha Kane"
+      "name": "Diarry Diémé"
     },
     {
       "id": "p19",
-      "name": "Bineta Sow"
+      "name": "Papa Seydou Ndiaye"
     },
     {
       "id": "p20",
-      "name": "Alioune Diouf"
+      "name": "Idrissa Fall"
     },
     {
       "id": "p21",
-      "name": "Sokhna Mbengue"
+      "name": "Satou Coly"
     },
     {
       "id": "p22",
-      "name": "Lamine Touré"
+      "name": "Coumbis Siby"
     },
     {
       "id": "p23",
-      "name": "Rokhaya Diagne"
+      "name": "Oustaz Issa Coly"
     },
     {
       "id": "p24",
-      "name": "Serigne Lo"
+      "name": "Aboubacar Ndiaye"
     },
     {
       "id": "p25",
-      "name": "Coumba Ndiaye"
+      "name": "Ousmane Diallo"
     },
     {
       "id": "p26",
-      "name": "Babacar Samb"
+      "name": "Issa Sagna"
     },
     {
       "id": "p27",
-      "name": "Yacine Gaye"
+      "name": "Marème Mbaye"
     },
     {
       "id": "p28",
-      "name": "Assane Wade"
+      "name": "Abdou Diouf"
+    },
+    {
+      "id": "p29",
+      "name": "Oustaz Cheikh Tidiane Tamboura"
+    },
+    {
+      "id": "p30",
+      "name": "Oustaz Abdou Rahmane Diop"
     }
   ],
   "executive": [
@@ -120,133 +128,139 @@
     },
     {
       "personId": "p02",
-      "role": "Vice-présidente"
+      "role": "Présidente"
     },
     {
-      "personId": "p03",
+      "personId": "p05",
       "role": "Secrétaire général"
     },
     {
-      "personId": "p04",
-      "role": "Trésorière"
+      "personId": "p09",
+      "role": "Trésorier"
     }
   ],
   "commissions": [
     {
-      "id": "organisation",
-      "name": "Organisation",
-      "description": "Prépare les dahiras, l'accueil, la sonorisation et les déplacements comme la ziar.",
+      "id": "vice-presidence",
+      "name": "Vice-présidence",
       "members": [
         {
           "personId": "p03",
-          "role": "Responsable"
+          "role": "Vice-président(e)"
         },
         {
-          "personId": "p06",
-          "role": "Adjoint"
+          "personId": "p04",
+          "role": "Vice-président(e)"
+        }
+      ]
+    },
+    {
+      "id": "secretariat",
+      "name": "Secrétariat général",
+      "members": [
+        {
+          "personId": "p05",
+          "role": "Secrétaire général",
+          "lead": true
+        },
+        {
+          "personId": "p06"
         },
         {
           "personId": "p07"
         },
         {
           "personId": "p08"
-        },
-        {
-          "personId": "p09"
-        },
-        {
-          "personId": "p10"
-        },
-        {
-          "personId": "p11"
         }
       ]
     },
     {
-      "id": "sociale",
-      "name": "Sociale",
-      "description": "Accompagne les membres lors des baptêmes, mariages, maladies et deuils.",
+      "id": "tresorerie",
+      "name": "Trésorerie",
+      "description": "Tient les finances du dahira.",
       "members": [
         {
-          "personId": "p02",
-          "role": "Responsable"
+          "personId": "p09",
+          "role": "Trésorier",
+          "lead": true
+        },
+        {
+          "personId": "p10",
+          "role": "Trésorier adjoint"
+        }
+      ]
+    },
+    {
+      "id": "organisation",
+      "name": "Organisation",
+      "description": "Prépare les dahiras, l'accueil et les déplacements.",
+      "members": [
+        {
+          "personId": "p11",
+          "role": "Président(e) organisation",
+          "lead": true
+        },
+        {
+          "personId": "p12",
+          "role": "Président(e) organisation"
         },
         {
           "personId": "p13",
-          "role": "Adjointe"
+          "role": "Vice-président(e) organisation"
         },
         {
-          "personId": "p04"
-        },
-        {
-          "personId": "p15"
-        },
-        {
-          "personId": "p17"
-        },
-        {
-          "personId": "p19"
+          "personId": "p14",
+          "role": "Vice-président(e) organisation"
         }
       ]
     },
     {
-      "id": "culturelle",
-      "name": "Culturelle et religieuse",
-      "description": "Prépare les récitals de khassaïdes, les conférences et les nabiens.",
+      "id": "coordination",
+      "name": "Coordination",
       "members": [
         {
-          "personId": "p12",
-          "role": "Responsable"
-        },
-        {
-          "personId": "p14",
-          "role": "Adjoint"
-        },
-        {
-          "personId": "p05"
+          "personId": "p15"
         },
         {
           "personId": "p16"
         },
         {
+          "personId": "p17"
+        },
+        {
           "personId": "p18"
-        },
-        {
-          "personId": "p20"
-        },
-        {
-          "personId": "p24"
         }
       ]
     },
     {
-      "id": "communication",
-      "name": "Communication",
-      "description": "Annonce les rendez-vous, gère le site, le groupe WhatsApp et les réseaux sociaux.",
+      "id": "commissaires-aux-comptes",
+      "name": "Commissaires aux comptes",
+      "description": "Contrôlent les comptes du dahira.",
       "members": [
         {
-          "personId": "p05",
-          "role": "Responsable"
+          "personId": "p19"
+        },
+        {
+          "personId": "p20"
         },
         {
           "personId": "p21"
         },
         {
           "personId": "p22"
-        },
-        {
-          "personId": "p23"
         }
       ]
     },
     {
-      "id": "finances",
-      "name": "Finances",
-      "description": "Suit les cotisations et tient les comptes du dahira.",
+      "id": "social",
+      "name": "Social",
+      "description": "Accompagne les membres lors des baptêmes, mariages, maladies et deuils.",
       "members": [
         {
-          "personId": "p04",
-          "role": "Responsable"
+          "personId": "p23"
+        },
+        {
+          "personId": "p24"
         },
         {
           "personId": "p25"
@@ -256,9 +270,46 @@
         },
         {
           "personId": "p27"
-        },
+        }
+      ]
+    },
+    {
+      "id": "micro-centrale-des-nabiens",
+      "name": "Micro centrale des nabiens",
+      "members": [
         {
           "personId": "p28"
+        }
+      ]
+    },
+    {
+      "id": "commission-scientifique",
+      "name": "Commission scientifique",
+      "members": [
+        {
+          "personId": "p23"
+        },
+        {
+          "personId": "p29"
+        },
+        {
+          "personId": "p30"
+        }
+      ]
+    },
+    {
+      "id": "sonorisation",
+      "name": "Sonorisation",
+      "description": "Installe et gère le son pendant les dahiras.",
+      "members": [
+        {
+          "personId": "p05"
+        },
+        {
+          "personId": "p20"
+        },
+        {
+          "personId": "p06"
         }
       ]
     }

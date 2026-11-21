@@ -30,5 +30,16 @@
     <app-timeline class="block__timeline" variant="lineage" [lineage]="content().lineage" />
   </section>
 
-  <p class="sources">{{ content().sources }}</p>
+  <footer class="sources">
+    <p>{{ content().sources }}</p>
+    @if (content().sourceLinks?.length) {
+      <ul class="sources__list">
+        @for (link of content().sourceLinks; track link.url) {
+          <li>
+            <a [href]="link.url" target="_blank" rel="noopener">{{ link.label }}</a>
+          </li>
+        }
+      </ul>
+    }
+  </footer>
 </div>

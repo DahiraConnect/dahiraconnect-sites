@@ -32,6 +32,16 @@
               <span class="lineage__alias">« {{ step.alias }} »</span>
             }
             <p class="lineage__text">{{ step.text }}</p>
+            @if (step.milestones?.length) {
+              <ol class="lineage__milestones">
+                @for (m of step.milestones; track m.year + m.label) {
+                  <li>
+                    <span class="lineage__year">{{ m.year }}</span>
+                    <span>{{ m.label }}</span>
+                  </li>
+                }
+              </ol>
+            }
           </div>
         </li>
       }

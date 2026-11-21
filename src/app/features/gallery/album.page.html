@@ -23,18 +23,12 @@
 @if (data(); as a) {
   <div class="sheet container">
     @if (a.kind === 'video') {
-      <div class="video">
-        @if (a.coverUrl; as cover) {
-          <img class="video__img" [ngSrc]="cover" alt="" fill sizes="(min-width: 1024px) 86vw, 100vw" priority />
-        }
-        @if (a.videoUrl) {
-          <a class="video__play" [href]="a.videoUrl" target="_blank" rel="noopener" aria-label="Regarder la vidéo">
-            <i class="ph-fill ph-play" aria-hidden="true"></i>
-          </a>
-        } @else {
-          <p class="video__soon">La vidéo sera bientôt en ligne.</p>
-        }
-      </div>
+      @if (video(); as v) {
+        <app-video-player [video]="v" [title]="a.title" [cover]="a.coverUrl" />
+      } @else {
+        <app-arch-photo class="placeholder" fallback="blue" [play]="true" />
+        <p class="empty">La vidéo sera bientôt en ligne.</p>
+      }
     } @else if (photos().length) {
       <ul class="photos">
         @for (photo of photos(); track photo.url; let i = $index) {

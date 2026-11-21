@@ -33,6 +33,15 @@
       />
       <app-event-ticket class="next__ticket" [event]="event" />
     </section>
+  } @else {
+    <section class="block next" aria-labelledby="next-title" appReveal>
+      <app-section-heading class="next__head" headingId="next-title" title="Prochain rendez-vous" />
+      <div class="next__empty">
+        <i class="ph ph-calendar-blank" aria-hidden="true"></i>
+        <p>Aucun rendez-vous annoncé pour le moment.</p>
+        <a class="link-more" routerLink="/agenda" fragment="rappels">Être prévenu&nbsp;<span aria-hidden="true">→</span></a>
+      </div>
+    </section>
   }
 
   <section class="block about" aria-labelledby="about-title" appReveal>

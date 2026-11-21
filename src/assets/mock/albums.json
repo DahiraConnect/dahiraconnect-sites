@@ -1,164 +1,322 @@
 [
   {
     "id": "alb-1",
-    "slug": "journee-culturelle-2026",
-    "title": "Journée culturelle 2026",
-    "date": "2026-02-14",
-    "place": "Yeumbeul",
+    "slug": "gamou-tivaoune-2026",
+    "title": "Gamou Tivaoune 2026",
+    "date": "2026-08-25",
+    "place": "Tivaouane",
     "kind": "photos",
     "fallback": "green",
     "featured": true,
-    "coverUrl": "/assets/tenants/moutahabina/exemples/albums/journee-culturelle-2026/couverture.svg",
+    "coverUrl": "/assets/tenants/moutahabina/evenements/gamou-25-08-2026/gamou2026-10.webp",
     "photos": [
       {
-        "url": "/assets/tenants/moutahabina/exemples/albums/journee-culturelle-2026/photo-01.svg",
-        "width": 1200,
-        "height": 900,
-        "alt": "Journée culturelle 2026 — photo 1 (exemple)"
+        "url": "/assets/tenants/moutahabina/evenements/gamou-25-08-2026/gamou2026-1.webp",
+        "width": 963,
+        "height": 1280,
+        "alt": "Gamou Tivaoune 2026"
       },
       {
-        "url": "/assets/tenants/moutahabina/exemples/albums/journee-culturelle-2026/photo-02.svg",
-        "width": 900,
-        "height": 1200,
-        "alt": "Journée culturelle 2026 — photo 2 (exemple)"
+        "url": "/assets/tenants/moutahabina/evenements/gamou-25-08-2026/gamou2026-2.webp",
+        "width": 963,
+        "height": 1280,
+        "alt": "Gamou Tivaoune 2026"
       },
       {
-        "url": "/assets/tenants/moutahabina/exemples/albums/journee-culturelle-2026/photo-03.svg",
-        "width": 1200,
-        "height": 900,
-        "alt": "Journée culturelle 2026 — photo 3 (exemple)"
+        "url": "/assets/tenants/moutahabina/evenements/gamou-25-08-2026/gamou2026-3.webp",
+        "width": 963,
+        "height": 1280,
+        "alt": "Gamou Tivaoune 2026"
       },
       {
-        "url": "/assets/tenants/moutahabina/exemples/albums/journee-culturelle-2026/photo-04.svg",
-        "width": 1200,
-        "height": 1200,
-        "alt": "Journée culturelle 2026 — photo 4 (exemple)"
+        "url": "/assets/tenants/moutahabina/evenements/gamou-25-08-2026/gamou2026-4.webp",
+        "width": 963,
+        "height": 1280,
+        "alt": "Gamou Tivaoune 2026"
       },
       {
-        "url": "/assets/tenants/moutahabina/exemples/albums/journee-culturelle-2026/photo-05.svg",
-        "width": 900,
-        "height": 1200,
-        "alt": "Journée culturelle 2026 — photo 5 (exemple)"
+        "url": "/assets/tenants/moutahabina/evenements/gamou-25-08-2026/gamou2026-5.webp",
+        "width": 963,
+        "height": 1280,
+        "alt": "Gamou Tivaoune 2026"
       },
       {
-        "url": "/assets/tenants/moutahabina/exemples/albums/journee-culturelle-2026/photo-06.svg",
-        "width": 1200,
-        "height": 800,
-        "alt": "Journée culturelle 2026 — photo 6 (exemple)"
+        "url": "/assets/tenants/moutahabina/evenements/gamou-25-08-2026/gamou2026-6.webp",
+        "width": 963,
+        "height": 1280,
+        "alt": "Gamou Tivaoune 2026"
       },
       {
-        "url": "/assets/tenants/moutahabina/exemples/albums/journee-culturelle-2026/photo-07.svg",
-        "width": 1200,
-        "height": 900,
-        "alt": "Journée culturelle 2026 — photo 7 (exemple)"
+        "url": "/assets/tenants/moutahabina/evenements/gamou-25-08-2026/gamou2026-7.webp",
+        "width": 963,
+        "height": 1280,
+        "alt": "Gamou Tivaoune 2026"
       },
       {
-        "url": "/assets/tenants/moutahabina/exemples/albums/journee-culturelle-2026/photo-08.svg",
-        "width": 900,
-        "height": 1200,
-        "alt": "Journée culturelle 2026 — photo 8 (exemple)"
+        "url": "/assets/tenants/moutahabina/evenements/gamou-25-08-2026/gamou2026-8.webp",
+        "width": 963,
+        "height": 1280,
+        "alt": "Gamou Tivaoune 2026"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/gamou-25-08-2026/gamou2026-9.webp",
+        "width": 963,
+        "height": 1280,
+        "alt": "Gamou Tivaoune 2026"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/gamou-25-08-2026/gamou2026-10.webp",
+        "width": 1280,
+        "height": 963,
+        "alt": "Gamou Tivaoune 2026"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/gamou-25-08-2026/gamou2026-11.webp",
+        "width": 1280,
+        "height": 963,
+        "alt": "Gamou Tivaoune 2026"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/gamou-25-08-2026/gamou2026-12.webp",
+        "width": 963,
+        "height": 1280,
+        "alt": "Gamou Tivaoune 2026"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/gamou-25-08-2026/gamou2026-13.webp",
+        "width": 721,
+        "height": 1280,
+        "alt": "Gamou Tivaoune 2026"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/gamou-25-08-2026/gamou2026-14.webp",
+        "width": 720,
+        "height": 1280,
+        "alt": "Gamou Tivaoune 2026"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/gamou-25-08-2026/gamou2026-15.webp",
+        "width": 721,
+        "height": 1280,
+        "alt": "Gamou Tivaoune 2026"
       }
     ]
   },
   {
     "id": "alb-2",
-    "slug": "don-de-sang-octobre-2026",
-    "title": "Don de sang, octobre 2026",
-    "date": "2026-10-25",
+    "slug": "conference-2026",
+    "title": "Conférence DMF 2026",
+    "date": "2026-02-22",
     "place": "Yeumbeul",
     "kind": "photos",
-    "fallback": "gold",
-    "coverUrl": "/assets/tenants/moutahabina/exemples/albums/don-de-sang-octobre-2026/couverture.svg",
+    "fallback": "green",
+    "featured": true,
+    "coverUrl": "/assets/tenants/moutahabina/evenements/conference-22-02-2026/conference2026-3.webp",
     "photos": [
       {
-        "url": "/assets/tenants/moutahabina/exemples/albums/don-de-sang-octobre-2026/photo-01.svg",
-        "width": 1200,
-        "height": 900,
-        "alt": "Don de sang — photo 1 (exemple)"
+        "url": "/assets/tenants/moutahabina/evenements/conference-22-02-2026/conference2026-1.webp",
+        "width": 1280,
+        "height": 720,
+        "alt": "Conférence DMF 2026"
       },
       {
-        "url": "/assets/tenants/moutahabina/exemples/albums/don-de-sang-octobre-2026/photo-02.svg",
-        "width": 900,
-        "height": 1200,
-        "alt": "Don de sang — photo 2 (exemple)"
+        "url": "/assets/tenants/moutahabina/evenements/conference-22-02-2026/conference2026-2.webp",
+        "width": 720,
+        "height": 1280,
+        "alt": "Conférence DMF 2026"
       },
       {
-        "url": "/assets/tenants/moutahabina/exemples/albums/don-de-sang-octobre-2026/photo-03.svg",
-        "width": 1200,
-        "height": 900,
-        "alt": "Don de sang — photo 3 (exemple)"
+        "url": "/assets/tenants/moutahabina/evenements/conference-22-02-2026/conference2026-3.webp",
+        "width": 720,
+        "height": 1280,
+        "alt": "Conférence DMF 2026"
       },
       {
-        "url": "/assets/tenants/moutahabina/exemples/albums/don-de-sang-octobre-2026/photo-04.svg",
-        "width": 1200,
-        "height": 1200,
-        "alt": "Don de sang — photo 4 (exemple)"
+        "url": "/assets/tenants/moutahabina/evenements/conference-22-02-2026/conference2026-4.webp",
+        "width": 720,
+        "height": 1280,
+        "alt": "Conférence DMF 2026"
       },
       {
-        "url": "/assets/tenants/moutahabina/exemples/albums/don-de-sang-octobre-2026/photo-05.svg",
-        "width": 900,
-        "height": 1200,
-        "alt": "Don de sang — photo 5 (exemple)"
+        "url": "/assets/tenants/moutahabina/evenements/conference-22-02-2026/conference2026-5.webp",
+        "width": 720,
+        "height": 1280,
+        "alt": "Conférence DMF 2026"
       },
       {
-        "url": "/assets/tenants/moutahabina/exemples/albums/don-de-sang-octobre-2026/photo-06.svg",
-        "width": 1200,
-        "height": 800,
-        "alt": "Don de sang — photo 6 (exemple)"
+        "url": "/assets/tenants/moutahabina/evenements/conference-22-02-2026/conference2026-6.webp",
+        "width": 1280,
+        "height": 720,
+        "alt": "Conférence DMF 2026"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/conference-22-02-2026/conference2026-7.webp",
+        "width": 720,
+        "height": 1280,
+        "alt": "Conférence DMF 2026"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/conference-22-02-2026/conference2026-8.webp",
+        "width": 720,
+        "height": 1280,
+        "alt": "Conférence DMF 2026"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/conference-22-02-2026/conference2026-9.webp",
+        "width": 720,
+        "height": 1280,
+        "alt": "Conférence DMF 2026"
       }
     ]
   },
   {
     "id": "alb-3",
-    "slug": "set-setal-du-quartier",
-    "title": "Set setal du quartier",
-    "date": "2026-07-12",
-    "place": "Yeumbeul",
+    "slug": "gamou-tivaoune-2025",
+    "title": "Gamou Tivaoune 2025",
+    "date": "2025-10-02",
+    "place": "Tivaouane",
     "kind": "photos",
-    "fallback": "sage",
-    "coverUrl": "/assets/tenants/moutahabina/exemples/albums/set-setal-du-quartier/couverture.svg",
+    "fallback": "green",
+    "featured": true,
+    "coverUrl": "/assets/tenants/moutahabina/evenements/gamou-02-10-2025/gamou2025-9.webp",
     "photos": [
       {
-        "url": "/assets/tenants/moutahabina/exemples/albums/set-setal-du-quartier/photo-01.svg",
-        "width": 1200,
-        "height": 900,
-        "alt": "Set setal du quartier — photo 1 (exemple)"
+        "url": "/assets/tenants/moutahabina/evenements/gamou-02-10-2025/gamou2025-1.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Gamou Tivaoune 2025"
       },
       {
-        "url": "/assets/tenants/moutahabina/exemples/albums/set-setal-du-quartier/photo-02.svg",
-        "width": 900,
-        "height": 1200,
-        "alt": "Set setal du quartier — photo 2 (exemple)"
+        "url": "/assets/tenants/moutahabina/evenements/gamou-02-10-2025/gamou2025-2.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Gamou Tivaoune 2025"
       },
       {
-        "url": "/assets/tenants/moutahabina/exemples/albums/set-setal-du-quartier/photo-03.svg",
-        "width": 1200,
-        "height": 900,
-        "alt": "Set setal du quartier — photo 3 (exemple)"
+        "url": "/assets/tenants/moutahabina/evenements/gamou-02-10-2025/gamou2025-3.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Gamou Tivaoune 2025"
       },
       {
-        "url": "/assets/tenants/moutahabina/exemples/albums/set-setal-du-quartier/photo-04.svg",
-        "width": 1200,
-        "height": 1200,
-        "alt": "Set setal du quartier — photo 4 (exemple)"
+        "url": "/assets/tenants/moutahabina/evenements/gamou-02-10-2025/gamou2025-4.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Gamou Tivaoune 2025"
       },
       {
-        "url": "/assets/tenants/moutahabina/exemples/albums/set-setal-du-quartier/photo-05.svg",
-        "width": 900,
-        "height": 1200,
-        "alt": "Set setal du quartier — photo 5 (exemple)"
+        "url": "/assets/tenants/moutahabina/evenements/gamou-02-10-2025/gamou2025-5.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Gamou Tivaoune 2025"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/gamou-02-10-2025/gamou2025-6.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Gamou Tivaoune 2025"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/gamou-02-10-2025/gamou2025-7.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Gamou Tivaoune 2025"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/gamou-02-10-2025/gamou2025-8.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Gamou Tivaoune 2025"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/gamou-02-10-2025/gamou2025-9.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Gamou Tivaoune 2025"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/gamou-02-10-2025/gamou2025-10.webp",
+        "width": 750,
+        "height": 1000,
+        "alt": "Gamou Tivaoune 2025"
       }
     ]
   },
   {
     "id": "alb-4",
+    "slug": "conference-2025",
+    "title": "Conférence DMF 2025",
+    "date": "2025-04-04",
+    "place": "Yeumbeul",
+    "kind": "photos",
+    "fallback": "green",
+    "featured": true,
+    "coverUrl": "/assets/tenants/moutahabina/evenements/conference-04-04-2025/conference2025-8.webp",
+    "photos": [
+      {
+        "url": "/assets/tenants/moutahabina/evenements/conference-04-04-2025/conference2025-1.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Conférence DMF 2025"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/conference-04-04-2025/conference2025-2.webp",
+        "width": 607,
+        "height": 1080,
+        "alt": "Conférence DMF 2025"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/conference-04-04-2025/conference2025-3.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Conférence DMF 2025"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/conference-04-04-2025/conference2025-4.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Conférence DMF 2025"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/conference-04-04-2025/conference2025-5.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Conférence DMF 2025"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/conference-04-04-2025/conference2025-6.webp",
+        "width": 1280,
+        "height": 960,
+        "alt": "Conférence DMF 2025"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/conference-04-04-2025/conference2025-7.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Conférence DMF 2025"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/conference-04-04-2025/conference2025-8.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Conférence DMF 2025"
+      },
+      {
+        "url": "/assets/tenants/moutahabina/evenements/conference-04-04-2025/conference2025-9.webp",
+        "width": 960,
+        "height": 1280,
+        "alt": "Conférence DMF 2025"
+      }
+    ]
+  },
+  {
+    "id": "alb-5",
     "slug": "recital-khassaides-novembre-2026",
     "title": "Récital de khassaïdes",
     "date": "2026-11-07",
     "place": "Siège du dahira, Yeumbeul",
     "kind": "video",
     "fallback": "blue",
-    "coverUrl": "/assets/tenants/moutahabina/exemples/albums/recital-khassaides-novembre-2026/vignette.svg",
-    "durationMin": 42
+    "videoUrl": "https://www.tiktok.com/@dahiramoutahabinafilah0/video/7707726783621106964"
   }
 ]

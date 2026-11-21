@@ -172,6 +172,31 @@ li {
   color: var(--color-text-secondary);
 }
 
+// Repères datés : petite frise horizontale dans la carte
+.lineage__milestones {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-surface-muted);
+  font-size: var(--fs-small);
+  color: var(--color-text-secondary);
+
+  li {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+  }
+}
+
+.lineage__year {
+  flex: 0 0 72px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-gold-text);
+}
+
 .lineage--now {
   .lineage__relation {
     background: var(--color-gold);
@@ -190,8 +215,17 @@ li {
     color: var(--color-text-on-dark);
   }
 
-  .lineage__text {
+  .lineage__text,
+  .lineage__milestones {
     color: var(--color-text-on-dark-soft);
+  }
+
+  .lineage__milestones {
+    border-color: rgb(244 239 227 / 0.15);
+  }
+
+  .lineage__year {
+    color: var(--color-gold-line);
   }
 }
 

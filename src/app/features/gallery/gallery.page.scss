@@ -190,7 +190,23 @@
 }
 
 .empty {
-  padding-inline: var(--gutter);
   font-size: var(--fs-body-lg);
   color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-inline: var(--gutter);
+  padding: var(--space-5);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+
+  .ph {
+    font-size: 28px;
+    color: var(--color-gold-text);
+  }
+
+  @include m.desktop {
+    margin-inline: 0;
+  }
+
 }
