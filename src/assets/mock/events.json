@@ -1,63 +1,56 @@
 [
   {
-    "id": "evt-1",
-    "slug": "recital-mensuel-decembre-2026",
-    "title": "Récital mensuel de khassaïdes",
-    "startsAt": "2026-12-05T20:30:00Z",
-    "place": "Siège du dahira, Yeumbeul",
-    "description": "Chaque mois, le dahira se réunit pour réciter les khassaïdes. Venez avec votre famille.",
+    "id": "evt-dahira-2026-11-26",
+    "slug": "dahira-jeudi-26-novembre-2026",
+    "title": "Dahira chez Yamar Diène",
+    "startsAt": "2026-11-26T20:30:00Z",
+    "endsAt": "2026-11-26T23:00:00Z",
+    "place": "Tally Carreaux, côté pharmacie Saliou",
+    "description": "Rencontre hebdomadaire du dahira, accueillie par Yamar Diène. Tenue blanche obligatoire.",
     "images": [
       {
-        "url": "/assets/tenants/moutahabina/exemples/events/recital-mensuel-decembre-2026/affiche.svg",
-        "alt": "Affiche du récital mensuel de khassaïdes (exemple)",
-        "width": 900,
-        "height": 1200
+        "url": "/assets/tenants/moutahabina/evenements/dahira-jeudi-26-11-2026.webp",
+        "alt": "Affiche du dahira du jeudi 26 novembre chez Yamar Diène, de 20 h 30 à 23 h",
+        "width": 707,
+        "height": 1060
       }
     ]
   },
   {
-    "id": "evt-2",
-    "slug": "conference-fraternite-en-islam",
-    "title": "Conférence « La fraternité en Islam »",
-    "startsAt": "2026-12-19T16:00:00Z",
-    "place": "Salle polyvalente de Yeumbeul"
-  },
-  {
-    "id": "evt-3",
-    "slug": "journee-set-setal-janvier-2027",
-    "title": "Journée set setal",
-    "startsAt": "2027-01-10T08:00:00Z",
-    "place": "Départ du siège"
-  },
-  {
-    "id": "evt-4",
-    "slug": "journee-culturelle-2027",
-    "title": "Journée culturelle annuelle",
-    "startsAt": "2027-02-14T10:00:00Z",
-    "endsAt": "2027-02-14T22:00:00Z",
-    "place": "Esplanade de Yeumbeul",
+    "id": "evt-takussan-2026-12-12",
+    "slug": "takussanu-serigne-babacar-sy-2026",
+    "title": "Takussanu Serigne Babacar Sy",
+    "startsAt": "2026-12-12T12:00:00Z",
+    "timeTbc": true,
+    "place": "Yeumbeul Nèma",
     "isMajor": true,
+    "description": "Organisé et animé par Abdou Aziz Diouf. Conférencier : Oustaz Issa Coly. Invité d'honneur : Abdou Aziz Ndiaye Djamil.",
     "images": [
       {
-        "url": "/assets/tenants/moutahabina/exemples/events/journee-culturelle-2027/image-1.svg",
-        "alt": "Journée culturelle — image 1 (exemple)",
-        "width": 1200,
-        "height": 900
-      },
-      {
-        "url": "/assets/tenants/moutahabina/exemples/events/journee-culturelle-2027/image-2.svg",
-        "alt": "Journée culturelle — image 2 (exemple)",
-        "width": 1200,
-        "height": 900
-      },
-      {
-        "url": "/assets/tenants/moutahabina/exemples/events/journee-culturelle-2027/image-3.svg",
-        "alt": "Journée culturelle — image 3 (exemple)",
-        "width": 1200,
-        "height": 900
+        "url": "/assets/tenants/moutahabina/evenements/takkussan-babacar-sy-12-12-2026.webp",
+        "alt": "Affiche du Takussanu Serigne Babacar Sy, samedi 12 décembre 2026 à Yeumbeul Nèma",
+        "width": 854,
+        "height": 1280
       }
-    ],
-    "description": "Une journée de partage ouverte à tous : conférences, récitals, repas et animations pour les enfants."
+    ]
+  },
+  {
+    "id": "evt-ziar-2026-12-20",
+    "slug": "ziar-tivaouane-2026",
+    "title": "Ziar à Tivaouane",
+    "startsAt": "2026-12-20T12:00:00Z",
+    "timeTbc": true,
+    "place": "Tivaouane, chez Serigne Mame Malick Sy Mansour",
+    "isMajor": true,
+    "description": "Visite du dahira chez notre guide, Serigne Mame Malick Sy Mansour. Transport : 5 000 F CFA, pour tous les membres.",
+    "images": [
+      {
+        "url": "/assets/tenants/moutahabina/evenements/ziar-tivaoune-20-12-2026.webp",
+        "alt": "Affiche de la ziar à Tivaouane chez Serigne Mame Malick Sy Mansour, dimanche 20 décembre",
+        "width": 720,
+        "height": 1080
+      }
+    ]
   },
   {
     "id": "evt-0",

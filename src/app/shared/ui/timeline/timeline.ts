@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DahiraEvent, HistoryStep, LineageStep } from '../../../core/models';
 import { Reveal } from '../../motion/reveal.directive';
-import { fmtDay, fmtMonthShort, fmtTimeRange } from '../../../core/utils/dates';
+import { fmtDay, fmtMonthShort, fmtEventTime } from '../../../core/utils/dates';
 
 /** Frise verticale à fil doré : histoire, lignée ou agenda. */
 @Component({
@@ -21,5 +21,5 @@ export class Timeline {
 
   protected readonly fmtDay = fmtDay;
   protected readonly fmtMonthShort = fmtMonthShort;
-  protected readonly fmtTimeRange = fmtTimeRange;
+  protected readonly fmtEventTime = fmtEventTime;
 }

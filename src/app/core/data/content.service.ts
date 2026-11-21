@@ -10,4 +10,5 @@ export class ContentService {
   readonly about = computed(() => this.tenant.bundle().content.about);
   readonly guide = computed(() => this.tenant.bundle().content.guide);
   readonly join = computed(() => this.tenant.bundle().content.join);
+  readonly charter = computed(() => this.tenant.bundle().content.charter);
 }

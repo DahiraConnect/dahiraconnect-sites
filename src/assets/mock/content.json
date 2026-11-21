@@ -36,7 +36,7 @@
         "alias": "Maodo",
         "years": "† 27 juin 1922",
         "text": "Figure majeure de la Tijaniyya au Sénégal. Il fonde à Tivaouane la hadra et le grand daara où se forment des générations d'érudits.",
-        "photoUrl": "/assets/tenants/moutahabina/exemples/lignee/seydi-el-hadji-malick-sy.svg"
+        "photoUrl": "/assets/tenants/moutahabina/lignee/seydi-el-hadji-malick-sy.webp"
       },
       {
         "relation": "Grand-père",
@@ -44,7 +44,7 @@
         "alias": "Borom bonnet carré",
         "years": "1885 – 1957",
         "text": "Né à Saint-Louis, premier Khalife général des Tidianes de 1922 à 1957. Il initie les premiers dahiras.",
-        "photoUrl": "/assets/tenants/moutahabina/exemples/lignee/serigne-babacar-sy.svg"
+        "photoUrl": "/assets/tenants/moutahabina/lignee/serigne-babacar-sy.webp"
       },
       {
         "relation": "Père",
@@ -52,14 +52,14 @@
         "alias": "Borom Daaraji",
         "years": "1925 – 2012",
         "text": "Né à Tivaouane, il tient le grand daara fondé par son grand-père. Khalife général des Tidianes de 1997 à 2012, il guide notre dahira dès sa fondation en 1999.",
-        "photoUrl": "/assets/tenants/moutahabina/exemples/lignee/serigne-mansour-sy.svg"
+        "photoUrl": "/assets/tenants/moutahabina/lignee/serigne-mansour-sy.webp"
       },
       {
         "relation": "Notre guide",
         "name": "Serigne Mame Malick Sy",
         "text": "Guide du dahira depuis 2012. [Quelques lignes à fournir par le bureau.]",
         "highlight": true,
-        "photoUrl": "/assets/tenants/moutahabina/exemples/lignee/serigne-mame-malick-sy.svg"
+        "photoUrl": "/assets/tenants/moutahabina/lignee/serigne-mame-malick-sy.webp"
       }
     ],
     "didYouKnow": "Les premiers dahiras ont été initiés par Serigne Babacar Sy. Ils sont devenus des piliers de solidarité et d'éducation.",
@@ -72,5 +72,77 @@
       "Vous envoyez le message déjà écrit.",
       "Un responsable vous répond et vous ajoute au groupe du dahira."
     ]
+  },
+  "charter": {
+    "intro": "Les règles de vie du dahira, pour les nouveaux comme pour les anciens membres.",
+    "rules": [
+      {
+        "title": "Avoir une carte de membre"
+      },
+      {
+        "title": "Moutahabina Fillahi",
+        "wolof": "Sopanté té Yalla takh",
+        "detail": "S'aimer pour Dieu."
+      },
+      {
+        "title": "Discipline",
+        "wolof": "Yar ak téguine"
+      },
+      {
+        "title": "Présence physique et financière",
+        "wolof": "Téw tay téwal"
+      },
+      {
+        "title": "Tenue blanche obligatoire",
+        "detail": "Ou, à défaut, une tenue correcte."
+      },
+      {
+        "title": "Baptême ou mariage",
+        "detail": "Chaque membre cotise.",
+        "amounts": [
+          {
+            "label": "Par membre",
+            "amount": "1 000 F CFA"
+          }
+        ]
+      },
+      {
+        "title": "Le jour de son dahira",
+        "detail": "Chaque membre donne 4 000 F CFA le jour où il reçoit le dahira.",
+        "amounts": [
+          {
+            "label": "Sonorisation",
+            "amount": "2 000 F CFA"
+          },
+          {
+            "label": "Thé (ataya)",
+            "amount": "2 000 F CFA"
+          }
+        ]
+      }
+    ],
+    "schedule": [
+      {
+        "time": "21 h 00",
+        "label": "Début du dahira"
+      },
+      {
+        "time": "21 h 00 – 22 h 40",
+        "label": "Nabiens"
+      },
+      {
+        "time": "22 h 40 – 23 h 20",
+        "label": "Oustaz"
+      },
+      {
+        "time": "23 h 20",
+        "label": "Informations"
+      },
+      {
+        "time": "23 h 30",
+        "label": "Fin du dahira"
+      }
+    ],
+    "scheduleNote": "Le dahira commence à 21 h 00 et se termine à 23 h 30."
   }
 }

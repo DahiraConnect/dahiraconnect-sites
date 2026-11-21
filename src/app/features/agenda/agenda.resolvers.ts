@@ -17,7 +17,9 @@ export const eventSeoResolver: ResolveFn<SeoData> = (route) => {
   const event = find(route.paramMap.get('slug'));
   return event
     ? {
-        description: `${fmtDate(event.startsAt)} à ${fmtTime(event.startsAt)} · ${event.place}`,
+        description: event.timeTbc
+          ? `${fmtDate(event.startsAt)} · ${event.place}`
+          : `${fmtDate(event.startsAt)} à ${fmtTime(event.startsAt)} · ${event.place}`,
         image: event.images?.[0]?.url,
       }
     : {};

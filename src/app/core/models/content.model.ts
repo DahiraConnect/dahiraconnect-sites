@@ -27,6 +27,29 @@ export interface LineageStep {
   photoUrl?: string;
 }
 
+export interface CharterRule {
+  title: string;
+  /** Expression en wolof : « Yar ak téguine » */
+  wolof?: string;
+  detail?: string;
+  /** Montants à mettre en évidence */
+  amounts?: { label: string; amount: string }[];
+}
+
+export interface ScheduleStep {
+  /** '21 h 00' ou '21 h 00 – 22 h 40' */
+  time: string;
+  label: string;
+}
+
+/** Charte (règlement) du dahira */
+export interface Charter {
+  intro: string;
+  rules: CharterRule[];
+  schedule: ScheduleStep[];
+  scheduleNote?: string;
+}
+
 /** Textes éditoriaux des pages (back-office en phase 2) */
 export interface PageContent {
   home: {
@@ -50,4 +73,5 @@ export interface PageContent {
     intro: string;
     steps: string[];
   };
+  charter?: Charter;
 }

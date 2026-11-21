@@ -7,10 +7,11 @@ import { Medallion } from '../../shared/ui/medallion/medallion';
 import { WaButton } from '../../shared/ui/wa-button/wa-button';
 import { SocialLinks } from '../../shared/ui/social-links/social-links';
 import { Reveal } from '../../shared/motion/reveal.directive';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-join-page',
-  imports: [DarkHero, Medallion, WaButton, SocialLinks, Reveal],
+  imports: [RouterLink, DarkHero, Medallion, WaButton, SocialLinks, Reveal],
   templateUrl: './join.page.html',
   styleUrl: './join.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

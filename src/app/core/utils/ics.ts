@@ -9,6 +9,12 @@ const escape = (s: string) => s.replace(/[\;,]/g, (c) => `\\${c}`).replace(/\n/g
  */
 export function buildIcsDataUrl(event: DahiraEvent, organizer: string, url: string): string {
   const end = event.endsAt ?? new Date(new Date(event.startsAt).getTime() + 2 * 3_600_000).toISOString();
+  // Heure inconnue : événement « journée entière »
+  const day = event.startsAt.slice(0, 10).replace(/-/g, '');
+  const nextDay = new Date(Date.parse(event.startsAt.slice(0, 10)) + 86_400_000).toISOString().slice(0, 10).replace(/-/g, '');
+  const when = event.timeTbc
+    ? [`DTSTART;VALUE=DATE:${day}`, `DTEND;VALUE=DATE:${nextDay}`]
+    : [`DTSTART:${stamp(event.startsAt)}`, `DTEND:${stamp(end)}`];
   const lines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
@@ -16,8 +22,7 @@ export function buildIcsDataUrl(event: DahiraEvent, organizer: string, url: stri
     'BEGIN:VEVENT',
     `UID:${event.id}@dahiraconnect.sn`,
     `DTSTAMP:${stamp(event.startsAt)}`,
-    `DTSTART:${stamp(event.startsAt)}`,
-    `DTEND:${stamp(end)}`,
+    ...when,
     `SUMMARY:${escape(event.title)}`,
     `LOCATION:${escape(event.place)}`,
     `DESCRIPTION:${escape(`${organizer}\n${url}`)}`,

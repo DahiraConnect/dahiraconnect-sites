@@ -3,6 +3,7 @@ import {
   fmtCountdown,
   fmtDate,
   fmtDay,
+  fmtEventTime,
   fmtMonthShort,
   fmtMonthYear,
   fmtTime,
@@ -56,6 +57,11 @@ describe('dates utils', () => {
     expect(fmtTime('2026-12-19T16:00:00Z')).toBe('16 h');
     expect(fmtTime('2027-01-10T08:00:00Z')).toBe('8 h');
     expect(fmtTimeRange('2027-02-14T10:00:00Z', '2027-02-14T22:00:00Z')).toBe('10 h – 22 h');
+  });
+
+  it("affiche « Horaire à confirmer » si l'heure n'est pas annoncée", () => {
+    expect(fmtEventTime({ startsAt: '2026-12-12T12:00:00Z', timeTbc: true })).toBe('Horaire à confirmer');
+    expect(fmtEventTime({ startsAt: recital })).toBe('20 h 30');
   });
 
   it('formate le compte à rebours', () => {

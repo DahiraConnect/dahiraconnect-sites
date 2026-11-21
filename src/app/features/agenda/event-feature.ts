@@ -6,13 +6,22 @@ import {
   daysUntil,
   fmtCountdown,
   fmtDay,
+  fmtDayMonth,
+  fmtEventTime,
   fmtMonthShort,
-  fmtTimeRange,
+  fmtTime,
   fmtWeekday,
 } from '../../core/utils/dates';
 import { buildIcsDataUrl, buildMapLink } from '../../core/utils/ics';
 import { buildWaShare } from '../../core/utils/whatsapp';
 import { Lightbox } from '../../shared/ui/lightbox/lightbox';
+
+/** « Ziar à Tivaouane — dimanche 20 décembre, Tivaouane » (+ « à 20 h 30 » si l'heure est connue) */
+const shareText = (e: DahiraEvent) => {
+  const day = `${fmtWeekday(e.startsAt).toLowerCase()} ${fmtDayMonth(e.startsAt)}`;
+  const time = e.timeTbc ? '' : ` à ${fmtTime(e.startsAt)}`;
+  return `${e.title} — ${day}${time}, ${e.place}`;
+};
 
 /** Carte flottante d'un événement : date, compte à rebours, itinéraire, partage, rappel. */
 @Component({
@@ -28,18 +37,20 @@ export class EventFeature {
   readonly event = input.required<DahiraEvent>();
   /** Niveau du titre : h2 dans l'agenda, h1 sur la fiche */
   readonly headingLevel = input<1 | 2>(2);
+  /** Miniatures des images (inutile sur la fiche, qui les montre en grand) */
+  readonly showMedia = input(true);
 
   protected readonly day = computed(() => fmtDay(this.event().startsAt));
   protected readonly dateLine = computed(
     () => `${fmtMonthShort(this.event().startsAt)} · ${fmtWeekday(this.event().startsAt).toUpperCase()}`,
   );
   protected readonly countdown = computed(() => fmtCountdown(daysUntil(this.event().startsAt)));
-  protected readonly time = computed(() => fmtTimeRange(this.event().startsAt, this.event().endsAt));
+  protected readonly time = computed(() => fmtEventTime(this.event()));
   protected readonly pageUrl = computed(() => this.tenant.absoluteUrl(`/agenda/${this.event().slug}`));
   protected readonly mapUrl = computed(() => buildMapLink(this.event()));
   protected readonly shareUrl = computed(() =>
     buildWaShare(
-      `${this.event().title} — ${fmtDay(this.event().startsAt)} ${fmtMonthShort(this.event().startsAt).toLowerCase()} à ${this.time()}, ${this.event().place}`,
+      shareText(this.event()),
       this.pageUrl(),
     ),
   );

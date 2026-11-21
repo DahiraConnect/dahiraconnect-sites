@@ -20,6 +20,10 @@ export default class GuidePage {
   protected readonly ringText = computed(
     () => `${this.dahira().guideName.toUpperCase()} • NOTRE GUIDE •`,
   );
+  /** Portrait du guide (dernière étape de la lignée), sinon le logo du dahira */
+  protected readonly guidePhoto = computed(
+    () => this.content().lineage.find((step) => step.highlight)?.photoUrl,
+  );
   /** Texte entre crochets = à fournir par le bureau : affiché en encadré pointillé */
   protected readonly bioIsPlaceholder = computed(() => this.content().bio.startsWith('['));
 }

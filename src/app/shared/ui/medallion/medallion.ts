@@ -10,7 +10,11 @@ let nextId = 0;
   templateUrl: './medallion.html',
   styleUrl: './medallion.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { '[style.--size.px]': 'size()', '[class.has-ring]': '!!text()' },
+  host: {
+    '[style.--size.px]': 'size()',
+    '[class.has-ring]': '!!text()',
+    '[class.is-photo]': 'photo()',
+  },
 })
 export class Medallion {
   readonly logoUrl = input.required<string>();
@@ -21,6 +25,8 @@ export class Medallion {
   readonly spin = input<boolean>(true);
   /** Image prioritaire (LCP) : uniquement pour le médaillon du hero */
   readonly priority = input<boolean>(false);
+  /** Photo (portrait) plutôt que logo : recadrée en cercle avec un liseré or */
+  readonly photo = input<boolean>(false);
 
   protected readonly pathId = `medallion-ring-${nextId++}`;
   protected readonly center = computed(() => this.size() / 2);

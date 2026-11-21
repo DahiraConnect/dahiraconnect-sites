@@ -11,8 +11,9 @@
     </div>
     <app-medallion
       class="hero__medallion pop"
-      [logoUrl]="dahira().logoUrl"
-      [alt]="dahira().logoAlt"
+      [logoUrl]="guidePhoto() ?? dahira().logoUrl"
+      [alt]="guidePhoto() ? 'Portrait de ' + dahira().guideName : dahira().logoAlt"
+      [photo]="!!guidePhoto()"
       [text]="ringText()"
       [size]="260"
       [priority]="true"

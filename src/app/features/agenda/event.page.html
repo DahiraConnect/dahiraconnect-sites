@@ -12,7 +12,7 @@
 
 @if (event(); as e) {
   <div class="content container">
-    <app-event-feature class="content__feature rise" [event]="e" [headingLevel]="1" />
+    <app-event-feature class="content__feature rise" [event]="e" [headingLevel]="1" [showMedia]="false" />
 
     <div class="content__side">
       @if (e.description) {

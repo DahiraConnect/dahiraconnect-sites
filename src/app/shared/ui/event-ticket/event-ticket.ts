@@ -6,7 +6,7 @@ import {
   fmtCountdown,
   fmtDay,
   fmtMonthShort,
-  fmtTimeRange,
+  fmtEventTime,
   fmtWeekday,
 } from '../../../core/utils/dates';
 
@@ -25,5 +25,5 @@ export class EventTicket {
   protected readonly month = computed(() => fmtMonthShort(this.event().startsAt));
   protected readonly weekday = computed(() => fmtWeekday(this.event().startsAt));
   protected readonly countdown = computed(() => fmtCountdown(daysUntil(this.event().startsAt)));
-  protected readonly time = computed(() => fmtTimeRange(this.event().startsAt, this.event().endsAt));
+  protected readonly time = computed(() => fmtEventTime(this.event()));
 }

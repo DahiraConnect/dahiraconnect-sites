@@ -21,7 +21,7 @@
     </p>
   </div>
 
-  @if (images().length) {
+  @if (showMedia() && images().length) {
     <div class="feature__media">
       <ul class="feature__thumbs">
         @for (img of images().slice(0, 3); track img.url; let i = $index) {

@@ -7,6 +7,8 @@ export interface DahiraEvent {
   /** ISO 8601 avec fuseau */
   startsAt: string;
   endsAt?: string;
+  /** Heure pas encore annoncée : seule la date compte (« Horaire à confirmer ») */
+  timeTbc?: boolean;
   place: string;
   mapUrl?: string;
   /**

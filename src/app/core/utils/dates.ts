@@ -64,3 +64,7 @@ export const monthKey = (iso: string) => {
   const parts = Object.fromEntries(dateKeyFmt.formatToParts(new Date(iso)).map((p) => [p.type, p.value]));
   return `${parts['year']}-${parts['month']}`;
 };
+
+/** Horaire affiché d'un événement : plage horaire, ou « Horaire à confirmer ». */
+export const fmtEventTime = (event: { startsAt: string; endsAt?: string; timeTbc?: boolean }) =>
+  event.timeTbc ? 'Horaire à confirmer' : fmtTimeRange(event.startsAt, event.endsAt);

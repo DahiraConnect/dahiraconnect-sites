@@ -48,7 +48,7 @@
               <span class="agenda__title">{{ event.title }}</span>
               <span class="sr-only">, le {{ fmtDay(event.startsAt) }} {{ fmtMonthShort(event.startsAt) }}</span>
               <span class="agenda__meta">
-                {{ fmtTimeRange(event.startsAt, event.endsAt) }} · {{ event.place }}
+                {{ fmtEventTime(event) }} · {{ event.place }}
               </span>
               @if (event.isMajor) {
                 <span class="agenda__badge">Grand événement</span>
