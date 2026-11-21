@@ -8,18 +8,33 @@ Angular 20 (standalone, signals, OnPush) + SSR. Brief complet : [Claude.md](Clau
 | --- | --- |
 | `npm start` | Serveur de dev sur <http://localhost:4200> (dahira par défaut, ou `?tenant=<slug>`) |
 | `npm test` | Tests unitaires (utilitaires dates / WhatsApp, résolution du dahira, thème) |
-| `npm run build` | Build navigateur + serveur dans `dist/` |
-| `npm run serve:ssr:dahiraconnect` | Lance le serveur SSR compilé (port 4000) |
+| `npm run build` | Génère le site statique (toutes les pages pré-rendues) dans `dist/dahiraconnect/browser` |
+| `npm run preview` | Sert le build comme Cloudflare Pages (Wrangler) |
+| `npm run deploy` | Build puis déploiement direct sur Cloudflare Pages (Wrangler) |
 | `npm run icons` | Régénère le sous-ensemble d'icônes Phosphor (nécessite `pip install fonttools brotli`) |
 
-### SSR en local
+## Déploiement (Cloudflare Pages)
 
-Le serveur n'accepte que les hôtes `dahiraconnect.sn` et `*.dahiraconnect.sn` (protection SSRF).
-Pour tester en local :
+Site **statique** : chaque page (y compris chaque événement et album) est générée au build
+pour le dahira par défaut. Après une modification des données (`src/assets/mock`), un nouveau
+déploiement régénère les pages.
 
-```bash
-NG_ALLOWED_HOSTS=localhost npm run serve:ssr:dahiraconnect
-```
+Réglages du projet Cloudflare Pages (connecté au dépôt GitHub) :
+
+| Réglage | Valeur |
+| --- | --- |
+| Framework preset | None |
+| Build command | `npm run build` |
+| Build output directory | `dist/dahiraconnect/browser` |
+| Version de Node | 22 (fichier `.node-version`) |
+
+- `public/_headers` : cache long pour les fichiers du build, pas de cache pour le service worker.
+- `404.html` est créé par `scripts/postbuild.mjs` : Cloudflare le sert pour toute adresse inconnue.
+- Adresse publique (aperçus WhatsApp) : `siteUrl` dans `tenant.json`.
+
+Plus tard, plusieurs dahiras par sous-domaine : repasser en rendu serveur
+(`outputMode: "server"` dans `angular.json`, `RenderMode.Server` dans `app.routes.server.ts`),
+sur un hébergement qui exécute le serveur (Cloudflare Workers, Node). `src/server.ts` est conservé pour cela.
 
 ## Repères
 

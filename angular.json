@@ -41,16 +41,7 @@
               "src/styles.scss"
             ],
             "server": "src/main.server.ts",
-            "outputMode": "server",
-            "security": {
-              "allowedHosts": [
-                "dahiraconnect.sn",
-                "*.dahiraconnect.sn"
-              ]
-            },
-            "ssr": {
-              "entry": "src/server.ts"
-            },
+            "outputMode": "static",
             "stylePreprocessorOptions": {
               "includePaths": [
                 "src"

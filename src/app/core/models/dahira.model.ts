@@ -42,6 +42,8 @@ export interface SocialLink {
 export interface Dahira {
   id: string;
   slug: string;
+  /** Adresse publique du site (aperçus de liens, Open Graph) : 'https://moutahabina.akkili.sn' */
+  siteUrl?: string;
   name: string;
   shortName: string;
   nameArabic?: string;

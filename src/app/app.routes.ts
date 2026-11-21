@@ -72,6 +72,11 @@ export const routes: Routes = [
         data: { seo: { description: 'Rejoignez le dahira en un message WhatsApp.' } },
       },
       {
+        path: '404',
+        loadComponent: () => import('./features/not-found/not-found.page'),
+        title: 'Page introuvable',
+      },
+      {
         path: '**',
         loadComponent: () => import('./features/not-found/not-found.page'),
         title: 'Page introuvable',

@@ -1,4 +1,5 @@
-import { DOCUMENT, Injectable, REQUEST, computed, inject, signal } from '@angular/core';
+import { isPlatformServer } from '@angular/common';
+import { DOCUMENT, Injectable, PLATFORM_ID, REQUEST, computed, inject, signal } from '@angular/core';
 import { MOCK_SOURCES, TenantBundle } from '../data/tenant-bundle';
 import { DEFAULT_TENANT, resolveTenantSlug } from './tenant.config';
 
@@ -10,6 +11,7 @@ import { DEFAULT_TENANT, resolveTenantSlug } from './tenant.config';
 export class TenantService {
   private readonly document = inject(DOCUMENT);
   private readonly request = inject(REQUEST, { optional: true });
+  private readonly isServer = isPlatformServer(inject(PLATFORM_ID));
   private readonly _bundle = signal<TenantBundle | null>(null);
 
   readonly bundle = computed(() => {
@@ -19,9 +21,17 @@ export class TenantService {
   });
   readonly dahira = computed(() => this.bundle().dahira);
 
-  /** URL absolue de la page courante (partage, Open Graph). */
+  /**
+   * URL absolue (partage, Open Graph).
+   * Au build (pages pré-générées), l'adresse courante est « localhost » :
+   * on utilise alors l'adresse publique du dahira (`siteUrl`).
+   */
   absoluteUrl(path = ''): string {
-    return new URL(path, this.currentUrl()).toString();
+    const siteUrl = this._bundle()?.dahira.siteUrl;
+    const current = this.currentUrl();
+    const base =
+      this.isServer && siteUrl && !this.request ? new URL(current.pathname + current.search, siteUrl) : current;
+    return new URL(path, base).toString();
   }
 
   async load(): Promise<void> {

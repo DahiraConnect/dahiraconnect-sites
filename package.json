@@ -4,11 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && node scripts/postbuild.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:dahiraconnect": "node dist/dahiraconnect/server/server.mjs",
-    "icons": "python3 scripts/subset-icons.py"
+    "icons": "python3 scripts/subset-icons.py",
+    "preview": "npx wrangler pages dev dist/dahiraconnect/browser",
+    "deploy": "npm run build && npx wrangler pages deploy"
   },
   "prettier": {
     "printWidth": 100,

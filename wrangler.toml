@@ -1,0 +1,4 @@
+# Cloudflare Pages : site statique pré-généré
+name = "dahiraconnect"
+pages_build_output_dir = "dist/dahiraconnect/browser"
+compatibility_date = "2026-11-01"
