@@ -50,7 +50,7 @@
           }
         </ul>
       } @else {
-        <p class="adm-empty">Aucune commission pour le moment.</p>
+        <app-empty-state icon="ph-users-three"><p>Aucune commission pour le moment.</p></app-empty-state>
       }
       <button type="button" class="btn btn--outline adm-add adm-add--after" (click)="addCommission()" [disabled]="busy()">
         <i class="ph ph-plus-circle" aria-hidden="true"></i> Ajouter une commission

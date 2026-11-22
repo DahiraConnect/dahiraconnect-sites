@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, input, model, sig
 import { Photo } from '../../../../core/models';
 import { AdminAuth } from '../../core/admin-auth.service';
 import { formatBytes, uploadPhoto } from '../../core/images';
+import { Cropper } from '../cropper/cropper';
 
 /**
  * Choix de photos depuis le téléphone (galerie ou appareil photo).
@@ -9,6 +10,7 @@ import { formatBytes, uploadPhoto } from '../../core/images';
  */
 @Component({
   selector: 'app-photo-picker',
+  imports: [Cropper],
   templateUrl: './photo-picker.html',
   styleUrl: './photo-picker.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,6 +25,10 @@ export class PhotoPicker {
   readonly alt = input('');
   readonly max = input(50);
   readonly label = input('Ajouter une photo');
+  /** Recadrage carré avant l'envoi (photos de personnes) */
+  readonly crop = input(false);
+  /** Photo en attente de recadrage */
+  protected readonly cropping = signal<File | null>(null);
   /** Libellé du champ pour les lecteurs d'écran */
   readonly inputId = input.required<string>();
 
@@ -38,6 +44,22 @@ export class PhotoPicker {
     const files = Array.from(inputEl.files ?? []).slice(0, this.max() - this.photos().length);
     inputEl.value = '';
     if (!slug || !files.length) return;
+    if (this.crop()) {
+      this.cropping.set(files[0]);
+      return;
+    }
+    await this.send(files);
+  }
+
+  /** Après recadrage */
+  protected async cropped(file: File): Promise<void> {
+    this.cropping.set(null);
+    await this.send([file]);
+  }
+
+  private async send(files: File[]): Promise<void> {
+    const slug = this.auth.current()?.slug;
+    if (!slug) return;
     this.error.set('');
     this.pending.update((n) => n + files.length);
     let failed = 0;

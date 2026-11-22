@@ -589,3 +589,54 @@
     }
   }
 }
+
+// Barre d'actions : Aperçu (secondaire) + enregistrement (principal)
+.adm-actions .adm-actions__preview {
+  flex: 0 0 auto;
+  padding-inline: var(--space-4);
+}
+
+.pv-poster {
+  width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-muted);
+}
+
+.pv-text {
+  margin: 0;
+  white-space: pre-line;
+}
+
+// États vides : icône + phrase + action
+.adm-empty-state {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+  padding: var(--space-8) var(--space-5);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  text-align: center;
+
+  > .ph {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--color-surface-muted);
+    color: var(--color-gold-text);
+    font-size: 32px;
+  }
+
+  p {
+    margin: 0;
+    max-width: 36ch;
+    color: var(--color-text-secondary);
+  }
+
+  strong {
+    color: var(--color-text-primary);
+  }
+}

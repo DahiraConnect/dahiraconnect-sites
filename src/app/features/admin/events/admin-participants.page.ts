@@ -1,3 +1,4 @@
+import { EmptyState } from '../ui/empty-state/empty-state';
 import { ChangeDetectionStrategy, Component, computed, inject, input, resource, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -27,7 +28,7 @@ const SOURCE: Record<Participant['source'], string> = { site: 'Site', admin: 'Aj
 /** Participants d'un événement : recherche, ajout, import d'une liste, export CSV et PDF. */
 @Component({
   selector: 'app-admin-participants',
-  imports: [FormsModule, RouterLink, HelpTip],
+  imports: [EmptyState, FormsModule, RouterLink, HelpTip],
   templateUrl: './admin-participants.page.html',
   styleUrl: './admin-participants.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

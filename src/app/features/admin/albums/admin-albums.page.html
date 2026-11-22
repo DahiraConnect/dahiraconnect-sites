@@ -11,7 +11,7 @@
   } @else if (rows.error()) {
     <p class="adm-error" role="alert">Impossible de charger la galerie. Vérifiez votre connexion.</p>
   } @else if (!rows.value()?.length) {
-    <p class="adm-empty">Aucun album pour le moment. Ajoutez les photos de votre dernier événement.</p>
+    <app-empty-state icon="ph-images"><p>Aucun album pour le moment.</p><a class="btn btn--dark btn--sm" routerLink="nouveau"><i class="ph ph-plus-circle" aria-hidden="true"></i> Ajouter les photos du dernier événement</a></app-empty-state>
   } @else {
     @if ((rows.value()?.length ?? 0) > 4) {
       <div class="adm-search" role="search">
@@ -21,7 +21,7 @@
   </div>
     }
     @if (query() && !found().length) {
-      <p class="adm-empty">Aucun album ne correspond à « {{ query() }} ».</p>
+      <app-empty-state icon="ph-magnifying-glass"><p>Aucun album ne correspond à « <strong>{{ query() }}</strong> ».</p><button type="button" class="btn btn--outline btn--sm" (click)="query.set('')"><i class="ph ph-x-circle" aria-hidden="true"></i> Effacer la recherche</button></app-empty-state>
     }
     <ul class="adm-list">
       @for (r of found(); track r.id) {

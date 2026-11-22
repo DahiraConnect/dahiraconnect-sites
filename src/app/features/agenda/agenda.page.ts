@@ -52,7 +52,8 @@ export default class AgendaPage {
   });
 
   protected readonly lastPast = computed(() => {
-    const event = this.events.past().find((e) => e.albumSlug);
+    // Seulement un événement dont l'album existe vraiment (sinon lien vers une page introuvable)
+    const event = this.events.past().find((e) => e.albumSlug && this.albums.bySlug(e.albumSlug));
     if (!event) return undefined;
     const album = this.albums.bySlug(event.albumSlug!);
     return {

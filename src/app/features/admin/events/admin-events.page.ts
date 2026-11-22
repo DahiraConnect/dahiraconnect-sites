@@ -1,3 +1,4 @@
+import { EmptyState } from '../ui/empty-state/empty-state';
 import { ChangeDetectionStrategy, Component, computed, inject, resource, signal } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -11,7 +12,7 @@ import { StatusBadge } from '../ui/status-badge/status-badge';
 /** Liste des événements : à venir d'abord, puis les passés. */
 @Component({
   selector: 'app-admin-events',
-  imports: [RouterLink, NgTemplateOutlet, StatusBadge],
+  imports: [EmptyState, RouterLink, NgTemplateOutlet, StatusBadge],
   templateUrl: './admin-events.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

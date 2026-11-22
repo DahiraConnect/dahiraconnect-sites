@@ -38,7 +38,7 @@
         <app-lightbox [photos]="images()" [title]="e.title" [(index)]="viewing" />
       }
 
-      @if (isPast() && e.albumSlug) {
+      @if (isPast() && album()) {
         <a class="btn btn--outline content__album" [routerLink]="['/galerie', e.albumSlug]">
           <i class="ph ph-images" aria-hidden="true"></i>
           Voir les photos

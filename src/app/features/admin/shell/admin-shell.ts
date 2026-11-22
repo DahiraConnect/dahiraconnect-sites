@@ -30,6 +30,9 @@ export default class AdminShell {
   private readonly site = inject(TenantService).dahira;
 
   protected readonly menuOpen = signal(false);
+  /** Fermeture en cours (animation de sortie avant de retirer la grille) */
+  protected readonly menuClosing = signal(false);
+  private closeTimer?: ReturnType<typeof setTimeout>;
   protected readonly userOpen = signal(false);
 
   protected readonly name = computed(() => this.auth.current()?.profile.shortName ?? this.site().shortName);
@@ -49,7 +52,22 @@ export default class AdminShell {
 
   protected toggleMenu(): void {
     this.userOpen.set(false);
-    this.menuOpen.update((v) => !v);
+    if (this.menuOpen() && !this.menuClosing()) this.closeMenu();
+    else {
+      clearTimeout(this.closeTimer);
+      this.menuClosing.set(false);
+      this.menuOpen.set(true);
+    }
+  }
+
+  private closeMenu(): void {
+    if (!this.menuOpen()) return;
+    this.menuClosing.set(true);
+    clearTimeout(this.closeTimer);
+    this.closeTimer = setTimeout(() => {
+      this.menuOpen.set(false);
+      this.menuClosing.set(false);
+    }, 180);
   }
 
   protected toggleUser(): void {
@@ -58,7 +76,7 @@ export default class AdminShell {
   }
 
   protected closeAll(): void {
-    this.menuOpen.set(false);
+    this.closeMenu();
     this.userOpen.set(false);
   }
 

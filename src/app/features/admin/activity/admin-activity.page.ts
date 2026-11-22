@@ -1,3 +1,4 @@
+import { EmptyState } from '../ui/empty-state/empty-state';
 import { ChangeDetectionStrategy, Component, computed, inject, resource, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AdminAuth } from '../core/admin-auth.service';
@@ -8,7 +9,7 @@ import { supabase } from '../core/supabase';
 /** Journal d'activité : qui a fait quoi, et quand (100 dernières actions). */
 @Component({
   selector: 'app-admin-activity',
-  imports: [RouterLink],
+  imports: [EmptyState, RouterLink],
   templateUrl: './admin-activity.page.html',
   styleUrl: './admin-activity.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

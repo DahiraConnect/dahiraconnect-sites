@@ -5,7 +5,7 @@
   @if (id() && row.isLoading()) {
     <p class="adm-lead" aria-live="polite">Chargement…</p>
   } @else if (id() && !row.value()) {
-    <p class="adm-empty">Cet album n’existe plus. <a routerLink="/admin/galerie">Retour à la galerie</a></p>
+    <app-empty-state icon="ph-question"><p>Cet album n’existe plus.</p><a class="btn btn--outline btn--sm" routerLink="/admin/galerie"><i class="ph ph-arrow-left" aria-hidden="true"></i> Retour à la galerie</a></app-empty-state>
   } @else {
     @if (id() && row.value(); as r) {
       @if (r.status !== 'draft') {
@@ -87,11 +87,19 @@
       }
     </form>
 
+    @if (previewOpen()) {
+      <app-preview-dialog title="Aperçu de l’album" (closed)="previewOpen.set(false)">
+        <app-album-card [album]="previewAlbum()" size="md" />
+      </app-preview-dialog>
+    }
     <div class="adm-actions">
       <p class="adm-error" role="alert">{{ saveError() }}</p>
+      <button class="btn btn--outline adm-actions__preview" type="button" (click)="previewOpen.set(true)">
+        <i class="ph ph-eye" aria-hidden="true"></i> Aperçu
+      </button>
       <button class="btn btn--dark" type="submit" form="album-form" [disabled]="busy()">
         @if (busy()) { Enregistrement… } @else {
-          <i class="ph ph-check" aria-hidden="true"></i> Enregistrer
+          <i class="ph {{ action().icon }}" aria-hidden="true"></i> {{ action().label }}
         }
       </button>
     </div>

@@ -19,7 +19,7 @@
   </div>
     }
     @if (query() && !upcoming().length && !past().length) {
-      <p class="adm-empty">Aucun événement ne correspond à « {{ query() }} ».</p>
+      <app-empty-state icon="ph-magnifying-glass"><p>Aucun événement ne correspond à « <strong>{{ query() }}</strong> ».</p><button type="button" class="btn btn--outline btn--sm" (click)="query.set('')"><i class="ph ph-x-circle" aria-hidden="true"></i> Effacer la recherche</button></app-empty-state>
     }
     <section class="adm-section" aria-labelledby="ev-upcoming">
       <h2 id="ev-upcoming">À venir</h2>
@@ -32,7 +32,7 @@
           }
         </ul>
       } @else {
-        <p class="adm-empty">Aucun événement à venir. Ajoutez le prochain rendez-vous.</p>
+        <app-empty-state icon="ph-calendar-blank"><p>Aucun événement à venir.</p><a class="btn btn--dark btn--sm" routerLink="nouveau"><i class="ph ph-calendar-plus" aria-hidden="true"></i> Ajouter le prochain rendez-vous</a></app-empty-state>
       }
     </section>
 

@@ -1,3 +1,4 @@
+import { EmptyState } from '../ui/empty-state/empty-state';
 import { ChangeDetectionStrategy, Component, computed, inject, resource } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Album, DahiraEvent } from '../../../core/models';
@@ -24,7 +25,7 @@ const DAYS = 30;
 /** Tableau de bord : actions rapides, chiffres du mois, contenus en attente, activité récente. */
 @Component({
   selector: 'app-admin-home',
-  imports: [RouterLink, HelpTip, StatusBadge, ChartView],
+  imports: [EmptyState, RouterLink, HelpTip, StatusBadge, ChartView],
   templateUrl: './admin-home.page.html',
   styleUrl: './admin-home.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -8,7 +8,7 @@
   } @else if (entries.error()) {
     <p class="adm-error" role="alert">Impossible de charger le journal. Vérifiez votre connexion.</p>
   } @else if (!entries.value()?.length) {
-    <p class="adm-empty">Aucune activité pour le moment.</p>
+    <app-empty-state icon="ph-clock-counter-clockwise"><p>Aucune activité pour le moment. Les modifications de l’équipe apparaîtront ici.</p></app-empty-state>
   } @else {
     <div class="adm-search" role="search">
     <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
@@ -16,7 +16,7 @@
     <input id="ac-search" type="search" placeholder="Rechercher une personne ou une action" [value]="query()" (input)="query.set($any($event.target).value)" />
   </div>
     @if (!days().length) {
-      <p class="adm-empty">Rien ne correspond à « {{ query() }} ».</p>
+      <app-empty-state icon="ph-magnifying-glass"><p>Rien ne correspond à « <strong>{{ query() }}</strong> ».</p><button type="button" class="btn btn--outline btn--sm" (click)="query.set('')"><i class="ph ph-x-circle" aria-hidden="true"></i> Effacer la recherche</button></app-empty-state>
     }
     @for (d of days(); track d.day) {
       <section class="adm-section" [attr.aria-label]="d.day">

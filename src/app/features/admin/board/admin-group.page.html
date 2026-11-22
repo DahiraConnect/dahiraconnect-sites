@@ -5,7 +5,7 @@
   @if (loading()) {
     <p class="adm-lead" aria-live="polite">Chargement…</p>
   } @else if (!isExecutive() && !commission()) {
-    <p class="adm-empty">Cette commission n’existe plus. <a routerLink="/admin/bureau">Retour au bureau</a></p>
+    <app-empty-state icon="ph-question"><p>Cette commission n’existe plus.</p><a class="btn btn--outline btn--sm" routerLink="/admin/bureau"><i class="ph ph-arrow-left" aria-hidden="true"></i> Retour au bureau</a></app-empty-state>
   } @else {
     <form id="group-form" (ngSubmit)="save()" novalidate>
       @if (isExecutive()) {
@@ -22,7 +22,7 @@
       }
 
       @if (!people().length) {
-        <p class="adm-empty">Ajoutez d’abord des personnes. <a routerLink="/admin/bureau/personnes">Aller aux personnes</a></p>
+        <app-empty-state icon="ph-users"><p>Ajoutez d’abord les personnes du bureau.</p><a class="btn btn--dark btn--sm" routerLink="/admin/bureau/personnes"><i class="ph ph-user-plus" aria-hidden="true"></i> Ajouter des personnes</a></app-empty-state>
       } @else {
         <ol class="adm-list">
           @for (r of rows(); track $index; let i = $index, first = $first, last = $last) {

@@ -1,6 +1,7 @@
 import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AlbumService } from '../../core/data/album.service';
 import { EventService } from '../../core/data/event.service';
 import { DarkHero } from '../../shared/ui/dark-hero/dark-hero';
 import { EventSignup } from './event-signup/event-signup';
@@ -18,12 +19,19 @@ import { Reveal } from '../../shared/motion/reveal.directive';
 })
 export default class EventPage {
   private readonly events = inject(EventService);
+  private readonly albums = inject(AlbumService);
 
   readonly slug = input.required<string>();
 
   protected readonly event = computed(() => this.events.bySlug(this.slug()));
   protected readonly images = computed(() => this.event()?.images ?? []);
   protected readonly viewing = signal<number | null>(null);
+  /** Album lié, seulement s'il existe vraiment */
+  protected readonly album = computed(() => {
+    const slug = this.event()?.albumSlug;
+    return slug ? this.albums.bySlug(slug) : undefined;
+  });
+
   protected readonly isPast = computed(() => {
     const e = this.event();
     return !!e && this.events.isPast(e);

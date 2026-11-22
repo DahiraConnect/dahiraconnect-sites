@@ -22,7 +22,7 @@
   </div>
     }
     @if (query() && !people().length) {
-      <p class="adm-empty">Personne ne correspond à « {{ query() }} ».</p>
+      <app-empty-state icon="ph-magnifying-glass"><p>Personne ne correspond à « <strong>{{ query() }}</strong> ».</p><button type="button" class="btn btn--outline btn--sm" (click)="query.set('')"><i class="ph ph-x-circle" aria-hidden="true"></i> Effacer la recherche</button></app-empty-state>
     }
     @if (people().length) {
       <ul class="adm-list">
@@ -46,7 +46,7 @@
         }
       </ul>
     } @else if (editing() !== 'new') {
-      <p class="adm-empty">Personne pour le moment.</p>
+      <app-empty-state icon="ph-users"><p>Personne pour le moment. Ajoutez les membres du bureau un par un.</p><button type="button" class="btn btn--dark btn--sm" (click)="open()"><i class="ph ph-user-plus" aria-hidden="true"></i> Ajouter une personne</button></app-empty-state>
     }
   }
 </div>
@@ -60,7 +60,7 @@
     </div>
     <div class="adm-field">
       <span class="adm-label">Photo <small>(facultative)</small></span>
-      <app-photo-picker [(photos)]="photo" folder="bureau" [alt]="name" inputId="person-photo" label="Ajouter une photo" [max]="1" />
+      <app-photo-picker [(photos)]="photo" folder="bureau" [alt]="name" inputId="person-photo" label="Ajouter une photo" [max]="1" [crop]="true" />
     </div>
     <p id="person-err" class="adm-error" role="alert">{{ error() }}</p>
     <div class="adm-card__actions">

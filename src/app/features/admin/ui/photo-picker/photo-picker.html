@@ -40,3 +40,7 @@
   <p class="pp__saved"><i class="ph ph-lightning" aria-hidden="true"></i> {{ saved() }}</p>
 }
 <p class="adm-error" aria-live="polite">{{ error() }}</p>
+
+@if (cropping(); as file) {
+  <app-cropper [file]="file" (done)="cropped($event)" (cancel)="cropping.set(null)" />
+}

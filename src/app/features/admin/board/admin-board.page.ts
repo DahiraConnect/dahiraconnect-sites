@@ -1,3 +1,4 @@
+import { EmptyState } from '../ui/empty-state/empty-state';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Commission } from '../../../core/models';
@@ -7,7 +8,7 @@ import { slugify, uniqueSlug } from '../core/slug';
 /** Bureau : personnes, bureau exécutif, commissions. */
 @Component({
   selector: 'app-admin-board',
-  imports: [RouterLink],
+  imports: [EmptyState, RouterLink],
   templateUrl: './admin-board.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

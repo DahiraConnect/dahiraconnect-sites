@@ -1,0 +1,84 @@
+@use 'styles/mixins' as m;
+
+.cr {
+  width: min(360px, calc(100vw - 24px));
+  padding: var(--space-5);
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  text-align: center;
+
+  &::backdrop {
+    background: rgb(6 39 17 / 0.6);
+  }
+}
+
+.cr__title {
+  @include m.display(var(--fs-title));
+}
+
+.cr__help {
+  margin: var(--space-2) 0 var(--space-4);
+  font-size: var(--fs-small);
+  color: var(--color-text-secondary);
+}
+
+.cr__frame {
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: #222;
+  cursor: grab;
+  touch-action: none;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+}
+
+.cr__img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+// Le rond montre ce qui apparaîtra sur le site
+.cr__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 999px rgb(0 0 0 / 0.45);
+  pointer-events: none;
+}
+
+.cr__zoom {
+  @include m.flex-row(var(--space-2));
+  margin: var(--space-4) auto;
+  max-width: 280px;
+
+  input {
+    flex: 1;
+    accent-color: var(--color-primary);
+  }
+
+  .ph {
+    font-size: 22px;
+    color: var(--color-text-secondary);
+  }
+}
+
+.cr__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}

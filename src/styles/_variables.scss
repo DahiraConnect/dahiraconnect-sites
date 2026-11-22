@@ -11,7 +11,7 @@
   --color-gold: #e2b743; // aplats or (soutien, badges, chips actifs)
   --color-gold-deep: #b8901f; // aplat or foncé (cartes membres)
   --color-gold-line: #d9b24c; // filets, anneau, motif étoilé, fils de frise
-  --color-gold-text: #8a6a12; // or lisible sur ivoire (surtitres)
+  --color-gold-text: #7D5F0F; // 5,2:1 sur l'ivoire // or lisible sur ivoire (surtitres)
   --color-gold-soft: #e8d9a8; // texte or pâle sur fond sombre
   --color-accent-blue: #2c3ba8; // aplats vidéo (bleu du boubou)
   --color-accent-blue-soft: #dce0f7; // texte secondaire sur bleu
@@ -93,7 +93,7 @@
 
   /* Focus */
   --focus-ring-width: 3px;
-  --focus-ring-color: #e2b743;
+  --focus-ring-color: #A87A12; // ≥ 3:1 sur l'ivoire, le blanc et le vert foncé
   --focus-ring-offset: 2px;
 
   /* Tailles tactiles */

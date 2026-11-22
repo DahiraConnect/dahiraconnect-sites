@@ -10,6 +10,7 @@ puis génère :
 Usage : npm run icons   (nécessite : pip install fonttools brotli)
 À relancer après l'ajout d'une nouvelle icône.
 """
+import hashlib
 import re
 from pathlib import Path
 
@@ -20,6 +21,7 @@ SRC = ROOT / 'src' / 'app'
 PKG = ROOT / 'node_modules' / '@phosphor-icons' / 'web' / 'src'
 FONTS = ROOT / 'src' / 'assets' / 'fonts'
 SCSS = ROOT / 'src' / 'styles' / '_icons.scss'
+INDEX = ROOT / 'src' / 'index.html'
 
 WEIGHTS = {
     'regular': {'css': PKG / 'regular' / 'style.css', 'font': PKG / 'regular' / 'Phosphor.woff2',
@@ -58,7 +60,7 @@ def codepoints(css_path, names):
 def build(weight, names):
     conf = WEIGHTS[weight]
     cps = codepoints(conf['css'], names)
-    out = FONTS / f'phosphor-{weight}.woff2'
+    tmp = FONTS / f'phosphor-{weight}.tmp.woff2'
     options = subset.Options()
     options.flavor = 'woff2'
     options.layout_features = []
@@ -66,11 +68,23 @@ def build(weight, names):
     sub = subset.Subsetter(options)
     sub.populate(unicodes=[int(c, 16) for c in cps.values()])
     sub.subset(font)
-    subset.save_font(font, str(out), options)
+    subset.save_font(font, str(tmp), options)
+    # Nom avec empreinte : les fichiers de /assets/fonts sont en cache « immutable » (1 an) ;
+    # un nouveau nom force le téléchargement des nouvelles icônes.
+    digest = hashlib.sha256(tmp.read_bytes()).hexdigest()[:8]
+    for old in FONTS.glob(f'phosphor-{weight}*.woff2'):
+        if old != tmp:
+            old.unlink()
+    out = FONTS / f'phosphor-{weight}.{digest}.woff2'
+    tmp.rename(out)
+    INDEX.write_text(
+        re.sub(rf'/assets/fonts/phosphor-{weight}[^"]*\.woff2', f'/assets/fonts/{out.name}', INDEX.read_text(encoding='utf-8')),
+        encoding='utf-8',
+    )
     rules = '\n'.join(f'{conf["selector"]}.ph-{n}::before {{\n  content: "\\{c}";\n}}' for n, c in cps.items())
     face = f"""@font-face {{
   font-family: '{conf['family']}';
-  src: url('/assets/fonts/phosphor-{weight}.woff2') format('woff2');
+  src: url('/assets/fonts/{out.name}') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: block;

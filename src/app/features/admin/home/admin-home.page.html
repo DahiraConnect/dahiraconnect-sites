@@ -134,7 +134,7 @@
           </ol>
         }
         @if (!topPages().length && !topClicks().length) {
-          <p class="adm-empty">Pas encore de visites comptées. Les chiffres apparaîtront dès les premières visites du site.</p>
+          <app-empty-state icon="ph-chart-bar"><p>Pas encore de visites comptées. Partagez le lien du site sur WhatsApp : les chiffres apparaîtront ici.</p></app-empty-state>
         }
       }
     </section>
@@ -155,7 +155,7 @@
           <i class="ph ph-clock-counter-clockwise" aria-hidden="true"></i> Tout le journal
         </a>
       } @else {
-        <p class="adm-empty">Aucune activité pour le moment.</p>
+        <app-empty-state icon="ph-clock-counter-clockwise"><p>Aucune activité pour le moment.</p></app-empty-state>
       }
     </section>
 

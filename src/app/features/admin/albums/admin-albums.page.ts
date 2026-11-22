@@ -1,3 +1,4 @@
+import { EmptyState } from '../ui/empty-state/empty-state';
 import { ChangeDetectionStrategy, Component, computed, inject, resource, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Album, albumCover, albumPhotoCount } from '../../../core/models';
@@ -10,7 +11,7 @@ import { StatusBadge } from '../ui/status-badge/status-badge';
 /** Liste des albums, du plus récent au plus ancien. */
 @Component({
   selector: 'app-admin-albums',
-  imports: [RouterLink, StatusBadge],
+  imports: [EmptyState, RouterLink, StatusBadge],
   templateUrl: './admin-albums.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

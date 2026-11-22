@@ -1,3 +1,4 @@
+import { EmptyState } from '../ui/empty-state/empty-state';
 import { ChangeDetectionStrategy, Component, computed, inject, input, resource, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -8,8 +9,10 @@ import { deleteDoc, getDoc, listDocs, saveDoc } from '../core/docs';
 import { removePhoto } from '../core/images';
 import { PublishService } from '../core/publish.service';
 import { slugify, uniqueSlug } from '../core/slug';
-import { PubStatus } from '../core/status';
+import { PubStatus, effectiveStatus, saveAction } from '../core/status';
+import { AlbumCard } from '../../../shared/ui/album-card/album-card';
 import { HelpTip } from '../ui/help-tip/help-tip';
+import { PreviewDialog } from '../ui/preview-dialog/preview-dialog';
 import { PhotoPicker } from '../ui/photo-picker/photo-picker';
 import { StatusField } from '../ui/status-field/status-field';
 
@@ -25,7 +28,7 @@ interface AlbumForm {
 /** Ajout ou modification d'un album : photos envoyées depuis le téléphone, ou lien TikTok / YouTube. */
 @Component({
   selector: 'app-admin-album-form',
-  imports: [FormsModule, RouterLink, PhotoPicker, StatusField, HelpTip],
+  imports: [EmptyState, FormsModule, RouterLink, PhotoPicker, StatusField, HelpTip, PreviewDialog, AlbumCard],
   templateUrl: './admin-album-form.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -41,6 +44,11 @@ export default class AdminAlbumFormPage {
   protected readonly status = signal<PubStatus>('published');
   protected readonly publishAt = signal<string | null>(null);
   protected readonly statusError = signal('');
+  /** Bouton d'enregistrement : « Publier », « Mettre à jour », « Enregistrer le brouillon », « Programmer… » */
+  protected readonly action = computed(() => {
+    const r = this.row.value();
+    return saveAction(this.status(), this.publishAt(), !!r && effectiveStatus(r.status, r.publish_at) === 'published');
+  });
   protected readonly busy = signal(false);
   protected readonly errors = signal<Partial<Record<keyof AlbumForm, string>>>({});
   protected readonly saveError = signal('');
@@ -82,6 +90,27 @@ export default class AdminAlbumFormPage {
     this.photos.set(photos);
   }
 
+  protected readonly previewOpen = signal(false);
+
+  /** L'album tel qu'il sera affiché dans la galerie, d'après la saisie en cours */
+  protected previewAlbum(): Album {
+    const f = this.form;
+    const photos = f.kind === 'photos' ? this.photos() : [];
+    return {
+      id: 'apercu',
+      slug: this.original?.slug ?? 'apercu',
+      title: f.title.trim() || 'Titre de l’album',
+      date: f.date || new Date().toISOString().slice(0, 10),
+      place: f.place.trim() || undefined,
+      kind: f.kind,
+      videoUrl: f.kind === 'video' ? f.videoUrl.trim() || undefined : undefined,
+      photos: photos.length ? photos : undefined,
+      coverUrl: photos[0]?.url,
+      coverThumbUrl: photos[0]?.thumbUrl,
+      fallback: this.original?.fallback ?? 'green',
+    };
+  }
+
   protected onVideoInput(value: string): void {
     this.videoUrl.set(value.trim());
   }
@@ -102,11 +131,9 @@ export default class AdminAlbumFormPage {
     }
     this.errors.set(errors);
     const when = this.publishAt();
-    this.statusError.set(
-      this.status() === 'scheduled' && (!when || new Date(when).getTime() <= Date.now())
-        ? 'Choisissez une date et une heure à venir.'
-        : '',
-    );
+    // Date déjà passée : publié tout de suite (comme l'indique le texte sous le choix)
+    if (this.status() === 'scheduled' && when && new Date(when).getTime() <= Date.now()) this.status.set('published');
+    this.statusError.set(this.status() === 'scheduled' && !when ? 'Choisissez le jour de mise en ligne.' : '');
     return !Object.keys(errors).length && !this.statusError();
   }
 

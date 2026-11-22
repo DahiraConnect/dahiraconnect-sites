@@ -5,7 +5,7 @@
   </a>
   @if (auth.session()) {
      <button type="button" class="adm-bar__menu" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()" aria-controls="adm-apps">
-      <i class="ph" [class.ph-dots-nine]="!menuOpen()" [class.ph-x]="menuOpen()" aria-hidden="true"></i>
+      <i class="ph" [class.ph-dots-nine]="!menuOpen() || menuClosing()" [class.ph-x]="menuOpen() && !menuClosing()" aria-hidden="true"></i>
       <span>Menu</span>
     </button>
     <div class="adm-user">
@@ -36,8 +36,8 @@
 </header>
 
 @if (menuOpen()) {
-  <div class="adm-apps__backdrop" (click)="closeAll()" aria-hidden="true"></div>
-  <nav class="adm-apps" id="adm-apps" aria-label="Modules">
+  <div class="adm-apps__backdrop" [class.is-closing]="menuClosing()" (click)="closeAll()" aria-hidden="true"></div>
+  <nav class="adm-apps" [class.is-closing]="menuClosing()" id="adm-apps" aria-label="Modules">
     <ul>
       @for (m of modules(); track m.path) {
         <li>

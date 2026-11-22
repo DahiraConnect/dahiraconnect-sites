@@ -22,6 +22,7 @@ describe('admin / colors', () => {
       expect(contrast(t['color-primary']!, SURFACE)).toBeGreaterThanOrEqual(4.5);
       expect(contrast(t['color-gold-text']!, SURFACE)).toBeGreaterThanOrEqual(4.5);
       expect(contrast(t['color-on-brand']!, t['color-brand']!)).toBeGreaterThanOrEqual(4.5);
+      expect(contrast(t['focus-ring-color']!, SURFACE)).toBeGreaterThanOrEqual(3);
     }
   });
 });

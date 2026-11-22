@@ -1,31 +1,41 @@
 <fieldset class="sf">
-  <legend class="adm-label">Visibilité sur le site</legend>
+  <legend class="adm-label">Sur le site</legend>
   <div class="sf__options">
-    @for (o of options; track o.id) {
-      <label class="sf__option" [class.is-on]="status() === o.id">
-        <input type="radio" [name]="name()" [value]="o.id" [checked]="status() === o.id" (change)="status.set(o.id)" />
-        <i class="ph {{ o.icon }}" aria-hidden="true"></i>
-        <span class="sf__label">{{ o.label }}</span>
-      </label>
-    }
+    <label class="sf__option" [class.is-on]="mode() === 'published'">
+      <input type="radio" [name]="idPrefix() + '-mode'" value="published" [checked]="mode() === 'published'" (change)="setMode('published')" />
+      <i class="ph ph-globe-simple" aria-hidden="true"></i>
+      <span class="sf__label">Publié</span>
+    </label>
+    <label class="sf__option" [class.is-on]="mode() === 'draft'">
+      <input type="radio" [name]="idPrefix() + '-mode'" value="draft" [checked]="mode() === 'draft'" (change)="setMode('draft')" />
+      <i class="ph ph-pencil-simple-line" aria-hidden="true"></i>
+      <span class="sf__label">Brouillon</span>
+    </label>
   </div>
-  <p class="adm-hint" aria-live="polite">
-    @for (o of options; track o.id) { @if (status() === o.id) { {{ o.help }} } }
-  </p>
 
-  @if (status() === 'scheduled') {
-    <div class="adm-row sf__when">
-      <div class="adm-field">
-        <label [for]="idPrefix() + '-pub-date'">Mise en ligne le</label>
-        <input [id]="idPrefix() + '-pub-date'" type="date" [ngModel]="date()" (ngModelChange)="setDate($event)"
-          [ngModelOptions]="{ standalone: true }" [attr.aria-invalid]="!!error()" />
+  @if (mode() === 'published') {
+    <label class="adm-check sf__later">
+      <input type="checkbox" [checked]="later()" (change)="setLater($any($event.target).checked)" />
+      <span>Publier plus tard <small>À une date et une heure choisies</small></span>
+    </label>
+    @if (later()) {
+      <div class="adm-row">
+        <div class="adm-field">
+          <label [for]="idPrefix() + '-pub-date'">Le</label>
+          <input [id]="idPrefix() + '-pub-date'" type="date" [ngModel]="date()" (ngModelChange)="setDate($event)"
+            [ngModelOptions]="{ standalone: true }" [attr.aria-invalid]="!!error()" />
+        </div>
+        <div class="adm-field">
+          <label [for]="idPrefix() + '-pub-time'">à</label>
+          <input [id]="idPrefix() + '-pub-time'" type="time" [ngModel]="time()" (ngModelChange)="setTime($event)"
+            [ngModelOptions]="{ standalone: true }" />
+        </div>
       </div>
-      <div class="adm-field">
-        <label [for]="idPrefix() + '-pub-time'">à</label>
-        <input [id]="idPrefix() + '-pub-time'" type="time" [ngModel]="time()" (ngModelChange)="setTime($event)"
-          [ngModelOptions]="{ standalone: true }" />
-      </div>
-    </div>
-    <p class="adm-error">{{ error() }}</p>
+    }
   }
+  <p class="sf__hint" [class.sf__hint--later]="later()" aria-live="polite">
+    <i class="ph" [class.ph-eye-slash]="mode() === 'draft'" [class.ph-clock]="later()" [class.ph-check-circle]="mode() === 'published' && !later()" aria-hidden="true"></i>
+    {{ hint() }}
+  </p>
+  <p class="adm-error">{{ error() }}</p>
 </fieldset>

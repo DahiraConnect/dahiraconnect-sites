@@ -1,3 +1,4 @@
+import { EmptyState } from '../ui/empty-state/empty-state';
 import { ChangeDetectionStrategy, Component, computed, effect, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -10,7 +11,7 @@ import { DahiraDocStore } from '../core/dahira-doc.store';
  */
 @Component({
   selector: 'app-admin-group',
-  imports: [FormsModule, RouterLink],
+  imports: [EmptyState, FormsModule, RouterLink],
   templateUrl: './admin-group.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

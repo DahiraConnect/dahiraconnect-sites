@@ -82,7 +82,7 @@
         <input id="pt-search" type="search" placeholder="Rechercher un nom ou un numéro" [ngModel]="query()" (ngModelChange)="query.set($event)" />
       </div>
       @if (query() && !filtered().length) {
-        <p class="adm-empty">Personne ne correspond à « {{ query() }} ».</p>
+        <app-empty-state icon="ph-magnifying-glass"><p>Personne ne correspond à « <strong>{{ query() }}</strong> ».</p><button type="button" class="btn btn--outline btn--sm" (click)="query.set('')"><i class="ph ph-x-circle" aria-hidden="true"></i> Effacer la recherche</button></app-empty-state>
       }
       <ol class="adm-list">
         @for (p of filtered(); track p.id) {
@@ -108,7 +108,7 @@
         }
       </ol>
     } @else if (panel() === 'none') {
-      <p class="adm-empty">Personne n’est encore inscrit. Les inscriptions du site apparaîtront ici, ou ajoutez des noms vous-même.</p>
+      <app-empty-state icon="ph-hand-waving"><p>Personne n’est encore inscrit. Les inscriptions du site apparaîtront ici.</p><button type="button" class="btn btn--dark btn--sm" (click)="toggle('add')"><i class="ph ph-user-plus" aria-hidden="true"></i> Ajouter quelqu’un</button><button type="button" class="btn btn--outline btn--sm" (click)="toggle('import')"><i class="ph ph-list-plus" aria-hidden="true"></i> Coller une liste</button></app-empty-state>
     }
   }
 </div>

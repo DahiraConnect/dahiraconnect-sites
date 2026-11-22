@@ -7,6 +7,11 @@ app-admin-shell {
   background: var(--color-surface);
 }
 
+// La barre de défilement garde sa place : l'en-tête ne se décale pas d'une page à l'autre
+html:has(app-admin-shell) {
+  scrollbar-gutter: stable;
+}
+
 .adm-bar {
   @include m.flex-row(var(--space-2));
   position: sticky;
@@ -17,6 +22,8 @@ app-admin-shell {
   padding-top: calc(var(--space-2) + env(safe-area-inset-top));
   background: var(--color-primary-deep);
   color: var(--color-text-on-dark);
+  // Transitions de page : l'en-tête reste fixe, seul le contenu change
+  view-transition-name: adm-bar;
 
   &__menu {
     @include m.flex-row(6px);
@@ -175,7 +182,11 @@ app-admin-shell {
   inset: 0;
   z-index: 35;
   background: rgb(6 39 17 / 0.35);
-  animation: adm-fade 0.15s ease-out;
+  animation: adm-fade 0.22s ease-out both;
+
+  &.is-closing {
+    animation: adm-fade-out 0.18s ease-in both;
+  }
 
   &--clear {
     background: transparent;
@@ -194,7 +205,12 @@ app-admin-shell {
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   background: var(--color-surface);
   box-shadow: var(--shadow-dock);
-  animation: adm-drop 0.2s ease-out;
+  transform-origin: top center;
+  animation: adm-drop 0.26s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  &.is-closing {
+    animation: adm-lift 0.18s ease-in both;
+  }
 
   ul {
     display: grid;
@@ -275,13 +291,39 @@ app-admin-shell {
 @keyframes adm-drop {
   from {
     opacity: 0;
-    transform: translateY(-12px);
+    transform: translateY(-8px) scale(0.985);
   }
+}
+
+@keyframes adm-lift {
+  to {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.99);
+  }
+}
+
+@keyframes adm-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+// Changement de page dans l'admin : fondu court du contenu seulement
+::view-transition-old(adm-bar),
+::view-transition-new(adm-bar) {
+  animation: none;
 }
 
 @keyframes adm-fade {
   from {
     opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .adm-apps,
+  .adm-apps__backdrop {
+    animation: none !important;
   }
 }
 

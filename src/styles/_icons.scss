@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: 'Phosphor';
-  src: url('/assets/fonts/phosphor-regular.woff2') format('woff2');
+  src: url('/assets/fonts/phosphor-regular.b287f9fe.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -65,6 +65,9 @@
 }
 .ph.ph-caret-right::before {
   content: "\e13a";
+}
+.ph.ph-chart-bar::before {
+  content: "\e150";
 }
 .ph.ph-check::before {
   content: "\e182";
@@ -135,6 +138,9 @@
 .ph.ph-file-csv::before {
   content: "\eb1c";
 }
+.ph.ph-floppy-disk::before {
+  content: "\e248";
+}
 .ph.ph-gear-six::before {
   content: "\e272";
 }
@@ -180,6 +186,12 @@
 .ph.ph-magnifying-glass::before {
   content: "\e30c";
 }
+.ph.ph-magnifying-glass-minus::before {
+  content: "\e30e";
+}
+.ph.ph-magnifying-glass-plus::before {
+  content: "\e310";
+}
 .ph.ph-map-pin::before {
   content: "\e316";
 }
@@ -197,6 +209,9 @@
 }
 .ph.ph-palette::before {
   content: "\e6c8";
+}
+.ph.ph-paper-plane-tilt::before {
+  content: "\e398";
 }
 .ph.ph-pencil-simple::before {
   content: "\e3b4";
@@ -267,6 +282,9 @@
 .ph.ph-trash::before {
   content: "\e4a6";
 }
+.ph.ph-tray::before {
+  content: "\e4aa";
+}
 .ph.ph-trophy::before {
   content: "\e67e";
 }
@@ -315,7 +333,7 @@
 
 @font-face {
   font-family: 'Phosphor Fill';
-  src: url('/assets/fonts/phosphor-fill.woff2') format('woff2');
+  src: url('/assets/fonts/phosphor-fill.27539104.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -378,6 +396,9 @@
 }
 .ph-fill.ph-caret-right::before {
   content: "\e13a";
+}
+.ph-fill.ph-chart-bar::before {
+  content: "\e150";
 }
 .ph-fill.ph-check::before {
   content: "\e182";
@@ -448,6 +469,9 @@
 .ph-fill.ph-file-csv::before {
   content: "\eb1c";
 }
+.ph-fill.ph-floppy-disk::before {
+  content: "\e248";
+}
 .ph-fill.ph-gear-six::before {
   content: "\e272";
 }
@@ -493,6 +517,12 @@
 .ph-fill.ph-magnifying-glass::before {
   content: "\e30c";
 }
+.ph-fill.ph-magnifying-glass-minus::before {
+  content: "\e30e";
+}
+.ph-fill.ph-magnifying-glass-plus::before {
+  content: "\e310";
+}
 .ph-fill.ph-map-pin::before {
   content: "\e316";
 }
@@ -510,6 +540,9 @@
 }
 .ph-fill.ph-palette::before {
   content: "\e6c8";
+}
+.ph-fill.ph-paper-plane-tilt::before {
+  content: "\e398";
 }
 .ph-fill.ph-pencil-simple::before {
   content: "\e3b4";
@@ -582,6 +615,9 @@
 }
 .ph-fill.ph-trash::before {
   content: "\e4a6";
+}
+.ph-fill.ph-tray::before {
+  content: "\e4aa";
 }
 .ph-fill.ph-trophy::before {
   content: "\e67e";

@@ -37,6 +37,15 @@ export function readableOn(hex: string, background = SURFACE): string {
   return c;
 }
 
+/** Contour de focus visible (≥ 3:1) à la fois sur le fond ivoire et sur la couleur principale */
+export function focusColor(gold: string, primary: string): string {
+  for (let i = 0; i <= 20; i++) {
+    const c = mix(gold, '#000000', i * 0.04);
+    if (contrast(c, SURFACE) >= 3 && contrast(c, primary) >= 3) return c;
+  }
+  return readableOn(gold);
+}
+
 export interface Palette {
   primary: string;
   gold: string;
@@ -56,7 +65,7 @@ export function themeFrom(p: Palette): Partial<Record<ThemeToken, string>> {
     'color-gold': p.gold,
     'color-gold-line': mix(p.gold, '#000000', 0.05),
     'color-gold-text': readableOn(p.gold),
-    'focus-ring-color': p.gold,
+    'focus-ring-color': focusColor(p.gold, p.primary),
   };
 }
 

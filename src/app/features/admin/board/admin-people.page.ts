@@ -1,3 +1,4 @@
+import { EmptyState } from '../ui/empty-state/empty-state';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,7 +13,7 @@ import { PhotoPicker } from '../ui/photo-picker/photo-picker';
 /** Personnes du bureau : nom et photo (facultative), décrites une seule fois. */
 @Component({
   selector: 'app-admin-people',
-  imports: [FormsModule, RouterLink, PhotoPicker, NgTemplateOutlet],
+  imports: [EmptyState, FormsModule, RouterLink, PhotoPicker, NgTemplateOutlet],
   templateUrl: './admin-people.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

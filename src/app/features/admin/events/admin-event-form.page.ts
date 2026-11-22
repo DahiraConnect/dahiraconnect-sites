@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject, input, resource, signal } from '@angular/core';
+import { EmptyState } from '../ui/empty-state/empty-state';
+import { ChangeDetectionStrategy, Component, computed, inject, input, resource, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Album, DahiraEvent, Photo } from '../../../core/models';
@@ -8,9 +9,11 @@ import { deleteDoc, getDoc, listDocs, saveDoc } from '../core/docs';
 import { removePhoto } from '../core/images';
 import { PublishService } from '../core/publish.service';
 import { fromIso, slugify, toIso, uniqueSlug } from '../core/slug';
-import { PubStatus } from '../core/status';
+import { PubStatus, effectiveStatus, saveAction } from '../core/status';
 import { supabase } from '../core/supabase';
+import { EventTicket } from '../../../shared/ui/event-ticket/event-ticket';
 import { HelpTip } from '../ui/help-tip/help-tip';
+import { PreviewDialog } from '../ui/preview-dialog/preview-dialog';
 import { PhotoPicker } from '../ui/photo-picker/photo-picker';
 import { StatusField } from '../ui/status-field/status-field';
 
@@ -55,7 +58,7 @@ const EMPTY: EventForm = {
 /** Ajout ou modification d'un événement (une seule colonne, bouton Enregistrer toujours visible). */
 @Component({
   selector: 'app-admin-event-form',
-  imports: [FormsModule, RouterLink, PhotoPicker, StatusField, HelpTip],
+  imports: [EmptyState, FormsModule, RouterLink, PhotoPicker, StatusField, HelpTip, PreviewDialog, EventTicket],
   templateUrl: './admin-event-form.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -72,6 +75,11 @@ export default class AdminEventFormPage {
   protected readonly status = signal<PubStatus>('published');
   protected readonly publishAt = signal<string | null>(null);
   protected readonly statusError = signal('');
+  /** Bouton d'enregistrement : « Publier », « Mettre à jour », « Enregistrer le brouillon », « Programmer… » */
+  protected readonly action = computed(() => {
+    const r = this.row.value();
+    return saveAction(this.status(), this.publishAt(), !!r && effectiveStatus(r.status, r.publish_at) === 'published');
+  });
   protected readonly busy = signal(false);
   protected readonly errors = signal<Partial<Record<keyof EventForm, string>>>({});
   protected readonly saveError = signal('');
@@ -90,6 +98,25 @@ export default class AdminEventFormPage {
       return row;
     },
   });
+
+  protected readonly previewOpen = signal(false);
+
+  /** L'événement tel qu'il sera affiché, d'après la saisie en cours */
+  protected previewEvent(): DahiraEvent {
+    const f = this.form;
+    return {
+      id: 'apercu',
+      slug: this.original?.slug ?? 'apercu',
+      title: f.title.trim() || 'Nom de l’événement',
+      startsAt: toIso(f.date || new Date().toISOString().slice(0, 10), f.timeTbc ? null : f.time || null),
+      endsAt: !f.timeTbc && f.date && f.endTime ? toIso(f.date, f.endTime) : undefined,
+      timeTbc: f.timeTbc || !f.time || undefined,
+      place: f.place.trim() || 'Lieu',
+      description: f.description.trim() || undefined,
+      isMajor: f.isMajor || undefined,
+      images: this.images().length ? this.images() : undefined,
+    };
+  }
 
   /** Nombre d'inscrits (personnes) */
   protected readonly participants = resource({
@@ -148,11 +175,9 @@ export default class AdminEventFormPage {
     if (f.regEnabled && f.regLimit && !/^\d+$/.test(f.regLimit.trim())) errors.regLimit = 'Un nombre, sans lettres.';
     this.errors.set(errors);
     const when = this.publishAt();
-    this.statusError.set(
-      this.status() === 'scheduled' && (!when || new Date(when).getTime() <= Date.now())
-        ? 'Choisissez une date et une heure à venir.'
-        : '',
-    );
+    // Date déjà passée : publié tout de suite (comme l'indique le texte sous le choix)
+    if (this.status() === 'scheduled' && when && new Date(when).getTime() <= Date.now()) this.status.set('published');
+    this.statusError.set(this.status() === 'scheduled' && !when ? 'Choisissez le jour de mise en ligne.' : '');
     return !Object.keys(errors).length && !this.statusError();
   }
 
