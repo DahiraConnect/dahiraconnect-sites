@@ -5,7 +5,7 @@
 // Variables d'environnement (Cloudflare Pages > Settings > Variables) :
 //   SUPABASE_URL       https://<projet>.supabase.co
 //   SUPABASE_ANON_KEY  clé publique (lecture seule grâce aux règles RLS)
-//   DAHIRA_SLUG        facultatif, 'moutahabina' par défaut
+//   DAHIRA_SLUG        adresse du site (<adresse>.akkili.sn), 'moutahabina' par défaut
 // Sans ces variables, les fichiers JSON du dépôt sont utilisés tels quels.
 import { writeFileSync } from 'node:fs';
 
@@ -29,11 +29,14 @@ async function get(path) {
   return res.json();
 }
 
-const [dahira] = await get(`dahiras?slug=eq.${encodeURIComponent(slug)}&select=id,profile,content,board,quiz`);
-if (!dahira) throw new Error(`pull-content : dahira « ${slug} » introuvable dans Supabase`);
+// Base commune Saa-Dahira : tables du module site (sites, site_evenements, site_albums)
+const [dahira] = await get(
+  `sites?adresse=eq.${encodeURIComponent(slug)}&select=id:dahira_id,profile:profil,content:contenu,board:bureau,quiz`,
+);
+if (!dahira) throw new Error(`pull-content : site « ${slug} » introuvable dans Supabase`);
 
-const events = await get(`events?dahira_id=eq.${dahira.id}&select=id,slug,data&order=starts_at`);
-const albums = await get(`albums?dahira_id=eq.${dahira.id}&select=id,slug,data&order=date.desc`);
+const events = await get(`site_evenements?dahira_id=eq.${dahira.id}&select=id,slug,data&order=debut`);
+const albums = await get(`site_albums?dahira_id=eq.${dahira.id}&select=id,slug,data&order=date.desc`);
 
 const write = (name, value) =>
   writeFileSync(`src/assets/mock/${name}.json`, JSON.stringify(value, null, 2) + '\n');

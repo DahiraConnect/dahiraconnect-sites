@@ -1,4 +1,4 @@
-// Sauvegarde du stockage Supabase (bucket « media » : photos, sons, images de partage).
+// Sauvegarde du stockage Supabase (bucket « site » : photos, sons, images de partage).
 // Usage : SUPABASE_URL=… SUPABASE_SERVICE_ROLE_KEY=… node scripts/backup-storage.mjs <dossier>
 import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
@@ -6,7 +6,7 @@ import { dirname, join } from 'node:path';
 const url = process.env.SUPABASE_URL;
 const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const out = process.argv[2] ?? 'sauvegarde/media';
-const BUCKET = 'media';
+const BUCKET = process.env.BUCKET || 'site';
 
 if (!url || !key) {
   console.error('backup-storage : SUPABASE_URL et SUPABASE_SERVICE_ROLE_KEY sont nécessaires.');
