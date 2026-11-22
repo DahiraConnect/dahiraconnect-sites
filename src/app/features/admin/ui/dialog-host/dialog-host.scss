@@ -1,0 +1,89 @@
+@use 'styles/mixins' as m;
+
+.dh {
+  width: min(420px, calc(100vw - 24px));
+  padding: var(--space-6) var(--space-5) var(--space-5);
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-card);
+  color: var(--color-text-primary);
+  text-align: center;
+  box-shadow: var(--shadow-dock);
+
+  &[open] {
+    animation: dh-in 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &::backdrop {
+    background: rgb(6 39 17 / 0.55);
+  }
+}
+
+.dh__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--space-3);
+  border-radius: 50%;
+  background: var(--color-surface-muted);
+  color: var(--color-primary);
+  font-size: 28px;
+}
+
+.dh--danger .dh__icon {
+  background: #fbe3e1;
+  color: #b3261e;
+}
+
+.dh__title {
+  @include m.display(var(--fs-title), 1.2);
+}
+
+.dh__text {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+}
+
+.dh__field {
+  margin: var(--space-4) 0 0;
+  text-align: left;
+}
+
+.dh__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+}
+
+.dh__confirm {
+  background: var(--color-primary);
+  color: var(--color-text-on-dark);
+
+  &:hover {
+    background: var(--color-primary-mid);
+    color: var(--color-text-on-dark);
+  }
+}
+
+.dh--danger .dh__confirm {
+  background: #b3261e;
+
+  &:hover {
+    background: #8f1d17;
+  }
+}
+
+@keyframes dh-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dh[open] {
+    animation: none;
+  }
+}

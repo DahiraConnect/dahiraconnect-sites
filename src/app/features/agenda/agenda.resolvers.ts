@@ -22,7 +22,8 @@ export const eventSeoResolver: ResolveFn<SeoData> = (route) => {
         description: event.timeTbc
           ? `${fmtDate(event.startsAt)} · ${event.place}`
           : `${fmtDate(event.startsAt)} à ${fmtTime(event.startsAt)} · ${event.place}`,
-        image: event.images?.[0]?.url,
+        // Image de partage 1200 × 630 (JPEG) ; sinon celle du dahira, jamais l'affiche WebP en portrait
+        image: event.shareImageUrl,
         jsonLd: withTenant((dahira, site) => eventLd(event, dahira, site)),
       }
     : {};

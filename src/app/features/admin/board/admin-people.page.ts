@@ -1,4 +1,5 @@
 import { EmptyState } from '../ui/empty-state/empty-state';
+import { DialogService } from '../core/dialog.service';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -18,6 +19,7 @@ import { PhotoPicker } from '../ui/photo-picker/photo-picker';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class AdminPeoplePage {
+  private readonly dialogs = inject(DialogService);
   protected readonly store = inject(DahiraDocStore);
   protected readonly loading = signal(true);
   protected readonly busy = signal(false);
@@ -88,8 +90,14 @@ export default class AdminPeoplePage {
     const b = this.store.board();
     if (!b) return;
     const posts = this.posts().get(person.id) ?? [];
-    const warning = posts.length ? `\nCette personne sera aussi retirée de : ${posts.join(', ')}.` : '';
-    if (!confirm(`Retirer ${person.name} du bureau ?${warning}`)) return;
+    const confirmed = await this.dialogs.confirm({
+      title: `Retirer ${person.name} du bureau ?`,
+      message: posts.length ? `Cette personne sera aussi retirée de : ${posts.join(', ')}.` : undefined,
+      confirmLabel: 'Retirer',
+      tone: 'danger',
+      icon: 'ph-user-minus',
+    });
+    if (!confirmed) return;
     this.busy.set(true);
     const ok = await this.store.saveBoard(
       {

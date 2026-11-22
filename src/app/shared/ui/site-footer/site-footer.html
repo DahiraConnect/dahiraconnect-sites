@@ -48,7 +48,11 @@
 
     <div class="footer__bottom">
       <p>© {{ year }} {{ dahira().name }}</p>
-      <p class="footer__credit">Site créé avec DahiraConnect</p>
+      <p class="footer__credit">
+        <a routerLink="/mentions-legales">Mentions légales</a> ·
+        <a routerLink="/confidentialite">Vos données</a> ·
+        Site créé avec DahiraConnect
+      </p>
       <button type="button" class="footer__top-btn" (click)="toTop()">
         Haut de page
         <i class="ph ph-arrow-up" aria-hidden="true"></i>

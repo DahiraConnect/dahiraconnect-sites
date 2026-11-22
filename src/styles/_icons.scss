@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: 'Phosphor';
-  src: url('/assets/fonts/phosphor-regular.b287f9fe.woff2') format('woff2');
+  src: url('/assets/fonts/phosphor-regular.714abc60.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -312,6 +312,9 @@
 .ph.ph-video::before {
   content: "\e740";
 }
+.ph.ph-warning::before {
+  content: "\e4e0";
+}
 .ph.ph-whatsapp-logo::before {
   content: "\e5d0";
 }
@@ -333,7 +336,7 @@
 
 @font-face {
   font-family: 'Phosphor Fill';
-  src: url('/assets/fonts/phosphor-fill.27539104.woff2') format('woff2');
+  src: url('/assets/fonts/phosphor-fill.2dcdf405.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -645,6 +648,9 @@
 }
 .ph-fill.ph-video::before {
   content: "\e740";
+}
+.ph-fill.ph-warning::before {
+  content: "\e4e0";
 }
 .ph-fill.ph-whatsapp-logo::before {
   content: "\e5d0";

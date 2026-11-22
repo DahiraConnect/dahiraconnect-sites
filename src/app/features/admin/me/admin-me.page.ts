@@ -16,8 +16,32 @@ import { PublishService } from '../core/publish.service';
       <div class="adm-card me">
         <span class="adm-avatar me__avatar" aria-hidden="true">{{ initial() }}</span>
         <p class="me__email">{{ auth.email() }}</p>
-        <span class="adm-tag">{{ auth.current()?.role === 'owner' ? 'Propriétaire' : 'Éditeur' }}</span>
+        <span class="adm-tag">{{ auth.roleLabel() }}</span>
+        @if (auth.posts().length) {
+          <p class="me__posts">{{ auth.posts().join(' · ') }}</p>
+        }
       </div>
+
+      <section class="adm-section" aria-labelledby="me-board">
+        <h2 id="me-board">Ma place au bureau</h2>
+        @if (people().length) {
+          <div class="adm-field">
+            <label for="me-person">Je suis…</label>
+            <select id="me-person" [value]="auth.current()?.personId ?? ''" (change)="link($any($event.target).value)" [disabled]="linking()">
+              <option value="">— Je ne suis pas dans le bureau —</option>
+              @for (p of people(); track p.id) {
+                <option [value]="p.id">{{ p.name }}</option>
+              }
+            </select>
+            <p class="adm-hint">Vos postes (Président, Trésorier, commission…) apparaissent alors dans votre profil et pour l’équipe.</p>
+          </div>
+        } @else {
+          <p class="adm-hint">Le bureau n’a pas encore de membres. <a routerLink="/admin/bureau/personnes">Ajouter les personnes du bureau</a></p>
+        }
+      </section>
+
+      <section class="adm-section" aria-labelledby="me-name-title">
+        <h2 id="me-name-title">Mon prénom</h2>
 
       <form (ngSubmit)="save()" novalidate>
         <div class="adm-field">
@@ -31,12 +55,14 @@ import { PublishService } from '../core/publish.service';
           <i class="ph ph-check" aria-hidden="true"></i> Enregistrer
         </button>
       </form>
+      </section>
     </div>
   `,
   styles: `
     .me { display: grid; justify-items: center; gap: var(--space-2); margin-bottom: var(--space-6); text-align: center; }
     .me__avatar { width: 88px; height: 88px; font-size: 40px; background: var(--color-gold); color: var(--color-primary-deep); }
     .me__email { margin: 0; color: var(--color-text-secondary); overflow-wrap: anywhere; }
+    .me__posts { margin: 0; font-weight: 700; color: var(--color-gold-text); }
     .me__save { width: 100%; }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -48,6 +74,22 @@ export default class AdminMePage {
   protected readonly busy = signal(false);
   protected readonly error = signal('');
   protected readonly initial = computed(() => this.auth.displayName().charAt(0).toUpperCase());
+  protected readonly linking = signal(false);
+  protected readonly people = computed(() =>
+    [...(this.auth.current()?.board?.people ?? [])].sort((a, b) => a.name.localeCompare(b.name, 'fr')),
+  );
+
+  protected async link(personId: string): Promise<void> {
+    this.linking.set(true);
+    const ok = await this.auth.setMyPerson(personId || null);
+    this.linking.set(false);
+    const posts = this.auth.posts();
+    this.notices.show(
+      ok
+        ? { kind: 'ok', text: personId ? `C’est noté${posts.length ? ' : ' + posts.join(', ') : ''}.` : 'Lien retiré.' }
+        : { kind: 'warn', text: 'L’enregistrement a échoué. Réessayez.' },
+    );
+  }
 
   protected async save(): Promise<void> {
     const name = this.name.trim();

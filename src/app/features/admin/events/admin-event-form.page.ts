@@ -1,4 +1,5 @@
 import { EmptyState } from '../ui/empty-state/empty-state';
+import { DialogService } from '../core/dialog.service';
 import { ChangeDetectionStrategy, Component, computed, inject, input, resource, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -6,7 +7,7 @@ import { Album, DahiraEvent, Photo } from '../../../core/models';
 import { fmtMonthYear } from '../../../core/utils/dates';
 import { AdminAuth } from '../core/admin-auth.service';
 import { deleteDoc, getDoc, listDocs, saveDoc } from '../core/docs';
-import { removePhoto } from '../core/images';
+import { removePhoto, uploadShareCard } from '../core/images';
 import { PublishService } from '../core/publish.service';
 import { fromIso, slugify, toIso, uniqueSlug } from '../core/slug';
 import { PubStatus, effectiveStatus, saveAction } from '../core/status';
@@ -63,6 +64,7 @@ const EMPTY: EventForm = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class AdminEventFormPage {
+  private readonly dialogs = inject(DialogService);
   private readonly auth = inject(AdminAuth);
   private readonly router = inject(Router);
   private readonly publish = inject(PublishService);
@@ -229,6 +231,17 @@ export default class AdminEventFormPage {
             }
           : undefined,
       };
+      // Image de partage WhatsApp : refaite seulement si la première image a changé
+      const first = event.images?.[0]?.url;
+      if (!first) {
+        event.shareImageUrl = event.shareSourceUrl = undefined;
+      } else if (first !== this.original?.shareSourceUrl || !this.original?.shareImageUrl) {
+        const card = await uploadShareCard(first, dahira.slug, `evenement-${slug}`);
+        if (card) {
+          event.shareImageUrl = card;
+          event.shareSourceUrl = first;
+        }
+      }
       const clean = JSON.parse(JSON.stringify(event)) as DahiraEvent; // retire les champs vides
       await saveDoc('events', dahira.dahiraId, this.id() ?? null, clean, {
         starts_at: startsAt,
@@ -274,7 +287,15 @@ export default class AdminEventFormPage {
 
   protected async remove(): Promise<void> {
     const id = this.id();
-    if (!id || !confirm(`Supprimer « ${this.form.title} » ? Cette action est définitive.`)) return;
+    if (!id) return;
+    const confirmed = await this.dialogs.confirm({
+      title: `Supprimer « ${this.form.title} » ?`,
+      message: 'L’événement, son affiche et ses inscriptions seront supprimés. C’est définitif.',
+      confirmLabel: 'Supprimer',
+      tone: 'danger',
+      icon: 'ph-trash',
+    });
+    if (!confirmed) return;
     this.busy.set(true);
     try {
       await deleteDoc('events', id);

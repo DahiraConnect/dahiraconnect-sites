@@ -90,3 +90,14 @@ export const initials = (name: string) => {
   const parts = name.trim().split(/\s+/);
   return ((parts[0]?.[0] ?? '') + (parts.length > 1 ? parts[parts.length - 1][0] : '')).toUpperCase();
 };
+
+/** Postes d'une personne, lisibles : « Vice-président », « Responsable (Commission sociale) », « Commission sociale » */
+export function postsOf(board: Board | null | undefined, personId: string | null | undefined): string[] {
+  if (!board || !personId) return [];
+  return [
+    ...board.executive.filter((p) => p.personId === personId).map((p) => p.role ?? 'Bureau exécutif'),
+    ...board.commissions.flatMap((c) =>
+      c.members.filter((m) => m.personId === personId).map((m) => (m.role ? `${m.role} (${c.name})` : c.name)),
+    ),
+  ];
+}

@@ -1,4 +1,5 @@
 import { EmptyState } from '../ui/empty-state/empty-state';
+import { DialogService } from '../core/dialog.service';
 import { ChangeDetectionStrategy, Component, computed, effect, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -16,6 +17,7 @@ import { DahiraDocStore } from '../core/dahira-doc.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class AdminGroupPage {
+  private readonly dialogs = inject(DialogService);
   protected readonly store = inject(DahiraDocStore);
   private readonly router = inject(Router);
 
@@ -105,7 +107,14 @@ export default class AdminGroupPage {
   protected async removeCommission(): Promise<void> {
     const board = this.store.board();
     const c = this.commission();
-    if (!board || !c || !confirm(`Supprimer la commission « ${c.name} » ? Les personnes restent dans le bureau.`)) return;
+    if (!board || !c) return;
+    const confirmed = await this.dialogs.confirm({
+      title: `Supprimer la commission « ${c.name} » ?`,
+      message: 'Les personnes restent dans le bureau.',
+      confirmLabel: 'Supprimer',
+      tone: 'danger',
+    });
+    if (!confirmed) return;
     this.busy.set(true);
     const ok = await this.store.saveBoard(
       { ...board, commissions: board.commissions.filter((x) => x.id !== c.id) },

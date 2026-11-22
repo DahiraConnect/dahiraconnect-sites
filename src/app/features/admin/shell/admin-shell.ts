@@ -6,6 +6,7 @@ import { TenantService } from '../../../core/tenant/tenant.service';
 import { AdminAuth } from '../core/admin-auth.service';
 import { ADMIN_MODULES } from '../core/modules';
 import { PublishService } from '../core/publish.service';
+import { DialogHost } from '../ui/dialog-host/dialog-host';
 
 /**
  * Coquille du back-office : bouton Menu (grille des modules, comme Odoo), avatar (profil, site,
@@ -13,7 +14,7 @@ import { PublishService } from '../core/publish.service';
  */
 @Component({
   selector: 'app-admin-shell',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, DialogHost],
   templateUrl: './admin-shell.html',
   styleUrl: './admin-shell.scss',
   // Styles communs (formulaires, listes) partagés par toutes les pages admin

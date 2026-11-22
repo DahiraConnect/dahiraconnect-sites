@@ -1,7 +1,9 @@
+import { DialogService } from '../core/dialog.service';
 import { ChangeDetectionStrategy, Component, computed, inject, resource, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AdminAuth } from '../core/admin-auth.service';
+import { postsOf } from '../../../core/data/board';
 import { relativeTime } from '../core/labels';
 import { PublishService } from '../core/publish.service';
 import { supabase } from '../core/supabase';
@@ -11,6 +13,7 @@ interface Member {
   user_id: string;
   email: string;
   role: 'owner' | 'editor';
+  person_id: string | null;
   created_at: string;
   last_sign_in_at: string | null;
 }
@@ -23,6 +26,7 @@ interface Member {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class AdminTeamPage {
+  private readonly dialogs = inject(DialogService);
   protected readonly auth = inject(AdminAuth);
   private readonly notices = inject(PublishService);
 
@@ -33,6 +37,26 @@ export default class AdminTeamPage {
   protected email = '';
   protected role: 'editor' | 'owner' = 'editor';
   protected readonly when = relativeTime;
+  protected readonly people = computed(() =>
+    [...(this.auth.current()?.board?.people ?? [])].sort((a, b) => a.name.localeCompare(b.name, 'fr')),
+  );
+  protected readonly postsOf = (m: Member) => postsOf(this.auth.current()?.board, m.person_id);
+
+  /** Propriétaire : relier un responsable à une personne du bureau */
+  protected async linkPerson(m: Member, personId: string): Promise<void> {
+    const { error } = await supabase().rpc('set_team_person', {
+      d: this.auth.current()?.dahiraId,
+      member: m.user_id,
+      person: personId || null,
+    });
+    if (error) {
+      this.notices.show({ kind: 'warn', text: 'Le lien a échoué. Réessayez.' });
+      return;
+    }
+    this.members.reload();
+    if (m.user_id === this.myId()) await this.auth.refresh();
+    this.notices.show({ kind: 'ok', text: personId ? 'Poste au bureau relié.' : 'Lien retiré.' });
+  }
 
   protected readonly members = resource({
     params: () => this.auth.current()?.dahiraId,
@@ -68,11 +92,26 @@ export default class AdminTeamPage {
   }
 
   protected async setRole(m: Member, role: 'owner' | 'editor' | 'none'): Promise<void> {
-    const question =
+    const confirmed = await this.dialogs.confirm(
       role === 'none'
-        ? `Retirer ${m.email} de l’équipe ? Cette personne ne pourra plus modifier le site.`
-        : `Donner à ${m.email} le rôle « ${role === 'owner' ? 'Propriétaire' : 'Éditeur'} » ?`;
-    if (!confirm(question)) return;
+        ? {
+            title: `Retirer ${m.email} de l’équipe ?`,
+            message: 'Cette personne ne pourra plus modifier le site.',
+            confirmLabel: 'Retirer de l’équipe',
+            tone: 'danger',
+            icon: 'ph-user-minus',
+          }
+        : {
+            title: role === 'owner' ? 'Nommer propriétaire ?' : 'Nommer éditeur ?',
+            message:
+              role === 'owner'
+                ? `${m.email} pourra tout gérer : contenu, équipe et paramètres.`
+                : `${m.email} pourra gérer l’agenda, la galerie et le bureau, mais plus l’équipe ni les paramètres.`,
+            confirmLabel: role === 'owner' ? 'Nommer propriétaire' : 'Nommer éditeur',
+            icon: role === 'owner' ? 'ph-crown-simple' : 'ph-user',
+          },
+    );
+    if (!confirmed) return;
     this.busy.set(true);
     const { error } = await supabase().rpc('set_team_role', { d: this.auth.current()?.dahiraId, member: m.user_id, new_role: role });
     this.busy.set(false);

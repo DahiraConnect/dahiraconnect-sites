@@ -1,4 +1,5 @@
 import { EmptyState } from '../ui/empty-state/empty-state';
+import { DialogService } from '../core/dialog.service';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Commission } from '../../../core/models';
@@ -13,6 +14,7 @@ import { slugify, uniqueSlug } from '../core/slug';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class AdminBoardPage {
+  private readonly dialogs = inject(DialogService);
   protected readonly store = inject(DahiraDocStore);
   private readonly router = inject(Router);
   protected readonly loading = signal(true);
@@ -32,7 +34,14 @@ export default class AdminBoardPage {
 
   protected async addCommission(): Promise<void> {
     const b = this.board();
-    const name = prompt('Nom de la nouvelle commission (ex. : Commission sociale)')?.trim();
+    const name = (
+      await this.dialogs.ask({
+        title: 'Nouvelle commission',
+        confirmLabel: 'Créer',
+        icon: 'ph-users-three',
+        input: { label: 'Nom de la commission', placeholder: 'Ex. : Commission sociale' },
+      })
+    )?.trim();
     if (!b || !name) return;
     this.busy.set(true);
     const id = uniqueSlug(slugify(name), b.commissions.map((c) => c.id));

@@ -107,3 +107,49 @@ export async function uploadAudio(blob: Blob, slug: string, folder: string): Pro
   if (error) throw error;
   return bucket.getPublicUrl(path).data.publicUrl;
 }
+
+/**
+ * Image de partage WhatsApp / Facebook (1200 × 630, JPEG) à partir d'une affiche ou d'une photo :
+ * l'image entière au centre, sur un fond flou fait de la même image. Rien n'est coupé.
+ */
+export async function makeShareCard(src: string): Promise<Blob> {
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.src = src;
+  await img.decode();
+  const W = 1200;
+  const H = 630;
+  const canvas = document.createElement('canvas');
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d')!;
+  // Fond : l'image agrandie, floutée et assombrie
+  const cover = Math.max(W / img.naturalWidth, H / img.naturalHeight) * 1.1;
+  ctx.filter = 'blur(28px) brightness(0.55)';
+  ctx.drawImage(img, (W - img.naturalWidth * cover) / 2, (H - img.naturalHeight * cover) / 2, img.naturalWidth * cover, img.naturalHeight * cover);
+  ctx.filter = 'none';
+  // Premier plan : l'image entière
+  const fit = Math.min((W - 80) / img.naturalWidth, (H - 60) / img.naturalHeight);
+  const w = img.naturalWidth * fit;
+  const h = img.naturalHeight * fit;
+  ctx.shadowColor = 'rgba(0,0,0,0.45)';
+  ctx.shadowBlur = 30;
+  ctx.drawImage(img, (W - w) / 2, (H - h) / 2, w, h);
+  const blob = await new Promise<Blob | null>((res) => canvas.toBlob(res, 'image/jpeg', 0.85));
+  if (!blob) throw new Error('Image de partage impossible');
+  return blob;
+}
+
+/** Envoie l'image de partage et renvoie son adresse (null si l'image source est illisible) */
+export async function uploadShareCard(src: string, slug: string, name: string): Promise<string | null> {
+  try {
+    const blob = await makeShareCard(src);
+    const path = `${slug}/partage/${name}-${Date.now().toString(36)}.jpg`;
+    const bucket = supabase().storage.from('media');
+    const { error } = await bucket.upload(path, blob, { contentType: 'image/jpeg', cacheControl: '31536000' });
+    if (error) return null;
+    return bucket.getPublicUrl(path).data.publicUrl;
+  } catch {
+    return null;
+  }
+}

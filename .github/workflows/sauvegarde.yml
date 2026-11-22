@@ -1,0 +1,53 @@
+# Sauvegarde hebdomadaire (dimanche 2 h, heure de Dakar) : base de données + photos et sons.
+# Le fichier produit est CHIFFRÉ (mot de passe BACKUP_PASSPHRASE) : il contient des données personnelles.
+#
+# Secrets à créer (GitHub > Settings > Secrets and variables > Actions) :
+#   SUPABASE_DB_URL            chaîne de connexion Postgres (Supabase > Connect > Session pooler)
+#   SUPABASE_URL               https://<projet>.supabase.co
+#   SUPABASE_SERVICE_ROLE_KEY  clé secrète (lecture du stockage)
+#   BACKUP_PASSPHRASE          mot de passe de chiffrement, à garder aussi hors de GitHub
+#
+# Restaurer : gpg -d sauvegarde.tar.gz.gpg | tar xz   puis   psql "$SUPABASE_DB_URL" -f base.sql
+name: Sauvegarde
+
+on:
+  schedule:
+    - cron: '0 2 * * 0'
+  workflow_dispatch:
+
+jobs:
+  sauvegarder:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Base de données (structure + contenu)
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          mkdir -p sauvegarde
+          supabase db dump --db-url "$SUPABASE_DB_URL" -f sauvegarde/structure.sql
+          supabase db dump --db-url "$SUPABASE_DB_URL" --data-only -f sauvegarde/base.sql
+      - name: Photos et sons
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/backup-storage.mjs sauvegarde/media
+      - name: Chiffrement
+        env:
+          BACKUP_PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+        run: |
+          tar czf sauvegarde.tar.gz sauvegarde
+          gpg --batch --yes --pinentry-mode loopback --passphrase "$BACKUP_PASSPHRASE" \
+            --symmetric --cipher-algo AES256 -o sauvegarde.tar.gz.gpg sauvegarde.tar.gz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sauvegarde-${{ github.run_number }}
+          path: sauvegarde.tar.gz.gpg
+          retention-days: 90

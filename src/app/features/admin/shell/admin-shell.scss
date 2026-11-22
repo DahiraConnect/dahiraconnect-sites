@@ -146,6 +146,12 @@ html:has(app-admin-shell) {
   }
 }
 
+.adm-user__posts {
+  white-space: normal !important;
+  color: var(--color-gold-text) !important;
+  font-weight: 700;
+}
+
 .adm-user__item {
   @include m.flex-row(var(--space-3));
   @include m.focus-ring;

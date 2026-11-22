@@ -21,7 +21,10 @@
             <span>
               <strong>{{ auth.displayName() }}</strong>
               <small>{{ auth.email() }}</small>
-              <span class="adm-tag adm-tag--soft">{{ roleLabel() }}</span>
+              <span class="adm-tag adm-tag--soft">{{ auth.roleLabel() }}</span>
+              @if (auth.posts().length) {
+                <small class="adm-user__posts">{{ auth.posts().join(' · ') }}</small>
+              }
             </span>
           </div>
           <a class="adm-user__item" routerLink="/admin/profil"><i class="ph ph-user-circle" aria-hidden="true"></i> Mon profil</a>
@@ -68,3 +71,5 @@
     </p>
   }
 </div>
+
+<app-dialog-host />

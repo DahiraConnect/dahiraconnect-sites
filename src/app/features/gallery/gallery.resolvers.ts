@@ -21,7 +21,8 @@ export const albumSeoResolver: ResolveFn<SeoData> = (route) => {
         description: [album.kind === 'video' ? 'Vidéo' : `${albumPhotoCount(album)} photos`, fmtDate(album.date), album.place]
           .filter(Boolean)
           .join(' · '),
-        image: albumCover(album),
+        // Image de partage 1200 × 630 (JPEG) ; sinon celle du dahira
+        image: album.shareImageUrl,
       }
     : {};
 };

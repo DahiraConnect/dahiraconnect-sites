@@ -20,12 +20,26 @@
             <span class="adm-avatar" aria-hidden="true"><i class="ph ph-user" ></i></span>
             <span class="adm-item__text">
               <span class="adm-item__title">{{ m.email }} @if (m.user_id === myId()) { <small>(vous)</small> }</span>
+              @if (postsOf(m).length) {
+                <span class="adm-item__meta team-posts">{{ postsOf(m).join(' · ') }}</span>
+              }
               <span class="adm-item__meta">
                 {{ m.role === 'owner' ? 'Propriétaire' : 'Éditeur' }} ·
                 {{ m.last_sign_in_at ? 'connecté ' + when(m.last_sign_in_at) : 'jamais connecté' }}
               </span>
             </span>
           </div>
+          @if (isOwner() && people().length) {
+            <div class="adm-field team-link">
+              <label [for]="'link-' + m.user_id">Dans le bureau</label>
+              <select [id]="'link-' + m.user_id" [value]="m.person_id ?? ''" (change)="linkPerson(m, $any($event.target).value)">
+                <option value="">— Pas dans le bureau —</option>
+                @for (p of people(); track p.id) {
+                  <option [value]="p.id">{{ p.name }}</option>
+                }
+              </select>
+            </div>
+          }
           @if (isOwner()) {
             <div class="adm-card__actions">
               @if (m.role === 'editor') {

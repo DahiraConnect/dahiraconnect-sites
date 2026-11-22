@@ -173,13 +173,26 @@
   gap: var(--space-2) var(--space-6);
   padding-top: var(--space-6);
   border-top: 1px solid rgb(244 239 227 / 0.1);
-  font-size: 13px;
+  font-size: var(--fs-small);
   color: var(--color-text-on-dark-faint);
 }
 
 .footer__credit {
   @include m.desktop {
     margin-right: auto;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap-min);
+    color: var(--color-text-on-dark-soft);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: var(--color-text-on-dark);
+    }
   }
 }
 

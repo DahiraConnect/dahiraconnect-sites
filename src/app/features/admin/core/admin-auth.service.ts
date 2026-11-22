@@ -1,6 +1,7 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { Session } from '@supabase/supabase-js';
-import { Dahira } from '../../../core/models';
+import { postsOf } from '../../../core/data/board';
+import { Board, Dahira } from '../../../core/models';
 import { TenantService } from '../../../core/tenant/tenant.service';
 import { supabase, supabaseConfigured } from './supabase';
 
@@ -9,6 +10,9 @@ export interface Membership {
   slug: string;
   role: 'owner' | 'editor';
   profile: Dahira;
+  board: Board | null;
+  /** Personne du bureau reliée à ce compte */
+  personId: string | null;
 }
 
 /**
@@ -32,6 +36,21 @@ export class AdminAuth {
     const name = (this._session()?.user.user_metadata?.['name'] as string | undefined)?.trim();
     return name || this.email().split('@')[0];
   });
+  /** Rôle sur le site + postes au bureau : « Propriétaire · Vice-président » */
+  readonly roleLabel = computed(() => (this.current()?.role === 'owner' ? 'Propriétaire' : 'Éditeur'));
+  readonly posts = computed(() => postsOf(this.current()?.board, this.current()?.personId));
+
+  /** Relie ce compte à une personne du bureau (ou retire le lien) */
+  async setMyPerson(personId: string | null): Promise<boolean> {
+    const c = this.current();
+    const me = this._session()?.user.id;
+    if (!c || !me) return false;
+    const { error } = await supabase().rpc('set_team_person', { d: c.dahiraId, member: me, person: personId });
+    if (error) return false;
+    await this.loadMemberships();
+    return true;
+  }
+
   readonly hasName = computed(() => !!(this._session()?.user.user_metadata?.['name'] as string | undefined)?.trim());
   /** Dahira géré : celui du site courant s'il fait partie des droits, sinon le premier */
   readonly memberships = this._memberships.asReadonly();
@@ -100,6 +119,11 @@ export class AdminAuth {
     this._memberships.set([]);
   }
 
+  /** Recharge les droits et le bureau (après un changement d'équipe) */
+  refresh(): Promise<void> {
+    return this.loadMemberships();
+  }
+
   private async loadMemberships(): Promise<void> {
     if (!this._session()) {
       this._memberships.set([]);
@@ -107,14 +131,20 @@ export class AdminAuth {
     }
     const { data } = await supabase()
       .from('dahira_admins')
-      .select('role, dahira:dahiras(id, slug, profile)');
-    type Row = { role: Membership['role']; dahira: { id: string; slug: string; profile: Dahira } };
+      .select('role, person_id, dahira:dahiras(id, slug, profile, board)');
+    type Row = {
+      role: Membership['role'];
+      person_id: string | null;
+      dahira: { id: string; slug: string; profile: Dahira; board: Board | null };
+    };
     this._memberships.set(
       ((data ?? []) as unknown as Row[]).map((r) => ({
         dahiraId: r.dahira.id,
         slug: r.dahira.slug,
         role: r.role,
         profile: r.dahira.profile,
+        board: r.dahira.board,
+        personId: r.person_id,
       })),
     );
   }

@@ -1,0 +1,67 @@
+<app-dark-hero>
+  <div class="hero">
+    <h1 class="hero__title rise">{{ kind() === 'mentions' ? 'Mentions légales' : 'Vos données' }}</h1>
+    <p class="hero__lead rise" style="--i: 1">
+      {{ kind() === 'mentions' ? 'Qui publie ce site, et qui l’héberge.' : 'Ce que le site garde sur vous, et comment le faire retirer.' }}
+    </p>
+  </div>
+</app-dark-hero>
+
+<div class="sheet container legal">
+  @if (kind() === 'mentions') {
+    <section>
+      <h2>Qui publie ce site ?</h2>
+      <p>Le site <strong>{{ site() }}</strong> est publié par le <strong>{{ dahira().name }}</strong>, association religieuse.</p>
+      <p>Adresse : {{ dahira().contact.address }}<br />Téléphone : <a [href]="telUrl()">{{ dahira().contact.phone }}</a></p>
+      <p>Le bureau du dahira est responsable de ce qui est publié.</p>
+    </section>
+    <section>
+      <h2>Qui a fait le site ?</h2>
+      <p>Le site est réalisé avec <strong>DahiraConnect</strong>, une solution d’Akkili pour les dahiras.</p>
+    </section>
+    <section>
+      <h2>Où est-il hébergé ?</h2>
+      <ul>
+        <li><strong>Pages du site</strong> : Cloudflare, Inc. (cloudflare.com).</li>
+        <li><strong>Agenda, photos et inscriptions</strong> : Supabase, Inc. (supabase.com).</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Photos, textes et sons</h2>
+      <p>Les photos et les textes appartiennent au dahira ou aux personnes qui les ont partagés. Les sons du quiz sont libres de droits. Les logos Wave et Orange Money appartiennent à leurs sociétés.</p>
+      <p>Une photo vous concerne et vous voulez qu’elle soit retirée ? <a [href]="requestUrl()" target="_blank" rel="noopener">Écrivez-nous sur WhatsApp</a> : nous la retirons rapidement.</p>
+    </section>
+  } @else {
+    <section>
+      <h2>En visitant le site</h2>
+      <p><strong>Pas de cookie, pas de publicité, pas de suivi.</strong> Le site compte seulement, chaque jour, combien de fois chaque page est ouverte et combien de fois les boutons importants sont touchés (par exemple « Rejoindre »). Ces chiffres ne disent pas qui vous êtes : ni nom, ni numéro, ni adresse IP ne sont gardés.</p>
+      <p>Votre téléphone garde quelques réglages pour vous (meilleur score du quiz, son coupé ou non). Ils restent sur votre téléphone.</p>
+    </section>
+    <section>
+      <h2>Quand vous vous inscrivez à un événement</h2>
+      <p>Nous gardons votre <strong>prénom</strong>, votre <strong>nom</strong> et, si vous le donnez, votre <strong>téléphone</strong>. Ils servent seulement à organiser l’événement (places, transport, repas).</p>
+      <p>Seuls les responsables du dahira voient la liste. Elle est <strong>effacée automatiquement 6 mois après l’événement</strong>.</p>
+    </section>
+    <section>
+      <h2>Photos des événements</h2>
+      <p>Le dahira publie des photos de ses rendez-vous. Pour les enfants, nous demandons l’accord des parents. Une photo vous gêne ? Elle est retirée sur simple demande.</p>
+    </section>
+    <section>
+      <h2>Vos droits</h2>
+      <p>Vous pouvez demander à voir, corriger ou effacer ce qui vous concerne. Il suffit de nous écrire :</p>
+      <p><a class="btn btn--dark btn--sm" [href]="requestUrl()" target="_blank" rel="noopener"><i class="ph ph-whatsapp-logo" aria-hidden="true"></i> Faire une demande sur WhatsApp</a></p>
+      <p>Au Sénégal, vos données sont protégées par la loi n° 2008-12. En cas de désaccord, vous pouvez vous adresser à la Commission de protection des Données Personnelles (CDP).</p>
+    </section>
+    <section>
+      <h2>Pour les responsables du site</h2>
+      <p>Les responsables se connectent avec leur adresse e-mail. L’historique de leurs modifications est gardé 12 mois, les statistiques de visites 24 mois.</p>
+    </section>
+  }
+  <p class="legal__other">
+    @if (kind() === 'mentions') {
+      <a routerLink="/confidentialite">Vos données et la confidentialité →</a>
+    } @else {
+      <a routerLink="/mentions-legales">Mentions légales →</a>
+    }
+  </p>
+</div>

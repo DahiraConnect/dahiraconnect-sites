@@ -39,6 +39,18 @@ export const routes: Routes = [
         data: { seo: { description: 'Le bureau du dahira et ses commissions.' } },
       },
       {
+        path: 'mentions-legales',
+        loadComponent: () => import('./features/legal/legal.page'),
+        title: 'Mentions légales',
+        data: { kind: 'mentions', seo: { description: 'Qui publie le site du dahira, et qui l’héberge.' } },
+      },
+      {
+        path: 'confidentialite',
+        loadComponent: () => import('./features/legal/legal.page'),
+        title: 'Vos données',
+        data: { kind: 'confidentialite', seo: { description: 'Ce que le site garde sur vous, et comment le faire retirer.' } },
+      },
+      {
         path: 'le-dahira/charte',
         loadComponent: () => import('./features/about/charter/charter.page'),
         title: 'Notre charte',

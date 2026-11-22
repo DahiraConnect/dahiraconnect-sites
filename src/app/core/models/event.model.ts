@@ -32,6 +32,9 @@ export interface DahiraEvent {
   description?: string;
   /** Badge « Grand événement » */
   isMajor?: boolean;
+  /** Image d'aperçu WhatsApp 1200 × 630 (JPEG), fabriquée par l'admin depuis la première image */
+  shareImageUrl?: string;
+  shareSourceUrl?: string;
   /** Inscriptions des participants (facultatif) */
   registration?: EventRegistration;
   /** Lien vers l'album une fois passé */

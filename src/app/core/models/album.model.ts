@@ -11,6 +11,9 @@ export interface Album {
   coverUrl?: string;
   /** Vignette de la couverture (640 px) */
   coverThumbUrl?: string;
+  /** Image d'aperçu WhatsApp 1200 × 630 (JPEG), fabriquée par l'admin depuis la couverture */
+  shareImageUrl?: string;
+  shareSourceUrl?: string;
   /** Aplat de repli tant qu'il n'y a pas de photo */
   fallback?: 'green' | 'gold' | 'blue' | 'sage';
   /** Mis en avant en tête de galerie */

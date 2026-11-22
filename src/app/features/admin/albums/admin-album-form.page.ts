@@ -1,4 +1,5 @@
 import { EmptyState } from '../ui/empty-state/empty-state';
+import { DialogService } from '../core/dialog.service';
 import { ChangeDetectionStrategy, Component, computed, inject, input, resource, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -6,7 +7,7 @@ import { Album, Photo } from '../../../core/models';
 import { parseVideo } from '../../../core/utils/video';
 import { AdminAuth } from '../core/admin-auth.service';
 import { deleteDoc, getDoc, listDocs, saveDoc } from '../core/docs';
-import { removePhoto } from '../core/images';
+import { removePhoto, uploadShareCard } from '../core/images';
 import { PublishService } from '../core/publish.service';
 import { slugify, uniqueSlug } from '../core/slug';
 import { PubStatus, effectiveStatus, saveAction } from '../core/status';
@@ -33,6 +34,7 @@ interface AlbumForm {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class AdminAlbumFormPage {
+  private readonly dialogs = inject(DialogService);
   private readonly auth = inject(AdminAuth);
   private readonly router = inject(Router);
   private readonly publish = inject(PublishService);
@@ -172,6 +174,16 @@ export default class AdminAlbumFormPage {
         count: undefined,
         fallback: this.original?.fallback ?? 'green',
       };
+      // Image de partage WhatsApp : depuis la couverture, refaite seulement si elle a changé
+      if (!cover) {
+        album.shareImageUrl = album.shareSourceUrl = undefined;
+      } else if (cover.url !== this.original?.shareSourceUrl || !this.original?.shareImageUrl) {
+        const card = await uploadShareCard(cover.url, dahira.slug, `album-${slug}`);
+        if (card) {
+          album.shareImageUrl = card;
+          album.shareSourceUrl = cover.url;
+        }
+      }
       const clean = JSON.parse(JSON.stringify(album)) as Album;
       const savedId = await saveDoc('albums', dahira.dahiraId, this.id() ?? null, clean, {
         date: f.date,
@@ -202,7 +214,15 @@ export default class AdminAlbumFormPage {
 
   protected async remove(): Promise<void> {
     const id = this.id();
-    if (!id || !confirm(`Supprimer l’album « ${this.form.title} » et ses photos ? Cette action est définitive.`)) return;
+    if (!id) return;
+    const confirmed = await this.dialogs.confirm({
+      title: `Supprimer l’album « ${this.form.title} » ?`,
+      message: 'L’album et toutes ses photos seront supprimés. C’est définitif.',
+      confirmLabel: 'Supprimer',
+      tone: 'danger',
+      icon: 'ph-trash',
+    });
+    if (!confirmed) return;
     this.busy.set(true);
     try {
       await deleteDoc('albums', id);

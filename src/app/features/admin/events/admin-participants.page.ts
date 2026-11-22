@@ -1,4 +1,5 @@
 import { EmptyState } from '../ui/empty-state/empty-state';
+import { DialogService } from '../core/dialog.service';
 import { ChangeDetectionStrategy, Component, computed, inject, input, resource, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -34,6 +35,7 @@ const SOURCE: Record<Participant['source'], string> = { site: 'Site', admin: 'Aj
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class AdminParticipantsPage {
+  private readonly dialogs = inject(DialogService);
   private readonly auth = inject(AdminAuth);
   private readonly notices = inject(PublishService);
   readonly id = input.required<string>();
@@ -157,7 +159,14 @@ export default class AdminParticipantsPage {
   }
 
   protected async remove(p: Participant): Promise<void> {
-    if (!confirm(`Retirer ${p.first_name} ${p.last_name} de la liste ?`)) return;
+    const confirmed = await this.dialogs.confirm({
+      title: `Retirer ${p.first_name} ${p.last_name} ?`,
+      message: 'Cette personne ne sera plus dans la liste des participants.',
+      confirmLabel: 'Retirer',
+      tone: 'danger',
+      icon: 'ph-user-minus',
+    });
+    if (!confirmed) return;
     const { error } = await supabase().from('event_registrations').delete().eq('id', p.id);
     if (error) this.notices.show({ kind: 'warn', text: 'La suppression a échoué.' });
     else this.list.reload();
