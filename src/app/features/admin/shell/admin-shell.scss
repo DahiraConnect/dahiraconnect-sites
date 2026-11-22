@@ -1,0 +1,118 @@
+@use 'styles/mixins' as m;
+@use '../ui/admin-ui';
+
+app-admin-shell {
+  display: block;
+  min-height: 100dvh;
+  background: var(--color-surface);
+}
+
+.adm-bar {
+  @include m.flex-row(var(--space-2));
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  padding: var(--space-2) var(--space-3);
+  padding-top: calc(var(--space-2) + env(safe-area-inset-top));
+  background: var(--color-primary-deep);
+  color: var(--color-text-on-dark);
+
+  &__home {
+    @include m.flex-row(var(--space-2));
+    @include m.focus-ring;
+    flex: 1;
+    min-width: 0;
+    min-height: var(--tap-min);
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      color: inherit;
+    }
+
+    img {
+      flex: none;
+      border-radius: 50%;
+      background: var(--color-surface);
+    }
+
+    span {
+      display: grid;
+      min-width: 0;
+    }
+
+    strong {
+      @include m.truncate;
+    }
+
+    small {
+      color: var(--color-text-on-dark-soft);
+      font-size: var(--fs-small);
+    }
+  }
+
+  &__btn {
+    @include m.flex-row(6px);
+    @include m.focus-ring;
+    flex: none;
+    min-height: var(--tap-min);
+    padding: 0 var(--space-3);
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: rgb(255 255 255 / 0.1);
+    color: var(--color-text-on-dark);
+    font: 700 var(--fs-small) / 1 var(--font-body);
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      background: rgb(255 255 255 / 0.2);
+      color: var(--color-text-on-dark);
+    }
+
+    &:active {
+      transform: scale(0.97);
+    }
+
+    .ph {
+      font-size: 20px;
+    }
+  }
+}
+
+.adm-toast-zone {
+  position: fixed;
+  inset: auto var(--space-3) calc(96px + env(safe-area-inset-bottom));
+  z-index: 40;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.adm-toast {
+  @include m.flex-row(var(--space-2), flex-start);
+  max-width: 520px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: var(--color-text-on-dark);
+  box-shadow: var(--shadow-dock);
+  animation: adm-toast-in 0.25s ease-out;
+
+  &--warn {
+    background: var(--color-gold);
+    color: var(--color-primary-deep);
+  }
+
+  .ph {
+    flex: none;
+    font-size: 22px;
+  }
+}
+
+@keyframes adm-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}

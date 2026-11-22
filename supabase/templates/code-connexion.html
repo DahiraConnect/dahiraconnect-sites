@@ -1,0 +1,9 @@
+<!-- Modèle « Magic Link » (code + lien) : Supabase > Authentication > Emails > Magic Link (nécessite un SMTP personnel sur l'offre gratuite) -->
+<div style="font-family: Arial, sans-serif; max-width: 480px; margin: 0 auto; color: #0A3A1B">
+  <h2 style="margin: 0 0 12px">Votre code de connexion</h2>
+  <p style="font-size: 16px; line-height: 1.5">Assalamou aleykoum. Pour entrer dans l’espace responsables du site, saisissez ce code :</p>
+  <p style="font-size: 36px; font-weight: bold; letter-spacing: 8px; background: #F4EFE3; padding: 16px; text-align: center; border-radius: 12px">{{ .Token }}</p>
+  <p style="font-size: 16px; line-height: 1.5">Ou appuyez simplement sur ce bouton :</p>
+  <p style="text-align: center"><a href="{{ .ConfirmationURL }}" style="display: inline-block; padding: 14px 28px; background: #0A3A1B; color: #F4EFE3; border-radius: 999px; font-weight: bold; text-decoration: none">Entrer dans l’espace responsables</a></p>
+  <p style="font-size: 14px; color: #6A6152">Ce code est valable une heure. Si vous n’avez rien demandé, ignorez simplement cet e-mail.</p>
+</div>

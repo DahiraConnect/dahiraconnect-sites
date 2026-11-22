@@ -1,0 +1,40 @@
+<div class="adm-page">
+  <a class="adm-back" routerLink="/admin"><i class="ph ph-arrow-left" aria-hidden="true"></i> Accueil</a>
+  <h1 class="adm-title">Galerie</h1>
+
+  <a class="btn btn--dark adm-add" routerLink="nouveau">
+    <i class="ph ph-plus-circle" aria-hidden="true"></i> Ajouter un album
+  </a>
+
+  @if (rows.isLoading()) {
+    <p class="adm-lead" aria-live="polite">Chargement…</p>
+  } @else if (rows.error()) {
+    <p class="adm-error" role="alert">Impossible de charger la galerie. Vérifiez votre connexion.</p>
+  } @else if (!rows.value()?.length) {
+    <p class="adm-empty">Aucun album pour le moment. Ajoutez les photos de votre dernier événement.</p>
+  } @else {
+    <ul class="adm-list">
+      @for (r of rows.value(); track r.id) {
+        <li>
+          <a class="adm-item" [routerLink]="r.id">
+            @if (cover(r.data); as src) {
+              <img [src]="src" alt="" width="56" height="56" loading="lazy" />
+            } @else {
+              <span class="adm-item__thumb">
+                <i class="ph" [class.ph-video]="r.data.kind === 'video'" [class.ph-images]="r.data.kind !== 'video'" aria-hidden="true"></i>
+              </span>
+            }
+            <span class="adm-item__text">
+              <span class="adm-item__title">{{ r.data.title }}</span>
+              <span class="adm-item__meta">{{ meta(r.data) }}</span>
+            </span>
+            @if (r.data.featured) {
+              <span class="adm-tag">À la une</span>
+            }
+            <i class="ph ph-caret-right" aria-hidden="true"></i>
+          </a>
+        </li>
+      }
+    </ul>
+  }
+</div>

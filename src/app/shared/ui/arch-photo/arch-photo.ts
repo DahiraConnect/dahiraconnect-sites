@@ -24,6 +24,8 @@ export class ArchPhoto {
   /** Bouton lecture centré (vidéo) */
   readonly play = input<boolean>(false);
   readonly sizes = input<string>('(min-width: 1024px) 50vw, 90vw');
+  /** Image principale de la page (LCP) : chargée en priorité */
+  readonly priority = input(false);
 
   protected readonly darkBadge = computed(() => ['gold', 'sage'].includes(this.fallback()));
 }

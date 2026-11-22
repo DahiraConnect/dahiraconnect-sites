@@ -1,0 +1,68 @@
+<div class="adm-page">
+  <a class="adm-back" routerLink="/admin/bureau"><i class="ph ph-arrow-left" aria-hidden="true"></i> Bureau</a>
+  <h1 class="adm-title">Personnes</h1>
+  <p class="adm-lead">Ajoutez chaque personne une seule fois, même si elle a plusieurs postes. Photo uniquement avec son accord.</p>
+
+  @if (loading()) {
+    <p class="adm-lead" aria-live="polite">Chargement…</p>
+  } @else {
+    @if (editing() === 'new') {
+      <ng-container *ngTemplateOutlet="card; context: { $implicit: null }" />
+    } @else {
+      <button type="button" class="btn btn--dark adm-add" (click)="open()">
+        <i class="ph ph-user-plus" aria-hidden="true"></i> Ajouter une personne
+      </button>
+    }
+
+    @if (people().length) {
+      <ul class="adm-list">
+        @for (p of people(); track p.id) {
+          <li>
+            @if (editing() === p.id) {
+              <ng-container *ngTemplateOutlet="card; context: { $implicit: p }" />
+            } @else {
+              <button type="button" class="adm-item adm-item--button" (click)="open(p)">
+                <span class="adm-avatar" aria-hidden="true">
+                  @if (p.photoUrl) { <img [src]="p.photoUrl" alt="" width="56" height="56" loading="lazy" /> } @else { {{ initials(p.name) }} }
+                </span>
+                <span class="adm-item__text">
+                  <span class="adm-item__title">{{ p.name }}</span>
+                  <span class="adm-item__meta">{{ posts().get(p.id)?.join(' · ') || 'Aucun poste' }}</span>
+                </span>
+                <i class="ph ph-pencil-simple" aria-hidden="true"></i>
+              </button>
+            }
+          </li>
+        }
+      </ul>
+    } @else if (editing() !== 'new') {
+      <p class="adm-empty">Personne pour le moment.</p>
+    }
+  }
+</div>
+
+<ng-template #card let-p>
+  <form class="adm-card" (ngSubmit)="save()" novalidate>
+    <div class="adm-field">
+      <label for="person-name">Prénom et nom</label>
+      <input id="person-name" name="name" [(ngModel)]="name" autocomplete="off" autofocus
+        [attr.aria-invalid]="!!error()" aria-describedby="person-err" />
+    </div>
+    <div class="adm-field">
+      <span class="adm-label">Photo <small>(facultative)</small></span>
+      <app-photo-picker [(photos)]="photo" folder="bureau" [alt]="name" inputId="person-photo" label="Ajouter une photo" [max]="1" />
+    </div>
+    <p id="person-err" class="adm-error" role="alert">{{ error() }}</p>
+    <div class="adm-card__actions">
+      <button type="submit" class="btn btn--dark btn--sm" [disabled]="busy()">
+        <i class="ph ph-check" aria-hidden="true"></i> Enregistrer
+      </button>
+      <button type="button" class="btn btn--outline btn--sm" (click)="close()">Annuler</button>
+    </div>
+    @if (p) {
+      <button type="button" class="adm-danger" (click)="remove(p)" [disabled]="busy()">
+        <i class="ph ph-trash" aria-hidden="true"></i> Retirer cette personne
+      </button>
+    }
+  </form>
+</ng-template>

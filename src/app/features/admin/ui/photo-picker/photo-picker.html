@@ -1,0 +1,39 @@
+@if (photos().length) {
+  <ul class="pp__list">
+    @for (p of photos(); track p.url; let i = $index, first = $first, last = $last) {
+      <li class="pp__item">
+        <img [src]="p.thumbUrl ?? p.url" [alt]="p.alt" [width]="p.width" [height]="p.height" loading="lazy" />
+        <div class="pp__tools">
+          @if (max() > 1) {
+            <button type="button" class="pp__tool" [disabled]="first" (click)="move(i, -1)" [attr.aria-label]="'Avancer la photo ' + (i + 1)">
+              <i class="ph ph-arrow-left" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="pp__tool" [disabled]="last" (click)="move(i, 1)" [attr.aria-label]="'Reculer la photo ' + (i + 1)">
+              <i class="ph ph-arrow-right" aria-hidden="true"></i>
+            </button>
+          }
+          <button type="button" class="pp__tool pp__tool--remove" (click)="remove(i)" [attr.aria-label]="'Retirer la photo ' + (i + 1)">
+            <i class="ph ph-trash" aria-hidden="true"></i>
+          </button>
+        </div>
+        @if (first && max() > 1) {
+          <span class="pp__badge">Principale</span>
+        }
+      </li>
+    }
+  </ul>
+}
+
+@if (!full()) {
+  <label class="pp__add" [class.pp__add--busy]="pending()">
+    <input [id]="inputId()" type="file" accept="image/*" [multiple]="max() > 1" (change)="add($event)" [disabled]="pending() > 0" />
+    @if (pending()) {
+      <i class="ph ph-spinner pp__spin" aria-hidden="true"></i>
+      Envoi en cours ({{ pending() }})…
+    } @else {
+      <i class="ph ph-camera-plus" aria-hidden="true"></i>
+      {{ label() }}
+    }
+  </label>
+}
+<p class="adm-error" aria-live="polite">{{ error() }}</p>

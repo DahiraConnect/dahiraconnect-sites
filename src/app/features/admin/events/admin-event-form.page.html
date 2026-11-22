@@ -1,0 +1,106 @@
+<div class="adm-page">
+  <a class="adm-back" routerLink="/admin/agenda"><i class="ph ph-arrow-left" aria-hidden="true"></i> Agenda</a>
+  <h1 class="adm-title">{{ id() ? 'Modifier l’événement' : 'Nouvel événement' }}</h1>
+
+  @if (id() && row.isLoading()) {
+    <p class="adm-lead" aria-live="polite">Chargement…</p>
+  } @else if (id() && !row.value()) {
+    <p class="adm-empty">Cet événement n’existe plus. <a routerLink="/admin/agenda">Retour à l’agenda</a></p>
+  } @else {
+    <form id="event-form" (ngSubmit)="save()" (input)="revalidate()" (change)="revalidate()" novalidate>
+      <div class="adm-field">
+        <label for="ev-title">Nom de l’événement</label>
+        <input id="ev-title" name="title" [(ngModel)]="form.title" placeholder="Ex. : Ziar à Tivaouane"
+          [attr.aria-invalid]="!!errors().title" aria-describedby="ev-title-err" />
+        <p id="ev-title-err" class="adm-error">{{ errors().title }}</p>
+      </div>
+
+      <div class="adm-field">
+        <label for="ev-date">Date</label>
+        <input id="ev-date" name="date" type="date" [(ngModel)]="form.date"
+          [attr.aria-invalid]="!!errors().date" aria-describedby="ev-date-err" />
+        <p id="ev-date-err" class="adm-error">{{ errors().date }}</p>
+      </div>
+
+      <label class="adm-check">
+        <input type="checkbox" name="timeTbc" [(ngModel)]="form.timeTbc" />
+        <span>Heure pas encore connue <small>Le site affichera « Horaire à confirmer »</small></span>
+      </label>
+
+      @if (!form.timeTbc) {
+        <div class="adm-row">
+          <div class="adm-field">
+            <label for="ev-time">Début</label>
+            <input id="ev-time" name="time" type="time" [(ngModel)]="form.time"
+              [attr.aria-invalid]="!!errors().time" aria-describedby="ev-time-err" />
+          </div>
+          <div class="adm-field">
+            <label for="ev-end">Fin <small>(facultatif)</small></label>
+            <input id="ev-end" name="endTime" type="time" [(ngModel)]="form.endTime" />
+          </div>
+        </div>
+        <p id="ev-time-err" class="adm-error">{{ errors().time }}</p>
+      }
+
+      <div class="adm-field">
+        <label for="ev-place">Lieu</label>
+        <input id="ev-place" name="place" [(ngModel)]="form.place" placeholder="Ex. : Chez Yamar Diène, Tally Carreaux"
+          [attr.aria-invalid]="!!errors().place" aria-describedby="ev-place-err" />
+        <p id="ev-place-err" class="adm-error">{{ errors().place }}</p>
+      </div>
+
+      <div class="adm-field">
+        <label for="ev-map">Lien Google Maps <small>(facultatif)</small></label>
+        <input id="ev-map" name="mapUrl" type="url" inputmode="url" [(ngModel)]="form.mapUrl"
+          placeholder="https://maps.app.goo.gl/…" [attr.aria-invalid]="!!errors().mapUrl" aria-describedby="ev-map-hint" />
+        <p id="ev-map-hint" class="adm-hint">Dans Google Maps : « Partager » puis « Copier le lien ».</p>
+        <p class="adm-error">{{ errors().mapUrl }}</p>
+      </div>
+
+      <div class="adm-field">
+        <label for="ev-desc">Description <small>(facultatif)</small></label>
+        <textarea id="ev-desc" name="description" [(ngModel)]="form.description"
+          placeholder="Programme, tenue, contact…"></textarea>
+      </div>
+
+      <label class="adm-check">
+        <input type="checkbox" name="isMajor" [(ngModel)]="form.isMajor" />
+        <span>Grand événement <small>Badge doré dans l’agenda</small></span>
+      </label>
+
+      <div class="adm-field">
+        <span class="adm-label" id="ev-images-label">Affiche ou photos <small>(facultatif)</small></span>
+        <app-photo-picker [(photos)]="images" folder="evenements" [alt]="'Affiche : ' + form.title"
+          inputId="ev-images" label="Ajouter l’affiche" [max]="6" />
+        <p class="adm-hint">La première image sert d’aperçu quand on partage le lien sur WhatsApp.</p>
+      </div>
+
+      @if (albums.value()?.length) {
+        <div class="adm-field">
+          <label for="ev-album">Album photos de l’événement <small>(une fois passé)</small></label>
+          <select id="ev-album" name="albumSlug" [(ngModel)]="form.albumSlug">
+            <option value="">Aucun</option>
+            @for (a of albums.value(); track a.id) {
+              <option [value]="a.slug">{{ a.data.title }}</option>
+            }
+          </select>
+        </div>
+      }
+
+      @if (id()) {
+        <button type="button" class="adm-danger" (click)="remove()" [disabled]="busy()">
+          <i class="ph ph-trash" aria-hidden="true"></i> Supprimer l’événement
+        </button>
+      }
+    </form>
+
+    <div class="adm-actions">
+      <p class="adm-error" role="alert">{{ saveError() }}</p>
+      <button class="btn btn--dark" type="submit" form="event-form" [disabled]="busy()">
+        @if (busy()) { Enregistrement… } @else {
+          <i class="ph ph-check" aria-hidden="true"></i> Enregistrer
+        }
+      </button>
+    </div>
+  }
+</div>

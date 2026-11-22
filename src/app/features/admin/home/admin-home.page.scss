@@ -1,0 +1,53 @@
+@use 'styles/mixins' as m;
+
+.tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.tile {
+  @include m.focus-ring;
+  display: grid;
+  gap: var(--space-1);
+  align-content: start;
+  min-height: 160px;
+  height: 100%;
+  padding: var(--space-4);
+  border-radius: var(--radius-card);
+  background: var(--color-surface-card);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  box-shadow: 0 1px 0 var(--color-border);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+
+  &:hover {
+    color: var(--color-text-primary);
+    box-shadow: 0 0 0 2px var(--color-gold-line);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  .ph {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: var(--space-2);
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-gold);
+    font-size: 30px;
+  }
+
+  &__title {
+    @include m.display(var(--fs-title));
+  }
+
+  &__text {
+    font-size: var(--fs-small);
+    color: var(--color-text-secondary);
+  }
+}

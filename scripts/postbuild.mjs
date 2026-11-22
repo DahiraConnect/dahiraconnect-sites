@@ -45,10 +45,26 @@ await writeFile(
 await writeFile(join(out, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /admin\n\nSitemap: ${site}/sitemap.xml\n`);
 console.log(`postbuild : sitemap.xml (${urls.length} pages) et robots.txt`);
 
-// Les pages ont changé : on régénère le manifeste du service worker (empreintes des fichiers),
-// sinon le mode hors ligne refuserait les fichiers modifiés.
-execFileSync('node_modules/.bin/ngsw-config', [out, 'ngsw-config.json', '/'], { stdio: 'inherit' });
-console.log('postbuild : manifeste du service worker régénéré');
+// 4. Manifeste du service worker régénéré (les pages ont changé : nouvelles empreintes).
+//    Les morceaux propres au back-office (client Supabase…) ne sont pas préchargés chez
+//    chaque visiteur : ils passent dans un groupe « à la demande », placé en premier
+//    (un fichier appartient au premier groupe qui le cite).
+const swConfig = JSON.parse(await readFile('ngsw-config.json', 'utf8'));
+const adminChunks = [];
+for (const name of await readdir(out)) {
+  if (/^chunk-[A-Z0-9]+\.js$/.test(name) && /supabase|app-admin-/.test(await readFile(join(out, name), 'utf8')))
+    adminChunks.push(`/${name}`);
+}
+swConfig.assetGroups.unshift({
+  name: 'admin',
+  installMode: 'lazy',
+  updateMode: 'lazy',
+  resources: { files: adminChunks },
+});
+const swConfigPath = 'dist/ngsw-config.build.json'; // hors du dossier publié
+await writeFile(swConfigPath, JSON.stringify(swConfig));
+execFileSync('node_modules/.bin/ngsw-config', [out, swConfigPath, '/'], { stdio: 'inherit' });
+console.log(`postbuild : manifeste du service worker régénéré (${adminChunks.length} fichiers admin à la demande)`);
 
 const src = join(out, '404', 'index.html');
 try {

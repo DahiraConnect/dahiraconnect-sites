@@ -1,0 +1,150 @@
+<div class="adm-page">
+  <a class="adm-back" routerLink="/admin"><i class="ph ph-arrow-left" aria-hidden="true"></i> Accueil</a>
+  <h1 class="adm-title">Infos du dahira</h1>
+
+  @if (loading()) {
+    <p class="adm-lead" aria-live="polite">Chargement…</p>
+  } @else if (!store.profile()) {
+    <p class="adm-error" role="alert">Impossible de charger les informations. Vérifiez votre connexion.</p>
+  } @else {
+    <form id="profile-form" (ngSubmit)="save()" (input)="revalidate()" (change)="revalidate()" novalidate>
+      <section class="adm-section" aria-labelledby="s-join">
+        <h2 id="s-join">Bouton « Rejoindre »</h2>
+        <fieldset class="adm-choices">
+          <legend class="adm-label">Quand quelqu’un appuie sur « Rejoindre sur WhatsApp »</legend>
+          <label class="adm-check">
+            <input type="radio" name="joinMode" value="chat" [(ngModel)]="form.joinMode" />
+            <span>Il écrit à un responsable</span>
+          </label>
+          <label class="adm-check">
+            <input type="radio" name="joinMode" value="group" [(ngModel)]="form.joinMode" />
+            <span>Il entre dans le groupe</span>
+          </label>
+        </fieldset>
+
+        @if (form.joinMode === 'chat') {
+          <div class="adm-field">
+            <label for="p-wa">Numéro WhatsApp du responsable</label>
+            <input id="p-wa" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" [(ngModel)]="form.whatsapp"
+              placeholder="77 123 45 67" [attr.aria-invalid]="!!errors().whatsapp" aria-describedby="p-wa-err" />
+            <p id="p-wa-err" class="adm-error">{{ errors().whatsapp }}</p>
+          </div>
+          <div class="adm-field">
+            <label for="p-msg">Message déjà écrit</label>
+            <textarea id="p-msg" name="message" rows="3" [(ngModel)]="form.message" aria-describedby="p-msg-hint"></textarea>
+            <p id="p-msg-hint" class="adm-hint">La personne n’a plus qu’à appuyer sur « Envoyer ».</p>
+          </div>
+        } @else {
+          <div class="adm-field">
+            <label for="p-group">Lien d’invitation du groupe</label>
+            <input id="p-group" name="groupUrl" type="url" inputmode="url" [(ngModel)]="form.groupUrl"
+              placeholder="https://chat.whatsapp.com/…" [attr.aria-invalid]="!!errors().groupUrl" aria-describedby="p-group-hint p-group-err" />
+            <p id="p-group-hint" class="adm-hint">Dans WhatsApp : infos du groupe, puis « Inviter via un lien ».</p>
+            <p id="p-group-err" class="adm-error">{{ errors().groupUrl }}</p>
+          </div>
+        }
+
+        <div class="adm-field">
+          <label for="p-call">Numéro à appeler <small>(facultatif)</small></label>
+          <input id="p-call" name="callNumber" type="tel" inputmode="tel" [(ngModel)]="form.callNumber"
+            placeholder="77 123 45 67" [attr.aria-invalid]="!!errors().callNumber" aria-describedby="p-call-err" />
+          <p id="p-call-err" class="adm-error">{{ errors().callNumber }}</p>
+        </div>
+      </section>
+
+      <section class="adm-section" aria-labelledby="s-support">
+        <h2 id="s-support">Soutenir le dahira</h2>
+        <div class="adm-row">
+          <div class="adm-field">
+            <label for="p-wave">Numéro Wave</label>
+            <input id="p-wave" name="wave" type="tel" inputmode="tel" [(ngModel)]="form.wave" placeholder="77 123 45 67" />
+          </div>
+          <div class="adm-field">
+            <label for="p-om">Numéro Orange Money</label>
+            <input id="p-om" name="orangeMoney" type="tel" inputmode="tel" [(ngModel)]="form.orangeMoney" placeholder="77 123 45 67" />
+          </div>
+        </div>
+        <p class="adm-hint">Même numéro pour les deux ? Le site les affiche sur une seule ligne. Laissez vide pour ne pas l’afficher.</p>
+        <div class="adm-field">
+          <label for="p-stext">Phrase d’appel</label>
+          <input id="p-stext" name="supportText" [(ngModel)]="form.supportText" />
+        </div>
+        <div class="adm-field">
+          <label for="p-bless">Bénédiction <small>(facultatif)</small></label>
+          <input id="p-bless" name="blessing" [(ngModel)]="form.blessing" />
+        </div>
+      </section>
+
+      <section class="adm-section" aria-labelledby="s-contact">
+        <h2 id="s-contact">Contact (bas de page)</h2>
+        <div class="adm-field">
+          <label for="p-addr">Adresse</label>
+          <input id="p-addr" name="address" [(ngModel)]="form.address" autocomplete="street-address" />
+        </div>
+        <div class="adm-field">
+          <label for="p-phone">Téléphone affiché</label>
+          <input id="p-phone" name="phone" type="tel" inputmode="tel" [(ngModel)]="form.phone"
+            [attr.aria-invalid]="!!errors().phone" aria-describedby="p-phone-err" />
+          <p id="p-phone-err" class="adm-error">{{ errors().phone }}</p>
+        </div>
+      </section>
+
+      <section class="adm-section" aria-labelledby="s-social">
+        <h2 id="s-social">Réseaux sociaux</h2>
+        <ul class="adm-list">
+          @for (s of social(); track $index; let i = $index) {
+            <li class="adm-card">
+              <div class="adm-field">
+                <label [for]="'so-' + i + '-p'">Réseau</label>
+                <select [id]="'so-' + i + '-p'" [name]="'platform' + i" [(ngModel)]="s.platform">
+                  @for (p of platforms; track p.id) {
+                    <option [value]="p.id">{{ p.label }}</option>
+                  }
+                </select>
+              </div>
+              <div class="adm-field">
+                <label [for]="'so-' + i + '-u'">Lien de la page</label>
+                <input [id]="'so-' + i + '-u'" [name]="'url' + i" type="url" inputmode="url" [(ngModel)]="s.url" placeholder="https://…" />
+              </div>
+              <div class="adm-field">
+                <label [for]="'so-' + i + '-h'">Nom du compte <small>(facultatif)</small></label>
+                <input [id]="'so-' + i + '-h'" [name]="'handle' + i" [(ngModel)]="s.handle" placeholder="@dahira…" />
+              </div>
+              <button type="button" class="btn btn--outline btn--sm" (click)="removeSocial(i)">
+                <i class="ph ph-x" aria-hidden="true"></i> Retirer
+              </button>
+            </li>
+          }
+        </ul>
+        <button type="button" class="btn btn--outline adm-add adm-add--after" (click)="addSocial()">
+          <i class="ph ph-plus-circle" aria-hidden="true"></i> Ajouter un réseau
+        </button>
+      </section>
+
+      <section class="adm-section" aria-labelledby="s-presentation">
+        <h2 id="s-presentation">Présentation</h2>
+        <div class="adm-field">
+          <label for="p-motto">Devise</label>
+          <input id="p-motto" name="motto" [(ngModel)]="form.motto"
+            [attr.aria-invalid]="!!errors().motto" aria-describedby="p-motto-err" />
+          <p id="p-motto-err" class="adm-error">{{ errors().motto }}</p>
+        </div>
+        <div class="adm-field">
+          <label for="p-members">Nombre de membres environ</label>
+          <input id="p-members" name="membersApprox" inputmode="numeric" [(ngModel)]="form.membersApprox"
+            [attr.aria-invalid]="!!errors().membersApprox" aria-describedby="p-members-err" />
+          <p id="p-members-err" class="adm-error">{{ errors().membersApprox }}</p>
+        </div>
+      </section>
+    </form>
+
+    <div class="adm-actions">
+      <p class="adm-error" role="alert">{{ saveError() }}</p>
+      <button class="btn btn--dark" type="submit" form="profile-form" [disabled]="busy()">
+        @if (busy()) { Enregistrement… } @else {
+          <i class="ph ph-check" aria-hidden="true"></i> Enregistrer
+        }
+      </button>
+    </div>
+  }
+</div>

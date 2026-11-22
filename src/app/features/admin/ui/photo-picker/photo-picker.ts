@@ -1,0 +1,68 @@
+import { ChangeDetectionStrategy, Component, computed, inject, input, model, signal } from '@angular/core';
+import { Photo } from '../../../../core/models';
+import { AdminAuth } from '../../core/admin-auth.service';
+import { uploadPhoto } from '../../core/images';
+
+/**
+ * Choix de photos depuis le téléphone (galerie ou appareil photo).
+ * Les images sont réduites avant l'envoi : rapide même en 3G.
+ */
+@Component({
+  selector: 'app-photo-picker',
+  templateUrl: './photo-picker.html',
+  styleUrl: './photo-picker.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class PhotoPicker {
+  private readonly auth = inject(AdminAuth);
+
+  readonly photos = model<Photo[]>([]);
+  /** Sous-dossier du stockage : 'evenements', 'albums/<slug>', 'bureau'… */
+  readonly folder = input.required<string>();
+  /** Texte alternatif par défaut des nouvelles photos */
+  readonly alt = input('');
+  readonly max = input(50);
+  readonly label = input('Ajouter une photo');
+  /** Libellé du champ pour les lecteurs d'écran */
+  readonly inputId = input.required<string>();
+
+  protected readonly pending = signal(0);
+  protected readonly error = signal('');
+  protected readonly full = computed(() => this.photos().length >= this.max());
+
+  protected async add(event: Event): Promise<void> {
+    const inputEl = event.target as HTMLInputElement;
+    const slug = this.auth.current()?.slug;
+    const files = Array.from(inputEl.files ?? []).slice(0, this.max() - this.photos().length);
+    inputEl.value = '';
+    if (!slug || !files.length) return;
+    this.error.set('');
+    this.pending.update((n) => n + files.length);
+    let failed = 0;
+    // Une par une : moins de mémoire sur les petits téléphones
+    for (const file of files) {
+      try {
+        const photo = await uploadPhoto(file, slug, this.folder(), this.alt());
+        this.photos.update((list) => [...list, photo]);
+      } catch {
+        failed++;
+      } finally {
+        this.pending.update((n) => n - 1);
+      }
+    }
+    if (failed) this.error.set(failed === 1 ? 'Une photo n’a pas pu être envoyée.' : `${failed} photos n’ont pas pu être envoyées.`);
+  }
+
+  protected remove(index: number): void {
+    this.photos.update((list) => list.filter((_, i) => i !== index));
+  }
+
+  protected move(index: number, delta: number): void {
+    this.photos.update((list) => {
+      const next = [...list];
+      const [item] = next.splice(index, 1);
+      next.splice(index + delta, 0, item);
+      return next;
+    });
+  }
+}

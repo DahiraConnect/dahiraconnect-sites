@@ -1,0 +1,23 @@
+<div class="adm-page">
+  <h1 class="adm-title">Que voulez-vous faire ?</h1>
+
+  @if (auth.current(); as m) {
+    <p class="adm-lead">Vous gérez le site de <strong>{{ m.profile.name }}</strong>.</p>
+    <ul class="tiles">
+      @for (t of tiles; track t.path) {
+        <li>
+          <a class="tile" [routerLink]="t.path">
+            <i class="ph {{ t.icon }}" aria-hidden="true"></i>
+            <span class="tile__title">{{ t.title }}</span>
+            <span class="tile__text">{{ t.text }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+  } @else {
+    <p class="adm-empty">
+      Votre adresse ({{ auth.email() }}) n’est rattachée à aucun dahira pour le moment.
+      Demandez au responsable du site de vous ajouter.
+    </p>
+  }
+</div>

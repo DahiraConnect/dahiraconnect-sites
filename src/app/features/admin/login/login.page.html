@@ -1,0 +1,50 @@
+<div class="adm-page login">
+  <h1 class="adm-title">Espace responsables</h1>
+
+  @if (!configured) {
+    <p class="adm-empty">
+      Le back-office n’est pas encore relié à sa base de données.
+      Renseignez l’adresse et la clé Supabase dans <code>src/environments/supabase.ts</code>.
+    </p>
+  } @else if (step() === 'email') {
+    <p class="adm-lead">Pour modifier le site du dahira. Nous vous envoyons un e-mail de connexion : pas de mot de passe à retenir.</p>
+    <form (ngSubmit)="send()" novalidate>
+      <div class="adm-field">
+        <label for="email">Votre adresse e-mail</label>
+        <input id="email" name="email" type="email" inputmode="email" autocomplete="email"
+          [(ngModel)]="email" [attr.aria-invalid]="!!error()" aria-describedby="login-error" required />
+      </div>
+      <p id="login-error" class="adm-error" aria-live="polite">{{ error() }}</p>
+      <button class="btn btn--dark login__submit" type="submit" [disabled]="busy()">
+        @if (busy()) { Envoi… } @else {
+          <i class="ph ph-envelope-simple" aria-hidden="true"></i> Recevoir l’e-mail
+        }
+      </button>
+    </form>
+  } @else {
+    <p class="adm-lead">
+      E-mail envoyé à <strong>{{ email }}</strong>. Il peut mettre une minute à arriver
+      (pensez à regarder dans « Spam »).
+    </p>
+    <ol class="login__steps">
+      <li>Ouvrez l’e-mail sur <strong>ce téléphone</strong>.</li>
+      <li>Appuyez sur le lien : vous êtes connecté.</li>
+      <li>L’e-mail contient un code ? Saisissez-le ci-dessous.</li>
+    </ol>
+    <form (ngSubmit)="verify()" novalidate>
+      <div class="adm-field">
+        <label for="code">Code à 6 chiffres <small>(s’il y en a un)</small></label>
+        <input #codeInput id="code" name="code" class="login__code" type="text" inputmode="numeric"
+          autocomplete="one-time-code" maxlength="6" [(ngModel)]="code"
+          [attr.aria-invalid]="!!error()" aria-describedby="login-error" required />
+      </div>
+      <p id="login-error" class="adm-error" aria-live="polite">{{ error() }}</p>
+      <button class="btn btn--dark login__submit" type="submit" [disabled]="busy()">
+        @if (busy()) { Vérification… } @else {
+          <i class="ph ph-sign-in" aria-hidden="true"></i> Entrer
+        }
+      </button>
+      <button class="btn btn--outline login__submit" type="button" (click)="restart()">Changer d’adresse ou renvoyer</button>
+    </form>
+  }
+</div>

@@ -1,0 +1,32 @@
+<header class="adm-bar">
+  <a class="adm-bar__home" routerLink="/admin">
+    <img [src]="logo()" alt="" width="40" height="40" />
+    <span>
+      <strong>{{ name() }}</strong>
+      <small>Espace responsables</small>
+    </span>
+  </a>
+  <a class="adm-bar__btn" href="/" target="_blank" rel="noopener">
+    <i class="ph ph-arrow-square-out" aria-hidden="true"></i>
+    Voir le site
+  </a>
+  @if (auth.session()) {
+    <button type="button" class="adm-bar__btn" (click)="signOut()">
+      <i class="ph ph-sign-out" aria-hidden="true"></i>
+      Sortir
+    </button>
+  }
+</header>
+
+<main id="contenu">
+  <router-outlet />
+</main>
+
+<div class="adm-toast-zone" aria-live="polite">
+  @if (notice(); as n) {
+    <p class="adm-toast" [class.adm-toast--warn]="n.kind === 'warn'">
+      <i class="ph" [class.ph-check-circle]="n.kind === 'ok'" [class.ph-warning]="n.kind === 'warn'" aria-hidden="true"></i>
+      {{ n.text }}
+    </p>
+  }
+</div>

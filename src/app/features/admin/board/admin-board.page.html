@@ -1,0 +1,60 @@
+<div class="adm-page">
+  <a class="adm-back" routerLink="/admin"><i class="ph ph-arrow-left" aria-hidden="true"></i> Accueil</a>
+  <h1 class="adm-title">Bureau</h1>
+  <p class="adm-lead">Commencez par ajouter les personnes, puis attribuez-leur un poste. Une personne peut avoir plusieurs postes.</p>
+
+  @if (loading()) {
+    <p class="adm-lead" aria-live="polite">Chargement…</p>
+  } @else if (store.error() || !board()) {
+    <p class="adm-error" role="alert">Impossible de charger le bureau. Vérifiez votre connexion.</p>
+  } @else {
+    @let b = board()!;
+    <ul class="adm-list">
+      <li>
+        <a class="adm-item" routerLink="personnes">
+          <span class="adm-item__thumb"><i class="ph ph-users" aria-hidden="true"></i></span>
+          <span class="adm-item__text">
+            <span class="adm-item__title">Personnes</span>
+            <span class="adm-item__meta">{{ b.people.length }} personne{{ b.people.length > 1 ? 's' : '' }} · noms et photos</span>
+          </span>
+          <i class="ph ph-caret-right" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li>
+        <a class="adm-item" routerLink="executif">
+          <span class="adm-item__thumb"><i class="ph ph-crown-simple" aria-hidden="true"></i></span>
+          <span class="adm-item__text">
+            <span class="adm-item__title">Bureau exécutif</span>
+            <span class="adm-item__meta">{{ execNames() || 'Aucun poste' }}</span>
+          </span>
+          <i class="ph ph-caret-right" aria-hidden="true"></i>
+        </a>
+      </li>
+    </ul>
+
+    <section class="adm-section" aria-labelledby="commissions-title">
+      <h2 id="commissions-title">Commissions</h2>
+      @if (b.commissions.length) {
+        <ul class="adm-list">
+          @for (c of b.commissions; track c.id) {
+            <li>
+              <a class="adm-item" [routerLink]="['commission', c.id]">
+                <span class="adm-item__thumb"><i class="ph ph-users-three" aria-hidden="true"></i></span>
+                <span class="adm-item__text">
+                  <span class="adm-item__title">{{ c.name }}</span>
+                  <span class="adm-item__meta">{{ c.members.length }} membre{{ c.members.length > 1 ? 's' : '' }}</span>
+                </span>
+                <i class="ph ph-caret-right" aria-hidden="true"></i>
+              </a>
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="adm-empty">Aucune commission pour le moment.</p>
+      }
+      <button type="button" class="btn btn--outline adm-add adm-add--after" (click)="addCommission()" [disabled]="busy()">
+        <i class="ph ph-plus-circle" aria-hidden="true"></i> Ajouter une commission
+      </button>
+    </section>
+  }
+</div>

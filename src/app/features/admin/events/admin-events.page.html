@@ -1,0 +1,57 @@
+<div class="adm-page">
+  <a class="adm-back" routerLink="/admin"><i class="ph ph-arrow-left" aria-hidden="true"></i> Accueil</a>
+  <h1 class="adm-title">Agenda</h1>
+
+  <a class="btn btn--dark adm-add" routerLink="nouveau">
+    <i class="ph ph-plus-circle" aria-hidden="true"></i> Ajouter un événement
+  </a>
+
+  @if (rows.isLoading()) {
+    <p class="adm-lead" aria-live="polite">Chargement…</p>
+  } @else if (rows.error()) {
+    <p class="adm-error" role="alert">Impossible de charger l’agenda. Vérifiez votre connexion.</p>
+  } @else {
+    <section class="adm-section" aria-labelledby="ev-upcoming">
+      <h2 id="ev-upcoming">À venir</h2>
+      @if (upcoming().length) {
+        <ul class="adm-list">
+          @for (r of upcoming(); track r.id) {
+            <li>
+              <ng-container *ngTemplateOutlet="item; context: { $implicit: r }" />
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="adm-empty">Aucun événement à venir. Ajoutez le prochain rendez-vous.</p>
+      }
+    </section>
+
+    @if (past().length) {
+      <section class="adm-section" aria-labelledby="ev-past">
+        <h2 id="ev-past">Passés</h2>
+        <ul class="adm-list">
+          @for (r of past(); track r.id) {
+            <li>
+              <ng-container *ngTemplateOutlet="item; context: { $implicit: r }" />
+            </li>
+          }
+        </ul>
+      </section>
+    }
+  }
+</div>
+
+<ng-template #item let-r>
+  <a class="adm-item" [routerLink]="r.id">
+    @if (r.data.images?.[0]; as img) {
+      <img [src]="img.thumbUrl ?? img.url" alt="" width="56" height="56" loading="lazy" />
+    } @else {
+      <span class="adm-item__thumb"><i class="ph ph-calendar-blank" aria-hidden="true"></i></span>
+    }
+    <span class="adm-item__text">
+      <span class="adm-item__title">{{ r.data.title }}</span>
+      <span class="adm-item__meta">{{ when(r.data) }}</span>
+    </span>
+    <i class="ph ph-caret-right" aria-hidden="true"></i>
+  </a>
+</ng-template>

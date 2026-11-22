@@ -1,5 +1,5 @@
 @if (src(); as src) {
-  <img [ngSrc]="src" [alt]="alt()" fill [sizes]="sizes()" />
+  <img [ngSrc]="src" [alt]="alt()" fill [sizes]="sizes()" [priority]="priority()" />
 }
 @if (play()) {
   <span class="arch__play" aria-hidden="true"><i class="ph-fill ph-play"></i></span>

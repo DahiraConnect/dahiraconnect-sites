@@ -11,6 +11,7 @@ Angular 20 (standalone, signals, OnPush) + SSR. Brief complet : [Claude.md](Clau
 | `npm run build` | Génère le site statique (toutes les pages pré-rendues) dans `dist/dahiraconnect/browser` |
 | `npm run preview` | Sert le build comme Cloudflare Pages (Wrangler) |
 | `npm run deploy` | Build puis déploiement direct sur Cloudflare Pages (Wrangler) |
+| `npm run seed` | Génère `supabase/seed.sql` à partir des JSON de démo |
 | `npm run icons` | Régénère le sous-ensemble d'icônes Phosphor (nécessite `pip install fonttools brotli`) |
 
 ## Déploiement (Cloudflare)
@@ -36,11 +37,18 @@ Plus tard, plusieurs dahiras par sous-domaine : repasser en rendu serveur
 (`outputMode: "server"` dans `angular.json`, `RenderMode.Server` dans `app.routes.server.ts`),
 sur Cloudflare Workers. `src/server.ts` est conservé pour cela.
 
+## Back-office (`/admin`)
+
+Les responsables modifient l'agenda, la galerie, le bureau et les infos pratiques depuis leur téléphone
+(connexion par code reçu par e-mail). Le contenu est stocké dans **Supabase** ; chaque enregistrement
+relance le build Cloudflare, qui lit Supabase avant de générer les pages (`scripts/pull-content.mjs`).
+Mise en place pas à pas : [supabase/LISEZMOI.md](supabase/LISEZMOI.md).
+
 ## Repères
 
 - **Dahira courant** : déduit du sous-domaine (`core/tenant/tenant.config.ts`), chargé avant le premier rendu.
-- **Données de démo** : `src/assets/mock/*.json`, embarquées dans le bundle (`core/data/tenant-bundle.ts`).
-  Les services (`EventService`, `AlbumService`…) exposent des signaux ; ce sont eux qu'on rebranchera sur Supabase.
+- **Données** : `src/assets/mock/*.json`, embarquées dans le bundle (`core/data/tenant-bundle.ts`).
+  Avec Supabase configuré, ces fichiers sont réécrits au build depuis la base (`scripts/pull-content.mjs`).
 - **Couleurs par dahira** : champ `theme` du tenant → surcharge des tokens CSS (`core/tenant/theme.initializer.ts`).
 - **Images d'exemple** : `src/assets/tenants/moutahabina/exemples/` (albums, affiches, portraits de la lignée).
   Pour les remplacer : déposer les vraies photos (WebP conseillé) et mettre à jour les chemins dans `src/assets/mock/*.json`,

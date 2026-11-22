@@ -1,0 +1,85 @@
+<div class="adm-page">
+  <a class="adm-back" routerLink="/admin/galerie"><i class="ph ph-arrow-left" aria-hidden="true"></i> Galerie</a>
+  <h1 class="adm-title">{{ id() ? 'Modifier l’album' : 'Nouvel album' }}</h1>
+
+  @if (id() && row.isLoading()) {
+    <p class="adm-lead" aria-live="polite">Chargement…</p>
+  } @else if (id() && !row.value()) {
+    <p class="adm-empty">Cet album n’existe plus. <a routerLink="/admin/galerie">Retour à la galerie</a></p>
+  } @else {
+    <form id="album-form" (ngSubmit)="save()" (input)="revalidate()" (change)="revalidate()" novalidate>
+      <fieldset class="adm-choices">
+        <legend class="adm-label">Type d’album</legend>
+        <label class="adm-check">
+          <input type="radio" name="kind" value="photos" [(ngModel)]="form.kind" />
+          <span><i class="ph ph-images" aria-hidden="true"></i> Photos</span>
+        </label>
+        <label class="adm-check">
+          <input type="radio" name="kind" value="video" [(ngModel)]="form.kind" />
+          <span><i class="ph ph-video" aria-hidden="true"></i> Vidéo (lien)</span>
+        </label>
+      </fieldset>
+
+      <div class="adm-field">
+        <label for="al-title">Titre</label>
+        <input id="al-title" name="title" [(ngModel)]="form.title" placeholder="Ex. : Gamou Tivaouane 2026"
+          [attr.aria-invalid]="!!errors().title" aria-describedby="al-title-err" />
+        <p id="al-title-err" class="adm-error">{{ errors().title }}</p>
+      </div>
+
+      <div class="adm-row">
+        <div class="adm-field">
+          <label for="al-date">Date</label>
+          <input id="al-date" name="date" type="date" [(ngModel)]="form.date"
+            [attr.aria-invalid]="!!errors().date" aria-describedby="al-date-err" />
+          <p id="al-date-err" class="adm-error">{{ errors().date }}</p>
+        </div>
+        <div class="adm-field">
+          <label for="al-place">Lieu <small>(facultatif)</small></label>
+          <input id="al-place" name="place" [(ngModel)]="form.place" />
+        </div>
+      </div>
+
+      @if (form.kind === 'video') {
+        <div class="adm-field">
+          <label for="al-video">Lien de la vidéo</label>
+          <input id="al-video" name="videoUrl" type="url" inputmode="url" [(ngModel)]="form.videoUrl"
+            (ngModelChange)="onVideoInput($event)" placeholder="https://vm.tiktok.com/…"
+            [attr.aria-invalid]="!!errors().videoUrl" aria-describedby="al-video-hint al-video-err" />
+          <p id="al-video-hint" class="adm-hint">
+            Dans TikTok ou YouTube : « Partager » puis « Copier le lien ».
+            @if (videoLabel() && videoLabel() !== 'la vidéo') { Lien {{ videoLabel() }} reconnu ✓ }
+          </p>
+          <p id="al-video-err" class="adm-error">{{ errors().videoUrl }}</p>
+        </div>
+      } @else {
+        <div class="adm-field">
+          <span class="adm-label">Photos</span>
+          <app-photo-picker [(photos)]="photos" [folder]="folder()" [alt]="form.title"
+            inputId="al-photos" label="Ajouter des photos" [max]="120" />
+          <p class="adm-hint">Vous pouvez en choisir plusieurs à la fois. La première sert de couverture.</p>
+        </div>
+      }
+
+      <label class="adm-check">
+        <input type="checkbox" name="featured" [(ngModel)]="form.featured" />
+        <span>À la une <small>Affiché en grand en tête de la galerie</small></span>
+      </label>
+
+      @if (id()) {
+        <button type="button" class="adm-danger" (click)="remove()" [disabled]="busy()">
+          <i class="ph ph-trash" aria-hidden="true"></i> Supprimer l’album
+        </button>
+      }
+    </form>
+
+    <div class="adm-actions">
+      <p class="adm-error" role="alert">{{ saveError() }}</p>
+      <button class="btn btn--dark" type="submit" form="album-form" [disabled]="busy()">
+        @if (busy()) { Enregistrement… } @else {
+          <i class="ph ph-check" aria-hidden="true"></i> Enregistrer
+        }
+      </button>
+    </div>
+  }
+</div>

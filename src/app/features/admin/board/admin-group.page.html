@@ -1,0 +1,87 @@
+<div class="adm-page">
+  <a class="adm-back" routerLink="/admin/bureau"><i class="ph ph-arrow-left" aria-hidden="true"></i> Bureau</a>
+  <h1 class="adm-title">{{ isExecutive() ? 'Bureau exécutif' : (commission()?.name ?? 'Commission') }}</h1>
+
+  @if (loading()) {
+    <p class="adm-lead" aria-live="polite">Chargement…</p>
+  } @else if (!isExecutive() && !commission()) {
+    <p class="adm-empty">Cette commission n’existe plus. <a routerLink="/admin/bureau">Retour au bureau</a></p>
+  } @else {
+    <form id="group-form" (ngSubmit)="save()" novalidate>
+      @if (isExecutive()) {
+        <p class="adm-lead">Dans l’ordre d’affichage sur le site : page « Le dahira » et page du bureau.</p>
+      } @else {
+        <div class="adm-field">
+          <label for="c-name">Nom de la commission</label>
+          <input id="c-name" name="name" [(ngModel)]="name" />
+        </div>
+        <div class="adm-field">
+          <label for="c-desc">Rôle de la commission <small>(facultatif)</small></label>
+          <textarea id="c-desc" name="description" [(ngModel)]="description" rows="3"></textarea>
+        </div>
+      }
+
+      @if (!people().length) {
+        <p class="adm-empty">Ajoutez d’abord des personnes. <a routerLink="/admin/bureau/personnes">Aller aux personnes</a></p>
+      } @else {
+        <ol class="adm-list">
+          @for (r of rows(); track $index; let i = $index, first = $first, last = $last) {
+            <li class="adm-card">
+              <div class="adm-field">
+                <label [for]="'row-' + i + '-person'">Personne</label>
+                <select [id]="'row-' + i + '-person'" [name]="'person' + i" [(ngModel)]="r.personId">
+                  <option value="">— Choisir —</option>
+                  @for (p of people(); track p.id) {
+                    <option [value]="p.id">{{ p.name }}</option>
+                  }
+                </select>
+              </div>
+              <div class="adm-field">
+                <label [for]="'row-' + i + '-role'">
+                  Poste @if (!isExecutive()) { <small>(facultatif)</small> }
+                </label>
+                <input [id]="'row-' + i + '-role'" [name]="'role' + i" [(ngModel)]="r.role"
+                  [placeholder]="isExecutive() ? 'Ex. : Président' : 'Ex. : Responsable, Adjoint…'" />
+              </div>
+              @if (!isExecutive()) {
+                <label class="adm-check">
+                  <input type="checkbox" [name]="'lead' + i" [(ngModel)]="r.lead" />
+                  <span>Responsable <small>Affiché en premier</small></span>
+                </label>
+              }
+              <div class="adm-card__actions">
+                <button type="button" class="btn btn--outline btn--sm" [disabled]="first" (click)="move(i, -1)">
+                  <i class="ph ph-arrow-up" aria-hidden="true"></i> Monter
+                </button>
+                <button type="button" class="btn btn--outline btn--sm" [disabled]="last" (click)="move(i, 1)">
+                  <i class="ph ph-arrow-down" aria-hidden="true"></i> Descendre
+                </button>
+                <button type="button" class="btn btn--outline btn--sm" (click)="removeRow(i)">
+                  <i class="ph ph-x" aria-hidden="true"></i> Retirer
+                </button>
+              </div>
+            </li>
+          }
+        </ol>
+        <button type="button" class="btn btn--outline adm-add adm-add--after" (click)="add()">
+          <i class="ph ph-plus-circle" aria-hidden="true"></i> {{ isExecutive() ? 'Ajouter un poste' : 'Ajouter un membre' }}
+        </button>
+      }
+
+      @if (!isExecutive()) {
+        <button type="button" class="adm-danger" (click)="removeCommission()" [disabled]="busy()">
+          <i class="ph ph-trash" aria-hidden="true"></i> Supprimer la commission
+        </button>
+      }
+    </form>
+
+    <div class="adm-actions">
+      <p class="adm-error" role="alert">{{ error() }}</p>
+      <button class="btn btn--dark" type="submit" form="group-form" [disabled]="busy()">
+        @if (busy()) { Enregistrement… } @else {
+          <i class="ph ph-check" aria-hidden="true"></i> Enregistrer
+        }
+      </button>
+    </div>
+  }
+</div>
