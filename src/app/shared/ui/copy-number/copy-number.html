@@ -9,7 +9,7 @@
   <span class="copy__label">{{ label() }}</span>
   <span class="copy__number">{{ number() }}</span>
 </div>
-<button type="button" class="copy__btn" (click)="copy()">
+<button type="button" class="copy__btn" data-track="copie_numero_soutien" (click)="copy()">
   @if (copied()) {
     Copié <i class="ph ph-check" aria-hidden="true"></i>
   } @else {

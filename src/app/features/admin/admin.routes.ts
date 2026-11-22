@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { adminGuard, guestGuard } from './core/admin.guard';
+import { ownerGuard } from './core/owner.guard';
 
 /** Back-office de contenu (rendu dans le navigateur uniquement, chargé à la demande). */
 const ADMIN_ROUTES: Routes = [
@@ -17,7 +18,7 @@ const ADMIN_ROUTES: Routes = [
         path: '',
         canActivateChild: [adminGuard],
         children: [
-          { path: '', loadComponent: () => import('./home/admin-home.page'), title: 'Espace responsables' },
+          { path: '', loadComponent: () => import('./home/admin-home.page'), title: 'Tableau de bord' },
           { path: 'agenda', loadComponent: () => import('./events/admin-events.page'), title: 'Agenda · Admin' },
           { path: 'agenda/nouveau', loadComponent: () => import('./events/admin-event-form.page'), title: 'Nouvel événement' },
           { path: 'agenda/:id', loadComponent: () => import('./events/admin-event-form.page'), title: 'Modifier un événement' },
@@ -28,7 +29,10 @@ const ADMIN_ROUTES: Routes = [
           { path: 'bureau/personnes', loadComponent: () => import('./board/admin-people.page'), title: 'Personnes du bureau' },
           { path: 'bureau/executif', loadComponent: () => import('./board/admin-group.page'), title: 'Bureau exécutif' },
           { path: 'bureau/commission/:id', loadComponent: () => import('./board/admin-group.page'), title: 'Commission' },
-          { path: 'infos', loadComponent: () => import('./profile/admin-profile.page'), title: 'Infos du dahira' },
+          { path: 'parametres', canActivate: [ownerGuard], loadComponent: () => import('./profile/admin-profile.page'), title: 'Paramètres' },
+          { path: 'infos', redirectTo: 'parametres' },
+          { path: 'equipe', loadComponent: () => import('./team/admin-team.page'), title: 'Équipe' },
+          { path: 'activite', loadComponent: () => import('./activity/admin-activity.page'), title: 'Journal d’activité' },
           { path: '**', redirectTo: '' },
         ],
       },

@@ -1,0 +1,69 @@
+@use 'styles/mixins' as m;
+
+.sf {
+  margin: 0 0 var(--space-5);
+  padding: 0;
+  border: 0;
+
+  > legend {
+    margin-bottom: 6px;
+    padding: 0;
+  }
+}
+
+.sf__options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.sf__option {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  min-height: 76px;
+  padding: var(--space-3) var(--space-1);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-card);
+  color: var(--color-text-secondary);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color var(--transition-base), background-color var(--transition-base);
+
+  &:hover {
+    border-color: var(--color-text-muted);
+  }
+
+  &:has(input:focus-visible) {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  &.is-on {
+    border-color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-text-on-dark);
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .ph {
+    font-size: 26px;
+  }
+}
+
+.sf__label {
+  font-weight: 700;
+  font-size: var(--fs-small);
+}
+
+.sf__when {
+  margin-top: var(--space-3);
+}

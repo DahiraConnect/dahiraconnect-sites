@@ -1,4 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core';
+import { fmtDate, fmtTime } from '../../../core/utils/dates';
+import { PubStatus } from './status';
 import { AdminAuth } from './admin-auth.service';
 import { supabase } from './supabase';
 
@@ -13,7 +15,7 @@ export class PublishService {
   readonly notice = signal<{ kind: 'ok' | 'warn'; text: string } | null>(null);
   private timer?: ReturnType<typeof setTimeout>;
 
-  async afterSave(what: string): Promise<void> {
+  async afterSave(what: string, status: PubStatus = 'published', publishAt: string | null = null): Promise<void> {
     const dahiraId = this.auth.current()?.dahiraId;
     let result: 'ok' | 'not-configured' | 'error' = 'error';
     try {
@@ -24,12 +26,20 @@ export class PublishService {
     } catch {
       result = 'error';
     }
+    const visible =
+      status === 'draft'
+        ? 'Brouillon : invisible sur le site.'
+        : status === 'scheduled' && publishAt
+          ? `Programmé : visible le ${fmtDate(publishAt)} à ${fmtTime(publishAt)}.`
+          : 'Visible sur le site dans 2 à 3 minutes.';
     const texts = {
-      ok: `${what}. Visible sur le site dans 2 à 3 minutes.`,
+      ok: `${what}. ${visible}`,
       'not-configured': `${what}. La mise en ligne automatique n'est pas encore configurée.`,
       error: `${what}. La mise en ligne n'a pas répondu : elle se fera au prochain enregistrement.`,
     };
-    this.show({ kind: result === 'ok' ? 'ok' : 'warn', text: texts[result] });
+    // Brouillon ou programmé : le statut compte plus que la republication immédiate
+    const quiet = status !== 'published';
+    this.show({ kind: result === 'ok' || quiet ? 'ok' : 'warn', text: quiet ? `${what}. ${visible}` : texts[result] });
   }
 
   show(notice: { kind: 'ok' | 'warn'; text: string }): void {

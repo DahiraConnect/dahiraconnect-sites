@@ -50,7 +50,7 @@
               · {{ t()['best'] }} : {{ best() }}/{{ d.questions.length }}
             }
           </p>
-          <button type="button" class="btn btn--dark intro__start" (click)="start()">
+          <button type="button" class="btn btn--dark intro__start" data-track="quiz_commence" (click)="start()">
             <i class="ph-fill ph-play" aria-hidden="true"></i>
             {{ t()['start'] }}
           </button>

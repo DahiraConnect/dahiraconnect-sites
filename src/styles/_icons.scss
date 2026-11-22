@@ -69,8 +69,23 @@
 .ph.ph-check-circle::before {
   content: "\e184";
 }
+.ph.ph-clock::before {
+  content: "\e19a";
+}
+.ph.ph-clock-counter-clockwise::before {
+  content: "\e1a0";
+}
+.ph.ph-copy::before {
+  content: "\e1ca";
+}
 .ph.ph-crown-simple::before {
   content: "\e616";
+}
+.ph.ph-cursor-click::before {
+  content: "\e7c8";
+}
+.ph.ph-dot::before {
+  content: "\ecde";
 }
 .ph.ph-drop::before {
   content: "\e210";
@@ -81,14 +96,26 @@
 .ph.ph-envelope-simple::before {
   content: "\e218";
 }
+.ph.ph-exam::before {
+  content: "\e742";
+}
 .ph.ph-export::before {
   content: "\eaf0";
+}
+.ph.ph-eye::before {
+  content: "\e220";
 }
 .ph.ph-facebook-logo::before {
   content: "\e226";
 }
+.ph.ph-file::before {
+  content: "\e230";
+}
 .ph.ph-gear-six::before {
   content: "\e272";
+}
+.ph.ph-hand-heart::before {
+  content: "\e810";
 }
 .ph.ph-hand-tap::before {
   content: "\ec90";
@@ -98,6 +125,9 @@
 }
 .ph.ph-house::before {
   content: "\e2c2";
+}
+.ph.ph-identification-card::before {
+  content: "\e2c8";
 }
 .ph.ph-images::before {
   content: "\e836";
@@ -114,8 +144,14 @@
 .ph.ph-mosque::before {
   content: "\ecee";
 }
+.ph.ph-palette::before {
+  content: "\e6c8";
+}
 .ph.ph-pencil-simple::before {
   content: "\e3b4";
+}
+.ph.ph-pencil-simple-line::before {
+  content: "\ebc6";
 }
 .ph.ph-phone::before {
   content: "\e3b8";
@@ -125,6 +161,9 @@
 }
 .ph.ph-play::before {
   content: "\e3d0";
+}
+.ph.ph-play-circle::before {
+  content: "\e3d2";
 }
 .ph.ph-plus-circle::before {
   content: "\e3d6";
@@ -167,6 +206,18 @@
 }
 .ph.ph-trophy::before {
   content: "\e67e";
+}
+.ph.ph-user::before {
+  content: "\e4c2";
+}
+.ph.ph-user-circle::before {
+  content: "\e4c4";
+}
+.ph.ph-user-gear::before {
+  content: "\e4cc";
+}
+.ph.ph-user-minus::before {
+  content: "\e4ce";
 }
 .ph.ph-user-plus::before {
   content: "\e4d0";
@@ -268,8 +319,23 @@
 .ph-fill.ph-check-circle::before {
   content: "\e184";
 }
+.ph-fill.ph-clock::before {
+  content: "\e19a";
+}
+.ph-fill.ph-clock-counter-clockwise::before {
+  content: "\e1a0";
+}
+.ph-fill.ph-copy::before {
+  content: "\e1ca";
+}
 .ph-fill.ph-crown-simple::before {
   content: "\e616";
+}
+.ph-fill.ph-cursor-click::before {
+  content: "\e7c8";
+}
+.ph-fill.ph-dot::before {
+  content: "\ecde";
 }
 .ph-fill.ph-drop::before {
   content: "\e210";
@@ -280,14 +346,26 @@
 .ph-fill.ph-envelope-simple::before {
   content: "\e218";
 }
+.ph-fill.ph-exam::before {
+  content: "\e742";
+}
 .ph-fill.ph-export::before {
   content: "\eaf0";
+}
+.ph-fill.ph-eye::before {
+  content: "\e220";
 }
 .ph-fill.ph-facebook-logo::before {
   content: "\e226";
 }
+.ph-fill.ph-file::before {
+  content: "\e230";
+}
 .ph-fill.ph-gear-six::before {
   content: "\e272";
+}
+.ph-fill.ph-hand-heart::before {
+  content: "\e810";
 }
 .ph-fill.ph-hand-tap::before {
   content: "\ec90";
@@ -297,6 +375,9 @@
 }
 .ph-fill.ph-house::before {
   content: "\e2c2";
+}
+.ph-fill.ph-identification-card::before {
+  content: "\e2c8";
 }
 .ph-fill.ph-images::before {
   content: "\e836";
@@ -313,8 +394,14 @@
 .ph-fill.ph-mosque::before {
   content: "\ecee";
 }
+.ph-fill.ph-palette::before {
+  content: "\e6c8";
+}
 .ph-fill.ph-pencil-simple::before {
   content: "\e3b4";
+}
+.ph-fill.ph-pencil-simple-line::before {
+  content: "\ebc6";
 }
 .ph-fill.ph-phone::before {
   content: "\e3b8";
@@ -324,6 +411,9 @@
 }
 .ph-fill.ph-play::before {
   content: "\e3d0";
+}
+.ph-fill.ph-play-circle::before {
+  content: "\e3d2";
 }
 .ph-fill.ph-plus-circle::before {
   content: "\e3d6";
@@ -369,6 +459,18 @@
 }
 .ph-fill.ph-trophy::before {
   content: "\e67e";
+}
+.ph-fill.ph-user::before {
+  content: "\e4c2";
+}
+.ph-fill.ph-user-circle::before {
+  content: "\e4c4";
+}
+.ph-fill.ph-user-gear::before {
+  content: "\e4cc";
+}
+.ph-fill.ph-user-minus::before {
+  content: "\e4ce";
 }
 .ph-fill.ph-user-plus::before {
   content: "\e4d0";

@@ -1,6 +1,7 @@
 <div class="adm-page">
-  <a class="adm-back" routerLink="/admin"><i class="ph ph-arrow-left" aria-hidden="true"></i> Accueil</a>
-  <h1 class="adm-title">Infos du dahira</h1>
+  <a class="adm-back" routerLink="/admin"><i class="ph ph-arrow-left" aria-hidden="true"></i> Tableau de bord</a>
+  <h1 class="adm-title">Paramètres</h1>
+  <p class="adm-lead">Touchez une rubrique pour l’ouvrir. Un seul bouton « Enregistrer » pour tout.</p>
 
   @if (loading()) {
     <p class="adm-lead" aria-live="polite">Chargement…</p>
@@ -8,8 +9,123 @@
     <p class="adm-error" role="alert">Impossible de charger les informations. Vérifiez votre connexion.</p>
   } @else {
     <form id="profile-form" (ngSubmit)="save()" (input)="revalidate()" (change)="revalidate()" novalidate>
-      <section class="adm-section" aria-labelledby="s-join">
-        <h2 id="s-join">Bouton « Rejoindre »</h2>
+      <details class="adm-fold" open>
+        <summary><i class="ph ph-identification-card" aria-hidden="true"></i><span>Identité et logo<small>Nom, devise, logo</small></span></summary>
+        <div class="adm-field">
+          <label for="p-name">Nom complet</label>
+          <input id="p-name" name="name" [(ngModel)]="form.name" [attr.aria-invalid]="!!errors().name" aria-describedby="p-name-err" />
+          <p id="p-name-err" class="adm-error">{{ errors().name }}</p>
+        </div>
+        <div class="adm-field">
+          <span class="adm-with-tip">
+            <label for="p-short">Nom court</label>
+            <app-help-tip>Affiché en capitales dans la barre du haut, à côté du logo (ex. : MOUTAHABINA).</app-help-tip>
+          </span>
+          <input id="p-short" name="shortName" [(ngModel)]="form.shortName" [attr.aria-invalid]="!!errors().shortName" aria-describedby="p-short-err" />
+          <p id="p-short-err" class="adm-error">{{ errors().shortName }}</p>
+        </div>
+        <div class="adm-row">
+          <div class="adm-field">
+            <label for="p-ar">Nom en arabe <small>(facultatif)</small></label>
+            <input id="p-ar" name="nameArabic" lang="ar" dir="rtl" [(ngModel)]="form.nameArabic" />
+          </div>
+          <div class="adm-field">
+            <label for="p-mean">Sens du nom <small>(facultatif)</small></label>
+            <input id="p-mean" name="nameMeaning" [(ngModel)]="form.nameMeaning" />
+          </div>
+        </div>
+        <div class="adm-field">
+          <label for="p-motto">Devise</label>
+          <input id="p-motto" name="motto" [(ngModel)]="form.motto" [attr.aria-invalid]="!!errors().motto" aria-describedby="p-motto-err" />
+          <p id="p-motto-err" class="adm-error">{{ errors().motto }}</p>
+        </div>
+        <div class="adm-field">
+          <span class="adm-with-tip">
+            <label for="p-ring">Texte autour du logo</label>
+            <app-help-tip>Le texte doré qui tourne autour du logo sur l’accueil. Séparez les mots par « • ».</app-help-tip>
+          </span>
+          <input id="p-ring" name="ringText" [(ngModel)]="form.ringText" />
+        </div>
+        <div class="adm-row">
+          <div class="adm-field">
+            <label for="p-year">Année de création</label>
+            <input id="p-year" name="foundedYear" inputmode="numeric" [(ngModel)]="form.foundedYear"
+              [attr.aria-invalid]="!!errors().foundedYear" aria-describedby="p-year-err" />
+            <p id="p-year-err" class="adm-error">{{ errors().foundedYear }}</p>
+          </div>
+          <div class="adm-field">
+            <label for="p-place">Lieu de création</label>
+            <input id="p-place" name="foundedPlace" [(ngModel)]="form.foundedPlace" />
+          </div>
+        </div>
+        <div class="adm-field">
+          <label for="p-members">Nombre de membres environ</label>
+          <input id="p-members" name="membersApprox" inputmode="numeric" [(ngModel)]="form.membersApprox"
+            [attr.aria-invalid]="!!errors().membersApprox" aria-describedby="p-members-err" />
+          <p id="p-members-err" class="adm-error">{{ errors().membersApprox }}</p>
+        </div>
+        <div class="adm-field">
+          <span class="adm-with-tip">
+            <span class="adm-label">Logo</span>
+            <app-help-tip>Image carrée, de préférence sur fond transparent (PNG). L’icône de l’application installée ne change qu’après une mise à jour technique.</app-help-tip>
+          </span>
+          <app-photo-picker [(photos)]="logo" folder="identite" [alt]="'Logo du ' + form.name" inputId="p-logo" label="Changer le logo" [max]="1" />
+        </div>
+      </details>
+
+      <details class="adm-fold">
+        <summary><i class="ph ph-user-circle" aria-hidden="true"></i><span>Le guide<small>Nom et photo</small></span></summary>
+        <div class="adm-field">
+          <label for="p-guide">Nom du guide</label>
+          <input id="p-guide" name="guideName" [(ngModel)]="form.guideName" />
+        </div>
+        <div class="adm-field">
+          <span class="adm-label">Photo du guide</span>
+          <app-photo-picker [(photos)]="guidePhoto" folder="identite" [alt]="form.guideName" inputId="p-guide-photo" label="Choisir une photo" [max]="1" />
+        </div>
+      </details>
+
+      <details class="adm-fold">
+        <summary><i class="ph ph-palette" aria-hidden="true"></i><span>Couleurs du site<small>Charte graphique</small></span></summary>
+        <p class="adm-label">Palettes prêtes</p>
+        <ul class="presets">
+          @for (p of presets; track p.name) {
+            <li>
+              <button type="button" class="preset" [class.is-on]="palette().primary === p.primary && palette().gold === p.gold"
+                [attr.aria-pressed]="palette().primary === p.primary && palette().gold === p.gold" (click)="usePreset(p)">
+                <span class="preset__swatch" aria-hidden="true">
+                  <span [style.background]="p.primary"></span><span [style.background]="p.gold"></span>
+                </span>
+                {{ p.name }}
+              </button>
+            </li>
+          }
+        </ul>
+        <div class="colors">
+          <label class="color">
+            <input type="color" [value]="palette().primary" (input)="setColor('primary', $any($event.target).value)" />
+            <span>Couleur principale <small>Fonds sombres, titres</small></span>
+          </label>
+          <label class="color">
+            <input type="color" [value]="palette().gold" (input)="setColor('gold', $any($event.target).value)" />
+            <span>Couleur d’accent <small>Filets, badges, motif</small></span>
+          </label>
+          <label class="color">
+            <input type="color" [value]="palette().brand" (input)="setColor('brand', $any($event.target).value)" />
+            <span>Bouton WhatsApp <small>Vert conseillé</small></span>
+          </label>
+        </div>
+        <div class="preview" [style.background]="palette().primary" aria-hidden="true">
+          <span class="preview__over" [style.color]="palette().gold">APERÇU</span>
+          <span class="preview__title">{{ form.motto }}</span>
+          <span class="preview__btn" [style.background]="palette().brand">Nous rejoindre</span>
+        </div>
+        @if (!paletteOk()) {
+          <p class="adm-error" role="alert">Couleur principale trop claire : le texte blanc ne serait pas lisible.</p>
+        }
+      </details>
+      <details class="adm-fold">
+        <summary><i class="ph ph-whatsapp-logo" aria-hidden="true"></i><span>Bouton « Rejoindre »<small>WhatsApp, appel</small></span></summary>
         <fieldset class="adm-choices">
           <legend class="adm-label">Quand quelqu’un appuie sur « Rejoindre sur WhatsApp »</legend>
           <label class="adm-check">
@@ -50,10 +166,10 @@
             placeholder="77 123 45 67" [attr.aria-invalid]="!!errors().callNumber" aria-describedby="p-call-err" />
           <p id="p-call-err" class="adm-error">{{ errors().callNumber }}</p>
         </div>
-      </section>
+      </details>
 
-      <section class="adm-section" aria-labelledby="s-support">
-        <h2 id="s-support">Soutenir le dahira</h2>
+      <details class="adm-fold">
+        <summary><i class="ph ph-hand-heart" aria-hidden="true"></i><span>Soutenir le dahira<small>Wave, Orange Money</small></span></summary>
         <div class="adm-row">
           <div class="adm-field">
             <label for="p-wave">Numéro Wave</label>
@@ -73,10 +189,10 @@
           <label for="p-bless">Bénédiction <small>(facultatif)</small></label>
           <input id="p-bless" name="blessing" [(ngModel)]="form.blessing" />
         </div>
-      </section>
+      </details>
 
-      <section class="adm-section" aria-labelledby="s-contact">
-        <h2 id="s-contact">Contact (bas de page)</h2>
+      <details class="adm-fold">
+        <summary><i class="ph ph-map-pin" aria-hidden="true"></i><span>Contact<small>Adresse, téléphone (bas de page)</small></span></summary>
         <div class="adm-field">
           <label for="p-addr">Adresse</label>
           <input id="p-addr" name="address" [(ngModel)]="form.address" autocomplete="street-address" />
@@ -87,10 +203,10 @@
             [attr.aria-invalid]="!!errors().phone" aria-describedby="p-phone-err" />
           <p id="p-phone-err" class="adm-error">{{ errors().phone }}</p>
         </div>
-      </section>
+      </details>
 
-      <section class="adm-section" aria-labelledby="s-social">
-        <h2 id="s-social">Réseaux sociaux</h2>
+      <details class="adm-fold">
+        <summary><i class="ph ph-share-network" aria-hidden="true"></i><span>Réseaux sociaux<small>TikTok, Facebook…</small></span></summary>
         <ul class="adm-list">
           @for (s of social(); track $index; let i = $index) {
             <li class="adm-card">
@@ -119,23 +235,8 @@
         <button type="button" class="btn btn--outline adm-add adm-add--after" (click)="addSocial()">
           <i class="ph ph-plus-circle" aria-hidden="true"></i> Ajouter un réseau
         </button>
-      </section>
+      </details>
 
-      <section class="adm-section" aria-labelledby="s-presentation">
-        <h2 id="s-presentation">Présentation</h2>
-        <div class="adm-field">
-          <label for="p-motto">Devise</label>
-          <input id="p-motto" name="motto" [(ngModel)]="form.motto"
-            [attr.aria-invalid]="!!errors().motto" aria-describedby="p-motto-err" />
-          <p id="p-motto-err" class="adm-error">{{ errors().motto }}</p>
-        </div>
-        <div class="adm-field">
-          <label for="p-members">Nombre de membres environ</label>
-          <input id="p-members" name="membersApprox" inputmode="numeric" [(ngModel)]="form.membersApprox"
-            [attr.aria-invalid]="!!errors().membersApprox" aria-describedby="p-members-err" />
-          <p id="p-members-err" class="adm-error">{{ errors().membersApprox }}</p>
-        </div>
-      </section>
     </form>
 
     <div class="adm-actions">

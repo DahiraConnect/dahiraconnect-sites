@@ -26,4 +26,6 @@ export interface DocRow<T> {
   slug: string;
   data: T;
   updated_at: string;
+  status: 'draft' | 'published' | 'scheduled';
+  publish_at: string | null;
 }

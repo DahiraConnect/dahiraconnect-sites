@@ -8,7 +8,10 @@ import { deleteDoc, getDoc, listDocs, saveDoc } from '../core/docs';
 import { removePhoto } from '../core/images';
 import { PublishService } from '../core/publish.service';
 import { slugify, uniqueSlug } from '../core/slug';
+import { PubStatus } from '../core/status';
+import { HelpTip } from '../ui/help-tip/help-tip';
 import { PhotoPicker } from '../ui/photo-picker/photo-picker';
+import { StatusField } from '../ui/status-field/status-field';
 
 interface AlbumForm {
   title: string;
@@ -22,7 +25,7 @@ interface AlbumForm {
 /** Ajout ou modification d'un album : photos envoyées depuis le téléphone, ou lien TikTok / YouTube. */
 @Component({
   selector: 'app-admin-album-form',
-  imports: [FormsModule, RouterLink, PhotoPicker],
+  imports: [FormsModule, RouterLink, PhotoPicker, StatusField, HelpTip],
   templateUrl: './admin-album-form.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -35,6 +38,9 @@ export default class AdminAlbumFormPage {
 
   protected form: AlbumForm = { title: '', date: '', place: '', kind: 'photos', videoUrl: '', featured: false };
   protected readonly photos = signal<Photo[]>([]);
+  protected readonly status = signal<PubStatus>('published');
+  protected readonly publishAt = signal<string | null>(null);
+  protected readonly statusError = signal('');
   protected readonly busy = signal(false);
   protected readonly errors = signal<Partial<Record<keyof AlbumForm, string>>>({});
   protected readonly saveError = signal('');
@@ -48,7 +54,11 @@ export default class AdminAlbumFormPage {
     params: () => this.id(),
     loader: async ({ params }) => {
       const row = await getDoc<Album>('albums', params);
-      if (row) this.fill(row.data);
+      if (row) {
+        this.fill(row.data);
+        this.status.set(row.status);
+        this.publishAt.set(row.publish_at);
+      }
       return row;
     },
   });
@@ -91,7 +101,13 @@ export default class AdminAlbumFormPage {
         errors.videoUrl = 'Lien non reconnu : collez un lien TikTok, YouTube ou Facebook.';
     }
     this.errors.set(errors);
-    return !Object.keys(errors).length;
+    const when = this.publishAt();
+    this.statusError.set(
+      this.status() === 'scheduled' && (!when || new Date(when).getTime() <= Date.now())
+        ? 'Choisissez une date et une heure à venir.'
+        : '',
+    );
+    return !Object.keys(errors).length && !this.statusError();
   }
 
   protected async save(): Promise<void> {
@@ -130,20 +146,26 @@ export default class AdminAlbumFormPage {
         fallback: this.original?.fallback ?? 'green',
       };
       const clean = JSON.parse(JSON.stringify(album)) as Album;
-      const savedId = await saveDoc('albums', dahira.dahiraId, this.id() ?? null, clean, { date: f.date });
+      const savedId = await saveDoc('albums', dahira.dahiraId, this.id() ?? null, clean, {
+        date: f.date,
+        status: this.status(),
+        publish_at: this.status() === 'scheduled' ? this.publishAt() : null,
+      });
       // Un seul album « À la une »
       if (f.featured) {
         const others = await listDocs<Album>('albums', dahira.dahiraId, 'date');
         await Promise.all(
           others
             .filter((r) => r.id !== savedId && r.data.featured)
-            .map((r) => saveDoc('albums', dahira.dahiraId, r.id, { ...r.data, featured: undefined }, { date: r.data.date })),
+            .map((r) =>
+              saveDoc('albums', dahira.dahiraId, r.id, { ...r.data, featured: undefined }, { date: r.data.date, status: r.status, publish_at: r.publish_at }),
+            ),
         );
       }
       const kept = new Set(photos.map((p) => p.url));
       await Promise.all((this.original?.photos ?? []).filter((p) => !kept.has(p.url)).map(removePhoto));
       await this.router.navigateByUrl('/admin/galerie');
-      void this.publish.afterSave(this.id() ? 'Album modifié' : 'Album ajouté');
+      void this.publish.afterSave(this.id() ? 'Album modifié' : 'Album ajouté', this.status(), this.publishAt());
     } catch {
       this.saveError.set('L’enregistrement a échoué. Vérifiez votre connexion et réessayez.');
     } finally {

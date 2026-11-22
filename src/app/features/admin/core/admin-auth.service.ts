@@ -22,14 +22,30 @@ export class AdminAuth {
   private readonly _session = signal<Session | null>(null);
   private readonly _memberships = signal<Membership[]>([]);
   private ready?: Promise<void>;
+  /** Dahira choisi (responsable de plusieurs dahiras), mémorisé sur cet appareil */
+  private readonly selected = signal<string | null>(readSelected());
 
   readonly session = this._session.asReadonly();
   readonly email = computed(() => this._session()?.user.email ?? '');
   /** Dahira géré : celui du site courant s'il fait partie des droits, sinon le premier */
+  readonly memberships = this._memberships.asReadonly();
   readonly current = computed<Membership | undefined>(() => {
     const list = this._memberships();
-    return list.find((m) => m.slug === this.tenant.dahira().slug) ?? list[0];
+    return (
+      list.find((m) => m.dahiraId === this.selected()) ??
+      list.find((m) => m.slug === this.tenant.dahira().slug) ??
+      list[0]
+    );
   });
+
+  select(dahiraId: string): void {
+    this.selected.set(dahiraId);
+    try {
+      localStorage.setItem(SELECTED_KEY, dahiraId);
+    } catch {
+      /* stockage indisponible : le choix vaut pour cette visite */
+    }
+  }
 
   /** Session et droits chargés (une seule fois) */
   init(): Promise<void> {
@@ -91,5 +107,14 @@ export class AdminAuth {
     this._memberships.update((list) =>
       list.map((m) => (m.dahiraId === this.current()?.dahiraId ? { ...m, profile } : m)),
     );
+  }
+}
+
+const SELECTED_KEY = 'dc-admin-dahira';
+function readSelected(): string | null {
+  try {
+    return localStorage.getItem(SELECTED_KEY);
+  } catch {
+    return null;
   }
 }

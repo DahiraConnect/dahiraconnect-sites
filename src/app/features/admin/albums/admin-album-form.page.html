@@ -7,7 +7,18 @@
   } @else if (id() && !row.value()) {
     <p class="adm-empty">Cet album n’existe plus. <a routerLink="/admin/galerie">Retour à la galerie</a></p>
   } @else {
+    @if (id() && row.value(); as r) {
+      @if (r.status !== 'draft') {
+        <div class="adm-quick">
+          <a class="adm-quick__btn" [href]="'/galerie/' + r.slug" target="_blank" rel="noopener">
+            <i class="ph ph-arrow-square-out" aria-hidden="true"></i> Voir sur le site
+          </a>
+        </div>
+      }
+    }
     <form id="album-form" (ngSubmit)="save()" (input)="revalidate()" (change)="revalidate()" novalidate>
+      <app-status-field [(status)]="status" [(publishAt)]="publishAt" [error]="statusError()" idPrefix="al" />
+
       <fieldset class="adm-choices">
         <legend class="adm-label">Type d’album</legend>
         <label class="adm-check">
@@ -61,10 +72,13 @@
         </div>
       }
 
-      <label class="adm-check">
-        <input type="checkbox" name="featured" [(ngModel)]="form.featured" />
-        <span>À la une <small>Affiché en grand en tête de la galerie</small></span>
-      </label>
+      <div class="adm-with-tip">
+        <label class="adm-check">
+          <input type="checkbox" name="featured" [(ngModel)]="form.featured" />
+          <span>À la une <small>Affiché en grand en tête de la galerie</small></span>
+        </label>
+        <app-help-tip>Un seul album à la fois : cocher celui-ci retire l’ancien de la une.</app-help-tip>
+      </div>
 
       @if (id()) {
         <button type="button" class="adm-danger" (click)="remove()" [disabled]="busy()">

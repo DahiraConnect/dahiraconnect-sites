@@ -27,6 +27,7 @@
             <span class="adm-item__text">
               <span class="adm-item__title">{{ r.data.title }}</span>
               <span class="adm-item__meta">{{ meta(r.data) }}</span>
+              <app-status-badge [value]="r.status" [publishAt]="r.publish_at" />
             </span>
             @if (r.data.featured) {
               <span class="adm-tag">À la une</span>

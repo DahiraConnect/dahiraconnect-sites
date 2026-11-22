@@ -1,0 +1,60 @@
+@use 'styles/mixins' as m;
+
+:host {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+.tip__btn {
+  @include m.focus-ring;
+  display: grid;
+  place-items: center;
+  // Zone tactile 44 px, pastille visible 26 px
+  width: var(--tap-min);
+  height: var(--tap-min);
+  margin: -9px -9px -9px -6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-gold-text);
+  font-size: 22px;
+  cursor: pointer;
+  border-radius: 50%;
+
+  &:hover,
+  &[aria-expanded='true'] {
+    color: var(--color-primary);
+  }
+
+  &:active {
+    transform: scale(0.94);
+  }
+}
+
+.tip__bubble {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  z-index: 25;
+  width: max-content;
+  max-width: min(280px, 80vw);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: var(--color-text-on-dark);
+  font: 400 var(--fs-small) / 1.45 var(--font-body);
+  text-transform: none;
+  letter-spacing: normal;
+  box-shadow: var(--shadow-float);
+  transform: translateX(-50%);
+  animation: tip-in 0.15s ease-out;
+}
+
+@keyframes tip-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -4px);
+  }
+}

@@ -1,0 +1,30 @@
+<div class="adm-page">
+  <a class="adm-back" routerLink="/admin"><i class="ph ph-arrow-left" aria-hidden="true"></i> Tableau de bord</a>
+  <h1 class="adm-title">Journal d’activité</h1>
+  <p class="adm-lead">Toutes les modifications faites par l’équipe, de la plus récente à la plus ancienne.</p>
+
+  @if (entries.isLoading()) {
+    <p class="adm-lead" aria-live="polite">Chargement…</p>
+  } @else if (entries.error()) {
+    <p class="adm-error" role="alert">Impossible de charger le journal. Vérifiez votre connexion.</p>
+  } @else if (!days().length) {
+    <p class="adm-empty">Aucune activité pour le moment.</p>
+  } @else {
+    @for (d of days(); track d.day) {
+      <section class="adm-section" [attr.aria-label]="d.day">
+        <h2>{{ d.day }}</h2>
+        <ol class="log">
+          @for (e of d.items; track e.id) {
+            <li class="log__item">
+              <span class="log__icon log__icon--{{ e.action }}"><i class="ph {{ icon(e) }}" aria-hidden="true"></i></span>
+              <span class="log__text">
+                <span><strong>{{ who(e.user_email) }}</strong> {{ describe(e) }}</span>
+                <time class="log__when" [attr.datetime]="e.created_at">{{ when(e.created_at) }}</time>
+              </span>
+            </li>
+          }
+        </ol>
+      </section>
+    }
+  }
+</div>

@@ -8,7 +8,10 @@ import { deleteDoc, getDoc, listDocs, saveDoc } from '../core/docs';
 import { removePhoto } from '../core/images';
 import { PublishService } from '../core/publish.service';
 import { fromIso, slugify, toIso, uniqueSlug } from '../core/slug';
+import { PubStatus } from '../core/status';
+import { HelpTip } from '../ui/help-tip/help-tip';
 import { PhotoPicker } from '../ui/photo-picker/photo-picker';
+import { StatusField } from '../ui/status-field/status-field';
 
 interface EventForm {
   title: string;
@@ -39,7 +42,7 @@ const EMPTY: EventForm = {
 /** Ajout ou modification d'un événement (une seule colonne, bouton Enregistrer toujours visible). */
 @Component({
   selector: 'app-admin-event-form',
-  imports: [FormsModule, RouterLink, PhotoPicker],
+  imports: [FormsModule, RouterLink, PhotoPicker, StatusField, HelpTip],
   templateUrl: './admin-event-form.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -53,6 +56,9 @@ export default class AdminEventFormPage {
 
   protected form: EventForm = { ...EMPTY };
   protected readonly images = signal<Photo[]>([]);
+  protected readonly status = signal<PubStatus>('published');
+  protected readonly publishAt = signal<string | null>(null);
+  protected readonly statusError = signal('');
   protected readonly busy = signal(false);
   protected readonly errors = signal<Partial<Record<keyof EventForm, string>>>({});
   protected readonly saveError = signal('');
@@ -63,7 +69,11 @@ export default class AdminEventFormPage {
     params: () => this.id(),
     loader: async ({ params }) => {
       const row = await getDoc<DahiraEvent>('events', params);
-      if (row) this.fill(row.data);
+      if (row) {
+        this.fill(row.data);
+        this.status.set(row.status);
+        this.publishAt.set(row.publish_at);
+      }
       return row;
     },
   });
@@ -106,7 +116,13 @@ export default class AdminEventFormPage {
     if (!f.place.trim()) errors.place = 'Indiquez le lieu.';
     if (f.mapUrl && !/^https?:\/\//.test(f.mapUrl.trim())) errors.mapUrl = 'Le lien doit commencer par https://';
     this.errors.set(errors);
-    return !Object.keys(errors).length;
+    const when = this.publishAt();
+    this.statusError.set(
+      this.status() === 'scheduled' && (!when || new Date(when).getTime() <= Date.now())
+        ? 'Choisissez une date et une heure à venir.'
+        : '',
+    );
+    return !Object.keys(errors).length && !this.statusError();
   }
 
   protected async save(): Promise<void> {
@@ -149,14 +165,43 @@ export default class AdminEventFormPage {
         images: this.images().length ? this.images() : undefined,
       };
       const clean = JSON.parse(JSON.stringify(event)) as DahiraEvent; // retire les champs vides
-      await saveDoc('events', dahira.dahiraId, this.id() ?? null, clean, { starts_at: startsAt });
+      await saveDoc('events', dahira.dahiraId, this.id() ?? null, clean, {
+        starts_at: startsAt,
+        status: this.status(),
+        publish_at: this.status() === 'scheduled' ? this.publishAt() : null,
+      });
       // Photos retirées : supprimées du stockage
       const kept = new Set(this.images().map((p) => p.url));
       await Promise.all((this.original?.images ?? []).filter((p) => !kept.has(p.url)).map(removePhoto));
       await this.router.navigateByUrl('/admin/agenda');
-      void this.publish.afterSave(this.id() ? 'Événement modifié' : 'Événement ajouté');
+      void this.publish.afterSave(this.id() ? 'Événement modifié' : 'Événement ajouté', this.status(), this.publishAt());
     } catch {
       this.saveError.set('L’enregistrement a échoué. Vérifiez votre connexion et réessayez.');
+    } finally {
+      this.busy.set(false);
+    }
+  }
+
+  /** Même événement une semaine plus tard, en brouillon (rencontre hebdomadaire) */
+  protected async duplicate(): Promise<void> {
+    const dahira = this.auth.current();
+    const e = this.original;
+    if (!dahira || !e) return;
+    this.busy.set(true);
+    try {
+      const week = 7 * 86_400_000;
+      const shift = (iso?: string) => (iso ? new Date(new Date(iso).getTime() + week).toISOString().replace('.000Z', 'Z') : undefined);
+      const startsAt = shift(e.startsAt)!;
+      const existing = await listDocs<DahiraEvent>('events', dahira.dahiraId, 'starts_at');
+      const slug = uniqueSlug(slugify(`${e.title} ${fmtMonthYear(startsAt)}`), existing.map((r) => r.slug));
+      const copy: DahiraEvent = JSON.parse(
+        JSON.stringify({ ...e, id: crypto.randomUUID(), slug, startsAt, endsAt: shift(e.endsAt), images: undefined, albumSlug: undefined }),
+      );
+      const newId = await saveDoc('events', dahira.dahiraId, null, copy, { starts_at: startsAt, status: 'draft', publish_at: null });
+      await this.router.navigate(['/admin/agenda', newId]);
+      this.publish.show({ kind: 'ok', text: 'Copie créée en brouillon, une semaine plus tard. Vérifiez puis publiez.' });
+    } catch {
+      this.saveError.set('La copie a échoué. Réessayez.');
     } finally {
       this.busy.set(false);
     }

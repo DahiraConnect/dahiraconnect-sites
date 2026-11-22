@@ -4,12 +4,15 @@ import { DocRow, supabase } from './supabase';
 export type DocTable = 'events' | 'albums';
 
 /** Colonnes de tri/filtre propres à chaque table, recalculées depuis l'objet */
-export type DocColumns = { starts_at: string } | { date: string };
+export type DocColumns = ({ starts_at: string } | { date: string }) & {
+  status?: 'draft' | 'published' | 'scheduled';
+  publish_at?: string | null;
+};
 
 export async function listDocs<T>(table: DocTable, dahiraId: string, order: string, ascending = true) {
   const { data, error } = await supabase()
     .from(table)
-    .select('id, dahira_id, slug, data, updated_at')
+    .select('id, dahira_id, slug, data, updated_at, status, publish_at')
     .eq('dahira_id', dahiraId)
     .order(order, { ascending });
   if (error) throw error;
@@ -19,7 +22,7 @@ export async function listDocs<T>(table: DocTable, dahiraId: string, order: stri
 export async function getDoc<T>(table: DocTable, id: string) {
   const { data, error } = await supabase()
     .from(table)
-    .select('id, dahira_id, slug, data, updated_at')
+    .select('id, dahira_id, slug, data, updated_at, status, publish_at')
     .eq('id', id)
     .maybeSingle();
   if (error) throw error;

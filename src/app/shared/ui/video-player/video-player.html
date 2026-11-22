@@ -14,7 +14,7 @@
       <span class="player__brand" aria-hidden="true"><i class="ph {{ icon() }}"></i></span>
     }
     @if (embed()) {
-      <button type="button" class="player__play" (click)="playing.set(true)">
+      <button type="button" class="player__play" data-track="lecture_video" (click)="playing.set(true)">
         <i class="ph-fill ph-play" aria-hidden="true"></i>
         <span class="sr-only">Lire la vidéo « {{ title() }} »</span>
       </button>

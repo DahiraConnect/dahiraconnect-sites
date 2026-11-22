@@ -5,11 +5,12 @@ import { DahiraEvent } from '../../../core/models';
 import { fmtDate, fmtEventTime } from '../../../core/utils/dates';
 import { AdminAuth } from '../core/admin-auth.service';
 import { listDocs } from '../core/docs';
+import { StatusBadge } from '../ui/status-badge/status-badge';
 
 /** Liste des événements : à venir d'abord, puis les passés. */
 @Component({
   selector: 'app-admin-events',
-  imports: [RouterLink, NgTemplateOutlet],
+  imports: [RouterLink, NgTemplateOutlet, StatusBadge],
   templateUrl: './admin-events.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,0 +1,74 @@
+<div class="adm-page">
+  <a class="adm-back" routerLink="/admin"><i class="ph ph-arrow-left" aria-hidden="true"></i> Tableau de bord</a>
+  <h1 class="adm-title">Équipe</h1>
+  <p class="adm-lead">Les personnes qui peuvent modifier le site.</p>
+
+  <div class="adm-roles">
+    <p><span class="adm-tag">Propriétaire</span> Tout : contenu, équipe et paramètres du dahira.</p>
+    <p><span class="adm-tag adm-tag--soft">Éditeur</span> Agenda, galerie et bureau. Ne touche pas à l’équipe ni aux paramètres.</p>
+  </div>
+
+  @if (members.isLoading()) {
+    <p class="adm-lead" aria-live="polite">Chargement…</p>
+  } @else if (members.error()) {
+    <p class="adm-error" role="alert">Impossible de charger l’équipe.</p>
+  } @else {
+    <ul class="adm-list">
+      @for (m of members.value(); track m.user_id) {
+        <li class="adm-card">
+          <div class="adm-member">
+            <span class="adm-avatar" aria-hidden="true"><i class="ph ph-user" ></i></span>
+            <span class="adm-item__text">
+              <span class="adm-item__title">{{ m.email }} @if (m.user_id === myId()) { <small>(vous)</small> }</span>
+              <span class="adm-item__meta">
+                {{ m.role === 'owner' ? 'Propriétaire' : 'Éditeur' }} ·
+                {{ m.last_sign_in_at ? 'connecté ' + when(m.last_sign_in_at) : 'jamais connecté' }}
+              </span>
+            </span>
+          </div>
+          @if (isOwner()) {
+            <div class="adm-card__actions">
+              @if (m.role === 'editor') {
+                <button type="button" class="btn btn--outline btn--sm" (click)="setRole(m, 'owner')" [disabled]="busy()">
+                  <i class="ph ph-crown-simple" aria-hidden="true"></i> Rendre propriétaire
+                </button>
+              } @else {
+                <button type="button" class="btn btn--outline btn--sm" (click)="setRole(m, 'editor')" [disabled]="busy()">
+                  <i class="ph ph-user" aria-hidden="true"></i> Rendre éditeur
+                </button>
+              }
+              <button type="button" class="btn btn--outline btn--sm adm-btn-danger" (click)="setRole(m, 'none')" [disabled]="busy()">
+                <i class="ph ph-user-minus" aria-hidden="true"></i> Retirer
+              </button>
+            </div>
+          }
+        </li>
+      }
+    </ul>
+  }
+
+  @if (isOwner()) {
+    <section class="adm-section" aria-labelledby="invite-title">
+      <h2 id="invite-title">Ajouter un responsable</h2>
+      <form class="adm-card" (ngSubmit)="invite()" novalidate>
+        <div class="adm-field">
+          <span class="adm-with-tip">
+            <label for="inv-email">Son adresse e-mail</label>
+            <app-help-tip>Aucun e-mail n’est envoyé maintenant. La personne ira sur /admin, saisira cette adresse et recevra son lien de connexion.</app-help-tip>
+          </span>
+          <input id="inv-email" name="email" type="email" inputmode="email" autocomplete="off" [(ngModel)]="email"
+            [attr.aria-invalid]="!!error()" aria-describedby="inv-err" />
+        </div>
+        <fieldset class="adm-choices">
+          <legend class="adm-label">Rôle</legend>
+          <label class="adm-check"><input type="radio" name="role" value="editor" [(ngModel)]="role" /><span>Éditeur</span></label>
+          <label class="adm-check"><input type="radio" name="role" value="owner" [(ngModel)]="role" /><span>Propriétaire</span></label>
+        </fieldset>
+        <p id="inv-err" class="adm-error" role="alert">{{ error() }}</p>
+        <button type="submit" class="btn btn--dark" [disabled]="busy()">
+          <i class="ph ph-user-plus" aria-hidden="true"></i> Ajouter à l’équipe
+        </button>
+      </form>
+    </section>
+  }
+</div>

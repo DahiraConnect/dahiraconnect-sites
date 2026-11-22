@@ -1,11 +1,22 @@
-import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { Dahira, SocialLink, SocialPlatform } from '../../../core/models';
+import { Dahira, Photo, SocialLink, SocialPlatform } from '../../../core/models';
+import { PRESETS, Palette, SURFACE, contrast, isHex, themeFrom } from '../core/colors';
 import { DahiraDocStore } from '../core/dahira-doc.store';
+import { HelpTip } from '../ui/help-tip/help-tip';
+import { PhotoPicker } from '../ui/photo-picker/photo-picker';
 import { formatLocal, toWhatsappNumber } from '../core/phone';
 
 interface ProfileForm {
+  name: string;
+  shortName: string;
+  nameArabic: string;
+  nameMeaning: string;
+  ringText: string;
+  foundedYear: string;
+  foundedPlace: string;
+  guideName: string;
   motto: string;
   membersApprox: string;
   address: string;
@@ -30,11 +41,12 @@ const PLATFORMS: { id: SocialPlatform; label: string }[] = [
   { id: 'x', label: 'X (Twitter)' },
 ];
 
-/** Informations pratiques du dahira : rejoindre, contact, soutien, réseaux sociaux. */
+/** Paramètres du dahira : identité, logo, guide, couleurs, rejoindre, soutien, contact, réseaux. */
 @Component({
   selector: 'app-admin-profile',
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, HelpTip, PhotoPicker],
   templateUrl: './admin-profile.page.html',
+  styleUrl: './admin-profile.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class AdminProfilePage {
@@ -46,6 +58,15 @@ export default class AdminProfilePage {
   protected readonly saveError = signal('');
   protected form!: ProfileForm;
   protected readonly social = signal<SocialLink[]>([]);
+  protected readonly logo = signal<Photo[]>([]);
+  protected readonly guidePhoto = signal<Photo[]>([]);
+  protected readonly presets = PRESETS;
+  protected readonly palette = signal<Palette>(PRESETS[0]);
+  /** Lisibilité des couleurs choisies (texte clair sur la couleur principale) */
+  protected readonly paletteOk = computed(() => {
+    const p = this.palette();
+    return isHex(p.primary) && isHex(p.gold) && isHex(p.brand) && contrast(p.primary, SURFACE) >= 4.5;
+  });
 
   constructor() {
     this.store.load(true).finally(() => this.loading.set(false));
@@ -57,6 +78,14 @@ export default class AdminProfilePage {
 
   private fill(d: Dahira): void {
     this.form = {
+      name: d.name,
+      shortName: d.shortName,
+      nameArabic: d.nameArabic ?? '',
+      nameMeaning: d.nameMeaning ?? '',
+      ringText: d.ringText,
+      foundedYear: String(d.foundedYear ?? ''),
+      foundedPlace: d.foundedPlace ?? '',
+      guideName: d.guideName ?? '',
       motto: d.motto,
       membersApprox: d.membersApprox ? String(d.membersApprox) : '',
       address: d.contact.address,
@@ -72,6 +101,21 @@ export default class AdminProfilePage {
       blessing: d.support?.blessing ?? '',
     };
     this.social.set(structuredClone(d.social ?? []));
+    this.logo.set([{ url: d.logoUrl, thumbUrl: d.logoSmallUrl, alt: d.logoAlt, width: 1, height: 1 }]);
+    this.guidePhoto.set(d.guidePhotoUrl ? [{ url: d.guidePhotoUrl, alt: d.guideName, width: 1, height: 1 }] : []);
+    this.palette.set({
+      primary: d.theme?.['color-primary'] ?? PRESETS[0].primary,
+      gold: d.theme?.['color-gold'] ?? PRESETS[0].gold,
+      brand: d.theme?.['color-brand'] ?? PRESETS[0].brand,
+    });
+  }
+
+  protected usePreset(p: Palette): void {
+    this.palette.set({ primary: p.primary, gold: p.gold, brand: p.brand });
+  }
+
+  protected setColor(key: keyof Palette, value: string): void {
+    this.palette.update((p) => ({ ...p, [key]: value.toUpperCase() }));
   }
 
   protected addSocial(): void {
@@ -100,6 +144,9 @@ export default class AdminProfilePage {
     optionalPhone('phone');
     if (f.membersApprox && !/^\d+$/.test(f.membersApprox.trim())) errors.membersApprox = 'Un nombre, sans lettres.';
     if (!f.motto.trim()) errors.motto = 'La devise s’affiche en grand sur l’accueil.';
+    if (!f.name.trim()) errors.name = 'Indiquez le nom complet du dahira.';
+    if (!f.shortName.trim()) errors.shortName = 'Indiquez le nom court (barre du haut).';
+    if (f.foundedYear && !/^(19|20)\d{2}$/.test(f.foundedYear.trim())) errors.foundedYear = 'Une année sur 4 chiffres (ex. : 1999).';
     this.errors.set(errors);
     return !Object.keys(errors).length;
   }
@@ -114,8 +161,27 @@ export default class AdminProfilePage {
     const f = this.form;
     const call = toWhatsappNumber(f.callNumber);
     const phone = toWhatsappNumber(f.phone);
+    if (!this.paletteOk()) {
+      this.saveError.set('Couleur principale trop claire : le texte ne serait pas lisible. Choisissez une couleur plus foncée.');
+      return;
+    }
+    const logo = this.logo()[0];
+    const guide = this.guidePhoto()[0];
     const profile: Dahira = {
       ...d,
+      name: f.name.trim(),
+      shortName: f.shortName.trim().toUpperCase(),
+      nameArabic: f.nameArabic.trim() || undefined,
+      nameMeaning: f.nameMeaning.trim() || undefined,
+      ringText: f.ringText.trim() || d.ringText,
+      foundedYear: f.foundedYear ? Number(f.foundedYear) : d.foundedYear,
+      foundedPlace: f.foundedPlace.trim(),
+      guideName: f.guideName.trim(),
+      guidePhotoUrl: guide?.url,
+      logoUrl: logo?.url ?? d.logoUrl,
+      logoSmallUrl: logo ? (logo.thumbUrl ?? logo.url) : d.logoSmallUrl,
+      logoAlt: `Logo du ${f.name.trim()}`,
+      theme: { ...d.theme, ...themeFrom(this.palette()) },
       motto: f.motto.trim(),
       membersApprox: f.membersApprox ? Number(f.membersApprox) : undefined,
       contact: { address: f.address.trim(), phone: !phone ? '' : phone.startsWith('221') ? `+221 ${formatLocal(phone)}` : `+${phone}` },
@@ -140,7 +206,7 @@ export default class AdminProfilePage {
     };
     this.busy.set(true);
     this.saveError.set('');
-    const ok = await this.store.saveProfile(JSON.parse(JSON.stringify(profile)), 'Informations enregistrées');
+    const ok = await this.store.saveProfile(JSON.parse(JSON.stringify(profile)), 'Paramètres enregistrés');
     this.busy.set(false);
     if (!ok) this.saveError.set('L’enregistrement a échoué. Vérifiez votre connexion et réessayez.');
   }

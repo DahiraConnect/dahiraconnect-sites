@@ -1,0 +1,52 @@
+@use 'styles/mixins' as m;
+
+.log {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.log__item {
+  @include m.flex-row(var(--space-3), flex-start);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-card);
+}
+
+.log__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-surface-muted);
+  color: var(--color-primary);
+  font-size: 22px;
+
+  &--delete {
+    background: #fbe3e1;
+    color: #b3261e;
+  }
+
+  &--publish {
+    background: #dcefe0;
+    color: #0b5a26;
+  }
+
+  &--schedule {
+    background: #f7e7b5;
+    color: #6b500c;
+  }
+}
+
+.log__text {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.log__when {
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}

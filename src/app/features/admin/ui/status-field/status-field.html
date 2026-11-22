@@ -1,0 +1,31 @@
+<fieldset class="sf">
+  <legend class="adm-label">Visibilité sur le site</legend>
+  <div class="sf__options">
+    @for (o of options; track o.id) {
+      <label class="sf__option" [class.is-on]="status() === o.id">
+        <input type="radio" [name]="name()" [value]="o.id" [checked]="status() === o.id" (change)="status.set(o.id)" />
+        <i class="ph {{ o.icon }}" aria-hidden="true"></i>
+        <span class="sf__label">{{ o.label }}</span>
+      </label>
+    }
+  </div>
+  <p class="adm-hint" aria-live="polite">
+    @for (o of options; track o.id) { @if (status() === o.id) { {{ o.help }} } }
+  </p>
+
+  @if (status() === 'scheduled') {
+    <div class="adm-row sf__when">
+      <div class="adm-field">
+        <label [for]="idPrefix() + '-pub-date'">Mise en ligne le</label>
+        <input [id]="idPrefix() + '-pub-date'" type="date" [ngModel]="date()" (ngModelChange)="setDate($event)"
+          [ngModelOptions]="{ standalone: true }" [attr.aria-invalid]="!!error()" />
+      </div>
+      <div class="adm-field">
+        <label [for]="idPrefix() + '-pub-time'">à</label>
+        <input [id]="idPrefix() + '-pub-time'" type="time" [ngModel]="time()" (ngModelChange)="setTime($event)"
+          [ngModelOptions]="{ standalone: true }" />
+      </div>
+    </div>
+    <p class="adm-error">{{ error() }}</p>
+  }
+</fieldset>

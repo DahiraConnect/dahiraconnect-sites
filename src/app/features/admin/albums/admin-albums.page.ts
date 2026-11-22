@@ -4,11 +4,12 @@ import { Album, albumCover, albumPhotoCount } from '../../../core/models';
 import { fmtDate } from '../../../core/utils/dates';
 import { AdminAuth } from '../core/admin-auth.service';
 import { listDocs } from '../core/docs';
+import { StatusBadge } from '../ui/status-badge/status-badge';
 
 /** Liste des albums, du plus récent au plus ancien. */
 @Component({
   selector: 'app-admin-albums',
-  imports: [RouterLink],
+  imports: [RouterLink, StatusBadge],
   templateUrl: './admin-albums.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
