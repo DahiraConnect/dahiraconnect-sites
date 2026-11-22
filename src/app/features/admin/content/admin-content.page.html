@@ -1,0 +1,192 @@
+<div class="adm-page">
+  <a class="adm-back" routerLink="/admin"><i class="ph ph-arrow-left" aria-hidden="true"></i> Tableau de bord</a>
+  <h1 class="adm-title">Textes du site</h1>
+  <p class="adm-lead">Touchez une page pour modifier ses textes. Écrivez court et simple : tout le monde doit comprendre.</p>
+
+  @if (loading()) {
+    <p class="adm-lead" aria-live="polite">Chargement…</p>
+  } @else if (!c) {
+    <p class="adm-error" role="alert">Impossible de charger les textes. Vérifiez votre connexion.</p>
+  } @else {
+    <form id="content-form" (ngSubmit)="save()" novalidate>
+      <!-- Accueil -->
+      <details class="adm-fold">
+        <summary><i class="ph ph-house" aria-hidden="true"></i><span>Accueil<small>Présentation du dahira</small></span></summary>
+        <div class="adm-field">
+          <label for="h-title">Titre</label>
+          <input id="h-title" name="h-title" [(ngModel)]="c.home.aboutTitle" />
+        </div>
+        <div class="adm-field">
+          <label for="h-text">Texte</label>
+          <textarea id="h-text" name="h-text" rows="4" [(ngModel)]="c.home.aboutText"></textarea>
+        </div>
+      </details>
+
+      <!-- Rejoindre -->
+      <details class="adm-fold">
+        <summary><i class="ph ph-whatsapp-logo" aria-hidden="true"></i><span>Rejoindre<small>Introduction et étapes</small></span></summary>
+        <div class="adm-field">
+          <label for="j-intro">Phrase d’introduction</label>
+          <textarea id="j-intro" name="j-intro" rows="2" [(ngModel)]="c.join.intro"></textarea>
+        </div>
+        <p class="adm-label">« Comment ça se passe » : les étapes</p>
+        <ol class="rows">
+          @for (s of c.join.steps; track trackIndex($index); let i = $index, first = $first, last = $last) {
+            <li class="row">
+              <span class="row__num" aria-hidden="true">{{ i + 1 }}</span>
+              <div class="adm-field row__main">
+                <label class="sr-only" [for]="'j-step-' + i">Étape {{ i + 1 }}</label>
+                <input [id]="'j-step-' + i" [name]="'j-step-' + i" [(ngModel)]="c.join.steps[i]" />
+              </div>
+              <ng-container *ngTemplateOutlet="tools; context: { list: c.join.steps, i, first, last, label: 'l’étape ' + (i + 1) }" />
+            </li>
+          }
+        </ol>
+        <button type="button" class="adm-quick__btn" (click)="addStep()"><i class="ph ph-plus" aria-hidden="true"></i> Ajouter une étape</button>
+      </details>
+
+      <!-- Histoire -->
+      <details class="adm-fold">
+        <summary><i class="ph ph-clock-counter-clockwise" aria-hidden="true"></i><span>Notre histoire<small>Page « Qui sommes-nous »</small></span></summary>
+        <div class="adm-field">
+          <label for="a-title">Grand titre de la page</label>
+          <input id="a-title" name="a-title" [(ngModel)]="c.about.heroTitle" />
+        </div>
+        <p class="adm-label">Les grandes dates</p>
+        <ol class="adm-list">
+          @for (h of c.about.history; track trackIndex($index); let i = $index, first = $first, last = $last) {
+            <li class="adm-card">
+              <div class="adm-row">
+                <div class="adm-field">
+                  <label [for]="'hi-year-' + i">Année</label>
+                  <input [id]="'hi-year-' + i" [name]="'hi-year-' + i" [(ngModel)]="h.year" placeholder="1999 ou Aujourd’hui" />
+                </div>
+                <div class="adm-field">
+                  <label [for]="'hi-title-' + i">Titre</label>
+                  <input [id]="'hi-title-' + i" [name]="'hi-title-' + i" [(ngModel)]="h.title" />
+                </div>
+              </div>
+              <div class="adm-field">
+                <label [for]="'hi-text-' + i">Ce qui s’est passé</label>
+                <textarea [id]="'hi-text-' + i" [name]="'hi-text-' + i" rows="3" [(ngModel)]="h.text"></textarea>
+              </div>
+              <div class="adm-with-tip">
+                <label class="adm-check">
+                  <input type="checkbox" [name]="'hi-hl-' + i" [checked]="!!h.highlight" (change)="highlight(h)" />
+                  <span>Mettre en avant <small>Point vert sur la frise</small></span>
+                </label>
+                <app-help-tip>Pour l’étape d’aujourd’hui, en général la dernière. Une seule à la fois.</app-help-tip>
+              </div>
+              <ng-container *ngTemplateOutlet="tools; context: { list: c.about.history, i, first, last, label: 'la date ' + (h.year || i + 1) }" />
+            </li>
+          }
+        </ol>
+        <button type="button" class="adm-quick__btn" (click)="addHistory()"><i class="ph ph-plus" aria-hidden="true"></i> Ajouter une date</button>
+      </details>
+
+      <!-- Charte -->
+      @if (c.charter; as ch) {
+        <details class="adm-fold">
+          <summary><i class="ph ph-scroll" aria-hidden="true"></i><span>La charte<small>Règles et déroulement d’une soirée</small></span></summary>
+          <div class="adm-field">
+            <label for="ch-intro">Introduction</label>
+            <textarea id="ch-intro" name="ch-intro" rows="2" [(ngModel)]="ch.intro"></textarea>
+          </div>
+
+          <p class="adm-label">Les règles</p>
+          <ol class="adm-list">
+            @for (r of ch.rules; track trackIndex($index); let i = $index, first = $first, last = $last) {
+              <li class="adm-card">
+                <div class="adm-field">
+                  <label [for]="'ru-title-' + i">Règle {{ i + 1 }}</label>
+                  <input [id]="'ru-title-' + i" [name]="'ru-title-' + i" [(ngModel)]="r.title" />
+                </div>
+                <div class="adm-row">
+                  <div class="adm-field">
+                    <label [for]="'ru-wo-' + i">En wolof <small>(facultatif)</small></label>
+                    <input [id]="'ru-wo-' + i" [name]="'ru-wo-' + i" [(ngModel)]="r.wolof" />
+                  </div>
+                  <div class="adm-field">
+                    <label [for]="'ru-de-' + i">Précision <small>(facultatif)</small></label>
+                    <input [id]="'ru-de-' + i" [name]="'ru-de-' + i" [(ngModel)]="r.detail" />
+                  </div>
+                </div>
+                @for (a of r.amounts ?? []; track trackIndex($index); let j = $index) {
+                  <div class="adm-row amount">
+                    <div class="adm-field">
+                      <label [for]="'am-l-' + i + '-' + j">Pour quoi</label>
+                      <input [id]="'am-l-' + i + '-' + j" [name]="'am-l-' + i + '-' + j" [(ngModel)]="a.label" placeholder="Sonorisation" />
+                    </div>
+                    <div class="adm-field">
+                      <label [for]="'am-a-' + i + '-' + j">Montant</label>
+                      <span class="amount__line">
+                        <input [id]="'am-a-' + i + '-' + j" [name]="'am-a-' + i + '-' + j" [(ngModel)]="a.amount" placeholder="2 000 F CFA" />
+                        <button type="button" class="row__tool" (click)="remove(r.amounts!, j)" [attr.aria-label]="'Retirer le montant ' + (a.label || j + 1)">
+                          <i class="ph ph-x" aria-hidden="true"></i>
+                        </button>
+                      </span>
+                    </div>
+                  </div>
+                }
+                <button type="button" class="adm-quick__btn" (click)="addAmount(r)"><i class="ph ph-coins" aria-hidden="true"></i> Ajouter un montant</button>
+                <ng-container *ngTemplateOutlet="tools; context: { list: ch.rules, i, first, last, label: 'la règle ' + (i + 1) }" />
+              </li>
+            }
+          </ol>
+          <button type="button" class="adm-quick__btn" (click)="addRule()"><i class="ph ph-plus" aria-hidden="true"></i> Ajouter une règle</button>
+
+          <p class="adm-label schedule-title">Déroulement d’une soirée</p>
+          <ol class="rows">
+            @for (s of ch.schedule; track trackIndex($index); let i = $index, first = $first, last = $last) {
+              <li class="row">
+                <div class="adm-field row__time">
+                  <label [for]="'sc-t-' + i">Heure</label>
+                  <input [id]="'sc-t-' + i" [name]="'sc-t-' + i" [(ngModel)]="s.time" placeholder="21 h 00" />
+                </div>
+                <div class="adm-field row__main">
+                  <label [for]="'sc-l-' + i">Moment</label>
+                  <input [id]="'sc-l-' + i" [name]="'sc-l-' + i" [(ngModel)]="s.label" placeholder="Début du dahira" />
+                </div>
+                <ng-container *ngTemplateOutlet="tools; context: { list: ch.schedule, i, first, last, label: 'le moment ' + (s.label || i + 1) }" />
+              </li>
+            }
+          </ol>
+          <button type="button" class="adm-quick__btn" (click)="addSchedule()"><i class="ph ph-plus" aria-hidden="true"></i> Ajouter un moment</button>
+          <div class="adm-field schedule-note">
+            <label for="ch-note">Phrase sous le déroulement <small>(facultatif)</small></label>
+            <input id="ch-note" name="ch-note" [(ngModel)]="ch.scheduleNote" />
+          </div>
+        </details>
+      }
+
+      <p class="adm-hint">
+        <i class="ph ph-info" aria-hidden="true"></i>
+        La biographie du guide et sa lignée restent vérifiées par la commission scientifique avant publication.
+      </p>
+    </form>
+
+    <div class="adm-actions">
+      <p class="adm-error" role="alert">{{ error() }}</p>
+      <button class="btn btn--dark" type="submit" form="content-form" [disabled]="busy()">
+        @if (busy()) { Enregistrement… } @else {
+          <i class="ph ph-check" aria-hidden="true"></i> Enregistrer
+        }
+      </button>
+    </div>
+  }
+</div>
+
+<!-- Monter / descendre / retirer -->
+<ng-template #tools let-list="list" let-i="i" let-first="first" let-last="last" let-label="label">
+  <span class="row__tools">
+    <button type="button" class="row__tool" [disabled]="first" (click)="move(list, i, -1)" [attr.aria-label]="'Monter ' + label">
+      <i class="ph ph-arrow-up" aria-hidden="true"></i>
+    </button>
+    <button type="button" class="row__tool" [disabled]="last" (click)="move(list, i, 1)" [attr.aria-label]="'Descendre ' + label">
+      <i class="ph ph-arrow-down" aria-hidden="true"></i>
+    </button>
+    <button type="button" class="row__tool row__tool--remove" (click)="remove(list, i)" [attr.aria-label]="'Retirer ' + label">
+      <i class="ph ph-trash" aria-hidden="true"></i>
+    </button>
+  </span>
+</ng-template>

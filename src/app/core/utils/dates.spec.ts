@@ -59,8 +59,8 @@ describe('dates utils', () => {
     expect(fmtTimeRange('2027-02-14T10:00:00Z', '2027-02-14T22:00:00Z')).toBe('10 h – 22 h');
   });
 
-  it("affiche « Horaire à confirmer » si l'heure n'est pas annoncée", () => {
-    expect(fmtEventTime({ startsAt: '2026-12-12T12:00:00Z', timeTbc: true })).toBe('Horaire à confirmer');
+  it("affiche « Heure à confirmer » si l'heure n'est pas annoncée", () => {
+    expect(fmtEventTime({ startsAt: '2026-12-12T12:00:00Z', timeTbc: true })).toBe('Heure à confirmer');
     expect(fmtEventTime({ startsAt: recital })).toBe('20 h 30');
   });
 

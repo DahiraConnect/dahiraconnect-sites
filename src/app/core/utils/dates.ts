@@ -65,6 +65,6 @@ export const monthKey = (iso: string) => {
   return `${parts['year']}-${parts['month']}`;
 };
 
-/** Horaire affiché d'un événement : plage horaire, ou « Horaire à confirmer ». */
+/** Horaire affiché d'un événement : plage horaire, ou « Heure à confirmer ». */
 export const fmtEventTime = (event: { startsAt: string; endsAt?: string; timeTbc?: boolean }) =>
-  event.timeTbc ? 'Horaire à confirmer' : fmtTimeRange(event.startsAt, event.endsAt);
+  event.timeTbc ? 'Heure à confirmer' : fmtTimeRange(event.startsAt, event.endsAt);

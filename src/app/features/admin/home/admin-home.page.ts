@@ -40,6 +40,7 @@ export default class AdminHomePage {
     { path: 'agenda', icon: 'ph-calendar-blank', title: 'Agenda', text: 'Événements et rendez-vous' },
     { path: 'galerie', icon: 'ph-images', title: 'Galerie', text: 'Albums photos et vidéos' },
     { path: 'bureau', icon: 'ph-users-three', title: 'Bureau', text: 'Membres et commissions' },
+    { path: 'textes', icon: 'ph-text-aa', title: 'Textes du site', text: 'Accueil, histoire, charte' },
     { path: 'equipe', icon: 'ph-user-gear', title: 'Équipe', text: 'Qui peut modifier le site' },
     ...(this.auth.current()?.role === 'owner'
       ? [{ path: 'parametres', icon: 'ph-gear-six', title: 'Paramètres', text: 'Identité, couleurs, contact' }]

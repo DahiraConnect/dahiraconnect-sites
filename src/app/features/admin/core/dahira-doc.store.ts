@@ -1,5 +1,5 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { Board, Dahira } from '../../../core/models';
+import { Board, Dahira, PageContent } from '../../../core/models';
 import { AdminAuth } from './admin-auth.service';
 import { PublishService } from './publish.service';
 import { supabase } from './supabase';
@@ -15,24 +15,35 @@ export class DahiraDocStore {
 
   readonly board = signal<Board | null>(null);
   readonly profile = signal<Dahira | null>(null);
+  readonly content = signal<PageContent | null>(null);
   readonly error = signal(false);
   private loadedFor?: string;
 
   async load(force = false): Promise<void> {
     const id = this.auth.current()?.dahiraId;
     if (!id || (!force && this.loadedFor === id)) return;
-    const { data, error } = await supabase().from('dahiras').select('profile, board').eq('id', id).single();
+    const { data, error } = await supabase().from('dahiras').select('profile, board, content').eq('id', id).single();
     this.error.set(!!error);
     if (error) return;
     this.loadedFor = id;
     this.board.set(data.board as Board);
     this.profile.set(data.profile as Dahira);
+    this.content.set(data.content as PageContent);
   }
 
   async saveBoard(board: Board, what: string): Promise<boolean> {
     const ok = await this.update({ board });
     if (ok) {
       this.board.set(board);
+      void this.publish.afterSave(what);
+    }
+    return ok;
+  }
+
+  async saveContent(content: PageContent, what: string): Promise<boolean> {
+    const ok = await this.update({ content });
+    if (ok) {
+      this.content.set(content);
       void this.publish.afterSave(what);
     }
     return ok;

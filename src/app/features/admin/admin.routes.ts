@@ -31,6 +31,7 @@ const ADMIN_ROUTES: Routes = [
           { path: 'bureau/commission/:id', loadComponent: () => import('./board/admin-group.page'), title: 'Commission' },
           { path: 'parametres', canActivate: [ownerGuard], loadComponent: () => import('./profile/admin-profile.page'), title: 'Paramètres' },
           { path: 'infos', redirectTo: 'parametres' },
+          { path: 'textes', loadComponent: () => import('./content/admin-content.page'), title: 'Textes du site' },
           { path: 'annonce', loadComponent: () => import('./announcement/admin-announcement.page'), title: 'Annonce' },
           { path: 'equipe', loadComponent: () => import('./team/admin-team.page'), title: 'Équipe' },
           { path: 'activite', loadComponent: () => import('./activity/admin-activity.page'), title: 'Journal d’activité' },

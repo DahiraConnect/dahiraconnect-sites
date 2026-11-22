@@ -2,6 +2,7 @@
 
 :host {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--space-3);
   padding: 14px var(--space-4);
@@ -27,8 +28,8 @@
 }
 
 .copy__text {
-  flex: 1;
-  min-width: 0;
+  // Ne rétrécit pas : si la place manque, le bouton passe à la ligne
+  flex: 1 0 auto;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -43,11 +44,14 @@
   font-family: var(--font-display);
   font-size: 22px;
   letter-spacing: 0.02em;
+  // Un numéro coupé en deux est difficile à recopier
+  white-space: nowrap;
 }
 
 .copy__btn {
   @include m.btn-base(var(--tap-min));
   min-width: 96px;
+  margin-left: auto;
   padding: 0 var(--space-4);
   background: var(--color-primary);
   color: var(--color-text-on-dark);
