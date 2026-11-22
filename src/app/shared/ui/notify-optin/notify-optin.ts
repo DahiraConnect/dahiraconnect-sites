@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, output, signal } from '@angular/core';
 
 /**
- * Carte « Ne ratez plus aucun rendez-vous ».
- * V1 : maquette (émet les intentions, rien n'est enregistré). V2 : notifications web + newsletter.
+ * Carte « Être prévenu ».
+ * V1 : aucun rappel n'est encore envoyé, le message le dit honnêtement (pas de faux formulaire).
+ * V2 : notifications web et/ou e-mail, branchées sur le back-office.
  */
 @Component({
   selector: 'app-notify-optin',
@@ -12,25 +13,12 @@ import { ChangeDetectionStrategy, Component, output, signal } from '@angular/cor
 })
 export class NotifyOptin {
   readonly activate = output<void>();
-  readonly subscribeEmail = output<string>();
-
-  protected readonly emailOpen = signal(false);
-  protected readonly email = signal('');
   protected readonly status = signal('');
 
   protected onActivate(): void {
     this.activate.emit();
-    this.status.set('Les rappels arrivent très bientôt. Merci de votre patience !');
-  }
-
-  protected onSubmit(event: SubmitEvent): void {
-    event.preventDefault();
-    const form = event.target as HTMLFormElement;
-    if (!form.reportValidity()) return;
-    const value = this.email().trim();
-    if (!value) return;
-    this.subscribeEmail.emit(value);
-    this.status.set('Merci ! Vous recevrez nos prochains rendez-vous par e-mail.');
-    this.emailOpen.set(false);
+    this.status.set(
+      'Les rappels arrivent bientôt. En attendant, rejoignez le groupe WhatsApp du dahira pour ne rien manquer.',
+    );
   }
 }

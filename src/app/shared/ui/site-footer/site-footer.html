@@ -2,7 +2,7 @@
   <div class="footer__inner container">
     <div class="footer__top">
       <a class="footer__brand" routerLink="/" [attr.aria-label]="'Accueil — ' + dahira().name">
-        <img [ngSrc]="dahira().logoUrl" alt="" width="64" height="64" />
+        <img [ngSrc]="dahira().logoSmallUrl ?? dahira().logoUrl" alt="" width="64" height="64" />
         <span class="footer__identity">
           <span class="footer__name">{{ dahira().name }}</span>
           <span class="footer__motto">{{ dahira().motto }}</span>

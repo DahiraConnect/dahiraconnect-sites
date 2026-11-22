@@ -1,7 +1,7 @@
 <header class="header">
   <div class="header__inner container">
     <a class="header__brand" routerLink="/" [attr.aria-label]="'Accueil — ' + dahira().name">
-      <img [ngSrc]="dahira().logoUrl" alt="" width="48" height="48" />
+      <img [ngSrc]="dahira().logoSmallUrl ?? dahira().logoUrl" alt="" width="48" height="48" />
       <span class="header__name">
         <span class="header__short">{{ dahira().shortName }}</span>
         @if (dahira().nameArabic) {

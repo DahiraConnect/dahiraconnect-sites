@@ -1,5 +1,10 @@
 import { Routes } from '@angular/router';
-import { eventExistsGuard, eventSeoResolver, eventTitleResolver } from './features/agenda/agenda.resolvers';
+import {
+  eventExistsGuard,
+  eventSeoResolver,
+  eventTitleResolver,
+  homeSeoResolver,
+} from './features/agenda/agenda.resolvers';
 import { albumExistsGuard, albumSeoResolver, albumTitleResolver } from './features/gallery/gallery.resolvers';
 import { quizExistsGuard, quizSeoResolver, quizTitleResolver } from './features/quiz/quiz.resolvers';
 
@@ -13,6 +18,7 @@ export const routes: Routes = [
         path: '',
         loadComponent: () => import('./features/home/home.page'),
         title: 'Accueil',
+        resolve: { seo: homeSeoResolver },
       },
       {
         path: 'le-dahira',

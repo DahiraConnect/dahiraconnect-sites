@@ -38,60 +38,8 @@
   gap: var(--space-2);
 }
 
-.optin__toggle {
-  @include m.focus-ring;
-  min-height: var(--tap-min);
-  padding: 0 var(--space-3);
-  border: 0;
-  border-radius: var(--radius-pill);
-  background: none;
-  color: var(--color-text-primary);
-  font-weight: 600;
-  text-decoration: underline;
-  cursor: pointer;
-
-  &:hover {
-    color: var(--color-primary-mid);
-  }
-}
-
-.optin__form,
 .optin__status {
   grid-column: 1 / -1;
-}
-
-.optin__form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  max-width: 520px;
-
-  label {
-    font-weight: 600;
-  }
-}
-
-.optin__row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-
-  input {
-    flex: 1 1 220px;
-    min-height: 50px;
-    padding: 0 var(--space-4);
-    border: 2px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    background: var(--color-surface-card);
-    font-size: var(--fs-body-lg);
-
-    &:focus-visible {
-      border-color: var(--color-primary);
-    }
-  }
-}
-
-.optin__status {
   color: var(--color-primary-mid);
   font-weight: 600;
 

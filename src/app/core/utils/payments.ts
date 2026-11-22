@@ -16,8 +16,8 @@ export interface PaymentGroup {
 }
 
 const METHODS: Record<PaymentMethod['id'], Omit<PaymentMethod, 'id'>> = {
-  wave: { name: 'Wave', logoUrl: '/assets/payments/wave.png' },
-  'orange-money': { name: 'Orange Money', logoUrl: '/assets/payments/orange-money.png' },
+  wave: { name: 'Wave', logoUrl: '/assets/payments/wave.webp' },
+  'orange-money': { name: 'Orange Money', logoUrl: '/assets/payments/orange-money.webp' },
 };
 
 /** Numéro sans espaces ni indicatif +221 / 00221, pour comparer. */

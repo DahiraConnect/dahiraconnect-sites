@@ -58,6 +58,8 @@ export interface Dahira {
   foundedPlace: string;
   membersApprox?: number;
   logoUrl: string;
+  /** Logo réduit (128 px) pour les barres de navigation et le pied de page */
+  logoSmallUrl?: string;
   /** Description courte du logo (texte alternatif) */
   logoAlt: string;
   theme: Partial<Record<ThemeToken, string>>;

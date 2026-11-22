@@ -9,6 +9,8 @@ export interface Album {
   place?: string;
   /** Couverture (format 4:5 conseillé) ; sinon première photo, sinon aplat */
   coverUrl?: string;
+  /** Vignette de la couverture (640 px) */
+  coverThumbUrl?: string;
   /** Aplat de repli tant qu'il n'y a pas de photo */
   fallback?: 'green' | 'gold' | 'blue' | 'sage';
   /** Mis en avant en tête de galerie */
@@ -27,7 +29,9 @@ export const albumPhotoCount = (album: Album) => album.count ?? album.photos?.le
 
 /** Image de couverture : explicite, sinon première photo, sinon vignette YouTube. */
 export const albumCover = (album: Album) =>
+  album.coverThumbUrl ??
   album.coverUrl ??
+  album.photos?.[0]?.thumbUrl ??
   album.photos?.[0]?.url ??
   (album.videoUrl ? parseVideo(album.videoUrl).thumbnailUrl : undefined);
 

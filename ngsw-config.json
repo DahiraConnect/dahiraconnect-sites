@@ -24,8 +24,9 @@
       "resources": {
         "files": [
           "/assets/tenants/*/logo.webp",
+          "/assets/tenants/*/logo-128.webp",
           "/assets/tenants/*/icons/*.png",
-          "/assets/payments/*.png"
+          "/assets/payments/*.webp"
         ]
       }
     },

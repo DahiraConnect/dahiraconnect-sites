@@ -28,6 +28,9 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender,
     getPrerenderParams: async () => ((await bundle()).quiz?.themes ?? []).map((t) => ({ theme: t.id })),
   },
+  // Back-office (phase 2) : rendu dans le navigateur, aucune page pré-générée
+  { path: 'admin/**', renderMode: RenderMode.Client },
+  { path: 'admin', renderMode: RenderMode.Client },
   // Adresse inconnue : 404.html (copié par scripts/postbuild.mjs) puis rendu dans le navigateur
   { path: '**', renderMode: RenderMode.Prerender },
 ];

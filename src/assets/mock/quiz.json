@@ -709,7 +709,12 @@
             "Seydi El Hadji Malick Sy"
           ],
           "answer": 0,
-          "explanation": "Serigne Mansour Sy « Borom Daaraji » guidait le dahira dès sa fondation en 1999."
+          "explanation": "Serigne Mansour Sy « Borom Daaraji » guidait le dahira dès sa fondation en 1999.",
+          "choiceImages": [
+            "/assets/tenants/moutahabina/lignee/serigne-mansour-sy.webp",
+            "/assets/tenants/moutahabina/lignee/serigne-babacar-sy.webp",
+            "/assets/tenants/moutahabina/lignee/seydi-el-hadji-malick-sy.webp"
+          ]
         },
         {
           "question": "Depuis quelle année Serigne Mame Malick Sy guide-t-il le dahira ?",
@@ -719,7 +724,9 @@
             "2020"
           ],
           "answer": 0,
-          "explanation": "Après le rappel à Dieu de Serigne Mansour Sy en 2012, son fils Serigne Mame Malick Sy guide le dahira."
+          "explanation": "Après le rappel à Dieu de Serigne Mansour Sy en 2012, son fils Serigne Mame Malick Sy guide le dahira.",
+          "image": "/assets/tenants/moutahabina/lignee/serigne-mame-malick-sy.webp",
+          "imageAlt": "Portrait de Serigne Mame Malick Sy"
         },
         {
           "question": "Quelle est la devise du dahira ?",
@@ -747,7 +754,9 @@
             "Borom bonnet carré"
           ],
           "answer": 0,
-          "explanation": "Seydi El Hadji Malick Sy est appelé « Maodo »."
+          "explanation": "Seydi El Hadji Malick Sy est appelé « Maodo ».",
+          "image": "/assets/tenants/moutahabina/lignee/seydi-el-hadji-malick-sy.webp",
+          "imageAlt": "Portrait de Seydi El Hadji Malick Sy"
         },
         {
           "question": "Dans quelle ville Seydi El Hadji Malick Sy s'installe-t-il au début du XXᵉ siècle pour y fonder sa grande école ?",
@@ -777,7 +786,12 @@
             "Serigne Mame Malick Sy"
           ],
           "answer": 0,
-          "explanation": "Serigne Babacar Sy devient le premier Khalife général des Tidianes en 1922, à 37 ans."
+          "explanation": "Serigne Babacar Sy devient le premier Khalife général des Tidianes en 1922, à 37 ans.",
+          "choiceImages": [
+            "/assets/tenants/moutahabina/lignee/serigne-babacar-sy.webp",
+            "/assets/tenants/moutahabina/lignee/serigne-mansour-sy.webp",
+            "/assets/tenants/moutahabina/lignee/serigne-mame-malick-sy.webp"
+          ]
         },
         {
           "question": "Quel surnom porte Serigne Babacar Sy ?",
@@ -787,7 +801,9 @@
             "Borom Daaraji"
           ],
           "answer": 0,
-          "explanation": "Serigne Babacar Sy est appelé « Borom bonnet carré »."
+          "explanation": "Serigne Babacar Sy est appelé « Borom bonnet carré ».",
+          "image": "/assets/tenants/moutahabina/lignee/serigne-babacar-sy.webp",
+          "imageAlt": "Portrait de Serigne Babacar Sy"
         },
         {
           "question": "Quel rôle Serigne Babacar Sy a-t-il joué pour les dahiras ?",
@@ -807,7 +823,9 @@
             "C'est le nom de son premier livre"
           ],
           "answer": 0,
-          "explanation": "Pendant de longues années, il a dirigé le grand daara de Tivaouane fondé par Maodo."
+          "explanation": "Pendant de longues années, il a dirigé le grand daara de Tivaouane fondé par Maodo.",
+          "image": "/assets/tenants/moutahabina/lignee/serigne-mansour-sy.webp",
+          "imageAlt": "Portrait de Serigne Mansour Sy"
         },
         {
           "question": "Qui est le père de notre guide, Serigne Mame Malick Sy ?",
@@ -817,7 +835,12 @@
             "Seydi El Hadji Malick Sy"
           ],
           "answer": 0,
-          "explanation": "Serigne Mame Malick Sy est le fils de Serigne Mansour Sy « Borom Daaraji »."
+          "explanation": "Serigne Mame Malick Sy est le fils de Serigne Mansour Sy « Borom Daaraji ».",
+          "choiceImages": [
+            "/assets/tenants/moutahabina/lignee/serigne-mansour-sy.webp",
+            "/assets/tenants/moutahabina/lignee/serigne-babacar-sy.webp",
+            "/assets/tenants/moutahabina/lignee/seydi-el-hadji-malick-sy.webp"
+          ]
         }
       ]
     },

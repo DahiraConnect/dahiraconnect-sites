@@ -406,6 +406,14 @@
   border-radius: var(--radius-md);
 }
 
+// Portraits (photos .webp) : en cercle, cadrés sur le visage
+.question__img[src$='.webp'],
+.choice__img[src$='.webp'] {
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
 // Rond vide → ✓ vert ou ✗ rouge
 .choice__dot {
   flex-shrink: 0;

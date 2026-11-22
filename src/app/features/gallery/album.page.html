@@ -35,7 +35,7 @@
           <li class="photos__item" appReveal [appRevealDelay]="(i % 4) * 70">
             <button type="button" class="photos__btn" (click)="viewing.set(i)">
               <img
-                [ngSrc]="photo.url"
+                [ngSrc]="photo.thumbUrl ?? photo.url"
                 [alt]="photo.alt"
                 [width]="photo.width"
                 [height]="photo.height"
