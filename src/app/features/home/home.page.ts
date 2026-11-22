@@ -6,6 +6,7 @@ import { ContentService } from '../../core/data/content.service';
 import { EventService } from '../../core/data/event.service';
 import { TenantService } from '../../core/tenant/tenant.service';
 import { AlbumCard } from '../../shared/ui/album-card/album-card';
+import { AnnouncementBanner } from '../../shared/ui/announcement/announcement';
 import { CopyNumber } from '../../shared/ui/copy-number/copy-number';
 import { DarkHero } from '../../shared/ui/dark-hero/dark-hero';
 import { EventTicket } from '../../shared/ui/event-ticket/event-ticket';
@@ -30,6 +31,7 @@ import { Reveal } from '../../shared/motion/reveal.directive';
     AlbumCard,
     CopyNumber,
     Reveal,
+    AnnouncementBanner,
   ],
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss',

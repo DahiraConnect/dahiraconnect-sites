@@ -520,3 +520,17 @@
     padding-bottom: var(--space-4);
   }
 }
+
+.ann-preview {
+  margin-bottom: var(--space-2);
+}
+
+.adm-hint > .ph {
+  vertical-align: -3px;
+  font-size: 18px;
+}
+
+.ann-preview .ann {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+}

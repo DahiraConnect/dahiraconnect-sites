@@ -1,0 +1,67 @@
+@use 'styles/mixins' as m;
+
+// Fine barre tout en haut de la page : vue dès l'ouverture, sans pousser le reste
+:host {
+  display: block;
+}
+
+.ann {
+  @include m.flex-row(var(--space-3), flex-start);
+  padding: var(--space-3) var(--gutter);
+  padding-top: calc(var(--space-3) + env(safe-area-inset-top));
+  background: var(--color-gold);
+  color: var(--color-primary-deep);
+
+  @include m.desktop {
+    justify-content: center;
+  }
+
+  &--important {
+    background: var(--color-primary-deep);
+    color: var(--color-text-on-dark);
+    border-bottom: 2px solid var(--color-gold);
+  }
+}
+
+.ann__icon {
+  flex: none;
+  margin-top: 1px;
+  font-size: 24px;
+}
+
+.ann__body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 var(--space-3);
+  min-width: 0;
+}
+
+.ann__over {
+  @include m.overline(var(--color-gold));
+  flex-basis: 100%;
+  margin-bottom: 2px;
+}
+
+.ann__text {
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.ann__link {
+  @include m.focus-ring;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  margin-block: calc((var(--tap-min) - 1.4em) / -2);
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+
+  &:hover {
+    color: inherit;
+    text-decoration-thickness: 2px;
+  }
+}

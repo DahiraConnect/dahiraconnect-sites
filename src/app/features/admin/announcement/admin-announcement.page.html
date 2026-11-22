@@ -1,0 +1,78 @@
+<div class="adm-page">
+  <a class="adm-back" routerLink="/admin"><i class="ph ph-arrow-left" aria-hidden="true"></i> Tableau de bord</a>
+  <h1 class="adm-title">Annonce</h1>
+  <p class="adm-lead">Une phrase en haut de l’accueil, pour ce que tout le monde doit savoir : lieu changé, décès, collecte…</p>
+
+  @if (loading()) {
+    <p class="adm-lead" aria-live="polite">Chargement…</p>
+  } @else {
+    @let ann = a();
+    <p class="adm-label">Aperçu</p>
+    <app-announcement class="ann-preview" [announcement]="preview()" />
+    @if (store.profile()?.announcement?.active) {
+      <p class="adm-hint"><i class="ph ph-check-circle" aria-hidden="true"></i> L’annonce est affichée sur le site en ce moment.</p>
+    } @else {
+      <p class="adm-hint"><i class="ph ph-eye-slash" aria-hidden="true"></i> Aucune annonce affichée en ce moment.</p>
+    }
+
+    <form id="ann-form" (ngSubmit)="save(true)" novalidate>
+      <div class="adm-field">
+        <label for="ann-text">Le message</label>
+        <textarea id="ann-text" name="text" rows="3" [maxlength]="max" [ngModel]="ann.text" (ngModelChange)="patch({ text: $event })"
+          placeholder="Ex. : Le dahira de jeudi aura lieu chez Moussa Fall, à Tally Carreaux."
+          [attr.aria-invalid]="!!error()" aria-describedby="ann-count ann-err"></textarea>
+        <p id="ann-count" class="adm-hint">{{ ann.text.length }} / {{ max }} caractères. Court, c’est mieux.</p>
+      </div>
+
+      <fieldset class="adm-choices">
+        <legend class="adm-label">Couleur</legend>
+        <label class="adm-check">
+          <input type="radio" name="tone" value="info" [ngModel]="ann.tone" (ngModelChange)="patch({ tone: $event })" />
+          <span>Information <small>Fond doré</small></span>
+        </label>
+        <label class="adm-check">
+          <input type="radio" name="tone" value="important" [ngModel]="ann.tone" (ngModelChange)="patch({ tone: $event })" />
+          <span>Important <small>Fond sombre</small></span>
+        </label>
+      </fieldset>
+
+      @if (events.value()?.length) {
+        <div class="adm-field">
+          <span class="adm-with-tip">
+            <label for="ann-link">Lien vers un événement <small>(facultatif)</small></label>
+            <app-help-tip>Ajoute « Voir le détail » sous l’annonce, qui ouvre la page de l’événement.</app-help-tip>
+          </span>
+          <select id="ann-link" name="link" [ngModel]="ann.linkUrl ?? ''" (ngModelChange)="setLink($event)">
+            <option value="">Aucun lien</option>
+            @for (r of events.value(); track r.id) {
+              <option [value]="'/agenda/' + r.slug">{{ eventLabel(r.data) }}</option>
+            }
+          </select>
+        </div>
+      }
+
+      <div class="adm-field">
+        <span class="adm-with-tip">
+          <label for="ann-until">Afficher jusqu’au <small>(facultatif)</small></label>
+          <app-help-tip>Après cette date, l’annonce disparaît toute seule. Laissez vide pour la retirer vous-même.</app-help-tip>
+        </span>
+        <input id="ann-until" name="until" type="date" [ngModel]="ann.until ?? ''" (ngModelChange)="patch({ until: $event || undefined })" />
+      </div>
+
+      @if (store.profile()?.announcement?.active) {
+        <button type="button" class="adm-danger" (click)="save(false)" [disabled]="busy()">
+          <i class="ph ph-eye-slash" aria-hidden="true"></i> Retirer l’annonce du site
+        </button>
+      }
+    </form>
+
+    <div class="adm-actions">
+      <p id="ann-err" class="adm-error" role="alert">{{ error() }}</p>
+      <button class="btn btn--dark" type="submit" form="ann-form" [disabled]="busy()">
+        @if (busy()) { Enregistrement… } @else {
+          <i class="ph ph-megaphone-simple" aria-hidden="true"></i> Afficher sur le site
+        }
+      </button>
+    </div>
+  }
+</div>

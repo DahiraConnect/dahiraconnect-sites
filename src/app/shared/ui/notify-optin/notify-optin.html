@@ -1,13 +1,13 @@
+@let o = option();
 <section class="optin" aria-labelledby="optin-title">
   <div class="optin__intro">
     <h2 id="optin-title" class="optin__title">Être prévenu</h2>
-    <p class="optin__text">Une notification à chaque événement, et un rappel la veille.</p>
+    <p class="optin__text">{{ o.text }}</p>
   </div>
   <div class="optin__actions">
-    <button type="button" class="btn btn--dark btn--sm" (click)="onActivate()">
-      <i class="ph ph-bell" aria-hidden="true"></i>
-      Activer les rappels
-    </button>
+    <a class="btn btn--dark btn--sm" [href]="o.url" target="_blank" rel="noopener" [attr.data-track]="o.track">
+      <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+      {{ o.button }}
+    </a>
   </div>
-  <p class="optin__status" aria-live="polite">{{ status() }}</p>
 </section>

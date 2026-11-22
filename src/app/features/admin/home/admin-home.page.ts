@@ -34,7 +34,7 @@ export default class AdminHomePage {
   protected readonly quick = [
     { path: 'agenda/nouveau', icon: 'ph-calendar-plus', label: 'Nouvel événement' },
     { path: 'galerie/nouveau', icon: 'ph-images', label: 'Nouvel album' },
-    { path: 'bureau/personnes', icon: 'ph-user-plus', label: 'Ajouter au bureau' },
+    { path: 'annonce', icon: 'ph-megaphone-simple', label: 'Annonce' },
   ];
   protected readonly manage = computed(() => [
     { path: 'agenda', icon: 'ph-calendar-blank', title: 'Agenda', text: 'Événements et rendez-vous' },

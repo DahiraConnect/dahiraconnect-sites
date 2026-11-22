@@ -39,6 +39,19 @@ export interface SocialLink {
   handle?: string;
 }
 
+/** Annonce importante en haut de l'accueil (lieu déplacé, décès, collecte…) */
+export interface Announcement {
+  active: boolean;
+  text: string;
+  /** 'important' : fond sombre, pour ce qui ne doit pas être manqué */
+  tone: 'info' | 'important';
+  /** Lien facultatif : page d'un événement ('/agenda/…') ou adresse complète */
+  linkUrl?: string;
+  linkLabel?: string;
+  /** Dernier jour d'affichage (AAAA-MM-JJ), inclus */
+  until?: string;
+}
+
 export interface Dahira {
   id: string;
   slug: string;
@@ -66,6 +79,7 @@ export interface Dahira {
   contact: { address: string; phone: string };
   join: JoinSettings;
   support?: SupportSettings;
+  announcement?: Announcement;
   /** Réseaux sociaux, dans l'ordre d'affichage */
   social?: SocialLink[];
 }

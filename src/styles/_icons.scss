@@ -105,6 +105,9 @@
 .ph.ph-eye::before {
   content: "\e220";
 }
+.ph.ph-eye-slash::before {
+  content: "\e224";
+}
 .ph.ph-facebook-logo::before {
   content: "\e226";
 }
@@ -140,6 +143,9 @@
 }
 .ph.ph-medal::before {
   content: "\e320";
+}
+.ph.ph-megaphone-simple::before {
+  content: "\e642";
 }
 .ph.ph-mosque::before {
   content: "\ecee";
@@ -355,6 +361,9 @@
 .ph-fill.ph-eye::before {
   content: "\e220";
 }
+.ph-fill.ph-eye-slash::before {
+  content: "\e224";
+}
 .ph-fill.ph-facebook-logo::before {
   content: "\e226";
 }
@@ -390,6 +399,9 @@
 }
 .ph-fill.ph-medal::before {
   content: "\e320";
+}
+.ph-fill.ph-megaphone-simple::before {
+  content: "\e642";
 }
 .ph-fill.ph-mosque::before {
   content: "\ecee";
