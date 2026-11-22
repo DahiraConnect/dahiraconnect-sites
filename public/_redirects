@@ -1,3 +1,4 @@
-# Back-office : rendu dans le navigateur (aucune page pré-générée)
-/admin /index.csr.html 200
-/admin/* /index.csr.html 200
+# Back-office : rendu dans le navigateur (aucune page pré-générée).
+# Cloudflare Pages retire « .html » des adresses : la cible est donc /index.csr (= index.csr.html).
+/admin /index.csr 200
+/admin/* /index.csr 200
