@@ -19,7 +19,10 @@
           <div class="adm-member">
             <span class="adm-avatar" aria-hidden="true"><i class="ph ph-user" ></i></span>
             <span class="adm-item__text">
-              <span class="adm-item__title">{{ m.email }} @if (m.user_id === myId()) { <small>(vous)</small> }</span>
+              <span class="adm-item__title">{{ nameOf(m) }} @if (m.user_id === myId()) { <small>(vous)</small> }</span>
+              @if (nameOf(m) !== m.email) {
+                <span class="adm-item__meta">{{ m.email }}</span>
+              }
               @if (postsOf(m).length) {
                 <span class="adm-item__meta team-posts">{{ postsOf(m).join(' · ') }}</span>
               }
@@ -29,7 +32,10 @@
               </span>
             </span>
           </div>
-          @if (isOwner() && people().length) {
+          @if (isOwner() && m.role === 'owner' && m.user_id !== myId()) {
+            <p class="team-protected"><i class="ph ph-shield-check" aria-hidden="true"></i> Propriétaire protégé : seul lui peut changer son rôle.</p>
+          }
+          @if (canManage(m) && people().length) {
             <div class="adm-field team-link">
               <label [for]="'link-' + m.user_id">Dans le bureau</label>
               <select [id]="'link-' + m.user_id" [value]="m.person_id ?? ''" (change)="linkPerson(m, $any($event.target).value)">
@@ -40,7 +46,7 @@
               </select>
             </div>
           }
-          @if (isOwner()) {
+          @if (canManage(m)) {
             <div class="adm-card__actions">
               @if (m.role === 'editor') {
                 <button type="button" class="btn btn--outline btn--sm" (click)="setRole(m, 'owner')" [disabled]="busy()">
@@ -73,6 +79,13 @@
           <input id="inv-email" name="email" type="email" inputmode="email" autocomplete="off" [(ngModel)]="email"
             [attr.aria-invalid]="!!error()" aria-describedby="inv-err" />
         </div>
+        <app-person-picker [board]="auth.current()?.board" [(value)]="person" />
+        @if (person()?.kind === 'new') {
+          <div class="adm-field">
+            <label for="inv-post">Son poste au bureau <small>(facultatif)</small></label>
+            <input id="inv-post" name="post" [(ngModel)]="newPost" placeholder="Ex. : Trésorier adjoint" />
+          </div>
+        }
         <fieldset class="adm-choices">
           <legend class="adm-label">Rôle</legend>
           <label class="adm-check"><input type="radio" name="role" value="editor" [(ngModel)]="role" /><span>Éditeur</span></label>

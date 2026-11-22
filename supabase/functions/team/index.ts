@@ -15,7 +15,7 @@ Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response(null, { headers: cors });
   if (req.method !== 'POST') return json({ error: 'method' }, 405);
 
-  const { dahiraId, email, role } = await req.json().catch(() => ({}));
+  const { dahiraId, email, role, personId } = await req.json().catch(() => ({}));
   const address = String(email ?? '').trim().toLowerCase();
   if (typeof dahiraId !== 'string' || !/^\S+@\S+\.\S+$/.test(address) || !['owner', 'editor'].includes(role)) {
     return json({ error: 'invalid' }, 400);
@@ -38,9 +38,30 @@ Deno.serve(async (req) => {
     userId = data.user.id;
   }
 
+  // Un propriétaire existant n'est jamais modifié par un autre (protection)
+  const { data: existing } = await admin
+    .from('dahira_admins')
+    .select('role')
+    .eq('dahira_id', dahiraId)
+    .eq('user_id', userId)
+    .maybeSingle();
+  if (existing?.role === 'owner' && userId !== me.user?.id) return json({ error: 'owner_exists' }, 409);
+
+  // Personne du bureau : doit exister dans le bureau de ce dahira
+  let person: string | null = null;
+  if (typeof personId === 'string' && personId) {
+    const { data: d } = await admin.from('dahiras').select('board').eq('id', dahiraId).single();
+    const people = ((d?.board as { people?: { id: string }[] } | null)?.people ?? []);
+    if (!people.some((p) => p.id === personId)) return json({ error: 'person' }, 400);
+    person = personId;
+  }
+
   const { error } = await admin
     .from('dahira_admins')
-    .upsert({ dahira_id: dahiraId, user_id: userId, role }, { onConflict: 'dahira_id,user_id' });
+    .upsert(
+      { dahira_id: dahiraId, user_id: userId, role, ...(person ? { person_id: person } : {}) },
+      { onConflict: 'dahira_id,user_id' },
+    );
   if (error) return json({ error: 'save' }, 500);
 
   await admin.from('audit_log').insert({

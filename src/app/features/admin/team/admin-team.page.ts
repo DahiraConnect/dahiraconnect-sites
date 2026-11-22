@@ -8,6 +8,8 @@ import { relativeTime } from '../core/labels';
 import { PublishService } from '../core/publish.service';
 import { supabase } from '../core/supabase';
 import { HelpTip } from '../ui/help-tip/help-tip';
+import { PersonChoice, PersonPicker } from '../ui/person-picker/person-picker';
+import { DahiraDocStore } from '../core/dahira-doc.store';
 
 interface Member {
   user_id: string;
@@ -21,7 +23,7 @@ interface Member {
 /** Équipe : qui peut modifier le site. Ajout, rôle et retrait réservés aux propriétaires. */
 @Component({
   selector: 'app-admin-team',
-  imports: [FormsModule, RouterLink, HelpTip],
+  imports: [PersonPicker, FormsModule, RouterLink, HelpTip],
   templateUrl: './admin-team.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -41,6 +43,41 @@ export default class AdminTeamPage {
     [...(this.auth.current()?.board?.people ?? [])].sort((a, b) => a.name.localeCompare(b.name, 'fr')),
   );
   protected readonly postsOf = (m: Member) => postsOf(this.auth.current()?.board, m.person_id);
+  private readonly store = inject(DahiraDocStore);
+  protected readonly person = signal<PersonChoice>(null);
+  /** Poste au bureau exécutif d'une personne nouvelle (facultatif) */
+  protected newPost = '';
+
+  /** Nom de la personne du bureau reliée, sinon l'adresse e-mail */
+  protected readonly nameOf = (m: Member) =>
+    this.auth.current()?.board?.people.find((p) => p.id === m.person_id)?.name ?? m.email;
+
+  /** Un propriétaire gère les éditeurs et lui-même, jamais un autre propriétaire */
+  protected readonly canManage = (m: Member) =>
+    this.isOwner() && (m.role === 'editor' || m.user_id === this.myId());
+
+  /** Personne nouvelle : ajoutée au bureau (avec son poste éventuel) avant l'invitation */
+  private async ensurePerson(): Promise<string | null> {
+    const choice = this.person();
+    if (!choice) return null;
+    if (choice.kind === 'existing') return choice.id;
+    await this.store.load(true);
+    const board = this.store.board();
+    if (!board) return null;
+    const id = `p-${crypto.randomUUID().slice(0, 8)}`;
+    const post = this.newPost.trim();
+    const ok = await this.store.saveBoard(
+      {
+        ...board,
+        people: [...board.people, { id, name: choice.name }],
+        executive: post ? [...board.executive, { personId: id, role: post }] : board.executive,
+      },
+      'Personne ajoutée au bureau',
+    );
+    if (!ok) return null;
+    await this.auth.refresh();
+    return id;
+  }
 
   /** Propriétaire : relier un responsable à une personne du bureau */
   protected async linkPerson(m: Member, personId: string): Promise<void> {
@@ -75,19 +112,29 @@ export default class AdminTeamPage {
     }
     this.busy.set(true);
     this.error.set('');
+    const personId = await this.ensurePerson();
     const { data, error } = await supabase().functions.invoke<{ ok: boolean }>('team', {
-      body: { dahiraId: this.auth.current()?.dahiraId, email, role: this.role },
+      body: { dahiraId: this.auth.current()?.dahiraId, email, role: this.role, personId },
     });
     this.busy.set(false);
     if (error || !data?.ok) {
-      this.error.set('L’ajout a échoué. Réessayez.');
+      const code = await (error as { context?: Response } | null)?.context?.json?.().then((b: { error?: string }) => b.error).catch(() => undefined);
+      this.error.set(
+        code === 'owner_exists'
+          ? 'Cette adresse est déjà propriétaire : un autre propriétaire ne peut pas la modifier.'
+          : 'L’ajout a échoué. Réessayez.',
+      );
       return;
     }
+    const who = this.person()?.name ?? email;
     this.email = '';
+    this.newPost = '';
+    this.person.set(null);
+    await this.auth.refresh();
     this.members.reload();
     this.notices.show({
       kind: 'ok',
-      text: `${email} est ajouté. Dites-lui d’aller sur ${location.origin}/admin et de saisir son adresse.`,
+      text: `${who} est ajouté. Dites-lui d’aller sur ${location.origin}/admin et de saisir son adresse.`,
     });
   }
 
@@ -118,7 +165,11 @@ export default class AdminTeamPage {
     if (error) {
       this.notices.show({
         kind: 'warn',
-        text: /propriétaire/.test(error.message) ? 'Il doit rester au moins un propriétaire.' : 'La modification a échoué.',
+        text: /autre propriétaire/.test(error.message)
+          ? 'Un propriétaire ne peut pas être modifié par un autre propriétaire.'
+          : /au moins un propriétaire/.test(error.message)
+            ? 'Il doit rester au moins un propriétaire.'
+            : 'La modification a échoué.',
       });
       return;
     }

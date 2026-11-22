@@ -649,3 +649,15 @@
 .team-link {
   margin-bottom: var(--space-3);
 }
+
+.team-protected {
+  @include m.flex-row(var(--space-2));
+  margin: 0;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: #0b5a26;
+
+  .ph {
+    font-size: 20px;
+  }
+}

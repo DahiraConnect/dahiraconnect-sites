@@ -10,6 +10,7 @@ import { getDoc } from '../core/docs';
 import { relativeTime } from '../core/labels';
 import { formatLocal, toWhatsappNumber } from '../core/phone';
 import { PublishService } from '../core/publish.service';
+import { ImportResult, downloadTemplate, exportParticipantsXlsx, readParticipantsFile } from '../core/excel';
 import { csvCell, matches, parseNameLine } from '../core/search';
 import { supabase } from '../core/supabase';
 import { HelpTip } from '../ui/help-tip/help-tip';
@@ -49,6 +50,9 @@ export default class AdminParticipantsPage {
   protected phone = '';
   protected people = 1;
   protected importText = '';
+  /** Fichier Excel lu, en attente de confirmation */
+  protected readonly preview = signal<ImportResult | null>(null);
+  protected readonly exportOpen = signal(false);
   protected readonly source = SOURCE;
   protected readonly when = relativeTime;
   /** « 772223344 » → « 77 222 33 44 » */
@@ -121,6 +125,33 @@ export default class AdminParticipantsPage {
     this.list.reload();
   }
 
+  /** Modèle Excel à télécharger */
+  protected async template(): Promise<void> {
+    await downloadTemplate(this.event.value()?.data.title ?? 'événement');
+  }
+
+  /** Fichier Excel choisi : lecture et vérification, sans rien enregistrer encore */
+  protected async pickFile(event: Event): Promise<void> {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    input.value = '';
+    if (!file) return;
+    this.error.set('');
+    try {
+      this.preview.set(await readParticipantsFile(file));
+    } catch {
+      this.preview.set(null);
+      this.error.set('Ce fichier ne peut pas être lu. Utilisez le modèle Excel (.xlsx).');
+    }
+  }
+
+  protected async confirmFile(): Promise<void> {
+    const p = this.preview();
+    if (!p?.people.length) return;
+    await this.insertMany(p.people.map((x) => ({ first: x.first, last: x.last, phone: x.phone, people: x.people })), 0);
+    this.preview.set(null);
+  }
+
   /** Une personne par ligne ; les doublons (déjà inscrits ou répétés) sont ignorés */
   protected async importList(): Promise<void> {
     const lines = this.importText.split('\n').map((l) => l.trim()).filter(Boolean);
@@ -131,10 +162,15 @@ export default class AdminParticipantsPage {
       this.error.set('Aucun nom reconnu. Écrivez une personne par ligne : « Prénom Nom ».');
       return;
     }
+    await this.insertMany(ok.map((p) => ({ ...p, people: 1 })), ignored);
+    this.importText = '';
+  }
+
+  private async insertMany(list: { first: string; last: string; phone?: string; people: number }[], ignored: number): Promise<void> {
     this.busy.set(true);
     const { data, error } = await supabase()
       .from('event_registrations')
-      .upsert(ok.map((p) => this.row(p.first, p.last, p.phone, 1, 'import')), {
+      .upsert(list.map((p) => this.row(p.first, p.last, p.phone, p.people, 'import')), {
         onConflict: 'event_id,name_key',
         ignoreDuplicates: true,
       })
@@ -144,6 +180,7 @@ export default class AdminParticipantsPage {
       this.error.set('L’import a échoué. Vérifiez la liste et réessayez.');
       return;
     }
+    const ok = list;
     const added = data?.length ?? 0;
     const dup = ok.length - added;
     this.notices.show({
@@ -152,10 +189,19 @@ export default class AdminParticipantsPage {
         (dup ? `, ${dup} déjà inscrite${dup > 1 ? 's' : ''} (ignorée${dup > 1 ? 's' : ''})` : '') +
         (ignored ? `, ${ignored} ligne${ignored > 1 ? 's' : ''} sans nom complet` : '') + '.',
     });
-    this.importText = '';
     this.panel.set('none');
     this.error.set('');
     this.list.reload();
+  }
+
+  /** Export : Excel, CSV ou PDF à imprimer */
+  protected async exportXlsx(): Promise<void> {
+    this.exportOpen.set(false);
+    const e = this.event.value()?.data;
+    await exportParticipantsXlsx(
+      (this.list.value() ?? []).map((p) => ({ ...p, source: SOURCE[p.source] })),
+      `participants-${e?.slug ?? 'evenement'}.xlsx`,
+    );
   }
 
   protected async remove(p: Participant): Promise<void> {
@@ -174,6 +220,7 @@ export default class AdminParticipantsPage {
 
   /** Fichier CSV (Excel, Google Sheets) */
   protected exportCsv(): void {
+    this.exportOpen.set(false);
     const e = this.event.value()?.data;
     const header = ['N°', 'Prénom', 'Nom', 'Téléphone', 'Personnes', 'Inscrit le', 'Origine'];
     const rows = (this.list.value() ?? []).map((p, i) => [

@@ -204,6 +204,30 @@
             [attr.aria-invalid]="!!errors().phone" aria-describedby="p-phone-err" />
           <p id="p-phone-err" class="adm-error">{{ errors().phone }}</p>
         </div>
+        <p class="adm-label">Autres numéros <small>(facultatif)</small></p>
+        <p class="adm-hint">Affichés en bas du site. Le bouton « Rejoindre sur WhatsApp » garde un seul numéro (rubrique « Rejoindre »).</p>
+        <ul class="adm-list">
+          @for (o of others(); track $index; let i = $index) {
+            <li class="adm-card">
+              <div class="adm-row">
+                <div class="adm-field">
+                  <label [for]="'oc-l-' + i">Pour qui</label>
+                  <input [id]="'oc-l-' + i" [name]="'oc-l-' + i" [(ngModel)]="o.label" placeholder="Secrétaire général" />
+                </div>
+                <div class="adm-field">
+                  <label [for]="'oc-p-' + i">Numéro</label>
+                  <input [id]="'oc-p-' + i" [name]="'oc-p-' + i" type="tel" inputmode="tel" [(ngModel)]="o.phone" placeholder="77 123 45 67" />
+                </div>
+              </div>
+              <button type="button" class="btn btn--outline btn--sm" (click)="removeOther(i)">
+                <i class="ph ph-x" aria-hidden="true"></i> Retirer
+              </button>
+            </li>
+          }
+        </ul>
+        <button type="button" class="adm-quick__btn adm-add--after" (click)="addOther()">
+          <i class="ph ph-plus" aria-hidden="true"></i> Ajouter un numéro
+        </button>
       </details>
 
       <details class="adm-fold">

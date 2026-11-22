@@ -41,6 +41,35 @@
       </a>
     }
 
+    <!-- Inscriptions en cours -->
+    @if (signups().length) {
+      <section class="adm-section" aria-labelledby="signups-title">
+        <h2 id="signups-title">Inscriptions</h2>
+        <ul class="adm-list">
+          @for (s of signups(); track s.id) {
+            <li>
+              <a class="signup-card" [routerLink]="['agenda', s.id, 'participants']">
+                <span class="signup-card__head">
+                  <strong>{{ s.title }}</strong>
+                  <span class="signup-card__count">
+                    <strong>{{ s.taken }}</strong>@if (s.limit) { / {{ s.limit }} } inscrit{{ s.taken > 1 ? 's' : '' }}
+                  </span>
+                </span>
+                <span class="signup-card__date">{{ s.date }}</span>
+                @if (s.pct !== null) {
+                  <span class="signup-card__bar" role="progressbar" [attr.aria-valuenow]="s.taken" aria-valuemin="0"
+                    [attr.aria-valuemax]="s.limit" [attr.aria-label]="s.taken + ' inscrits sur ' + s.limit + ' places'">
+                    <span [style.width.%]="s.pct" [class.is-full]="s.pct >= 100"></span>
+                  </span>
+                }
+                <span class="signup-card__link">Voir la liste <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+              </a>
+            </li>
+          }
+        </ul>
+      </section>
+    }
+
     <!-- En attente -->
     @if (pending().length) {
       <section class="adm-section" aria-labelledby="pending-title">

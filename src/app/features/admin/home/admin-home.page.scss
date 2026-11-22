@@ -261,3 +261,72 @@
 .act__all {
   margin-top: var(--space-3);
 }
+
+// Inscriptions : carte cliquable avec barre de progression
+.signup-card {
+  @include m.focus-ring;
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-card);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  box-shadow: 0 1px 0 var(--color-border);
+
+  &:hover {
+    color: var(--color-text-primary);
+    box-shadow: 0 0 0 2px var(--color-gold-line);
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
+
+  &__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  &__count {
+    flex: none;
+    color: var(--color-text-secondary);
+
+    strong {
+      font: 400 24px / 1 var(--font-display);
+      color: var(--color-primary);
+    }
+  }
+
+  &__date {
+    font-size: var(--fs-small);
+    color: var(--color-text-muted);
+  }
+
+  &__bar {
+    height: 10px;
+    border-radius: 5px;
+    background: var(--color-surface-muted);
+    overflow: hidden;
+
+    > span {
+      display: block;
+      height: 100%;
+      border-radius: 5px;
+      background: var(--color-primary-mid);
+      transition: width 0.4s ease;
+
+      &.is-full {
+        background: var(--color-gold-text);
+      }
+    }
+  }
+
+  &__link {
+    @include m.flex-row(6px);
+    font-weight: 700;
+    color: var(--color-primary-mid);
+  }
+}

@@ -1,0 +1,40 @@
+@if (value(); as v) {
+  <div class="ppk__chosen">
+    <span class="adm-avatar ppk__avatar" aria-hidden="true">{{ v.name.charAt(0) }}</span>
+    <span class="ppk__chosen-text">
+      <strong>{{ v.name }}</strong>
+      <small>{{ v.kind === 'new' ? 'Sera ajouté au bureau' : 'Dans le bureau' }}</small>
+    </span>
+    <button type="button" class="ppk__change" (click)="clear()">Changer</button>
+  </div>
+} @else {
+  <div class="adm-field ppk">
+    <label [for]="id">{{ label() }}</label>
+    <div class="ppk__box">
+    <input [id]="id" type="text" role="combobox" autocomplete="off" aria-autocomplete="list"
+      [attr.aria-expanded]="open() && count() > 0" [attr.aria-controls]="id + '-list'"
+      [attr.aria-activedescendant]="open() && count() ? id + '-opt-' + active() : null"
+      placeholder="Tapez son prénom ou son nom" [value]="query()"
+      (input)="onInput($any($event.target).value)" (keydown)="key($event)" (focus)="open.set(!!query().trim())" (blur)="open.set(false)" />
+    @if (open() && count()) {
+      <ul class="ppk__list" role="listbox" [id]="id + '-list'">
+        @for (p of results(); track p.id; let i = $index) {
+          <li role="option" [id]="id + '-opt-' + i" [attr.aria-selected]="active() === i" [class.is-active]="active() === i"
+            (mousedown)="$event.preventDefault(); pick(i)">
+            <span class="adm-avatar ppk__avatar" aria-hidden="true">{{ p.name.charAt(0) }}</span>
+            <span><strong>{{ p.name }}</strong>@if (p.posts.length) { <small>{{ p.posts.join(' · ') }}</small> }</span>
+          </li>
+        }
+        @if (canCreate()) {
+          <li role="option" class="ppk__create" [id]="id + '-opt-' + results().length" [attr.aria-selected]="active() === results().length"
+            [class.is-active]="active() === results().length" (mousedown)="$event.preventDefault(); pick(results().length)">
+            <span class="adm-avatar ppk__avatar ppk__avatar--new" aria-hidden="true"><i class="ph ph-plus"></i></span>
+            <span>Ajouter « <strong>{{ query().trim() }}</strong> » au bureau</span>
+          </li>
+        }
+      </ul>
+    }
+    </div>
+    <p class="adm-hint">S’il est déjà dans le bureau, choisissez-le : il gardera son poste.</p>
+  </div>
+}

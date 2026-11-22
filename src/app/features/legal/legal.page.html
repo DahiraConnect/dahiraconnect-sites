@@ -12,7 +12,11 @@
     <section>
       <h2>Qui publie ce site ?</h2>
       <p>Le site <strong>{{ site() }}</strong> est publié par le <strong>{{ dahira().name }}</strong>, association religieuse.</p>
-      <p>Adresse : {{ dahira().contact.address }}<br />Téléphone : <a [href]="telUrl()">{{ dahira().contact.phone }}</a></p>
+      <p>Adresse : {{ dahira().contact.address }}<br />Téléphone : <a [href]="telUrl()">{{ dahira().contact.phone }}</a>
+        @for (o of dahira().contact.others ?? []; track o.phone) {
+          <br />{{ o.label }} : {{ o.phone }}
+        }
+      </p>
       <p>Le bureau du dahira est responsable de ce qui est publié.</p>
     </section>
     <section>

@@ -25,6 +25,14 @@
               {{ dahira().contact.phone }}
             </a>
           </li>
+          @for (o of dahira().contact.others ?? []; track o.phone) {
+            <li>
+              <a [href]="telOf(o.phone)">
+                <i class="ph ph-phone" aria-hidden="true"></i>
+                <span>{{ o.label }} : {{ o.phone }}</span>
+              </a>
+            </li>
+          }
         </ul>
       </section>
 

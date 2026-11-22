@@ -58,6 +58,8 @@ export default class AdminProfilePage {
   protected readonly saveError = signal('');
   protected form!: ProfileForm;
   protected readonly social = signal<SocialLink[]>([]);
+  /** Autres numéros de contact (affichés en bas de page) */
+  protected readonly others = signal<{ label: string; phone: string }[]>([]);
   protected readonly logo = signal<Photo[]>([]);
   protected readonly guidePhoto = signal<Photo[]>([]);
   protected readonly presets = PRESETS;
@@ -101,6 +103,7 @@ export default class AdminProfilePage {
       blessing: d.support?.blessing ?? '',
     };
     this.social.set(structuredClone(d.social ?? []));
+    this.others.set(structuredClone(d.contact.others ?? []));
     this.logo.set([{ url: d.logoUrl, thumbUrl: d.logoSmallUrl, alt: d.logoAlt, width: 1, height: 1 }]);
     this.guidePhoto.set(d.guidePhotoUrl ? [{ url: d.guidePhotoUrl, alt: d.guideName, width: 1, height: 1 }] : []);
     this.palette.set({
@@ -116,6 +119,14 @@ export default class AdminProfilePage {
 
   protected setColor(key: keyof Palette, value: string): void {
     this.palette.update((p) => ({ ...p, [key]: value.toUpperCase() }));
+  }
+
+  protected addOther(): void {
+    this.others.update((o) => [...o, { label: '', phone: '' }]);
+  }
+
+  protected removeOther(i: number): void {
+    this.others.update((o) => o.filter((_, j) => j !== i));
   }
 
   protected addSocial(): void {
@@ -184,7 +195,14 @@ export default class AdminProfilePage {
       theme: { ...d.theme, ...themeFrom(this.palette()) },
       motto: f.motto.trim(),
       membersApprox: f.membersApprox ? Number(f.membersApprox) : undefined,
-      contact: { address: f.address.trim(), phone: !phone ? '' : phone.startsWith('221') ? `+221 ${formatLocal(phone)}` : `+${phone}` },
+      contact: {
+        address: f.address.trim(),
+        phone: !phone ? '' : phone.startsWith('221') ? `+221 ${formatLocal(phone)}` : `+${phone}`,
+        others: this.others()
+          .map((o) => ({ label: o.label.trim(), digits: toWhatsappNumber(o.phone) }))
+          .filter((o) => o.label && o.digits)
+          .map((o) => ({ label: o.label, phone: o.digits.startsWith('221') ? `+221 ${formatLocal(o.digits)}` : `+${o.digits}` })),
+      },
       join: {
         ...d.join,
         mode: f.joinMode,

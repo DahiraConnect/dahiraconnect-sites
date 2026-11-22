@@ -21,17 +21,23 @@
       </button>
       <span class="adm-with-tip">
         <button type="button" class="adm-quick__btn" [class.adm-quick__btn--main]="panel() === 'import'" (click)="toggle('import')">
-          <i class="ph ph-list-plus" aria-hidden="true"></i> Coller une liste
+          <i class="ph ph-upload-simple" aria-hidden="true"></i> Importer
         </button>
-        <app-help-tip>Copiez une liste de noms (WhatsApp, Excel…) : une personne par ligne. Les noms déjà inscrits sont ignorés.</app-help-tip>
+        <app-help-tip>Depuis le modèle Excel, ou en collant une liste de noms. Les noms déjà inscrits sont ignorés.</app-help-tip>
       </span>
       @if (list.value()?.length) {
-        <button type="button" class="adm-quick__btn" (click)="exportCsv()">
-          <i class="ph ph-file-csv" aria-hidden="true"></i> Excel (CSV)
-        </button>
-        <a class="adm-quick__btn" [routerLink]="['imprimer']">
-          <i class="ph ph-printer" aria-hidden="true"></i> PDF à imprimer
-        </a>
+        <div class="pt-export">
+          <button type="button" class="adm-quick__btn" (click)="exportOpen.set(!exportOpen())" [attr.aria-expanded]="exportOpen()" aria-controls="pt-export-menu">
+            <i class="ph ph-download-simple" aria-hidden="true"></i> Exporter <i class="ph ph-caret-down" aria-hidden="true"></i>
+          </button>
+          @if (exportOpen()) {
+            <div class="pt-export__menu" id="pt-export-menu">
+              <button type="button" (click)="exportXlsx()"><i class="ph ph-microsoft-excel-logo" aria-hidden="true"></i><span>Excel <small>Fichier .xlsx</small></span></button>
+              <button type="button" (click)="exportCsv()"><i class="ph ph-file-csv" aria-hidden="true"></i><span>CSV <small>Google Sheets, autres tableurs</small></span></button>
+              <a [routerLink]="['imprimer']" (click)="exportOpen.set(false)"><i class="ph ph-printer" aria-hidden="true"></i><span>PDF à imprimer <small>Liste avec cases « Présent »</small></span></a>
+            </div>
+          }
+        </div>
       }
     </div>
 
@@ -63,18 +69,58 @@
     }
 
     @if (panel() === 'import') {
-      <form class="adm-card pt-panel" (ngSubmit)="importList()" novalidate>
-        <div class="adm-field">
-          <label for="pt-import">Une personne par ligne</label>
-          <textarea id="pt-import" name="import" rows="8" [(ngModel)]="importText"
-            placeholder="Aminata Ndiaye&#10;Moussa Fall 77 123 45 67&#10;Ndeye Coura Gueye"></textarea>
-          <p class="adm-hint">Le dernier mot est pris comme nom de famille. Un numéro en fin de ligne est gardé.</p>
-        </div>
-        <p class="adm-error" role="alert">{{ error() }}</p>
-        <button type="submit" class="btn btn--dark btn--sm" [disabled]="busy()"><i class="ph ph-check" aria-hidden="true"></i> Ajouter la liste</button>
-      </form>
-    }
+      <div class="adm-card pt-panel pt-import">
+        <ol class="pt-steps">
+          <li>
+            <strong>Téléchargez le modèle Excel</strong>
+            <button type="button" class="btn btn--outline btn--sm" (click)="template()">
+              <i class="ph ph-microsoft-excel-logo" aria-hidden="true"></i> Modèle à remplir
+            </button>
+          </li>
+          <li>
+            <strong>Remplissez-le</strong> : Prénom, Nom, et si vous voulez Téléphone et Personnes.
+          </li>
+          <li>
+            <strong>Choisissez le fichier rempli</strong>
+            <label class="btn btn--dark btn--sm pt-file">
+              <input type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" (change)="pickFile($event)" />
+              <i class="ph ph-file-arrow-up" aria-hidden="true"></i> Choisir le fichier
+            </label>
+          </li>
+        </ol>
 
+        @if (preview(); as pv) {
+          <div class="pt-preview" role="status">
+            <p><strong>{{ pv.people.length }}</strong> personne{{ pv.people.length > 1 ? 's' : '' }} prête{{ pv.people.length > 1 ? 's' : '' }} à ajouter.</p>
+            @if (pv.errors.length) {
+              <p class="adm-error">{{ pv.errors.length }} ligne{{ pv.errors.length > 1 ? 's' : '' }} à corriger :</p>
+              <ul class="pt-errors">
+                @for (e of pv.errors.slice(0, 8); track e) { <li>{{ e }}</li> }
+              </ul>
+            }
+            @if (pv.people.length) {
+              <button type="button" class="btn btn--dark btn--sm" (click)="confirmFile()" [disabled]="busy()">
+                <i class="ph ph-check" aria-hidden="true"></i> Ajouter {{ pv.people.length }} personne{{ pv.people.length > 1 ? 's' : '' }}
+              </button>
+            }
+          </div>
+        }
+
+        <details class="pt-paste">
+          <summary>Ou coller une liste de noms</summary>
+          <form (ngSubmit)="importList()" novalidate>
+            <div class="adm-field">
+              <label for="pt-import">Une personne par ligne</label>
+              <textarea id="pt-import" name="import" rows="6" [(ngModel)]="importText"
+                placeholder="Aminata Ndiaye&#10;Moussa Fall 77 123 45 67&#10;Ndeye Coura Gueye"></textarea>
+              <p class="adm-hint">Le dernier mot est pris comme nom de famille. Un numéro en fin de ligne est gardé.</p>
+            </div>
+            <button type="submit" class="btn btn--outline btn--sm" [disabled]="busy()"><i class="ph ph-check" aria-hidden="true"></i> Ajouter la liste</button>
+          </form>
+        </details>
+        <p class="adm-error" role="alert">{{ error() }}</p>
+      </div>
+    }
     @if (list.value()?.length) {
       <div class="adm-search" role="search">
         <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
@@ -108,7 +154,7 @@
         }
       </ol>
     } @else if (panel() === 'none') {
-      <app-empty-state icon="ph-hand-waving"><p>Personne n’est encore inscrit. Les inscriptions du site apparaîtront ici.</p><button type="button" class="btn btn--dark btn--sm" (click)="toggle('add')"><i class="ph ph-user-plus" aria-hidden="true"></i> Ajouter quelqu’un</button><button type="button" class="btn btn--outline btn--sm" (click)="toggle('import')"><i class="ph ph-list-plus" aria-hidden="true"></i> Coller une liste</button></app-empty-state>
+      <app-empty-state icon="ph-hand-waving"><p>Personne n’est encore inscrit. Les inscriptions du site apparaîtront ici.</p><button type="button" class="btn btn--dark btn--sm" (click)="toggle('add')"><i class="ph ph-user-plus" aria-hidden="true"></i> Ajouter quelqu’un</button><button type="button" class="btn btn--outline btn--sm" (click)="toggle('import')"><i class="ph ph-upload-simple" aria-hidden="true"></i> Importer une liste</button></app-empty-state>
     }
   }
 </div>

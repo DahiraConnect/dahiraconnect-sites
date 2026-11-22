@@ -66,3 +66,117 @@
     color: #b3261e;
   }
 }
+
+// Export : un bouton, un petit menu
+.pt-export {
+  position: relative;
+}
+
+.pt-export__menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 15;
+  display: grid;
+  width: 260px;
+  padding: var(--space-1);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-card);
+  box-shadow: var(--shadow-float), 0 0 0 1px var(--color-border);
+
+  > button,
+  > a {
+    @include m.flex-row(var(--space-3));
+    @include m.focus-ring;
+    min-height: 56px;
+    padding: 0 var(--space-3);
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: none;
+    color: var(--color-text-primary);
+    font: 600 var(--fs-body) / 1.2 var(--font-body);
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--color-surface);
+      color: var(--color-text-primary);
+    }
+
+    .ph {
+      font-size: 24px;
+      color: var(--color-primary-mid);
+    }
+
+    span {
+      display: grid;
+    }
+
+    small {
+      font-weight: 400;
+      font-size: var(--fs-small);
+      color: var(--color-text-muted);
+    }
+  }
+}
+
+// Import en trois étapes
+.pt-steps {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0 0 var(--space-4);
+  padding-left: var(--space-6);
+  list-style: decimal;
+
+  li {
+    display: grid;
+    gap: var(--space-2);
+    justify-items: start;
+  }
+}
+
+.pt-file {
+  position: relative;
+
+  input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  &:has(input:focus-visible) {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  }
+}
+
+.pt-preview {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: start;
+  margin-bottom: var(--space-4);
+  padding: var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+
+  p {
+    margin: 0;
+  }
+}
+
+.pt-errors {
+  display: grid;
+  gap: 4px;
+  padding-left: var(--space-5);
+  list-style: disc;
+  font-size: var(--fs-small);
+  color: var(--color-text-secondary);
+}
+
+.pt-paste summary {
+  min-height: var(--tap-min);
+  font-weight: 700;
+  color: var(--color-primary-mid);
+  cursor: pointer;
+}

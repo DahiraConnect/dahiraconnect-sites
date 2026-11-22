@@ -31,8 +31,10 @@ export class EventSignup {
   protected readonly status = signal<RegistrationStatus | null>(null);
   protected readonly busy = signal(false);
   protected readonly error = signal('');
-  /** Prénom de la personne déjà inscrite depuis ce téléphone */
+  /** Prénom de la dernière personne inscrite (message de remerciement) */
   protected readonly done = signal<string | null>(null);
+  /** Prénoms déjà inscrits depuis ce téléphone */
+  protected readonly registered = signal<string[]>([]);
   protected first = '';
   protected last = '';
   protected phone = '';
@@ -51,9 +53,17 @@ export class EventSignup {
     // Dans le navigateur seulement : l'état change après la génération de la page
     afterNextRender(async () => {
       try {
-        this.done.set(localStorage.getItem(this.storageKey));
+        const saved = JSON.parse(localStorage.getItem(this.storageKey) ?? '[]');
+        // Ancien format : un seul prénom
+        const names: string[] = Array.isArray(saved) ? saved : [String(saved)];
+        this.registered.set(names);
+        if (names.length) this.done.set(names[names.length - 1]);
       } catch {
-        /* stockage indisponible */
+        const legacy = this.readLegacy();
+        if (legacy) {
+          this.registered.set([legacy]);
+          this.done.set(legacy);
+        }
       }
       try {
         this.status.set(await registrationStatus(this.dahira().slug, this.event().slug));
@@ -61,6 +71,23 @@ export class EventSignup {
         this.status.set({ open: true });
       }
     });
+  }
+
+  /** Inscrire quelqu'un d'autre depuis le même téléphone (famille, ami) */
+  protected another(): void {
+    this.done.set(null);
+    this.error.set('');
+    this.first = this.last = this.phone = '';
+    this.people = 1;
+    setTimeout(() => document.getElementById('su-first')?.focus());
+  }
+
+  private readLegacy(): string | null {
+    try {
+      return localStorage.getItem(this.storageKey);
+    } catch {
+      return null;
+    }
   }
 
   protected async submit(): Promise<void> {
@@ -87,8 +114,9 @@ export class EventSignup {
     this.busy.set(false);
     if (result === 'ok' || result === 'duplicate') {
       this.done.set(first);
+      if (!this.registered().includes(first)) this.registered.update((n) => [...n, first]);
       try {
-        localStorage.setItem(this.storageKey, first);
+        localStorage.setItem(this.storageKey, JSON.stringify(this.registered()));
       } catch {
         /* stockage indisponible */
       }

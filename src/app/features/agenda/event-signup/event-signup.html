@@ -11,6 +11,14 @@
     @if (error()) {
       <p class="signup__note">{{ error() }}</p>
     }
+    @if (registered().length > 1) {
+      <p class="signup__note">Déjà inscrits depuis ce téléphone : {{ registered().join(', ') }}.</p>
+    }
+    @if (status()?.open !== false) {
+      <button type="button" class="btn btn--outline signup__submit" (click)="another()">
+        <i class="ph ph-user-plus" aria-hidden="true"></i> Inscrire une autre personne
+      </button>
+    }
   } @else if (status() && !status()!.open) {
     <p class="signup__closed">
       <i class="ph ph-lock-simple" aria-hidden="true"></i>

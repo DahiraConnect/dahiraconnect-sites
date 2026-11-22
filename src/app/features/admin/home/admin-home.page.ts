@@ -73,6 +73,35 @@ export default class AdminHomePage {
     },
   });
 
+  /** Personnes inscrites par événement */
+  private readonly registrations = resource({
+    params: () => this.dahiraId(),
+    loader: async ({ params }) => {
+      const { data } = await supabase().from('event_registrations').select('event_id, people').eq('dahira_id', params);
+      const byEvent = new Map<string, number>();
+      for (const r of (data ?? []) as { event_id: string; people: number }[]) byEvent.set(r.event_id, (byEvent.get(r.event_id) ?? 0) + r.people);
+      return byEvent;
+    },
+  });
+
+  /** Événements à venir avec inscriptions ouvertes : barre de progression vers la liste */
+  protected readonly signups = computed(() =>
+    (this.events.value() ?? [])
+      .filter((r) => r.data.registration?.enabled && new Date(r.data.startsAt).getTime() > Date.now() - 86_400_000)
+      .map((r) => {
+        const taken = this.registrations.value()?.get(r.id) ?? 0;
+        const limit = r.data.registration?.limit;
+        return {
+          id: r.id,
+          title: r.data.title,
+          date: fmtDate(r.data.startsAt),
+          taken,
+          limit,
+          pct: limit ? Math.min(100, Math.round((taken / limit) * 100)) : null,
+        };
+      }),
+  );
+
   /** Brouillons et contenus programmés */
   protected readonly pending = computed(() => [
     ...(this.events.value() ?? [])

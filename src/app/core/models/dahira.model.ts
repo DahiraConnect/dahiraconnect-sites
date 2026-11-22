@@ -82,7 +82,12 @@ export interface Dahira {
   /** Description courte du logo (texte alternatif) */
   logoAlt: string;
   theme: Partial<Record<ThemeToken, string>>;
-  contact: { address: string; phone: string };
+  contact: {
+    address: string;
+    phone: string;
+    /** Autres numéros utiles (« Secrétaire général »…) ; WhatsApp « Rejoindre » reste unique (join) */
+    others?: { label: string; phone: string }[];
+  };
   join: JoinSettings;
   support?: SupportSettings;
   announcement?: Announcement;

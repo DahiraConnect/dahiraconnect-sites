@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: 'Phosphor';
-  src: url('/assets/fonts/phosphor-regular.714abc60.woff2') format('woff2');
+  src: url('/assets/fonts/phosphor-regular.19e78774.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -105,6 +105,9 @@
 .ph.ph-dot::before {
   content: "\ecde";
 }
+.ph.ph-download-simple::before {
+  content: "\e20c";
+}
 .ph.ph-drop::before {
   content: "\e210";
 }
@@ -131,6 +134,9 @@
 }
 .ph.ph-file::before {
   content: "\e230";
+}
+.ph.ph-file-arrow-up::before {
+  content: "\e61e";
 }
 .ph.ph-file-audio::before {
   content: "\ea20";
@@ -177,9 +183,6 @@
 .ph.ph-lightning::before {
   content: "\e2de";
 }
-.ph.ph-list-plus::before {
-  content: "\e2f8";
-}
 .ph.ph-lock-simple::before {
   content: "\e308";
 }
@@ -203,6 +206,9 @@
 }
 .ph.ph-microphone::before {
   content: "\e326";
+}
+.ph.ph-microsoft-excel-logo::before {
+  content: "\eb6c";
 }
 .ph.ph-mosque::before {
   content: "\ecee";
@@ -249,6 +255,9 @@
 .ph.ph-share-network::before {
   content: "\e408";
 }
+.ph.ph-shield-check::before {
+  content: "\e40c";
+}
 .ph.ph-sign-in::before {
   content: "\e428";
 }
@@ -287,6 +296,9 @@
 }
 .ph.ph-trophy::before {
   content: "\e67e";
+}
+.ph.ph-upload-simple::before {
+  content: "\e4c0";
 }
 .ph.ph-user::before {
   content: "\e4c2";
@@ -336,7 +348,7 @@
 
 @font-face {
   font-family: 'Phosphor Fill';
-  src: url('/assets/fonts/phosphor-fill.2dcdf405.woff2') format('woff2');
+  src: url('/assets/fonts/phosphor-fill.9bffa932.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -439,6 +451,9 @@
 .ph-fill.ph-dot::before {
   content: "\ecde";
 }
+.ph-fill.ph-download-simple::before {
+  content: "\e20c";
+}
 .ph-fill.ph-drop::before {
   content: "\e210";
 }
@@ -465,6 +480,9 @@
 }
 .ph-fill.ph-file::before {
   content: "\e230";
+}
+.ph-fill.ph-file-arrow-up::before {
+  content: "\e61e";
 }
 .ph-fill.ph-file-audio::before {
   content: "\ea20";
@@ -511,9 +529,6 @@
 .ph-fill.ph-lightning::before {
   content: "\e2de";
 }
-.ph-fill.ph-list-plus::before {
-  content: "\e2f8";
-}
 .ph-fill.ph-lock-simple::before {
   content: "\e308";
 }
@@ -537,6 +552,9 @@
 }
 .ph-fill.ph-microphone::before {
   content: "\e326";
+}
+.ph-fill.ph-microsoft-excel-logo::before {
+  content: "\eb6c";
 }
 .ph-fill.ph-mosque::before {
   content: "\ecee";
@@ -583,6 +601,9 @@
 .ph-fill.ph-share-network::before {
   content: "\e408";
 }
+.ph-fill.ph-shield-check::before {
+  content: "\e40c";
+}
 .ph-fill.ph-sign-in::before {
   content: "\e428";
 }
@@ -624,6 +645,9 @@
 }
 .ph-fill.ph-trophy::before {
   content: "\e67e";
+}
+.ph-fill.ph-upload-simple::before {
+  content: "\e4c0";
 }
 .ph-fill.ph-user::before {
   content: "\e4c2";

@@ -20,6 +20,7 @@ export class SiteFooter {
 
   protected readonly dahira = inject(TenantService).dahira;
   protected readonly tel = computed(() => buildTelLink(this.dahira().contact.phone));
+  protected readonly telOf = buildTelLink;
   /** Premier mot du nom arabe, en filigrane */
   protected readonly watermark = computed(() => this.dahira().nameArabic?.split(' ')[0] ?? '');
   protected readonly year = new Date().getFullYear();
