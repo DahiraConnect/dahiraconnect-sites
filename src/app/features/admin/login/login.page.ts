@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component, ElementRef, inject, signal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, afterNextRender, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdminAuth } from '../core/admin-auth.service';
+import { TURNSTILE_SITE_KEY } from '../../../../environments/supabase';
 import { supabaseConfigured } from '../core/supabase';
+import { loadTurnstile } from './turnstile';
 
 /**
  * Connexion sans mot de passe : l'adresse e-mail, puis le code à 6 chiffres reçu.
@@ -27,16 +29,57 @@ export default class LoginPage {
   protected email = '';
   protected code = '';
 
+  /** Anti-robots Cloudflare Turnstile (si une clé est configurée) */
+  protected readonly captchaEnabled = !!TURNSTILE_SITE_KEY;
+  private readonly captchaBox = viewChild<ElementRef<HTMLElement>>('captcha');
+  protected readonly captchaToken = signal('');
+  private widgetId?: string;
+
+  constructor() {
+    afterNextRender(() => void this.renderCaptcha());
+    inject(DestroyRef).onDestroy(() => {
+      if (this.widgetId) window.turnstile?.remove(this.widgetId);
+    });
+  }
+
+  private async renderCaptcha(): Promise<void> {
+    const box = this.captchaBox()?.nativeElement;
+    if (!this.captchaEnabled || !box) return;
+    try {
+      const turnstile = await loadTurnstile();
+      this.widgetId = turnstile.render(box, {
+        sitekey: TURNSTILE_SITE_KEY,
+        language: 'fr',
+        theme: 'light',
+        size: 'flexible',
+        callback: (token: string) => this.captchaToken.set(token),
+        'expired-callback': () => this.captchaToken.set(''),
+        'error-callback': () => this.captchaToken.set(''),
+      });
+    } catch {
+      this.error.set('La vérification anti-robots ne se charge pas. Vérifiez votre connexion puis rechargez la page.');
+    }
+  }
+
   protected async send(): Promise<void> {
     const email = this.email.trim().toLowerCase();
     if (!/^\S+@\S+\.\S+$/.test(email)) {
       this.error.set('Vérifiez l’adresse e-mail (exemple : nom@gmail.com).');
       return;
     }
+    if (this.captchaEnabled && !this.captchaToken()) {
+      this.error.set('Patientez une seconde : la vérification anti-robots se termine.');
+      return;
+    }
     this.busy.set(true);
     this.error.set('');
-    const result = await this.auth.sendCode(email);
+    const result = await this.auth.sendCode(email, this.captchaToken() || undefined);
     this.busy.set(false);
+    // Une vérification ne sert qu'une fois
+    if (this.widgetId) {
+      window.turnstile?.reset(this.widgetId);
+      this.captchaToken.set('');
+    }
     if (result === 'sent') {
       this.email = email;
       this.step.set('code');
@@ -45,7 +88,9 @@ export default class LoginPage {
       this.error.set(
         result === 'unknown'
           ? 'Cette adresse n’est pas inscrite. Demandez au responsable du site de vous ajouter.'
-          : 'Envoi impossible pour le moment. Vérifiez votre connexion et réessayez.',
+          : result === 'captcha'
+            ? 'La vérification anti-robots a échoué. Réessayez.'
+            : 'Envoi impossible pour le moment. Vérifiez votre connexion et réessayez.',
       );
     }
   }

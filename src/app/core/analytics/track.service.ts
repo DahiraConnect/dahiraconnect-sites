@@ -4,7 +4,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { SUPABASE } from '../../../environments/supabase';
 import { TenantService } from '../tenant/tenant.service';
-import { clickKey, viewKey } from './track';
+import { clickKey, deviceType, viewKey } from './track';
 
 /**
  * Statistiques anonymes du site public : pages vues et boutons importants touchés.
@@ -21,8 +21,11 @@ export class TrackService {
     // Robots, tests automatisés et audits (Lighthouse) : non comptés
     !navigator.webdriver;
 
+  private device: string | null = null;
+
   start(): void {
     if (!this.enabled) return;
+    this.device = deviceType(matchMedia('(pointer: coarse)').matches, Math.min(screen.width, innerWidth));
     this.router.events
       .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
       .subscribe((e) => {
@@ -46,7 +49,7 @@ export class TrackService {
         method: 'POST',
         keepalive: true,
         headers: { apikey: SUPABASE.anonKey, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ p_slug: this.tenant.dahira().slug, p_kind: kind, p_key: key }),
+        body: JSON.stringify({ p_slug: this.tenant.dahira().slug, p_kind: kind, p_key: key, p_device: this.device }),
       }).catch(() => undefined);
     }, kind === 'view' ? 1500 : 0);
   }

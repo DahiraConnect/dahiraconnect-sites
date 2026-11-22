@@ -29,3 +29,9 @@
 /agenda.ics
   Content-Type: text/calendar; charset=utf-8
   Cache-Control: public, max-age=3600
+
+# Espace des responsables : jamais dans les moteurs de recherche
+/admin
+  X-Robots-Tag: noindex, nofollow
+/admin/*
+  X-Robots-Tag: noindex, nofollow

@@ -18,7 +18,7 @@
             <li class="log__item">
               <span class="log__icon log__icon--{{ e.action }}"><i class="ph {{ icon(e) }}" aria-hidden="true"></i></span>
               <span class="log__text">
-                <span><strong>{{ who(e.user_email) }}</strong> {{ describe(e) }}</span>
+                <span><strong>{{ who(e) }}</strong> {{ describe(e) }}</span>
                 <time class="log__when" [attr.datetime]="e.created_at">{{ when(e.created_at) }}</time>
               </span>
             </li>

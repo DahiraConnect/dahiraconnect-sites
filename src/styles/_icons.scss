@@ -57,6 +57,9 @@
 .ph.ph-camera-plus::before {
   content: "\ec58";
 }
+.ph.ph-caret-down::before {
+  content: "\e136";
+}
 .ph.ph-caret-left::before {
   content: "\e138";
 }
@@ -86,6 +89,15 @@
 }
 .ph.ph-cursor-click::before {
   content: "\e7c8";
+}
+.ph.ph-desktop::before {
+  content: "\e560";
+}
+.ph.ph-device-mobile::before {
+  content: "\e1e0";
+}
+.ph.ph-device-tablet::before {
+  content: "\e1e6";
 }
 .ph.ph-dot::before {
   content: "\ecde";
@@ -123,6 +135,9 @@
 .ph.ph-gear-six::before {
   content: "\e272";
 }
+.ph.ph-globe-simple::before {
+  content: "\e28e";
+}
 .ph.ph-hand-heart::before {
   content: "\e810";
 }
@@ -146,6 +161,9 @@
 }
 .ph.ph-instagram-logo::before {
   content: "\e2d0";
+}
+.ph.ph-lightning::before {
+  content: "\e2de";
 }
 .ph.ph-map-pin::before {
   content: "\e316";
@@ -215,6 +233,9 @@
 }
 .ph.ph-spinner::before {
   content: "\e66a";
+}
+.ph.ph-squares-four::before {
+  content: "\e464";
 }
 .ph.ph-stop::before {
   content: "\e46c";
@@ -331,6 +352,9 @@
 .ph-fill.ph-camera-plus::before {
   content: "\ec58";
 }
+.ph-fill.ph-caret-down::before {
+  content: "\e136";
+}
 .ph-fill.ph-caret-left::before {
   content: "\e138";
 }
@@ -360,6 +384,15 @@
 }
 .ph-fill.ph-cursor-click::before {
   content: "\e7c8";
+}
+.ph-fill.ph-desktop::before {
+  content: "\e560";
+}
+.ph-fill.ph-device-mobile::before {
+  content: "\e1e0";
+}
+.ph-fill.ph-device-tablet::before {
+  content: "\e1e6";
 }
 .ph-fill.ph-dot::before {
   content: "\ecde";
@@ -397,6 +430,9 @@
 .ph-fill.ph-gear-six::before {
   content: "\e272";
 }
+.ph-fill.ph-globe-simple::before {
+  content: "\e28e";
+}
 .ph-fill.ph-hand-heart::before {
   content: "\e810";
 }
@@ -420,6 +456,9 @@
 }
 .ph-fill.ph-instagram-logo::before {
   content: "\e2d0";
+}
+.ph-fill.ph-lightning::before {
+  content: "\e2de";
 }
 .ph-fill.ph-map-pin::before {
   content: "\e316";
@@ -489,6 +528,9 @@
 }
 .ph-fill.ph-spinner::before {
   content: "\e66a";
+}
+.ph-fill.ph-squares-four::before {
+  content: "\e464";
 }
 .ph-fill.ph-star::before {
   content: "\e46a";

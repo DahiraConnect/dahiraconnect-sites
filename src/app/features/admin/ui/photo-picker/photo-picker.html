@@ -36,4 +36,7 @@
     }
   </label>
 }
+@if (saved()) {
+  <p class="pp__saved"><i class="ph ph-lightning" aria-hidden="true"></i> {{ saved() }}</p>
+}
 <p class="adm-error" aria-live="polite">{{ error() }}</p>

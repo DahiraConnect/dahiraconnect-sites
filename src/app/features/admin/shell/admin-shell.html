@@ -1,22 +1,62 @@
 <header class="adm-bar">
-  <a class="adm-bar__home" routerLink="/admin">
-    <img [src]="logo()" alt="" width="40" height="40" />
-    <span>
-      <strong>{{ name() }}</strong>
-      <small>Espace responsables</small>
-    </span>
-  </a>
-  <a class="adm-bar__btn" href="/" target="_blank" rel="noopener">
-    <i class="ph ph-arrow-square-out" aria-hidden="true"></i>
-    Voir le site
-  </a>
   @if (auth.session()) {
-    <button type="button" class="adm-bar__btn" (click)="signOut()">
-      <i class="ph ph-sign-out" aria-hidden="true"></i>
-      Sortir
+    <button type="button" class="adm-bar__menu" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()" aria-controls="adm-apps">
+      <i class="ph" [class.ph-dots-nine]="!menuOpen()" [class.ph-x]="menuOpen()" aria-hidden="true"></i>
+      <span>Menu</span>
     </button>
   }
+  <a class="adm-bar__home" routerLink="/admin">
+    <img [src]="logo()" alt="" width="36" height="36" />
+    <strong>{{ name() }}</strong>
+  </a>
+  @if (auth.session()) {
+    <div class="adm-user">
+      <button type="button" class="adm-user__btn" (click)="toggleUser()" [attr.aria-expanded]="userOpen()" aria-controls="adm-user-menu"
+        [attr.aria-label]="'Mon compte : ' + auth.displayName()">
+        <span class="adm-avatar adm-avatar--sm" aria-hidden="true">{{ initial() }}</span>
+        <i class="ph ph-caret-down" aria-hidden="true"></i>
+      </button>
+      @if (userOpen()) {
+        <div class="adm-user__menu" id="adm-user-menu">
+          <div class="adm-user__who">
+            <span class="adm-avatar" aria-hidden="true">{{ initial() }}</span>
+            <span>
+              <strong>{{ auth.displayName() }}</strong>
+              <small>{{ auth.email() }}</small>
+              <span class="adm-tag adm-tag--soft">{{ roleLabel() }}</span>
+            </span>
+          </div>
+          <a class="adm-user__item" routerLink="/admin/profil"><i class="ph ph-user-circle" aria-hidden="true"></i> Mon profil</a>
+          <a class="adm-user__item" href="/" target="_blank" rel="noopener"><i class="ph ph-globe-simple" aria-hidden="true"></i> Voir le site</a>
+          <button type="button" class="adm-user__item adm-user__item--out" (click)="signOut()">
+            <i class="ph ph-sign-out" aria-hidden="true"></i> Se déconnecter
+          </button>
+        </div>
+      }
+    </div>
+  }
 </header>
+
+@if (menuOpen()) {
+  <div class="adm-apps__backdrop" (click)="closeAll()" aria-hidden="true"></div>
+  <nav class="adm-apps" id="adm-apps" aria-label="Modules">
+    <ul>
+      @for (m of modules(); track m.path) {
+        <li>
+          <a class="adm-app" [routerLink]="m.path" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: m.path === '/admin' }"
+            ariaCurrentWhenActive="page">
+            <span class="adm-app__icon adm-app__icon--{{ m.tone }}"><i class="ph {{ m.icon }}" aria-hidden="true"></i></span>
+            <span class="adm-app__title">{{ m.title }}</span>
+            <span class="adm-app__text">{{ m.text }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+  </nav>
+}
+@if (userOpen()) {
+  <div class="adm-apps__backdrop adm-apps__backdrop--clear" (click)="closeAll()" aria-hidden="true"></div>
+}
 
 <main id="contenu">
   <router-outlet />

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, resource } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AdminAuth } from '../core/admin-auth.service';
-import { AUDIT_ACTIONS, AuditEntry, describeAudit, relativeTime, shortEmail } from '../core/labels';
+import { AUDIT_ACTIONS, AuditEntry, describeAudit, relativeTime, whoDid } from '../core/labels';
 import { supabase } from '../core/supabase';
 
 /** Journal d'activité : qui a fait quoi, et quand (100 dernières actions). */
@@ -20,7 +20,7 @@ export default class AdminActivityPage {
     loader: async ({ params }) => {
       const { data, error } = await supabase()
         .from('audit_log')
-        .select('id, user_email, action, entity, entity_id, label, created_at')
+        .select('id, user_email, user_name, action, entity, entity_id, label, created_at')
         .eq('dahira_id', params)
         .order('created_at', { ascending: false })
         .limit(100);
@@ -42,6 +42,6 @@ export default class AdminActivityPage {
 
   protected readonly icon = (e: AuditEntry) => AUDIT_ACTIONS[e.action]?.icon ?? 'ph-dot';
   protected readonly describe = describeAudit;
-  protected readonly who = shortEmail;
+  protected readonly who = whoDid;
   protected readonly when = relativeTime;
 }

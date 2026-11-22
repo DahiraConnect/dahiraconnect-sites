@@ -516,7 +516,9 @@
     margin-inline: var(--space-4);
   }
 
-  > :last-child {
+  // Espace sous le contenu ouvert : porté par la rubrique, pas par son dernier élément
+  // (sinon un bouton en dernière position est déformé)
+  &[open] {
     padding-bottom: var(--space-4);
   }
 }

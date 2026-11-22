@@ -1,6 +1,10 @@
 <div class="adm-page">
   @if (auth.current(); as m) {
-    <h1 class="adm-title">Tableau de bord</h1>
+    <p class="hello__date">{{ today }}</p>
+    <h1 class="adm-title hello__title">Bonjour, {{ auth.displayName() }}</h1>
+    @if (!auth.hasName()) {
+      <p class="hello__hint"><a routerLink="profil">Ajoutez votre prénom</a> pour que l’équipe vous reconnaisse.</p>
+    }
     @if (auth.memberships().length > 1) {
       <div class="adm-field switch">
         <label for="dahira-switch">Dahira géré</label>
@@ -81,12 +85,29 @@
           }
         </ul>
 
-        <div class="chart" role="img" [attr.aria-label]="'Pages vues par jour sur 30 jours, total ' + kpis()[0].value">
-          @for (d of daily(); track d.day) {
-            <span class="chart__bar" [style.height.%]="d.height" [title]="d.day + ' : ' + d.count"></span>
-          }
+        <div class="panel">
+          <h3 class="panel__title">Visites par jour</h3>
+          <app-chart class="panel__chart" [config]="dailyChart()" [label]="'Visites par jour sur 30 jours, ' + kpis()[0].value + ' au total'" />
         </div>
-        <p class="chart__legend"><span>il y a 30 jours</span><span>aujourd’hui</span></p>
+
+        @if (devices().total) {
+          <div class="panel devices">
+            <h3 class="panel__title">Téléphone ou ordinateur ?</h3>
+            <div class="devices__body">
+              <app-chart class="devices__chart" [config]="deviceChart()" [label]="deviceSentence()" />
+              <ul class="devices__list">
+                @for (r of devices().rows; track r.key) {
+                  <li>
+                    <span class="devices__dot" [style.background]="r.color" aria-hidden="true"></span>
+                    <i class="ph {{ r.icon }}" aria-hidden="true"></i>
+                    {{ r.label }} <strong>{{ r.pct }} %</strong>
+                  </li>
+                }
+              </ul>
+            </div>
+            <p class="devices__sentence">{{ deviceSentence() }}</p>
+          </div>
+        }
 
         @if (topPages().length) {
           <h3 class="sub">Pages les plus vues</h3>
@@ -126,7 +147,7 @@
           @for (e of activity.value(); track e.id) {
             <li class="act">
               <i class="ph {{ auditIcon(e) }}" aria-hidden="true"></i>
-              <span><strong>{{ who(e.user_email) }}</strong> {{ describe(e) }} <small>· {{ when(e.created_at) }}</small></span>
+              <span><strong>{{ who(e) }}</strong> {{ describe(e) }} <small>· {{ when(e.created_at) }}</small></span>
             </li>
           }
         </ol>
@@ -138,21 +159,6 @@
       }
     </section>
 
-    <!-- Gérer -->
-    <section class="adm-section" aria-labelledby="manage-title">
-      <h2 id="manage-title">Gérer</h2>
-      <ul class="tiles">
-        @for (t of manage(); track t.path) {
-          <li>
-            <a class="tile" [routerLink]="t.path">
-              <i class="ph {{ t.icon }}" aria-hidden="true"></i>
-              <span class="tile__title">{{ t.title }}</span>
-              <span class="tile__text">{{ t.text }}</span>
-            </a>
-          </li>
-        }
-      </ul>
-    </section>
   } @else {
     <h1 class="adm-title">Bienvenue</h1>
     <p class="adm-empty">

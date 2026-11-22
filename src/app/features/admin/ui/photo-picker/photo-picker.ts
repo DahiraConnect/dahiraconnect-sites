@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, model, signal } from '@angular/core';
 import { Photo } from '../../../../core/models';
 import { AdminAuth } from '../../core/admin-auth.service';
-import { uploadPhoto } from '../../core/images';
+import { formatBytes, uploadPhoto } from '../../core/images';
 
 /**
  * Choix de photos depuis le téléphone (galerie ou appareil photo).
@@ -28,6 +28,8 @@ export class PhotoPicker {
 
   protected readonly pending = signal(0);
   protected readonly error = signal('');
+  /** « Photos allégées : 8,4 Mo → 620 Ko » */
+  protected readonly saved = signal('');
   protected readonly full = computed(() => this.photos().length >= this.max());
 
   protected async add(event: Event): Promise<void> {
@@ -39,16 +41,25 @@ export class PhotoPicker {
     this.error.set('');
     this.pending.update((n) => n + files.length);
     let failed = 0;
+    let before = 0;
+    let after = 0;
     // Une par une : moins de mémoire sur les petits téléphones
     for (const file of files) {
       try {
-        const photo = await uploadPhoto(file, slug, this.folder(), this.alt());
+        const photo = await uploadPhoto(file, slug, this.folder(), this.alt(), (b, a) => {
+          before += b;
+          after += a;
+        });
         this.photos.update((list) => [...list, photo]);
       } catch {
         failed++;
       } finally {
         this.pending.update((n) => n - 1);
       }
+    }
+    if (before > after * 1.2) {
+      const label = files.length - failed > 1 ? 'Photos allégées' : 'Photo allégée';
+      this.saved.set(`${label} : ${formatBytes(before)} → ${formatBytes(after)}. Plus rapide à ouvrir, même en 3G.`);
     }
     if (failed) this.error.set(failed === 1 ? 'Une photo n’a pas pu être envoyée.' : `${failed} photos n’ont pas pu être envoyées.`);
   }

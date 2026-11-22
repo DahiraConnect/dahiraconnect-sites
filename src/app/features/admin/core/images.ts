@@ -43,7 +43,14 @@ const randomId = () => Math.random().toString(36).slice(2, 8);
  * Envoie une photo dans le stockage du dahira (`media/<slug>/<dossier>/…`)
  * et renvoie l'objet `Photo` du site (URL, vignette, dimensions).
  */
-export async function uploadPhoto(file: File, slug: string, folder: string, alt: string): Promise<Photo> {
+export async function uploadPhoto(
+  file: File,
+  slug: string,
+  folder: string,
+  alt: string,
+  /** Taille avant / après compression (pour l'afficher à l'utilisateur) */
+  onSize?: (before: number, after: number) => void,
+): Promise<Photo> {
   const bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
   try {
     const [full, thumb] = [await encode(bitmap, FULL_SIZE), await encode(bitmap, THUMB_SIZE)];
@@ -60,10 +67,17 @@ export async function uploadPhoto(file: File, slug: string, folder: string, alt:
     };
     const url = await put(`${base}.${full.ext}`, full);
     const thumbUrl = await put(`${base}.640.${thumb.ext}`, thumb);
+    onSize?.(file.size, full.blob.size);
     return { url, thumbUrl, alt, width: full.width, height: full.height };
   } finally {
     bitmap.close();
   }
+}
+
+/** 4 200 000 → '4,2 Mo' ; 310 000 → '310 Ko' */
+export function formatBytes(bytes: number): string {
+  if (bytes >= 1_000_000) return `${(bytes / 1_000_000).toLocaleString('fr-FR', { maximumFractionDigits: 1 })} Mo`;
+  return `${Math.max(1, Math.round(bytes / 1000))} Ko`;
 }
 
 /** Supprime du stockage une photo envoyée depuis le back-office (les images du dépôt sont ignorées) */

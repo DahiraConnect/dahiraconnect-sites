@@ -22,3 +22,8 @@
   list-style: decimal;
   font-size: var(--fs-body-lg);
 }
+
+.login__captcha {
+  min-height: 65px;
+  margin-bottom: var(--space-2);
+}

@@ -17,6 +17,12 @@ export function clickKey(el: Element): string | null {
   return null;
 }
 
+/** Type d'appareil, d'après l'écran (tactile ou non) et sa largeur */
+export function deviceType(coarsePointer: boolean, width: number): 'mobile' | 'tablet' | 'desktop' {
+  if (!coarsePointer) return 'desktop';
+  return width >= 768 ? 'tablet' : 'mobile';
+}
+
 /** Adresse de page → clé : '/agenda/ziar-2026/?x=1#a' → '/agenda/ziar-2026' */
 export function viewKey(url: string): string | null {
   const path = url.split(/[?#]/)[0].replace(/\/+$/, '').toLowerCase() || '/';

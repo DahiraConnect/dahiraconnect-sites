@@ -47,6 +47,7 @@ Deno.serve(async (req) => {
     dahira_id: dahiraId,
     user_id: me.user?.id,
     user_email: me.user?.email,
+    user_name: (me.user?.user_metadata?.name as string | undefined)?.trim() || null,
     action: 'team',
     entity: 'team',
     entity_id: userId,

@@ -1,4 +1,4 @@
-import { clickKey, viewKey } from './track';
+import { clickKey, deviceType, viewKey } from './track';
 
 const link = (href: string) => {
   const a = document.createElement('a');
@@ -24,6 +24,12 @@ describe('analytics / track', () => {
     const b = document.createElement('button');
     b.setAttribute('data-track', 'copie_numero');
     expect(clickKey(b)).toBe('copie_numero');
+  });
+
+  it('deviceType', () => {
+    expect(deviceType(true, 390)).toBe('mobile');
+    expect(deviceType(true, 820)).toBe('tablet');
+    expect(deviceType(false, 1440)).toBe('desktop');
   });
 
   it('viewKey normalise et ignore l’admin', () => {

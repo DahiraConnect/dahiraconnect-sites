@@ -27,6 +27,12 @@ export class AdminAuth {
 
   readonly session = this._session.asReadonly();
   readonly email = computed(() => this._session()?.user.email ?? '');
+  /** Prénom choisi dans « Mon profil », sinon le début de l'adresse e-mail */
+  readonly displayName = computed(() => {
+    const name = (this._session()?.user.user_metadata?.['name'] as string | undefined)?.trim();
+    return name || this.email().split('@')[0];
+  });
+  readonly hasName = computed(() => !!(this._session()?.user.user_metadata?.['name'] as string | undefined)?.trim());
   /** Dahira géré : celui du site courant s'il fait partie des droits, sinon le premier */
   readonly memberships = this._memberships.asReadonly();
   readonly current = computed<Membership | undefined>(() => {
@@ -60,12 +66,13 @@ export class AdminAuth {
   }
 
   /** Envoie le code à 6 chiffres. `false` si l'adresse n'est pas inscrite. */
-  async sendCode(email: string): Promise<'sent' | 'unknown' | 'error'> {
+  async sendCode(email: string, captchaToken?: string): Promise<'sent' | 'unknown' | 'captcha' | 'error'> {
     const { error } = await supabase().auth.signInWithOtp({
       email,
-      options: { shouldCreateUser: false, emailRedirectTo: `${location.origin}/admin/connexion` },
+      options: { shouldCreateUser: false, emailRedirectTo: `${location.origin}/admin/connexion`, captchaToken },
     });
     if (!error) return 'sent';
+    if (/captcha/i.test(error.message)) return 'captcha';
     return /signups not allowed|not found|otp_disabled/i.test(error.message) ? 'unknown' : 'error';
   }
 
@@ -75,6 +82,16 @@ export class AdminAuth {
     this._session.set(data.session);
     await this.loadMemberships();
     return true;
+  }
+
+  /** Enregistre le prénom affiché (journal, accueil de l'admin) */
+  async updateName(name: string): Promise<boolean> {
+    const { data, error } = await supabase().auth.updateUser({ data: { name: name.trim() } });
+    if (error) return false;
+    // Nouveau jeton : le prénom apparaît aussitôt dans le journal
+    const { data: refreshed } = await supabase().auth.refreshSession();
+    this._session.set(refreshed.session ?? this._session());
+    return !!data.user;
   }
 
   async signOut(): Promise<void> {
