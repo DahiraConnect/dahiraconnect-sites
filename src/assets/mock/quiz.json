@@ -63,7 +63,12 @@
               "إلى المنكبين"
             ],
             "explanation": "من فرائض الوضوء غسل اليدين إلى المرفقين."
-          }
+          },
+          "choiceImages": [
+            "/assets/quiz/ablution-bras-coudes.svg",
+            "/assets/quiz/ablution-mains-poignets.svg",
+            "/assets/quiz/ablution-bras-epaules.svg"
+          ]
         },
         {
           "question": "Pour la tête, que faut-il faire ?",
@@ -82,7 +87,9 @@
               "لا شيء"
             ],
             "explanation": "من فرائض الوضوء مسح الرأس."
-          }
+          },
+          "image": "/assets/quiz/ablution-tete.svg",
+          "imageAlt": "Les mains mouillées passent sur la tête"
         },
         {
           "question": "Jusqu'où faut-il laver les pieds ?",
@@ -101,7 +108,12 @@
               "الأصابع فقط"
             ],
             "explanation": "من فرائض الوضوء غسل الرجلين إلى الكعبين."
-          }
+          },
+          "choiceImages": [
+            "/assets/quiz/ablution-pieds-chevilles.svg",
+            "/assets/quiz/ablution-pieds-genoux.svg",
+            "/assets/quiz/ablution-orteils.svg"
+          ]
         },
         {
           "question": "Que veut dire « dalk » ?",
@@ -189,7 +201,9 @@
               "سنة"
             ],
             "explanation": "المضمضة من سنن الوضوء."
-          }
+          },
+          "image": "/assets/quiz/ablution-bouche.svg",
+          "imageAlt": "Se rincer la bouche"
         },
         {
           "question": "Aspirer l'eau par le nez (istinchâq)",
@@ -206,7 +220,9 @@
               "سنة"
             ],
             "explanation": "الاستنشاق من سنن الوضوء."
-          }
+          },
+          "image": "/assets/quiz/ablution-nez.svg",
+          "imageAlt": "Aspirer l’eau par le nez"
         },
         {
           "question": "Laver le visage",
@@ -223,7 +239,9 @@
               "سنة"
             ],
             "explanation": "غسل الوجه من فرائض الوضوء."
-          }
+          },
+          "image": "/assets/quiz/ablution-visage.svg",
+          "imageAlt": "Laver le visage"
         },
         {
           "question": "Essuyer les oreilles",
@@ -240,7 +258,9 @@
               "سنة"
             ],
             "explanation": "مسح الأذنين وتجديد الماء لهما من سنن الوضوء."
-          }
+          },
+          "image": "/assets/quiz/ablution-oreilles.svg",
+          "imageAlt": "Essuyer les oreilles"
         },
         {
           "question": "Se laver les mains jusqu'aux poignets au début",
@@ -257,7 +277,9 @@
               "سنة"
             ],
             "explanation": "غسل اليدين إلى الكوعين عند الشروع من سنن الوضوء."
-          }
+          },
+          "image": "/assets/quiz/ablution-mains-poignets.svg",
+          "imageAlt": "Laver les mains jusqu’aux poignets"
         },
         {
           "question": "Frotter les membres (dalk)",
@@ -361,7 +383,9 @@
               "بالسورة"
             ],
             "explanation": "من فرائض الصلاة تكبيرة الإحرام والقيام لها."
-          }
+          },
+          "image": "/assets/quiz/priere-takbir.svg",
+          "imageAlt": "Takbîr d’entrée, mains levées"
         },
         {
           "question": "Quand faut-il faire l'intention de la prière ?",
@@ -397,7 +421,9 @@
               "سنة"
             ],
             "explanation": "الفاتحة والقيام لها من فرائض الصلاة."
-          }
+          },
+          "image": "/assets/quiz/priere-debout.svg",
+          "imageAlt": "Debout pour réciter la Fâtiha"
         },
         {
           "question": "Se redresser après l'inclinaison (roukou')",
@@ -414,7 +440,9 @@
               "سنة"
             ],
             "explanation": "الركوع والرفع منه من فرائض الصلاة."
-          }
+          },
+          "image": "/assets/quiz/priere-roukou.svg",
+          "imageAlt": "Inclinaison (roukou’)"
         },
         {
           "question": "Que veut dire « touma'nîna » ?",
@@ -450,7 +478,9 @@
               "سنة"
             ],
             "explanation": "السجود على الجبهة والرفع منه من فرائض الصلاة."
-          }
+          },
+          "image": "/assets/quiz/priere-soujoud.svg",
+          "imageAlt": "Prosternation, le front au sol"
         },
         {
           "question": "Comment sort-on de la prière ?",
@@ -469,7 +499,9 @@
               "بالقيام"
             ],
             "explanation": "السلام وجلوسه الذي يقارنه من فرائض الصلاة."
-          }
+          },
+          "image": "/assets/quiz/priere-salam.svg",
+          "imageAlt": "Salam, en position assise"
         }
       ],
       "ar": {
@@ -500,7 +532,9 @@
               "سنة"
             ],
             "explanation": "السورة التي بعد الفاتحة من سنن الصلاة."
-          }
+          },
+          "image": "/assets/quiz/priere-debout.svg",
+          "imageAlt": "Debout pour réciter la sourate"
         },
         {
           "question": "Les « Allahou Akbar » après celui d'entrée",
@@ -551,7 +585,9 @@
               "سنة"
             ],
             "explanation": "التشهدان والجلوس لهما من سنن الصلاة."
-          }
+          },
+          "image": "/assets/quiz/priere-assis.svg",
+          "imageAlt": "Assis pour le tachahhoud"
         },
         {
           "question": "La takbîr d'entrée « Allahou Akbar »",
@@ -568,7 +604,9 @@
               "سنة"
             ],
             "explanation": "تكبيرة الإحرام من فرائض الصلاة."
-          }
+          },
+          "image": "/assets/quiz/priere-takbir.svg",
+          "imageAlt": "Takbîr d’entrée, mains levées"
         },
         {
           "question": "La prière sur le Prophète (PSL)",

@@ -90,11 +90,17 @@
 .ph.ph-map-pin::before {
   content: "\e316";
 }
+.ph.ph-medal::before {
+  content: "\e320";
+}
 .ph.ph-mosque::before {
   content: "\ecee";
 }
 .ph.ph-phone::before {
   content: "\e3b8";
+}
+.ph.ph-plant::before {
+  content: "\ebae";
 }
 .ph.ph-play::before {
   content: "\e3d0";
@@ -111,11 +117,20 @@
 .ph.ph-speaker-high::before {
   content: "\e44a";
 }
+.ph.ph-speaker-simple-high::before {
+  content: "\e450";
+}
+.ph.ph-speaker-simple-slash::before {
+  content: "\e456";
+}
 .ph.ph-stop::before {
   content: "\e46c";
 }
 .ph.ph-tiktok-logo::before {
   content: "\eaf2";
+}
+.ph.ph-trophy::before {
+  content: "\e67e";
 }
 .ph.ph-users-three::before {
   content: "\e68e";
@@ -157,6 +172,141 @@
   -webkit-font-smoothing: antialiased;
 }
 
+.ph-fill.ph-arrow-counter-clockwise::before {
+  content: "\e038";
+}
+.ph-fill.ph-arrow-left::before {
+  content: "\e058";
+}
+.ph-fill.ph-arrow-right::before {
+  content: "\e06c";
+}
+.ph-fill.ph-arrow-up::before {
+  content: "\e08e";
+}
+.ph-fill.ph-arrow-up-right::before {
+  content: "\e092";
+}
+.ph-fill.ph-bell::before {
+  content: "\e0ce";
+}
+.ph-fill.ph-book-open-text::before {
+  content: "\e8f2";
+}
+.ph-fill.ph-calendar-blank::before {
+  content: "\e10a";
+}
+.ph-fill.ph-calendar-check::before {
+  content: "\e712";
+}
+.ph-fill.ph-calendar-plus::before {
+  content: "\e714";
+}
+.ph-fill.ph-caret-left::before {
+  content: "\e138";
+}
+.ph-fill.ph-caret-right::before {
+  content: "\e13a";
+}
+.ph-fill.ph-check::before {
+  content: "\e182";
+}
+.ph-fill.ph-check-circle::before {
+  content: "\e184";
+}
+.ph-fill.ph-drop::before {
+  content: "\e210";
+}
+.ph-fill.ph-drop-half::before {
+  content: "\e566";
+}
+.ph-fill.ph-export::before {
+  content: "\eaf0";
+}
+.ph-fill.ph-facebook-logo::before {
+  content: "\e226";
+}
+.ph-fill.ph-hand-tap::before {
+  content: "\ec90";
+}
+.ph-fill.ph-hands-praying::before {
+  content: "\ecc8";
+}
+.ph-fill.ph-house::before {
+  content: "\e2c2";
+}
+.ph-fill.ph-images::before {
+  content: "\e836";
+}
+.ph-fill.ph-instagram-logo::before {
+  content: "\e2d0";
+}
+.ph-fill.ph-map-pin::before {
+  content: "\e316";
+}
+.ph-fill.ph-medal::before {
+  content: "\e320";
+}
+.ph-fill.ph-mosque::before {
+  content: "\ecee";
+}
+.ph-fill.ph-phone::before {
+  content: "\e3b8";
+}
+.ph-fill.ph-plant::before {
+  content: "\ebae";
+}
 .ph-fill.ph-play::before {
   content: "\e3d0";
+}
+.ph-fill.ph-question::before {
+  content: "\e3e8";
+}
+.ph-fill.ph-scroll::before {
+  content: "\eb7a";
+}
+.ph-fill.ph-share-network::before {
+  content: "\e408";
+}
+.ph-fill.ph-speaker-high::before {
+  content: "\e44a";
+}
+.ph-fill.ph-speaker-simple-high::before {
+  content: "\e450";
+}
+.ph-fill.ph-speaker-simple-slash::before {
+  content: "\e456";
+}
+.ph-fill.ph-star::before {
+  content: "\e46a";
+}
+.ph-fill.ph-stop::before {
+  content: "\e46c";
+}
+.ph-fill.ph-tiktok-logo::before {
+  content: "\eaf2";
+}
+.ph-fill.ph-trophy::before {
+  content: "\e67e";
+}
+.ph-fill.ph-users-three::before {
+  content: "\e68e";
+}
+.ph-fill.ph-whatsapp-logo::before {
+  content: "\e5d0";
+}
+.ph-fill.ph-wifi-slash::before {
+  content: "\e4f2";
+}
+.ph-fill.ph-x::before {
+  content: "\e4f6";
+}
+.ph-fill.ph-x-circle::before {
+  content: "\e4f8";
+}
+.ph-fill.ph-x-logo::before {
+  content: "\e4bc";
+}
+.ph-fill.ph-youtube-logo::before {
+  content: "\e4fc";
 }

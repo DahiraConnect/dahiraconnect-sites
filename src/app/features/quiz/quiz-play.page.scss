@@ -13,6 +13,34 @@
   }
 }
 
+.question__tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+// Couper / remettre le son (à côté de « Écouter »)
+.sound {
+  @include m.focus-ring;
+  @include m.flex-row(6px);
+  min-height: var(--tap-min);
+  padding: 0 var(--space-4);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-weight: 700;
+  cursor: pointer;
+
+  .ph {
+    font-size: 22px;
+  }
+
+  &[aria-pressed='false'] {
+    color: var(--color-text-muted);
+  }
+}
+
 .hero__back {
   @include m.flex-row(6px);
   align-self: flex-start;
@@ -243,7 +271,6 @@
 .listen {
   @include m.focus-ring;
   @include m.flex-row(8px);
-  align-self: flex-start;
   min-height: var(--tap-min);
   padding: 0 var(--space-4);
   border: 2px solid var(--color-border);
@@ -334,6 +361,49 @@
   &:disabled:not(.is-correct):not(.is-wrong) {
     opacity: 0.45;
   }
+}
+
+// Illustration de la question
+.question__img {
+  align-self: center;
+  width: 160px;
+  height: 160px;
+  border-radius: var(--radius-lg);
+
+  @include m.desktop {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+// Réponses en images : trois tuiles, l'image en grand, le texte dessous
+.choices--pictures {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+
+  .choice {
+    position: relative;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-2);
+    font-size: 15px;
+    text-align: center;
+  }
+
+  .choice__dot {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.choice__img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
 }
 
 // Rond vide → ✓ vert ou ✗ rouge
@@ -452,6 +522,39 @@
   text-align: center;
 }
 
+.done__medal {
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  color: var(--color-primary);
+  font-size: 52px;
+  box-shadow: 0 0 0 10px rgb(226 183 67 / 0.25);
+  animation: medal-in 900ms var(--ease-spring) both;
+
+  &.is-low {
+    background: var(--color-success-soft);
+    color: var(--color-primary-mid);
+    box-shadow: 0 0 0 10px rgb(27 177 62 / 0.12);
+  }
+}
+
+// Étoiles : apparaissent l'une après l'autre
+.done__stars {
+  display: flex;
+  gap: var(--space-2);
+  font-size: 40px;
+  color: var(--color-surface-muted);
+
+  .is-on {
+    color: var(--color-gold);
+    animation: star-in 600ms var(--ease-spring) both;
+    animation-delay: calc(300ms + var(--n) * 250ms);
+  }
+}
+
 .done__score {
   @include m.display(96px, 1);
   color: var(--color-primary);
@@ -568,5 +671,23 @@
   40%,
   80% {
     transform: translateX(6px);
+  }
+}
+
+@keyframes medal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.3) rotate(-25deg);
+  }
+}
+
+@keyframes star-in {
+  from {
+    opacity: 0;
+    transform: scale(0.2) rotate(-90deg);
+  }
+
+  70% {
+    transform: scale(1.25);
   }
 }

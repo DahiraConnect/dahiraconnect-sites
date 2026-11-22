@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { QuizService } from '../../core/data/quiz.service';
+import { QuizSoundService } from '../../core/data/quiz-sounds.service';
 import { QuizLang, hasArabic } from '../../core/models';
 import { QUIZ_TEXT, SOURCE_AR } from './quiz-i18n';
 import { TenantService } from '../../core/tenant/tenant.service';
@@ -20,6 +21,7 @@ import { plural } from '../../core/utils/plural';
 import { PlayableQuestion, preparePlay, scoreMessage } from '../../core/utils/quiz';
 import { buildWaShare } from '../../core/utils/whatsapp';
 import { DarkHero } from '../../shared/ui/dark-hero/dark-hero';
+import { Confetti } from '../../shared/ui/confetti/confetti';
 
 type Step = 'intro' | 'question' | 'done';
 
@@ -30,7 +32,7 @@ type Step = 'intro' | 'question' | 'done';
  */
 @Component({
   selector: 'app-quiz-play-page',
-  imports: [RouterLink, DarkHero],
+  imports: [RouterLink, DarkHero, Confetti],
   templateUrl: './quiz-play.page.html',
   styleUrl: './quiz-play.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,6 +41,7 @@ export default class QuizPlayPage {
   private readonly quiz = inject(QuizService);
   private readonly tenant = inject(TenantService);
   private readonly injector = inject(Injector);
+  protected readonly sound = inject(QuizSoundService);
 
   readonly theme = input.required<string>();
 
@@ -78,6 +81,19 @@ export default class QuizPlayPage {
     () => ((this.index() + (this.picked() !== null ? 1 : 0)) / Math.max(1, this.total())) * 100,
   );
   protected readonly message = computed(() => scoreMessage(this.score(), this.total(), this.lang()));
+  /** Étoiles gagnées (0 à 3) */
+  protected readonly stars = computed(() => {
+    const ratio = this.total() ? this.score() / this.total() : 0;
+    return ratio === 1 ? 3 : ratio >= 0.75 ? 2 : ratio >= 0.5 ? 1 : 0;
+  });
+  /** Bon score : confettis et applaudissements */
+  protected readonly celebrate = computed(() => this.score() * 2 >= this.total());
+  /** Médaille : trophée (sans faute), médaille (bon score), pousse (encouragement) */
+  protected readonly medal = computed(() =>
+    this.stars() === 3 ? 'ph-trophy' : this.celebrate() ? 'ph-medal' : 'ph-plant',
+  );
+  /** Score affiché, qui compte de 0 jusqu'au résultat */
+  protected readonly shownScore = signal(0);
   protected readonly plural = plural;
   protected readonly shareUrl = computed(() => {
     const d = this.data();
@@ -108,6 +124,7 @@ export default class QuizPlayPage {
   protected start(): void {
     const d = this.data();
     if (!d) return;
+    this.sound.preload();
     this.questions.set(preparePlay(d.questions, Math.random, !!d.keepOrder, this.lang()));
     this.picks.set(d.questions.map(() => null));
     this.index.set(0);
@@ -120,7 +137,9 @@ export default class QuizPlayPage {
     if (this.picked() !== null) return;
     this.stopSpeaking();
     this.picks.update((p) => p.map((v, i) => (i === this.index() ? choice : v)));
-    // Retour tactile (Android) : court si juste, double si faux
+    // Retour sonore (applaudissements si juste) et tactile (Android)
+    if (this.isRight()) this.sound.success();
+    else this.sound.error();
     navigator.vibrate?.(this.isRight() ? 40 : [60, 50, 60]);
     this.focus(this.continueBtn);
   }
@@ -131,12 +150,34 @@ export default class QuizPlayPage {
       this.quiz.saveScore(this.theme(), this.score());
       this.best.set(this.quiz.bestScore(this.theme()));
       this.step.set('done');
+      this.countUp();
+      // Bon score (au moins la moitié) : salve d'applaudissements
+      if (this.celebrate()) this.sound.cheer();
       this.scrollTop();
       return;
     }
     this.index.update((i) => i + 1);
     this.scrollTop();
     this.focus(this.heading);
+  }
+
+  /** Le score défile de 0 au résultat (instantané si mouvements réduits) */
+  private countUp(): void {
+    const target = this.score();
+    if (typeof window === 'undefined' || matchMedia('(prefers-reduced-motion: reduce)').matches || !target) {
+      this.shownScore.set(target);
+      return;
+    }
+    this.shownScore.set(0);
+    const start = performance.now();
+    const DURATION = 900;
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / DURATION);
+      const eased = 1 - Math.pow(1 - t, 3);
+      this.shownScore.set(Math.round(eased * target));
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
   }
 
   /** Lit la question et les réponses à voix haute (aide à la lecture). */

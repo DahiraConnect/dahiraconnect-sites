@@ -39,6 +39,8 @@ def used_icons():
     text = '\n'.join(p.read_text(encoding='utf-8') for p in files)
     regular = set(re.findall(r"(?:\bph |['\"])ph-([a-z0-9-]+)", text)) - {'fill'}
     fill = set(re.findall(r'\bph-fill ph-([a-z0-9-]+)', text))
+    # Toute icône utilisée existe aussi en plein : une icône choisie dynamiquement ne disparaît jamais
+    fill |= regular
     return regular, fill
 
 

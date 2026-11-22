@@ -24,6 +24,9 @@ export const QUIZ_TEXT: Record<QuizLang, Record<string, string>> = {
     answer: 'Réponse',
     source: 'Réponses d’après le',
     language: 'Langue du quiz',
+    soundOn: 'Son',
+    soundOff: 'Muet',
+    soundLabel: 'Couper ou remettre le son',
   },
   ar: {
     back: 'كل المواضيع',
@@ -47,6 +50,9 @@ export const QUIZ_TEXT: Record<QuizLang, Record<string, string>> = {
     answer: 'الإجابة',
     source: 'الإجابات من',
     language: 'لغة الأسئلة',
+    soundOn: 'الصوت',
+    soundOff: 'صامت',
+    soundLabel: 'تشغيل الصوت أو إيقافه',
   },
 };
 

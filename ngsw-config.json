@@ -35,7 +35,8 @@
       "updateMode": "prefetch",
       "resources": {
         "files": [
-          "/**/*.(svg|jpg|jpeg|png|webp|avif|gif)"
+          "/**/*.(svg|jpg|jpeg|png|webp|avif|gif)",
+          "/assets/quiz/sons/*.m4a"
         ]
       }
     }

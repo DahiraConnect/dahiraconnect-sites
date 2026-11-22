@@ -3,6 +3,10 @@ import { QuizLang, QuizQuestion } from '../models';
 export interface PlayableQuestion {
   question: string;
   choices: string[];
+  image?: string;
+  imageAlt?: string;
+  /** Images des réponses, dans l'ordre affiché */
+  choiceImages?: string[];
   /** Index de la bonne réponse, après mélange */
   answer: number;
   explanation?: string;
@@ -35,6 +39,9 @@ export function preparePlay(
       choices: order.map((i) => q.choices[i]),
       answer: order.indexOf(q.answer),
       explanation: q.explanation,
+      image: source.image,
+      imageAlt: source.imageAlt ?? q.question,
+      choiceImages: source.choiceImages ? order.map((i) => source.choiceImages![i]) : undefined,
     };
   });
 }

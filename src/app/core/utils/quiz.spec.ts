@@ -42,6 +42,15 @@ describe('quiz', () => {
     expect(q.choices[q.answer]).toBe('فرض');
   });
 
+  it('déplace les images avec leurs réponses au mélange', () => {
+    const [q] = preparePlay(
+      [{ question: 'Bras ?', choices: ['coudes', 'poignets', 'épaules'], answer: 0, choiceImages: ['c.svg', 'p.svg', 'e.svg'] }],
+      seeded([0.99, 0.0]),
+    );
+    const byChoice = Object.fromEntries(q.choices.map((c, i) => [c, q.choiceImages![i]]));
+    expect(byChoice).toEqual({ coudes: 'c.svg', poignets: 'p.svg', épaules: 'e.svg' });
+  });
+
   it('adapte le message au score', () => {
     expect(scoreMessage(8, 8)).toBe('Sans faute, bravo !');
     expect(scoreMessage(6, 8)).toBe('Très bien !');

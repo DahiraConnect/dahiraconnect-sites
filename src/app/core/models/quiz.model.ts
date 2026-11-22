@@ -5,6 +5,11 @@ export interface QuizQuestion {
   answer: number;
   /** Phrase d'explication affichée après la réponse */
   explanation?: string;
+  /** Illustration de la question (ex. '/assets/quiz/priere-takbir.svg') et sa description */
+  image?: string;
+  imageAlt?: string;
+  /** Une image par réponse, dans le même ordre que `choices` (répondre en regardant) */
+  choiceImages?: string[];
   /** Version arabe (mêmes réponses, dans le même ordre : `answer` reste valable) */
   ar?: { question: string; choices: string[]; explanation?: string };
 }

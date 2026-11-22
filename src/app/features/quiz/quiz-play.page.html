@@ -63,17 +63,32 @@
       @case ('question') {
         @if (current(); as q) {
           <section class="card question" aria-labelledby="question-text">
+            @if (q.image) {
+              <img class="question__img" [src]="q.image" [alt]="q.imageAlt" width="240" height="240" />
+            }
             <div class="question__head">
               <h2 id="question-text" class="question__text" tabindex="-1" #questionHeading>{{ q.question }}</h2>
-              @if (canSpeak()) {
-                <button type="button" class="listen" [class.is-on]="speaking()" (click)="speak()" [attr.aria-pressed]="speaking()">
-                  <i class="ph {{ speaking() ? 'ph-stop' : 'ph-speaker-high' }}" aria-hidden="true"></i>
-                  {{ speaking() ? t()['stop'] : t()['listen'] }}
+              <div class="question__tools">
+                @if (canSpeak()) {
+                  <button type="button" class="listen" [class.is-on]="speaking()" (click)="speak()" [attr.aria-pressed]="speaking()">
+                    <i class="ph {{ speaking() ? 'ph-stop' : 'ph-speaker-high' }}" aria-hidden="true"></i>
+                    {{ speaking() ? t()['stop'] : t()['listen'] }}
+                  </button>
+                }
+                <button
+                  type="button"
+                  class="sound"
+                  [attr.aria-pressed]="!sound.muted()"
+                  [attr.aria-label]="t()['soundLabel']"
+                  (click)="sound.toggle()"
+                >
+                  <i class="ph {{ sound.muted() ? 'ph-speaker-simple-slash' : 'ph-speaker-simple-high' }}" aria-hidden="true"></i>
+                  {{ sound.muted() ? t()['soundOff'] : t()['soundOn'] }}
                 </button>
-              }
+              </div>
             </div>
 
-            <ul class="choices" [class.choices--pair]="q.choices.length === 2">
+            <ul class="choices" [class.choices--pair]="q.choices.length === 2 && !q.choiceImages" [class.choices--pictures]="!!q.choiceImages">
               @for (choice of q.choices; track choice; let i = $index) {
                 <li>
                   <button
@@ -92,6 +107,9 @@
                         <i class="ph ph-x"></i>
                       }
                     </span>
+                    @if (q.choiceImages?.[i]; as pic) {
+                      <img class="choice__img" [src]="pic" alt="" width="240" height="240" />
+                    }
                     <span class="choice__text">{{ choice }}</span>
                   </button>
                 </li>
@@ -127,8 +145,19 @@
       }
 
       @case ('done') {
+        @if (celebrate()) {
+          <app-confetti />
+        }
         <section class="card done" aria-labelledby="done-title">
-          <p class="done__score" aria-hidden="true">{{ score() }}<span>/{{ total() }}</span></p>
+          <span class="done__medal" [class.is-low]="!celebrate()" aria-hidden="true">
+            <i class="ph-fill {{ medal() }}"></i>
+          </span>
+          <p class="done__score" aria-hidden="true">{{ shownScore() }}<span>/{{ total() }}</span></p>
+          <p class="done__stars" aria-hidden="true">
+            @for (s of [1, 2, 3]; track s) {
+              <i class="ph-fill ph-star" [class.is-on]="s <= stars()" [style.--n]="s"></i>
+            }
+          </p>
           <h2 id="done-title" class="done__title">
             <span class="sr-only">Votre score : {{ score() }} sur {{ total() }}. </span>{{ message() }}
           </h2>
