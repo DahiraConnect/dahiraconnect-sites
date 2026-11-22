@@ -69,3 +69,19 @@
     background: rgb(244 239 227 / 0.18);
   }
 }
+
+// Responsable connecté : pastille après « Rappels » ; le nom se raccourcit s'il manque de place
+.dark-hero__admin {
+  margin-left: var(--space-1);
+}
+
+.dark-hero__brand {
+  flex: 1;
+  min-width: 0;
+}
+
+.dark-hero__name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

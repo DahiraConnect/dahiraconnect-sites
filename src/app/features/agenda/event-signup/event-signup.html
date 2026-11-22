@@ -1,0 +1,62 @@
+<section class="signup" aria-labelledby="signup-title">
+  <h2 id="signup-title" class="signup__title">
+    <i class="ph ph-hand-waving" aria-hidden="true"></i> Vous venez ?
+  </h2>
+
+  @if (done(); as name) {
+    <p class="signup__done" role="status">
+      <i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+      Merci {{ name }}, vous êtes inscrit. À bientôt, inchallah !
+    </p>
+    @if (error()) {
+      <p class="signup__note">{{ error() }}</p>
+    }
+  } @else if (status() && !status()!.open) {
+    <p class="signup__closed">
+      <i class="ph ph-lock-simple" aria-hidden="true"></i>
+      {{ status()!.reason === 'full' ? 'C’est complet : il n’y a plus de place.' : 'Les inscriptions sont fermées.' }}
+    </p>
+  } @else {
+    <p class="signup__lead">
+      Inscrivez-vous en quelques secondes, pour que le bureau prévoie la place.
+      <span class="signup__when">Jusqu’au {{ closesLabel() }}.</span>
+      @if (status()?.remaining != null) {
+        <strong class="signup__left">Encore {{ status()!.remaining }} place{{ status()!.remaining! > 1 ? 's' : '' }}.</strong>
+      }
+    </p>
+    <form (ngSubmit)="submit()" novalidate>
+      <div class="signup__row">
+        <div class="signup__field">
+          <label for="su-first">Prénom</label>
+          <input id="su-first" name="first" autocomplete="given-name" [(ngModel)]="first" required />
+        </div>
+        <div class="signup__field">
+          <label for="su-last">Nom</label>
+          <input id="su-last" name="last" autocomplete="family-name" [(ngModel)]="last" required />
+        </div>
+      </div>
+      @if (settings().phone !== 'hidden') {
+        <div class="signup__field">
+          <label for="su-phone">Téléphone @if (settings().phone === 'optional') { <small>(facultatif)</small> }</label>
+          <input id="su-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="77 123 45 67" [(ngModel)]="phone" />
+        </div>
+      }
+      @if (settings().askPeople) {
+        <div class="signup__field">
+          <label for="su-people">Combien de personnes en tout (vous compris) ?</label>
+          <div class="signup__stepper">
+            <button type="button" (click)="people = people > 1 ? people - 1 : 1" aria-label="Une personne de moins">−</button>
+            <input id="su-people" name="people" type="number" inputmode="numeric" min="1" max="20" [(ngModel)]="people" />
+            <button type="button" (click)="people = people < 20 ? people + 1 : 20" aria-label="Une personne de plus">+</button>
+          </div>
+        </div>
+      }
+      <p class="signup__error" role="alert">{{ error() }}</p>
+      <button type="submit" class="btn btn--dark signup__submit" [disabled]="busy()" data-track="inscription_evenement">
+        @if (busy()) { Inscription… } @else {
+          <i class="ph ph-check" aria-hidden="true"></i> Je m’inscris
+        }
+      </button>
+    </form>
+  }
+</section>

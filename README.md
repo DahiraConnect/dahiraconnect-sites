@@ -60,4 +60,5 @@ Mise en place pas à pas : [supabase/LISEZMOI.md](supabase/LISEZMOI.md).
 - **Paiements** : logos communs dans `src/assets/payments/`. Si Wave et Orange Money ont le même numéro, ils sont regroupés en une ligne.
 - **Calendrier en ligne** : `/agenda.ics`, généré au build (`scripts/agenda-ics.mjs`) ; lien « Mettre tous les rendez-vous dans mon téléphone ».
 - **Image de partage** : `src/assets/tenants/<slug>/partage.jpg` (1200 × 630), régénérée par `python3 scripts/share-image.py <slug>` après un changement de nom, de devise ou de logo.
+- **Arabe** : police Amiri. Après un changement du nom en arabe, lancer `python3 scripts/arabic-title-font.py` (police des titres réduite aux lettres du nom).
 - **Icônes** : `<i class="ph ph-nom" aria-hidden="true">`. Après avoir ajouté une icône, lancer `npm run icons`.

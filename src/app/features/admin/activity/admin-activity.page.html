@@ -7,9 +7,17 @@
     <p class="adm-lead" aria-live="polite">Chargement…</p>
   } @else if (entries.error()) {
     <p class="adm-error" role="alert">Impossible de charger le journal. Vérifiez votre connexion.</p>
-  } @else if (!days().length) {
+  } @else if (!entries.value()?.length) {
     <p class="adm-empty">Aucune activité pour le moment.</p>
   } @else {
+    <div class="adm-search" role="search">
+    <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+    <label class="sr-only" for="ac-search">Rechercher une personne ou une action</label>
+    <input id="ac-search" type="search" placeholder="Rechercher une personne ou une action" [value]="query()" (input)="query.set($any($event.target).value)" />
+  </div>
+    @if (!days().length) {
+      <p class="adm-empty">Rien ne correspond à « {{ query() }} ».</p>
+    }
     @for (d of days(); track d.day) {
       <section class="adm-section" [attr.aria-label]="d.day">
         <h2>{{ d.day }}</h2>

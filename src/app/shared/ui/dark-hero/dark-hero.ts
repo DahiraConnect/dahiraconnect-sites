@@ -1,6 +1,7 @@
 import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AdminChip } from '../admin-chip/admin-chip';
 import { TenantService } from '../../../core/tenant/tenant.service';
 
 /**
@@ -9,7 +10,7 @@ import { TenantService } from '../../../core/tenant/tenant.service';
  */
 @Component({
   selector: 'app-dark-hero',
-  imports: [RouterLink, NgOptimizedImage],
+  imports: [RouterLink, NgOptimizedImage, AdminChip],
   templateUrl: './dark-hero.html',
   styleUrl: './dark-hero.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

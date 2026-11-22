@@ -1,15 +1,13 @@
 <header class="adm-bar">
-  @if (auth.session()) {
-    <button type="button" class="adm-bar__menu" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()" aria-controls="adm-apps">
-      <i class="ph" [class.ph-dots-nine]="!menuOpen()" [class.ph-x]="menuOpen()" aria-hidden="true"></i>
-      <span>Menu</span>
-    </button>
-  }
   <a class="adm-bar__home" routerLink="/admin">
     <img [src]="logo()" alt="" width="36" height="36" />
     <strong>{{ name() }}</strong>
   </a>
   @if (auth.session()) {
+     <button type="button" class="adm-bar__menu" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()" aria-controls="adm-apps">
+      <i class="ph" [class.ph-dots-nine]="!menuOpen()" [class.ph-x]="menuOpen()" aria-hidden="true"></i>
+      <span>Menu</span>
+    </button>
     <div class="adm-user">
       <button type="button" class="adm-user__btn" (click)="toggleUser()" [attr.aria-expanded]="userOpen()" aria-controls="adm-user-menu"
         [attr.aria-label]="'Mon compte : ' + auth.displayName()">

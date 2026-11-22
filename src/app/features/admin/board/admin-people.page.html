@@ -14,6 +14,16 @@
       </button>
     }
 
+    @if ((store.board()?.people?.length ?? 0) > 4) {
+      <div class="adm-search" role="search">
+    <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+    <label class="sr-only" for="pe-search">Rechercher un nom ou un poste</label>
+    <input id="pe-search" type="search" placeholder="Rechercher un nom ou un poste" [value]="query()" (input)="query.set($any($event.target).value)" />
+  </div>
+    }
+    @if (query() && !people().length) {
+      <p class="adm-empty">Personne ne correspond à « {{ query() }} ».</p>
+    }
     @if (people().length) {
       <ul class="adm-list">
         @for (p of people(); track p.id) {

@@ -30,16 +30,22 @@
 }
 
 .ann__body {
+  display: grid;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+// Écouter + Voir le détail : sur une ligne, sous le message
+.ann__actions {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0 var(--space-3);
-  min-width: 0;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  margin-top: var(--space-1);
 }
 
 .ann__over {
   @include m.overline(var(--color-gold));
-  flex-basis: 100%;
   margin-bottom: 2px;
 }
 
@@ -53,7 +59,6 @@
   display: inline-flex;
   align-items: center;
   min-height: var(--tap-min);
-  margin-block: calc((var(--tap-min) - 1.4em) / -2);
   color: inherit;
   font-weight: 700;
   text-decoration: underline;
@@ -71,8 +76,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: var(--tap-min);
-  margin-block: calc((var(--tap-min) - 1.4em) / -2);
+  min-height: 40px;
   padding: 0 var(--space-3);
   border: 0;
   border-radius: var(--radius-pill);

@@ -11,9 +11,12 @@
   Cache-Control: public, max-age=31536000, immutable
 
 # Service worker et manifeste : toujours revérifiés (mises à jour du site)
+# « ! Cache-Control » retire d'abord la règle /*.js (sinon les deux s'additionnent)
 /ngsw-worker.js
+  ! Cache-Control
   Cache-Control: no-cache
 /ngsw.json
+  ! Cache-Control
   Cache-Control: no-cache
 /manifest.webmanifest
   Cache-Control: no-cache

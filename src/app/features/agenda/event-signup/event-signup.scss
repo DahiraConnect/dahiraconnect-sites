@@ -1,0 +1,151 @@
+@use 'styles/mixins' as m;
+
+:host {
+  display: block;
+}
+
+.signup {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border-radius: var(--radius-card);
+  background: var(--color-surface-card);
+  box-shadow: inset 0 0 0 2px var(--color-gold-line);
+}
+
+.signup__title {
+  @include m.display(var(--fs-h2));
+  @include m.flex-row(var(--space-2));
+
+  .ph {
+    color: var(--color-gold-text);
+  }
+}
+
+.signup__lead {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.signup__when {
+  display: block;
+  margin-top: 4px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.signup__left {
+  display: block;
+  color: var(--color-gold-text);
+}
+
+.signup__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.signup__field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: var(--space-3);
+
+  label {
+    font-weight: 700;
+  }
+
+  small {
+    font-weight: 400;
+    color: var(--color-text-muted);
+  }
+
+  input {
+    width: 100%;
+    min-height: var(--btn-h);
+    padding: 0 var(--space-4);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text-primary);
+    font: 400 var(--fs-body-lg) / 1 var(--font-body);
+
+    &:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring-color);
+      outline-offset: 0;
+      border-color: var(--color-primary);
+    }
+  }
+}
+
+.signup__stepper {
+  display: flex;
+  gap: var(--space-2);
+
+  input {
+    width: 88px;
+    text-align: center;
+  }
+
+  button {
+    @include m.focus-ring;
+    flex: none;
+    width: var(--btn-h);
+    height: var(--btn-h);
+    border: 0;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-text-on-dark);
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--color-primary-mid);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
+.signup__error {
+  margin: 0;
+  font-weight: 700;
+  color: #b3261e;
+
+  &:empty {
+    display: none;
+  }
+}
+
+.signup__submit {
+  width: 100%;
+}
+
+.signup__done,
+.signup__closed {
+  @include m.flex-row(var(--space-2), flex-start);
+  margin: 0;
+  font-size: var(--fs-body-lg);
+  font-weight: 700;
+
+  .ph-fill,
+  .ph {
+    flex: none;
+    font-size: 26px;
+  }
+}
+
+.signup__done {
+  color: #0b5a26;
+}
+
+.signup__closed {
+  color: var(--color-text-secondary);
+}
+
+.signup__note {
+  margin: 0;
+  color: var(--color-text-secondary);
+}

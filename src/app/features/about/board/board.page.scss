@@ -39,10 +39,32 @@
 
 // Raccourcis vers chaque commission
 .hero__nav {
+  // Une seule ligne qui défile au doigt (11 commissions = trop de lignes sinon)
   display: flex;
-  flex-wrap: wrap;
   gap: var(--space-2);
-  margin-top: var(--space-2);
+  margin: var(--space-2) calc(var(--gutter) * -1) 0;
+  padding: 0 var(--gutter) var(--space-2);
+  overflow-x: auto;
+  scrollbar-width: none;
+  // Dégradé à droite : il y a d'autres commissions
+  mask-image: linear-gradient(to right, #000 85%, transparent);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  > * {
+    flex: none;
+    white-space: nowrap;
+  }
+
+  @include m.desktop {
+    flex-wrap: wrap;
+    margin-inline: 0;
+    padding-inline: 0;
+    overflow: visible;
+    mask-image: none;
+  }
 }
 
 .chip {

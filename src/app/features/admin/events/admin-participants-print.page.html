@@ -1,0 +1,56 @@
+<div class="pr-tools">
+  <a class="adm-back" [routerLink]="['..']"><i class="ph ph-arrow-left" aria-hidden="true"></i> Participants</a>
+  <button type="button" class="btn btn--dark pr-tools__print" (click)="print()" [disabled]="list.isLoading()">
+    <i class="ph ph-printer" aria-hidden="true"></i> Imprimer ou enregistrer en PDF
+  </button>
+  <p class="adm-hint">Sur téléphone : « Imprimer », puis choisissez « Enregistrer au format PDF ».</p>
+</div>
+
+<article class="pr-sheet">
+  @if (event.value(); as ev) {
+    <header class="pr-head">
+      <img class="pr-head__logo" [src]="dahira().logoUrl" alt="" width="84" height="84" />
+      <div class="pr-head__text">
+        <p class="pr-head__org">{{ dahira().name }}</p>
+        <h1 class="pr-head__title">Liste des participants</h1>
+        <p class="pr-head__event"><strong>{{ ev.data.title }}</strong></p>
+        <p class="pr-head__meta">{{ when() }} · {{ ev.data.place }}</p>
+      </div>
+    </header>
+
+    <p class="pr-summary">
+      <span><strong>{{ list.value()?.length ?? 0 }}</strong> inscriptions</span>
+      <span><strong>{{ total() }}</strong> personnes en tout</span>
+    </p>
+
+    <table class="pr-table">
+      <thead>
+        <tr>
+          <th scope="col" class="pr-n">N°</th>
+          <th scope="col">Prénom et nom</th>
+          @if (showPhone()) { <th scope="col">Téléphone</th> }
+          @if (showPeople()) { <th scope="col" class="pr-num">Pers.</th> }
+          <th scope="col" class="pr-check">Présent</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of list.value(); track p.id; let i = $index) {
+          <tr>
+            <td class="pr-n">{{ i + 1 }}</td>
+            <td><strong>{{ p.last_name | uppercase }}</strong> {{ p.first_name }}</td>
+            @if (showPhone()) { <td class="pr-phone">{{ p.phone ? phoneLabel(p.phone) : '' }}</td> }
+            @if (showPeople()) { <td class="pr-num">{{ p.people }}</td> }
+            <td class="pr-check"><span class="pr-box" aria-hidden="true"></span></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <footer class="pr-foot">
+      <span>{{ dahira().name }} · {{ dahira().contact.phone }}</span>
+      <span>Imprimé le {{ printedAt }}</span>
+    </footer>
+  } @else if (event.isLoading()) {
+    <p class="adm-lead">Chargement…</p>
+  }
+</article>

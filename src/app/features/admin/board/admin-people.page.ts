@@ -6,6 +6,7 @@ import { Person, Photo } from '../../../core/models';
 import { initials } from '../../../core/data/board';
 import { DahiraDocStore } from '../core/dahira-doc.store';
 import { removePhoto } from '../core/images';
+import { matches } from '../core/search';
 import { PhotoPicker } from '../ui/photo-picker/photo-picker';
 
 /** Personnes du bureau : nom et photo (facultative), décrites une seule fois. */
@@ -26,8 +27,11 @@ export default class AdminPeoplePage {
   protected readonly photo = signal<Photo[]>([]);
   protected readonly initials = initials;
 
+  protected readonly query = signal('');
   protected readonly people = computed(() =>
-    [...(this.store.board()?.people ?? [])].sort((a, b) => a.name.localeCompare(b.name, 'fr')),
+    [...(this.store.board()?.people ?? [])]
+      .filter((p) => matches(this.query(), p.name, ...(this.posts().get(p.id) ?? [])))
+      .sort((a, b) => a.name.localeCompare(b.name, 'fr')),
   );
   /** Postes de chaque personne (pour l'aperçu et la suppression) */
   protected readonly posts = computed(() => {

@@ -13,6 +13,7 @@
           "/*.css",
           "/*.js",
           "/assets/fonts/*.woff2",
+          "!/assets/fonts/amiri-arabic-*.woff2",
           "/assets/patterns/*.svg"
         ]
       }
@@ -37,7 +38,8 @@
       "resources": {
         "files": [
           "/**/*.(svg|jpg|jpeg|png|webp|avif|gif)",
-          "/assets/quiz/sons/*.m4a"
+          "/assets/quiz/sons/*.m4a",
+          "/assets/fonts/amiri-arabic-*.woff2"
         ]
       }
     }

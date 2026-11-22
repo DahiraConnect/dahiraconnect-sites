@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, input, signal } f
 import { RouterLink } from '@angular/router';
 import { EventService } from '../../core/data/event.service';
 import { DarkHero } from '../../shared/ui/dark-hero/dark-hero';
+import { EventSignup } from './event-signup/event-signup';
 import { EventFeature } from './event-feature';
 import { Lightbox } from '../../shared/ui/lightbox/lightbox';
 import { Reveal } from '../../shared/motion/reveal.directive';
@@ -10,7 +11,7 @@ import { Reveal } from '../../shared/motion/reveal.directive';
 /** Fiche d'un événement (/agenda/:slug). Slug inconnu : redirigé par le résolveur de titre. */
 @Component({
   selector: 'app-event-page',
-  imports: [RouterLink, NgOptimizedImage, DarkHero, EventFeature, Lightbox, Reveal],
+  imports: [RouterLink, NgOptimizedImage, DarkHero, EventFeature, Lightbox, Reveal, EventSignup],
   templateUrl: './event.page.html',
   styleUrl: './event.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

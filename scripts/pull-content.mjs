@@ -14,6 +14,11 @@ const key = process.env.SUPABASE_ANON_KEY;
 const slug = process.env.DAHIRA_SLUG || 'moutahabina';
 
 if (!url || !key) {
+  // Build de production sur Cloudflare (branche main) : jamais de données de démo en ligne
+  if (process.env.CF_PAGES === '1' && process.env.CF_PAGES_BRANCH === 'main') {
+    console.error('pull-content : SUPABASE_URL / SUPABASE_ANON_KEY manquants pour la production. Build arrêté.');
+    process.exit(1);
+  }
   console.log('pull-content : Supabase non configuré, contenu du dépôt utilisé.');
   process.exit(0);
 }

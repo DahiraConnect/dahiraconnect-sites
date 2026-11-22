@@ -18,17 +18,20 @@ export class DahiraDocStore {
   readonly content = signal<PageContent | null>(null);
   readonly error = signal(false);
   private loadedFor?: string;
+  /** Version lue : l'enregistrement est refusé si quelqu'un a modifié le dahira entre-temps */
+  private version = 0;
 
   async load(force = false): Promise<void> {
     const id = this.auth.current()?.dahiraId;
     if (!id || (!force && this.loadedFor === id)) return;
-    const { data, error } = await supabase().from('dahiras').select('profile, board, content').eq('id', id).single();
+    const { data, error } = await supabase().from('dahiras').select('profile, board, content, version').eq('id', id).single();
     this.error.set(!!error);
     if (error) return;
     this.loadedFor = id;
     this.board.set(data.board as Board);
     this.profile.set(data.profile as Dahira);
     this.content.set(data.content as PageContent);
+    this.version = data.version as number;
   }
 
   async saveBoard(board: Board, what: string): Promise<boolean> {
@@ -59,10 +62,31 @@ export class DahiraDocStore {
     return ok;
   }
 
+  /** Modification refusée car un autre responsable a enregistré entre-temps */
+  readonly conflict = signal(false);
+
   private async update(patch: Record<string, unknown>): Promise<boolean> {
     const id = this.auth.current()?.dahiraId;
     if (!id) return false;
-    const { error } = await supabase().from('dahiras').update(patch).eq('id', id);
-    return !error;
+    const { data, error } = await supabase()
+      .from('dahiras')
+      .update(patch)
+      .eq('id', id)
+      .eq('version', this.version)
+      .select('version');
+    if (error) return false;
+    if (!data?.length) {
+      // Quelqu'un d'autre a enregistré : on recharge pour ne rien écraser
+      this.conflict.set(true);
+      this.publish.show({
+        kind: 'warn',
+        text: 'Un autre responsable vient de modifier ces informations. La page a été rechargée : refaites votre modification.',
+      });
+      await this.load(true);
+      return false;
+    }
+    this.conflict.set(false);
+    this.version = data[0].version as number;
+    return true;
   }
 }

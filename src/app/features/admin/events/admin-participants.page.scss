@@ -1,0 +1,68 @@
+@use 'styles/mixins' as m;
+
+.pt-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+
+  p {
+    margin: 0;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-card);
+    color: var(--color-text-secondary);
+  }
+
+  strong {
+    display: block;
+    font: 400 30px / 1.1 var(--font-display);
+    color: var(--color-text-primary);
+  }
+}
+
+.pt-panel {
+  margin-bottom: var(--space-5);
+}
+
+.pt-item {
+  @include m.flex-row(var(--space-3));
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-card);
+}
+
+.pt-avatar {
+  width: 44px;
+  height: 44px;
+  font-size: var(--fs-small);
+}
+
+.pt-tool {
+  @include m.focus-ring;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--tap-min);
+  height: var(--tap-min);
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-size: 20px;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--color-surface-muted);
+    color: var(--color-primary);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &--remove {
+    color: #b3261e;
+  }
+}

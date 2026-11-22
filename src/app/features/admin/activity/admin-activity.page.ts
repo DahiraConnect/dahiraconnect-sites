@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, computed, inject, resource } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, resource, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AdminAuth } from '../core/admin-auth.service';
 import { AUDIT_ACTIONS, AuditEntry, describeAudit, relativeTime, whoDid } from '../core/labels';
+import { matches } from '../core/search';
 import { supabase } from '../core/supabase';
 
 /** Journal d'activité : qui a fait quoi, et quand (100 dernières actions). */
@@ -29,11 +30,13 @@ export default class AdminActivityPage {
     },
   });
 
+  protected readonly query = signal('');
+
   /** Regroupées par jour */
   protected readonly days = computed(() => {
     const fmt = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Africa/Dakar' });
     const groups = new Map<string, AuditEntry[]>();
-    for (const e of this.entries.value() ?? []) {
+    for (const e of (this.entries.value() ?? []).filter((x) => matches(this.query(), whoDid(x), describeAudit(x)))) {
       const day = fmt.format(new Date(e.created_at));
       groups.set(day, [...(groups.get(day) ?? []), e]);
     }

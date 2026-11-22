@@ -15,6 +15,11 @@
           </button>
           <app-help-tip>Crée une copie une semaine plus tard, en brouillon. Pratique pour le dahira de chaque semaine.</app-help-tip>
         </span>
+        @if (r.data.registration?.enabled || participants.value()) {
+          <a class="adm-quick__btn adm-quick__btn--main" [routerLink]="['/admin/agenda', r.id, 'participants']">
+            <i class="ph ph-users" aria-hidden="true"></i> Participants ({{ participants.value() ?? 0 }})
+          </a>
+        }
         @if (r.status !== 'draft') {
           <a class="adm-quick__btn" [href]="'/agenda/' + r.slug" target="_blank" rel="noopener">
             <i class="ph ph-arrow-square-out" aria-hidden="true"></i> Voir sur le site
@@ -109,6 +114,46 @@
           </select>
         </div>
       }
+
+      <details class="adm-fold" [open]="form.regEnabled">
+        <summary><i class="ph ph-hand-waving" aria-hidden="true"></i><span>Inscriptions des participants<small>« Vous venez ? » sur la page de l’événement</small></span></summary>
+        <label class="adm-check">
+          <input type="checkbox" name="regEnabled" [(ngModel)]="form.regEnabled" />
+          <span>Ouvrir les inscriptions sur le site <small>Prénom et nom, sans compte</small></span>
+        </label>
+        @if (form.regEnabled) {
+          <div class="adm-row">
+            <div class="adm-field">
+              <label for="reg-date">Fermeture le <small>(facultatif)</small></label>
+              <input id="reg-date" name="regDate" type="date" [(ngModel)]="form.regDate" />
+            </div>
+            <div class="adm-field">
+              <label for="reg-time">à</label>
+              <input id="reg-time" name="regTime" type="time" [(ngModel)]="form.regTime" />
+            </div>
+          </div>
+          <p class="adm-hint">Sans date, les inscriptions ferment au début de l’événement.</p>
+          <fieldset class="adm-choices adm-choices--3">
+            <legend class="adm-label">Téléphone</legend>
+            <label class="adm-check"><input type="radio" name="regPhone" value="hidden" [(ngModel)]="form.regPhone" /><span>Non demandé</span></label>
+            <label class="adm-check"><input type="radio" name="regPhone" value="optional" [(ngModel)]="form.regPhone" /><span>Facultatif</span></label>
+            <label class="adm-check"><input type="radio" name="regPhone" value="required" [(ngModel)]="form.regPhone" /><span>Obligatoire</span></label>
+          </fieldset>
+          <div class="adm-with-tip">
+            <label class="adm-check">
+              <input type="checkbox" name="regAskPeople" [(ngModel)]="form.regAskPeople" />
+              <span>Demander le nombre de personnes <small>Pour prévoir le transport ou le repas</small></span>
+            </label>
+            <app-help-tip>Une personne peut inscrire sa famille en une fois : « 3 personnes ».</app-help-tip>
+          </div>
+          <div class="adm-field">
+            <label for="reg-limit">Nombre de places <small>(facultatif)</small></label>
+            <input id="reg-limit" name="regLimit" inputmode="numeric" [(ngModel)]="form.regLimit" placeholder="Ex. : 60 (un car)"
+              [attr.aria-invalid]="!!errors().regLimit" aria-describedby="reg-limit-err" />
+            <p id="reg-limit-err" class="adm-error">{{ errors().regLimit }}</p>
+          </div>
+        }
+      </details>
 
       @if (id()) {
         <button type="button" class="adm-danger" (click)="remove()" [disabled]="busy()">

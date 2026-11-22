@@ -1,0 +1,183 @@
+@use 'styles/mixins' as m;
+
+// Écran : barre d'outils + feuille A4 centrée
+.pr-tools {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 210mm;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4) var(--space-3);
+}
+
+.pr-tools__print {
+  width: 100%;
+}
+
+.pr-sheet {
+  max-width: 210mm;
+  margin: 0 auto var(--space-10);
+  padding: 14mm 12mm;
+  background: #fff;
+  color: #10241a;
+  font: 400 11pt / 1.45 var(--font-body);
+  box-shadow: 0 6px 30px rgb(6 39 17 / 0.12);
+}
+
+.pr-head {
+  display: flex;
+  align-items: center;
+  gap: 6mm;
+  padding-bottom: 5mm;
+  border-bottom: 2.5pt solid var(--color-gold-line);
+
+  &__logo {
+    flex: none;
+    width: 26mm;
+    height: 26mm;
+    border-radius: 50%;
+    object-fit: contain;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  &__org {
+    font: 700 9pt / 1.2 var(--font-body);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-gold-text);
+  }
+
+  &__title {
+    margin: 1mm 0 2mm;
+    font: 400 20pt / 1.1 var(--font-display);
+    color: var(--color-primary);
+  }
+
+  &__event {
+    font-size: 12pt;
+  }
+
+  &__meta {
+    color: #4a5a50;
+  }
+}
+
+.pr-summary {
+  display: flex;
+  gap: 8mm;
+  margin: 5mm 0 4mm;
+  color: #4a5a50;
+
+  strong {
+    color: #10241a;
+    font-size: 13pt;
+  }
+}
+
+.pr-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    padding: 2.5mm 2mm;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  td {
+    padding: 2.6mm 2mm;
+    border-bottom: 0.6pt solid #d8cdb2;
+    vertical-align: middle;
+  }
+
+  tbody tr:nth-child(even) td {
+    background: #f8f5ec;
+  }
+
+  tr {
+    break-inside: avoid;
+  }
+
+  // L'en-tête du tableau se répète sur chaque page imprimée
+  thead {
+    display: table-header-group;
+  }
+}
+
+.pr-n {
+  width: 10mm;
+  color: #6a6152;
+  text-align: center !important;
+}
+
+.pr-num {
+  width: 14mm;
+  text-align: center !important;
+}
+
+.pr-phone {
+  white-space: nowrap;
+}
+
+.pr-check {
+  width: 18mm;
+  text-align: center !important;
+}
+
+.pr-box {
+  display: inline-block;
+  width: 4.5mm;
+  height: 4.5mm;
+  border: 0.9pt solid #10241a;
+  border-radius: 1mm;
+}
+
+.pr-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 4mm;
+  margin-top: 6mm;
+  padding-top: 3mm;
+  border-top: 0.6pt solid #d8cdb2;
+  font-size: 8.5pt;
+  color: #6a6152;
+}
+
+// Impression : seule la feuille sort, couleurs conservées
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm 10mm;
+  }
+
+  app-admin-shell {
+    background: #fff !important;
+  }
+
+  .adm-bar,
+  .adm-apps,
+  .adm-apps__backdrop,
+  .adm-toast-zone,
+  .pr-tools {
+    display: none !important;
+  }
+
+  .pr-sheet {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

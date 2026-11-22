@@ -132,6 +132,9 @@
 .ph.ph-file-audio::before {
   content: "\ea20";
 }
+.ph.ph-file-csv::before {
+  content: "\eb1c";
+}
 .ph.ph-gear-six::before {
   content: "\e272";
 }
@@ -143,6 +146,9 @@
 }
 .ph.ph-hand-tap::before {
   content: "\ec90";
+}
+.ph.ph-hand-waving::before {
+  content: "\e580";
 }
 .ph.ph-hands-praying::before {
   content: "\ecc8";
@@ -164,6 +170,15 @@
 }
 .ph.ph-lightning::before {
   content: "\e2de";
+}
+.ph.ph-list-plus::before {
+  content: "\e2f8";
+}
+.ph.ph-lock-simple::before {
+  content: "\e308";
+}
+.ph.ph-magnifying-glass::before {
+  content: "\e30c";
 }
 .ph.ph-map-pin::before {
   content: "\e316";
@@ -206,6 +221,9 @@
 }
 .ph.ph-plus-circle::before {
   content: "\e3d6";
+}
+.ph.ph-printer::before {
+  content: "\e3dc";
 }
 .ph.ph-question::before {
   content: "\e3e8";
@@ -427,6 +445,9 @@
 .ph-fill.ph-file-audio::before {
   content: "\ea20";
 }
+.ph-fill.ph-file-csv::before {
+  content: "\eb1c";
+}
 .ph-fill.ph-gear-six::before {
   content: "\e272";
 }
@@ -438,6 +459,9 @@
 }
 .ph-fill.ph-hand-tap::before {
   content: "\ec90";
+}
+.ph-fill.ph-hand-waving::before {
+  content: "\e580";
 }
 .ph-fill.ph-hands-praying::before {
   content: "\ecc8";
@@ -459,6 +483,15 @@
 }
 .ph-fill.ph-lightning::before {
   content: "\e2de";
+}
+.ph-fill.ph-list-plus::before {
+  content: "\e2f8";
+}
+.ph-fill.ph-lock-simple::before {
+  content: "\e308";
+}
+.ph-fill.ph-magnifying-glass::before {
+  content: "\e30c";
 }
 .ph-fill.ph-map-pin::before {
   content: "\e316";
@@ -501,6 +534,9 @@
 }
 .ph-fill.ph-plus-circle::before {
   content: "\e3d6";
+}
+.ph-fill.ph-printer::before {
+  content: "\e3dc";
 }
 .ph-fill.ph-question::before {
   content: "\e3e8";

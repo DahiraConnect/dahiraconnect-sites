@@ -58,7 +58,7 @@ console.log(`postbuild : agenda.ics (${events.length} événements)`);
 const swConfig = JSON.parse(await readFile('ngsw-config.json', 'utf8'));
 const adminChunks = [];
 for (const name of await readdir(out)) {
-  if (/^chunk-[A-Z0-9]+\.js$/.test(name) && /supabase|app-admin-/.test(await readFile(join(out, name), 'utf8')))
+  if (/^chunk-[A-Z0-9]+\.js$/.test(name) && /supabase|app-admin-|Chart\.js|chartjs/.test(await readFile(join(out, name), 'utf8')))
     adminChunks.push(`/${name}`);
 }
 swConfig.assetGroups.unshift({

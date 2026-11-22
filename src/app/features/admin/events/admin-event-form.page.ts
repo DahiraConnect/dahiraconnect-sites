@@ -9,11 +9,18 @@ import { removePhoto } from '../core/images';
 import { PublishService } from '../core/publish.service';
 import { fromIso, slugify, toIso, uniqueSlug } from '../core/slug';
 import { PubStatus } from '../core/status';
+import { supabase } from '../core/supabase';
 import { HelpTip } from '../ui/help-tip/help-tip';
 import { PhotoPicker } from '../ui/photo-picker/photo-picker';
 import { StatusField } from '../ui/status-field/status-field';
 
 interface EventForm {
+  regEnabled: boolean;
+  regDate: string;
+  regTime: string;
+  regPhone: 'hidden' | 'optional' | 'required';
+  regAskPeople: boolean;
+  regLimit: string;
   title: string;
   date: string;
   time: string;
@@ -27,6 +34,12 @@ interface EventForm {
 }
 
 const EMPTY: EventForm = {
+  regEnabled: false,
+  regDate: '',
+  regTime: '',
+  regPhone: 'optional',
+  regAskPeople: false,
+  regLimit: '',
   title: '',
   date: '',
   time: '',
@@ -78,6 +91,15 @@ export default class AdminEventFormPage {
     },
   });
 
+  /** Nombre d'inscrits (personnes) */
+  protected readonly participants = resource({
+    params: () => this.id(),
+    loader: async ({ params }) => {
+      const { data } = await supabase().from('event_registrations').select('people').eq('event_id', params);
+      return (data ?? []).reduce((n, r) => n + (r.people as number), 0) || null;
+    },
+  });
+
   /** Albums, pour relier un événement passé à ses photos */
   protected readonly albums = resource({
     params: () => this.auth.current()?.dahiraId,
@@ -87,7 +109,15 @@ export default class AdminEventFormPage {
   private fill(e: DahiraEvent): void {
     this.original = e;
     const start = fromIso(e.startsAt);
+    const reg = e.registration;
+    const closes = reg?.closesAt ? fromIso(reg.closesAt) : null;
     this.form = {
+      regEnabled: !!reg?.enabled,
+      regDate: closes?.date ?? '',
+      regTime: closes?.time ?? '',
+      regPhone: reg?.phone ?? 'optional',
+      regAskPeople: !!reg?.askPeople,
+      regLimit: reg?.limit ? String(reg.limit) : '',
       title: e.title,
       date: start.date,
       time: e.timeTbc ? '' : start.time,
@@ -115,6 +145,7 @@ export default class AdminEventFormPage {
     if (!f.timeTbc && !f.time) errors.time = 'Indiquez l’heure, ou cochez « Heure pas encore connue ».';
     if (!f.place.trim()) errors.place = 'Indiquez le lieu.';
     if (f.mapUrl && !/^https?:\/\//.test(f.mapUrl.trim())) errors.mapUrl = 'Le lien doit commencer par https://';
+    if (f.regEnabled && f.regLimit && !/^\d+$/.test(f.regLimit.trim())) errors.regLimit = 'Un nombre, sans lettres.';
     this.errors.set(errors);
     const when = this.publishAt();
     this.statusError.set(
@@ -163,6 +194,15 @@ export default class AdminEventFormPage {
         isMajor: f.isMajor || undefined,
         albumSlug: f.albumSlug || undefined,
         images: this.images().length ? this.images() : undefined,
+        registration: f.regEnabled || this.original?.registration
+          ? {
+              enabled: f.regEnabled,
+              closesAt: f.regDate ? toIso(f.regDate, f.regTime || '23:59') : undefined,
+              phone: f.regPhone,
+              askPeople: f.regAskPeople || undefined,
+              limit: f.regLimit ? Number(f.regLimit) : undefined,
+            }
+          : undefined,
       };
       const clean = JSON.parse(JSON.stringify(event)) as DahiraEvent; // retire les champs vides
       await saveDoc('events', dahira.dahiraId, this.id() ?? null, clean, {

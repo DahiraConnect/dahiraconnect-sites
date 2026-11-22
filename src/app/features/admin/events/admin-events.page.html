@@ -11,6 +11,16 @@
   } @else if (rows.error()) {
     <p class="adm-error" role="alert">Impossible de charger l’agenda. Vérifiez votre connexion.</p>
   } @else {
+    @if ((rows.value()?.length ?? 0) > 4) {
+      <div class="adm-search" role="search">
+    <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+    <label class="sr-only" for="ev-search">Rechercher un événement ou un lieu</label>
+    <input id="ev-search" type="search" placeholder="Rechercher un événement ou un lieu" [value]="query()" (input)="query.set($any($event.target).value)" />
+  </div>
+    }
+    @if (query() && !upcoming().length && !past().length) {
+      <p class="adm-empty">Aucun événement ne correspond à « {{ query() }} ».</p>
+    }
     <section class="adm-section" aria-labelledby="ev-upcoming">
       <h2 id="ev-upcoming">À venir</h2>
       @if (upcoming().length) {

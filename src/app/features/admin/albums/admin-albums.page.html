@@ -13,8 +13,18 @@
   } @else if (!rows.value()?.length) {
     <p class="adm-empty">Aucun album pour le moment. Ajoutez les photos de votre dernier événement.</p>
   } @else {
+    @if ((rows.value()?.length ?? 0) > 4) {
+      <div class="adm-search" role="search">
+    <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+    <label class="sr-only" for="al-search">Rechercher un album</label>
+    <input id="al-search" type="search" placeholder="Rechercher un album" [value]="query()" (input)="query.set($any($event.target).value)" />
+  </div>
+    }
+    @if (query() && !found().length) {
+      <p class="adm-empty">Aucun album ne correspond à « {{ query() }} ».</p>
+    }
     <ul class="adm-list">
-      @for (r of rows.value(); track r.id) {
+      @for (r of found(); track r.id) {
         <li>
           <a class="adm-item" [routerLink]="r.id">
             @if (cover(r.data); as src) {

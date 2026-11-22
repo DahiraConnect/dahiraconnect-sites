@@ -1,0 +1,114 @@
+<div class="adm-page">
+  <a class="adm-back" [routerLink]="['/admin/agenda', id()]"><i class="ph ph-arrow-left" aria-hidden="true"></i> L’événement</a>
+  <h1 class="adm-title">Participants</h1>
+  @if (event.value(); as ev) {
+    <p class="adm-lead"><strong>{{ ev.data.title }}</strong><br />{{ eventMeta() }}</p>
+  }
+
+  @if (list.isLoading()) {
+    <p class="adm-lead" aria-live="polite">Chargement…</p>
+  } @else if (list.error()) {
+    <p class="adm-error" role="alert">Impossible de charger la liste. Vérifiez votre connexion.</p>
+  } @else {
+    <div class="pt-summary">
+      <p><strong>{{ list.value()?.length ?? 0 }}</strong> inscription{{ (list.value()?.length ?? 0) > 1 ? 's' : '' }}</p>
+      <p><strong>{{ totalPeople() }}</strong> personne{{ totalPeople() > 1 ? 's' : '' }} en tout</p>
+    </div>
+
+    <div class="adm-quick">
+      <button type="button" class="adm-quick__btn" [class.adm-quick__btn--main]="panel() === 'add'" (click)="toggle('add')">
+        <i class="ph ph-user-plus" aria-hidden="true"></i> Ajouter
+      </button>
+      <span class="adm-with-tip">
+        <button type="button" class="adm-quick__btn" [class.adm-quick__btn--main]="panel() === 'import'" (click)="toggle('import')">
+          <i class="ph ph-list-plus" aria-hidden="true"></i> Coller une liste
+        </button>
+        <app-help-tip>Copiez une liste de noms (WhatsApp, Excel…) : une personne par ligne. Les noms déjà inscrits sont ignorés.</app-help-tip>
+      </span>
+      @if (list.value()?.length) {
+        <button type="button" class="adm-quick__btn" (click)="exportCsv()">
+          <i class="ph ph-file-csv" aria-hidden="true"></i> Excel (CSV)
+        </button>
+        <a class="adm-quick__btn" [routerLink]="['imprimer']">
+          <i class="ph ph-printer" aria-hidden="true"></i> PDF à imprimer
+        </a>
+      }
+    </div>
+
+    @if (panel() === 'add') {
+      <form class="adm-card pt-panel" (ngSubmit)="add()" novalidate>
+        <div class="adm-row">
+          <div class="adm-field">
+            <label for="pt-first">Prénom</label>
+            <input id="pt-first" name="first" [(ngModel)]="first" autocomplete="off" />
+          </div>
+          <div class="adm-field">
+            <label for="pt-last">Nom</label>
+            <input id="pt-last" name="last" [(ngModel)]="last" autocomplete="off" />
+          </div>
+        </div>
+        <div class="adm-row">
+          <div class="adm-field">
+            <label for="pt-phone">Téléphone <small>(facultatif)</small></label>
+            <input id="pt-phone" name="phone" type="tel" inputmode="tel" [(ngModel)]="phone" />
+          </div>
+          <div class="adm-field">
+            <label for="pt-people">Personnes</label>
+            <input id="pt-people" name="people" type="number" min="1" max="20" inputmode="numeric" [(ngModel)]="people" />
+          </div>
+        </div>
+        <p class="adm-error" role="alert">{{ error() }}</p>
+        <button type="submit" class="btn btn--dark btn--sm" [disabled]="busy()"><i class="ph ph-check" aria-hidden="true"></i> Inscrire</button>
+      </form>
+    }
+
+    @if (panel() === 'import') {
+      <form class="adm-card pt-panel" (ngSubmit)="importList()" novalidate>
+        <div class="adm-field">
+          <label for="pt-import">Une personne par ligne</label>
+          <textarea id="pt-import" name="import" rows="8" [(ngModel)]="importText"
+            placeholder="Aminata Ndiaye&#10;Moussa Fall 77 123 45 67&#10;Ndeye Coura Gueye"></textarea>
+          <p class="adm-hint">Le dernier mot est pris comme nom de famille. Un numéro en fin de ligne est gardé.</p>
+        </div>
+        <p class="adm-error" role="alert">{{ error() }}</p>
+        <button type="submit" class="btn btn--dark btn--sm" [disabled]="busy()"><i class="ph ph-check" aria-hidden="true"></i> Ajouter la liste</button>
+      </form>
+    }
+
+    @if (list.value()?.length) {
+      <div class="adm-search" role="search">
+        <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
+        <label class="sr-only" for="pt-search">Rechercher un participant</label>
+        <input id="pt-search" type="search" placeholder="Rechercher un nom ou un numéro" [ngModel]="query()" (ngModelChange)="query.set($event)" />
+      </div>
+      @if (query() && !filtered().length) {
+        <p class="adm-empty">Personne ne correspond à « {{ query() }} ».</p>
+      }
+      <ol class="adm-list">
+        @for (p of filtered(); track p.id) {
+          <li class="pt-item">
+            <span class="adm-avatar pt-avatar" aria-hidden="true">{{ p.first_name.charAt(0) }}{{ p.last_name.charAt(0) }}</span>
+            <span class="adm-item__text">
+              <span class="adm-item__title">{{ p.first_name }} {{ p.last_name }}</span>
+              <span class="adm-item__meta">
+                @if (p.phone) { {{ phoneLabel(p.phone) }} · }
+                @if (p.people > 1) { {{ p.people }} personnes · }
+                {{ source[p.source] }} · {{ when(p.created_at) }}
+              </span>
+            </span>
+            @if (p.phone) {
+              <a class="pt-tool" [href]="'tel:' + p.phone" [attr.aria-label]="'Appeler ' + p.first_name + ' (' + phoneLabel(p.phone) + ')'">
+                <i class="ph ph-phone" aria-hidden="true"></i>
+              </a>
+            }
+            <button type="button" class="pt-tool pt-tool--remove" (click)="remove(p)" [attr.aria-label]="'Retirer ' + p.first_name + ' ' + p.last_name">
+              <i class="ph ph-trash" aria-hidden="true"></i>
+            </button>
+          </li>
+        }
+      </ol>
+    } @else if (panel() === 'none') {
+      <p class="adm-empty">Personne n’est encore inscrit. Les inscriptions du site apparaîtront ici, ou ajoutez des noms vous-même.</p>
+    }
+  }
+</div>

@@ -536,3 +536,56 @@
   padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-md);
 }
+
+.adm-choices--3 {
+  grid-template-columns: repeat(3, 1fr);
+
+  .adm-check {
+    padding-inline: var(--space-2);
+    font-size: var(--fs-small);
+  }
+}
+
+.adm-quick__btn--main {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-text-on-dark);
+
+  &:hover {
+    background: var(--color-primary-mid);
+    color: var(--color-text-on-dark);
+  }
+}
+
+// Zone de recherche des listes
+.adm-search {
+  position: relative;
+  margin-bottom: var(--space-4);
+
+  > .ph {
+    position: absolute;
+    top: 50%;
+    left: var(--space-4);
+    font-size: 22px;
+    color: var(--color-text-muted);
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  input {
+    width: 100%;
+    min-height: var(--btn-h);
+    padding: 0 var(--space-4) 0 52px;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    background: var(--color-surface-card);
+    color: var(--color-text-primary);
+    font: 400 var(--fs-body-lg) / 1 var(--font-body);
+
+    &:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring-color);
+      outline-offset: 0;
+      border-color: var(--color-primary);
+    }
+  }
+}

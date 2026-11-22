@@ -15,6 +15,9 @@
     <app-event-feature class="content__feature rise" [event]="e" [headingLevel]="1" [showMedia]="false" />
 
     <div class="content__side">
+      @if (e.registration?.enabled && !isPast()) {
+        <app-event-signup [event]="e" appReveal />
+      }
       @if (e.description) {
         <p class="content__text" appReveal>{{ e.description }}</p>
       }

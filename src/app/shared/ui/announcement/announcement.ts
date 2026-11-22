@@ -20,25 +20,29 @@ export function isAnnouncementVisible(a: Announcement | undefined, now = new Dat
             <span class="ann__over">Important</span>
           }
           <p class="ann__text">{{ a.text }}</p>
-          @if (a.audioUrl || canSpeak()) {
-            <button type="button" class="ann__listen" data-track="ecoute_annonce" (click)="toggle(a)"
-              [attr.aria-pressed]="playing()">
-              <i class="ph-fill" [class.ph-play]="!playing()" [class.ph-pause]="playing()" aria-hidden="true"></i>
-              {{ playing() ? 'Pause' : 'Écouter' }}
-              @if (a.audioUrl && a.audioSeconds) {
-                <span class="ann__dur">{{ duration(a.audioSeconds) }}</span>
+          @if (a.audioUrl || canSpeak() || a.linkUrl) {
+            <div class="ann__actions">
+            @if (a.audioUrl || canSpeak()) {
+              <button type="button" class="ann__listen" data-track="ecoute_annonce" (click)="toggle(a)"
+                [attr.aria-pressed]="playing()">
+                <i class="ph-fill" [class.ph-play]="!playing()" [class.ph-pause]="playing()" aria-hidden="true"></i>
+                {{ playing() ? 'Pause' : 'Écouter' }}
+                @if (a.audioUrl && a.audioSeconds) {
+                  <span class="ann__dur">{{ duration(a.audioSeconds) }}</span>
+                }
+              </button>
+              @if (a.audioUrl) {
+                <audio #player [src]="a.audioUrl" preload="none" (ended)="playing.set(false)" (pause)="playing.set(false)" (play)="playing.set(true)"></audio>
               }
-            </button>
-            @if (a.audioUrl) {
-              <audio #player [src]="a.audioUrl" preload="none" (ended)="playing.set(false)" (pause)="playing.set(false)" (play)="playing.set(true)"></audio>
             }
-          }
-          @if (a.linkUrl) {
-            @if (a.linkUrl.startsWith('/')) {
-              <a class="ann__link" [routerLink]="a.linkUrl">{{ a.linkLabel || 'Voir le détail' }} <span aria-hidden="true">→</span></a>
-            } @else {
-              <a class="ann__link" [href]="a.linkUrl" target="_blank" rel="noopener">{{ a.linkLabel || 'Voir le détail' }} <span aria-hidden="true">→</span></a>
+            @if (a.linkUrl) {
+              @if (a.linkUrl.startsWith('/')) {
+                <a class="ann__link" [routerLink]="a.linkUrl">{{ a.linkLabel || 'Voir le détail' }} <span aria-hidden="true">→</span></a>
+              } @else {
+                <a class="ann__link" [href]="a.linkUrl" target="_blank" rel="noopener">{{ a.linkLabel || 'Voir le détail' }} <span aria-hidden="true">→</span></a>
+              }
             }
+            </div>
           }
         </div>
       </aside>

@@ -8,6 +8,7 @@ const ADMIN_ROUTES: Routes = [
     path: '',
     loadComponent: () => import('./shell/admin-shell'),
     children: [
+      { path: 'deconnexion', loadComponent: () => import('./logout/logout.page'), title: 'Déconnexion' },
       {
         path: 'connexion',
         canActivate: [guestGuard],
@@ -22,6 +23,8 @@ const ADMIN_ROUTES: Routes = [
           { path: 'agenda', loadComponent: () => import('./events/admin-events.page'), title: 'Agenda · Admin' },
           { path: 'agenda/nouveau', loadComponent: () => import('./events/admin-event-form.page'), title: 'Nouvel événement' },
           { path: 'agenda/:id', loadComponent: () => import('./events/admin-event-form.page'), title: 'Modifier un événement' },
+          { path: 'agenda/:id/participants', loadComponent: () => import('./events/admin-participants.page'), title: 'Participants' },
+          { path: 'agenda/:id/participants/imprimer', loadComponent: () => import('./events/admin-participants-print.page'), title: 'Liste à imprimer' },
           { path: 'galerie', loadComponent: () => import('./albums/admin-albums.page'), title: 'Galerie · Admin' },
           { path: 'galerie/nouveau', loadComponent: () => import('./albums/admin-album-form.page'), title: 'Nouvel album' },
           { path: 'galerie/:id', loadComponent: () => import('./albums/admin-album-form.page'), title: 'Modifier un album' },

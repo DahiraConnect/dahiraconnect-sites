@@ -1,5 +1,18 @@
 import { Photo } from './media.model';
 
+/** Inscriptions « Je viens » (Ziar, sortie, repas…) */
+export interface EventRegistration {
+  enabled: boolean;
+  /** Fermeture des inscriptions (ISO) ; par défaut, le début de l'événement */
+  closesAt?: string;
+  /** Téléphone : non demandé, facultatif ou obligatoire */
+  phone: 'hidden' | 'optional' | 'required';
+  /** Demander le nombre de personnes (transport, repas) */
+  askPeople?: boolean;
+  /** Nombre de places au total */
+  limit?: number;
+}
+
 export interface DahiraEvent {
   id: string;
   slug: string;
@@ -19,6 +32,8 @@ export interface DahiraEvent {
   description?: string;
   /** Badge « Grand événement » */
   isMajor?: boolean;
+  /** Inscriptions des participants (facultatif) */
+  registration?: EventRegistration;
   /** Lien vers l'album une fois passé */
   albumSlug?: string;
 }
