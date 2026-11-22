@@ -129,7 +129,7 @@ export class AdminAuth {
       this._memberships.set([]);
       return;
     }
-    // Équipe du site + responsable du dahira (base commune Saa-Dahira)
+    // Équipe du site + responsable du dahira (base commune DahiraConnect)
     const { data } = await supabase().rpc('mes_sites');
     type Row = {
       dahira_id: string;

@@ -1,4 +1,4 @@
-// Transfert d'un site de l'ancien Supabase DahiraConnect vers la base commune Saa-Dahira.
+// Transfert d'un site de l'ancien Supabase DahiraConnect vers la base commune DahiraConnect.
 //
 // Copie : contenu du site, événements, albums, inscriptions, équipe, journal, statistiques,
 // crochet de déploiement et fichiers (bucket « media » → bucket « site »). Les adresses des

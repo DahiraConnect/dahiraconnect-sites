@@ -20,7 +20,7 @@ export function supabase(): SupabaseClient {
 }
 
 /**
- * Base commune Saa-Dahira : les colonnes et les statuts y sont en français
+ * Base commune DahiraConnect : les colonnes et les statuts y sont en français
  * (tables site_*). Le code du site garde ses noms anglais ; la traduction se fait ici
  * et dans les `select` (alias PostgREST « nom_du_site:colonne »).
  */

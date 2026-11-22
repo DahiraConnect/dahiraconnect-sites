@@ -29,7 +29,7 @@ async function get(path) {
   return res.json();
 }
 
-// Base commune Saa-Dahira : tables du module site (sites, site_evenements, site_albums)
+// Base commune DahiraConnect : tables du module site (sites, site_evenements, site_albums)
 const [dahira] = await get(
   `sites?adresse=eq.${encodeURIComponent(slug)}&select=id:dahira_id,profile:profil,content:contenu,board:bureau,quiz`,
 );

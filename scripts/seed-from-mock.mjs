@@ -1,5 +1,5 @@
 // Génère supabase/seed.sql à partir des données de démo (src/assets/mock), pour la base commune
-// Saa-Dahira (module site). Le site est rattaché à un dahira qui existe déjà dans cette base :
+// DahiraConnect (module site). Le site est rattaché à un dahira qui existe déjà dans cette base :
 //   DAHIRA_NOM="Dahira Nourou Darayni" node scripts/seed-from-mock.mjs
 // puis coller supabase/seed.sql dans l'éditeur SQL (ou psql sur la base locale).
 import { readFileSync, writeFileSync } from 'node:fs';
