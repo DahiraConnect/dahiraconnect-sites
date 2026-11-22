@@ -1,5 +1,5 @@
 /**
- * Base commune DahiraConnect en local : `supabase start` dans le dépôt saa_dahira_mobile
+ * Base commune DahiraConnect en local : `supabase start` dans le dépôt dahiraconnect-mobile
  * (tables du module site : sites, site_evenements, site_albums…).
  */
 export const SUPABASE = {

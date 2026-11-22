@@ -1,6 +1,6 @@
 # Back-office : mise en ligne
 
-> **Base commune.** Le site utilise désormais la même base que la gestion (dépôt `saa_dahira_mobile`) :
+> **Base commune.** Le site utilise désormais la même base que la gestion (dépôt `dahiraconnect-mobile`) :
 > tables `sites`, `site_evenements`, `site_albums`, `site_inscriptions`, `site_equipe`, `site_journal`,
 > `site_stats`, bucket `site`, fonctions Edge `site-publier` et `site-equipe`
 > (migration `20261217090000_module_site.sql`). Les migrations et fonctions de **ce** dossier
@@ -11,10 +11,10 @@
 
 Dans l'ordre, sans rien supprimer de l'ancien projet avant la fin :
 
-1. **Base commune** (dépôt `saa_dahira_mobile`) : `supabase db push`, puis
+1. **Base commune** (dépôt `dahiraconnect-mobile`) : `supabase db push`, puis
    `supabase functions deploy site-publier` et `supabase functions deploy site-equipe`.
 2. **Connexion par code** sur le projet commun : SMTP personnel, puis coller
-   `saa_dahira_mobile/supabase/templates/code-connexion.html` dans *Emails → Magic Link*
+   `dahiraconnect-mobile/supabase/templates/code-connexion.html` dans *Emails → Magic Link*
    (sujet « Votre code de connexion »). *URL Configuration* : ajouter `https://moutahabina.akkili.sn/admin/**`.
    Si le captcha est activé sur le projet commun, y mettre la clé secrète Turnstile du site.
 3. **Créer le dahira** dans la base commune (création d'un dahira depuis le site ou le bureau) :
