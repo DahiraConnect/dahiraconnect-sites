@@ -1,10 +1,10 @@
 /**
- * Back-office : projet Supabase en ligne.
+ * Base commune DahiraConnect (projet Supabase « saa-dahira »), en ligne.
  * L'URL et la clé « anon » sont publiques par nature (la sécurité repose sur les règles RLS).
  */
 export const SUPABASE = {
-  url: 'https://obrdjhhakqhcbttdbfek.supabase.co',
-  anonKey: 'sb_publishable_SFwepiIrBtrLvyfm1NH6YA_h1V0cT4K',
+  url: 'https://smphfvfxwiiddhpwvcqk.supabase.co',
+  anonKey: 'sb_publishable_HRTjrVPSRry6xWAP7WJ_kA_bYxA0H5j',
 };
 
 /**
