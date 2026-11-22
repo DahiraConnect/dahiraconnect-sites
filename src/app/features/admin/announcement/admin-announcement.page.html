@@ -24,6 +24,14 @@
         <p id="ann-count" class="adm-hint">{{ ann.text.length }} / {{ max }} caractères. Court, c’est mieux.</p>
       </div>
 
+      <div class="adm-field">
+        <span class="adm-with-tip">
+          <span class="adm-label">Message vocal <small>(facultatif)</small></span>
+          <app-help-tip>Pour ceux qui préfèrent écouter. Parlez en wolof ou en français, 2 minutes au plus. Sans vocal, le site peut lire le texte à voix haute.</app-help-tip>
+        </span>
+        <app-voice-recorder [url]="ann.audioUrl" (urlChange)="setAudio($event)" [seconds]="ann.audioSeconds" (secondsChange)="setSeconds($event)" />
+      </div>
+
       <fieldset class="adm-choices">
         <legend class="adm-label">Couleur</legend>
         <label class="adm-check">

@@ -1,10 +1,10 @@
 {
-  "intro": "Apprenez en jouant : les ablutions, la prière, le dahira et sa charte. Sans inscription : jouez, apprenez, partagez votre score.",
+  "intro": "Apprenez en jouant : les ablutions, la prière, le dahira et sa charte. Pas besoin de compte.",
   "themes": [
     {
       "id": "farata-ndiapp",
       "title": "Farata ndiapp",
-      "description": "Les obligations des ablutions.",
+      "description": "Ce qui est obligatoire dans les ablutions.",
       "icon": "ph-drop",
       "source": "Mukhtasar d'Al-Akhdari (rite malikite)",
       "questions": [
@@ -16,7 +16,7 @@
             "10"
           ],
           "answer": 0,
-          "explanation": "Les obligations des ablutions sont au nombre de sept.",
+          "explanation": "Il y a sept farata dans les ablutions.",
           "ar": {
             "question": "كم عدد فرائض الوضوء؟",
             "choices": [
@@ -35,7 +35,7 @@
             "Se laver les oreilles"
           ],
           "answer": 0,
-          "explanation": "La première obligation est l'intention, faite au début des ablutions.",
+          "explanation": "La première farata, c'est l'intention, au début des ablutions.",
           "ar": {
             "question": "ما أول فرائض الوضوء؟",
             "choices": [
@@ -142,7 +142,7 @@
             "Utiliser beaucoup d'eau"
           ],
           "answer": 0,
-          "explanation": "Le fawr, c'est enchaîner les ablutions sans longue interruption.",
+          "explanation": "Le fawr, c'est enchaîner les ablutions sans s'arrêter longtemps.",
           "ar": {
             "question": "ما هو الفور؟",
             "choices": [
@@ -161,7 +161,7 @@
             "Attendre la prochaine prière"
           ],
           "answer": 0,
-          "explanation": "Si l'on s'en souvient vite, on fait l'obligation oubliée, puis ce qui vient après.",
+          "explanation": "Si on s'en souvient vite, on fait la farata oubliée, puis ce qui vient après.",
           "ar": {
             "question": "من نسي فرضا من أعضائه وتذكره بالقرب، ماذا يفعل؟",
             "choices": [
@@ -250,7 +250,7 @@
             "Sunna (recommandée)"
           ],
           "answer": 1,
-          "explanation": "Essuyer les oreilles est une sunna, en reprenant de l'eau pour elles.",
+          "explanation": "Essuyer les oreilles est une sunna. On reprend de l'eau pour elles.",
           "ar": {
             "question": "مسح الأذنين",
             "choices": [
@@ -305,7 +305,7 @@
             "Sunna (recommandée)"
           ],
           "answer": 1,
-          "explanation": "Respecter l'ordre entre les obligations est une sunna.",
+          "explanation": "Faire les farata dans l'ordre est une sunna.",
           "ar": {
             "question": "الترتيب بين الفرائض",
             "choices": [
@@ -323,7 +323,7 @@
             "Recommencer les ablutions et la prière"
           ],
           "answer": 0,
-          "explanation": "Si l'on oublie une sunna, on la fait, et on ne refait pas la prière.",
+          "explanation": "Si on oublie une sunna, on la fait. Pas besoin de refaire la prière.",
           "ar": {
             "question": "من ترك سنة من سنن الوضوء، ماذا يفعل؟",
             "choices": [
@@ -343,7 +343,7 @@
     {
       "id": "farata-diouli",
       "title": "Farata diouli",
-      "description": "Les obligations de la prière.",
+      "description": "Ce qui est obligatoire dans la prière.",
       "icon": "ph-hands-praying",
       "source": "Mukhtasar d'Al-Akhdari (rite malikite)",
       "questions": [
@@ -355,7 +355,7 @@
             "5"
           ],
           "answer": 0,
-          "explanation": "Al-Akhdari en cite quatorze.",
+          "explanation": "Al-Akhdari compte quatorze farata dans la prière.",
           "ar": {
             "question": "كم عدد فرائض الصلاة عند الأخضري؟",
             "choices": [
@@ -395,7 +395,7 @@
             "À la fin de la prière"
           ],
           "answer": 0,
-          "explanation": "L'intention doit accompagner la takbîr d'entrée.",
+          "explanation": "On fait l'intention en disant la takbîr d'entrée.",
           "ar": {
             "question": "متى تكون نية الصلاة؟",
             "choices": [
@@ -432,7 +432,7 @@
             "Sunna (recommandée)"
           ],
           "answer": 0,
-          "explanation": "L'inclinaison et le redressement sont des farata.",
+          "explanation": "S'incliner (roukou') puis se redresser : ce sont des farata.",
           "ar": {
             "question": "الرفع من الركوع",
             "choices": [
@@ -470,7 +470,7 @@
             "Sunna (recommandée)"
           ],
           "answer": 0,
-          "explanation": "La prosternation sur le front est une farata.",
+          "explanation": "Poser le front au sol est une farata.",
           "ar": {
             "question": "السجود على الجبهة",
             "choices": [
@@ -490,7 +490,7 @@
             "En se levant"
           ],
           "answer": 0,
-          "explanation": "Le salam, et la position assise qui l'accompagne, sont des farata.",
+          "explanation": "Le salam est une farata, et la position assise pour le dire aussi.",
           "ar": {
             "question": "بمَ يخرج المصلي من الصلاة؟",
             "choices": [
@@ -577,7 +577,7 @@
             "Sunna (recommandée)"
           ],
           "answer": 1,
-          "explanation": "Les deux tachahhoud, et la position assise pour eux, sont des sunnas.",
+          "explanation": "Les deux tachahhoud, et la position assise pour les dire, sont des sunnas.",
           "ar": {
             "question": "التشهد",
             "choices": [
@@ -759,14 +759,14 @@
           "imageAlt": "Portrait de Seydi El Hadji Malick Sy"
         },
         {
-          "question": "Dans quelle ville Seydi El Hadji Malick Sy s'installe-t-il au début du XXᵉ siècle pour y fonder sa grande école ?",
+          "question": "Dans quelle ville Seydi El Hadji Malick Sy a-t-il fondé sa grande école ?",
           "choices": [
             "Tivaouane",
             "Kaolack",
             "Ziguinchor"
           ],
           "answer": 0,
-          "explanation": "Installé à Tivaouane, il y fonde la zawiya et une grande école d'où sortent de nombreux muqaddams."
+          "explanation": "À Tivaouane, il fonde la zawiya et une grande école. Beaucoup de muqaddams y ont été formés."
         },
         {
           "question": "En quelle année Seydi El Hadji Malick Sy est-il rappelé à Dieu ?",
@@ -813,7 +813,7 @@
             "Aucun rôle particulier"
           ],
           "answer": 0,
-          "explanation": "Il initie les dahiras, comme la Dahiratoul Kiram, piliers d'entraide et d'enseignement."
+          "explanation": "Il a lancé les premiers dahiras, comme la Dahiratoul Kiram, pour s'entraider et apprendre ensemble."
         },
         {
           "question": "Pourquoi Serigne Mansour Sy est-il appelé « Borom Daaraji » ?",

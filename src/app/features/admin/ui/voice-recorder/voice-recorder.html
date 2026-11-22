@@ -1,0 +1,36 @@
+@if (state() === 'recording') {
+  <div class="vr__live" role="status">
+    <span class="vr__dot" aria-hidden="true"></span>
+    Enregistrement… <strong>{{ clock() }}</strong>
+  </div>
+  <button type="button" class="btn btn--dark vr__main" (click)="stop()">
+    <i class="ph-fill ph-stop" aria-hidden="true"></i> Arrêter
+  </button>
+} @else if (state() === 'uploading') {
+  <p class="vr__live" role="status"><i class="ph ph-spinner vr__spin" aria-hidden="true"></i> Envoi du message vocal…</p>
+} @else if (url(); as src) {
+  <audio class="vr__player" [src]="src" controls preload="metadata"></audio>
+  <div class="vr__tools">
+    @if (canRecord) {
+      <button type="button" class="adm-quick__btn" (click)="start()">
+        <i class="ph ph-microphone" aria-hidden="true"></i> Refaire
+      </button>
+    }
+    <button type="button" class="adm-quick__btn vr__remove" (click)="remove()">
+      <i class="ph ph-trash" aria-hidden="true"></i> Supprimer le vocal
+    </button>
+  </div>
+} @else {
+  @if (canRecord) {
+    <button type="button" class="vr__mic" (click)="start()">
+      <i class="ph-fill ph-microphone" aria-hidden="true"></i>
+      <span>Enregistrer un message vocal</span>
+    </button>
+  }
+  <label class="vr__file">
+    <input type="file" accept="audio/*" (change)="pickFile($event)" />
+    <i class="ph ph-file-audio" aria-hidden="true"></i>
+    {{ canRecord ? 'Ou choisir un fichier audio' : 'Choisir un fichier audio' }}
+  </label>
+}
+<p class="adm-error" aria-live="polite">{{ error() }}</p>

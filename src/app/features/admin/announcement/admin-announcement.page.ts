@@ -8,13 +8,14 @@ import { AdminAuth } from '../core/admin-auth.service';
 import { DahiraDocStore } from '../core/dahira-doc.store';
 import { listDocs } from '../core/docs';
 import { HelpTip } from '../ui/help-tip/help-tip';
+import { VoiceRecorder } from '../ui/voice-recorder/voice-recorder';
 
 const MAX = 180;
 
 /** Annonce en haut de l'accueil : une phrase, un lien facultatif, une date de fin. */
 @Component({
   selector: 'app-admin-announcement',
-  imports: [FormsModule, RouterLink, HelpTip, AnnouncementBanner],
+  imports: [FormsModule, RouterLink, HelpTip, AnnouncementBanner, VoiceRecorder],
   templateUrl: './admin-announcement.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -44,6 +45,14 @@ export default class AdminAnnouncementPage {
       const current = this.store.profile()?.announcement;
       if (current) this.a.set({ ...current });
     });
+  }
+
+  protected setAudio(audioUrl: string | undefined): void {
+    this.patch({ audioUrl });
+  }
+
+  protected setSeconds(audioSeconds: number | undefined): void {
+    this.patch({ audioSeconds });
   }
 
   protected patch(p: Partial<Announcement>): void {

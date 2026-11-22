@@ -6,6 +6,7 @@
 import { execFileSync } from 'node:child_process';
 import { access, copyFile, readdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { buildIcs } from './agenda-ics.mjs';
 
 const out = 'dist/dahiraconnect/browser';
 const ASSET = /(href|src)="((?:chunk|main|polyfills|styles)-[A-Z0-9]+\.(?:js|css))"/g;
@@ -44,6 +45,11 @@ await writeFile(
 );
 await writeFile(join(out, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /admin\n\nSitemap: ${site}/sitemap.xml\n`);
 console.log(`postbuild : sitemap.xml (${urls.length} pages) et robots.txt`);
+
+// 3 bis. Calendrier en ligne (abonnement « S'abonner à l'agenda »)
+const events = JSON.parse(await readFile('src/assets/mock/events.json', 'utf8'));
+await writeFile(join(out, 'agenda.ics'), buildIcs(tenant, events, site));
+console.log(`postbuild : agenda.ics (${events.length} événements)`);
 
 // 4. Manifeste du service worker régénéré (les pages ont changé : nouvelles empreintes).
 //    Les morceaux propres au back-office (client Supabase…) ne sont pas préchargés chez

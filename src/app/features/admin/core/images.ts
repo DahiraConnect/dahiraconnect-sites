@@ -74,3 +74,22 @@ export async function removePhoto(photo: Photo): Promise<void> {
     .map((u) => decodeURIComponent(u.split(marker)[1]));
   if (paths.length) await supabase().storage.from('media').remove(paths);
 }
+
+/** Extension de fichier selon le type audio (webm sur Android, mp4 sur iPhone) */
+export function audioExtension(type: string): string {
+  if (type.includes('webm')) return 'webm';
+  if (type.includes('ogg')) return 'ogg';
+  if (type.includes('mpeg')) return 'mp3';
+  if (type.includes('wav')) return 'wav';
+  return 'm4a';
+}
+
+/** Envoie un message vocal dans le stockage du dahira (`media/<slug>/<dossier>/…`) */
+export async function uploadAudio(blob: Blob, slug: string, folder: string): Promise<string> {
+  const type = (blob.type || 'audio/mp4').split(';')[0];
+  const path = `${slug}/${folder}/${Date.now().toString(36)}-${randomId()}.${audioExtension(type)}`;
+  const bucket = supabase().storage.from('media');
+  const { error } = await bucket.upload(path, blob, { contentType: type, cacheControl: '31536000', upsert: false });
+  if (error) throw error;
+  return bucket.getPublicUrl(path).data.publicUrl;
+}

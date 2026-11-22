@@ -58,4 +58,6 @@ Mise en place pas à pas : [supabase/LISEZMOI.md](supabase/LISEZMOI.md).
   Le manifeste est propre à chaque dahira (`/manifest.webmanifest` généré par `src/server.ts` via `core/tenant/manifest.ts`).
   Icônes d'application d'un dahira : `src/assets/tenants/<slug>/icons/` (192/512, maskable, iPhone, favicon), générées depuis son logo HD.
 - **Paiements** : logos communs dans `src/assets/payments/`. Si Wave et Orange Money ont le même numéro, ils sont regroupés en une ligne.
+- **Calendrier en ligne** : `/agenda.ics`, généré au build (`scripts/agenda-ics.mjs`) ; lien « Mettre tous les rendez-vous dans mon téléphone ».
+- **Image de partage** : `src/assets/tenants/<slug>/partage.jpg` (1200 × 630), régénérée par `python3 scripts/share-image.py <slug>` après un changement de nom, de devise ou de logo.
 - **Icônes** : `<i class="ph ph-nom" aria-hidden="true">`. Après avoir ajouté une icône, lancer `npm run icons`.

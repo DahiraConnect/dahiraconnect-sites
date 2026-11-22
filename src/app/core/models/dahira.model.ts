@@ -50,6 +50,10 @@ export interface Announcement {
   linkLabel?: string;
   /** Dernier jour d'affichage (AAAA-MM-JJ), inclus */
   until?: string;
+  /** Message vocal facultatif (enregistré depuis l'admin, en wolof ou en français) */
+  audioUrl?: string;
+  /** Durée du message vocal, en secondes */
+  audioSeconds?: number;
 }
 
 export interface Dahira {
@@ -73,6 +77,8 @@ export interface Dahira {
   logoUrl: string;
   /** Logo réduit (128 px) pour les barres de navigation et le pied de page */
   logoSmallUrl?: string;
+  /** Image de partage par défaut, 1200 × 630 (scripts/share-image.py) */
+  shareImageUrl?: string;
   /** Description courte du logo (texte alternatif) */
   logoAlt: string;
   theme: Partial<Record<ThemeToken, string>>;

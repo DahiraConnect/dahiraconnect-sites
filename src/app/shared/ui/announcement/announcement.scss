@@ -65,3 +65,44 @@
     text-decoration-thickness: 2px;
   }
 }
+
+.ann__listen {
+  @include m.focus-ring;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: var(--tap-min);
+  margin-block: calc((var(--tap-min) - 1.4em) / -2);
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: rgb(0 0 0 / 0.12);
+  color: inherit;
+  font: 700 var(--fs-body) / 1 var(--font-body);
+  cursor: pointer;
+
+  &:hover {
+    background: rgb(0 0 0 / 0.2);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  .ph-fill {
+    font-size: 18px;
+  }
+}
+
+.ann--important .ann__listen {
+  background: rgb(255 255 255 / 0.14);
+
+  &:hover {
+    background: rgb(255 255 255 / 0.24);
+  }
+}
+
+.ann__dur {
+  font-weight: 400;
+  opacity: 0.85;
+}

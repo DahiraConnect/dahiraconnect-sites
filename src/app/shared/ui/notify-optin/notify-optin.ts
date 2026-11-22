@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, afterNextRender, computed, inject, signal } from '@angular/core';
 import { TenantService } from '../../../core/tenant/tenant.service';
 import { buildWaLink } from '../../../core/utils/whatsapp';
 
@@ -13,7 +13,20 @@ import { buildWaLink } from '../../../core/utils/whatsapp';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotifyOptin {
-  private readonly dahira = inject(TenantService).dahira;
+  private readonly tenant = inject(TenantService);
+  private readonly dahira = this.tenant.dahira;
+  /** iPhone / Mac : le Calendrier s'abonne directement au lien webcal:// */
+  private readonly apple = signal(false);
+
+  /** Abonnement au calendrier en ligne (/agenda.ics) : Google Agenda sur Android, Calendrier sur iPhone */
+  protected readonly calendarUrl = computed(() => {
+    const webcal = this.tenant.absoluteUrl('/agenda.ics').replace(/^https?:/, 'webcal:');
+    return this.apple() ? webcal : `https://calendar.google.com/calendar/r?cid=${encodeURIComponent(webcal)}`;
+  });
+
+  constructor() {
+    afterNextRender(() => this.apple.set(/iPhone|iPad|Macintosh/.test(navigator.userAgent)));
+  }
 
   protected readonly option = computed(() => {
     const d = this.dahira();

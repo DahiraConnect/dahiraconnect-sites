@@ -23,7 +23,9 @@ export class SeoService {
   update(title: string, { description, image, jsonLd }: SeoData = {}): void {
     const dahira = this.tenant.dahira();
     const desc = description ?? `${dahira.name} — ${dahira.motto}`;
-    const img = this.tenant.absoluteUrl(image ?? dahira.logoUrl);
+    // Sans image propre à la page : l'image de partage du dahira (format WhatsApp), sinon le logo
+    const fallback = dahira.shareImageUrl ?? dahira.logoUrl;
+    const img = this.tenant.absoluteUrl(image ?? fallback);
     const url = this.canonicalUrl();
 
     this.meta.updateTag({ name: 'description', content: desc });
@@ -33,6 +35,14 @@ export class SeoService {
     this.meta.updateTag({ property: 'og:title', content: title });
     this.meta.updateTag({ property: 'og:description', content: desc });
     this.meta.updateTag({ property: 'og:image', content: img });
+    this.meta.updateTag({ property: 'og:image:alt', content: image ? title : dahira.name });
+    if (!image && dahira.shareImageUrl) {
+      this.meta.updateTag({ property: 'og:image:width', content: '1200' });
+      this.meta.updateTag({ property: 'og:image:height', content: '630' });
+    } else {
+      this.meta.removeTag("property='og:image:width'");
+      this.meta.removeTag("property='og:image:height'");
+    }
     this.meta.updateTag({ property: 'og:url', content: url });
     this.meta.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
 

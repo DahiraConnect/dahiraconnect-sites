@@ -9,6 +9,8 @@ export const CLICK_LABELS: Record<string, { label: string; icon: string }> = {
   copie_numero_soutien: { label: 'Numéros Wave / Orange Money copiés', icon: 'ph-hand-heart' },
   lecture_video: { label: 'Vidéos lancées', icon: 'ph-play-circle' },
   quiz_commence: { label: 'Quiz commencés', icon: 'ph-exam' },
+  abonnement_agenda: { label: 'Abonnements à l’agenda', icon: 'ph-calendar-plus' },
+  ecoute_annonce: { label: 'Écoutes de l’annonce', icon: 'ph-speaker-high' },
   suivre_chaine: { label: 'Abonnements à la chaîne WhatsApp', icon: 'ph-bell' },
   demande_annonces: { label: 'Demandes pour recevoir les annonces', icon: 'ph-bell' },
   reseau_tiktok: { label: 'Visites TikTok', icon: 'ph-tiktok-logo' },
