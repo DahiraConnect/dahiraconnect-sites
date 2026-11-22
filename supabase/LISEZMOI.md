@@ -1,5 +1,38 @@
 # Back-office : mise en ligne
 
+> **Base commune.** Le site utilise désormais la même base que la gestion (dépôt `saa_dahira_mobile`) :
+> tables `sites`, `site_evenements`, `site_albums`, `site_inscriptions`, `site_equipe`, `site_journal`,
+> `site_stats`, bucket `site`, fonctions Edge `site-publier` et `site-equipe`
+> (migration `20261217090000_module_site.sql`). Les migrations et fonctions de **ce** dossier
+> (`supabase/migrations`, `supabase/functions`) ne servent plus qu'à l'ancien projet, jusqu'à la bascule.
+> Les sections 1 à 4 plus bas décrivent l'ancien projet.
+
+## Bascule vers la base commune (Moutahabina)
+
+Dans l'ordre, sans rien supprimer de l'ancien projet avant la fin :
+
+1. **Base commune** (dépôt `saa_dahira_mobile`) : `supabase db push`, puis
+   `supabase functions deploy site-publier` et `supabase functions deploy site-equipe`.
+2. **Connexion par code** sur le projet commun : SMTP personnel, puis coller
+   `saa_dahira_mobile/supabase/templates/code-connexion.html` dans *Emails → Magic Link*
+   (sujet « Votre code de connexion »). *URL Configuration* : ajouter `https://moutahabina.akkili.sn/admin/**`.
+   Si le captcha est activé sur le projet commun, y mettre la clé secrète Turnstile du site.
+3. **Créer le dahira** dans la base commune (création d'un dahira depuis le site ou le bureau) :
+   le responsable devient propriétaire du site. Relever l'identifiant du dahira (table `dahiras`).
+4. **Transférer** (clés `service_role` des deux projets, dans le terminal seulement) :
+
+   ```bash
+   ANCIEN_URL=… ANCIENNE_CLE=… NOUVEAU_URL=… NOUVELLE_CLE=… DAHIRA_ID=… ADRESSE=moutahabina \
+     node scripts/migrer-site.mjs --essai   # compte tout, n'écrit rien
+   # puis la même commande sans --essai (relançable sans doublon)
+   ```
+
+5. **Brancher le site** : `src/environments/supabase.ts` (URL et clé publique du projet commun) et,
+   dans Cloudflare, `SUPABASE_URL` / `SUPABASE_ANON_KEY` du build. Le crochet de déploiement est repris
+   par le transfert (`site_prive`) ; sinon le secret `DEPLOY_HOOK_MOUTAHABINA` sur le projet commun.
+6. **Vérifier** : connexion à `/admin`, une modification, la republication, une inscription, une photo.
+7. Garder l'ancien projet un mois en lecture, puis le supprimer.
+
 Le site public reste un site statique (rapide, bien référencé). Le back-office (`/admin`)
 enregistre le contenu dans Supabase, puis demande à Cloudflare de régénérer le site (2 à 3 minutes).
 
