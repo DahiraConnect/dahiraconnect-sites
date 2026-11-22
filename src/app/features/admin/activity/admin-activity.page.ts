@@ -21,8 +21,8 @@ export default class AdminActivityPage {
     params: () => this.auth.current()?.dahiraId,
     loader: async ({ params }) => {
       const { data, error } = await supabase()
-        .from('audit_log')
-        .select('id, user_email, user_name, action, entity, entity_id, label, created_at')
+        .from('site_journal')
+        .select('id, user_name:auteur, action, entity:entite, entity_id:entite_id, label:libelle, created_at')
         .eq('dahira_id', params)
         .order('created_at', { ascending: false })
         .limit(100);

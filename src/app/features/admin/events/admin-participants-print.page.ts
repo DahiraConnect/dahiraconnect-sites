@@ -37,11 +37,11 @@ export default class AdminParticipantsPrintPage {
     params: () => this.id(),
     loader: async ({ params }) => {
       const { data, error } = await supabase()
-        .from('event_registrations')
-        .select('id, first_name, last_name, phone, people, source, created_at')
-        .eq('event_id', params)
-        .order('last_name')
-        .order('first_name');
+        .from('site_inscriptions')
+        .select('id, first_name:prenom, last_name:nom, phone:telephone, people:personnes, source, created_at')
+        .eq('evenement_id', params)
+        .order('nom')
+        .order('prenom');
       if (error) throw error;
       return data as Participant[];
     },

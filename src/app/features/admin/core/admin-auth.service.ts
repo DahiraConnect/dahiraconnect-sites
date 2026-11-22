@@ -3,7 +3,7 @@ import { Session } from '@supabase/supabase-js';
 import { postsOf } from '../../../core/data/board';
 import { Board, Dahira } from '../../../core/models';
 import { TenantService } from '../../../core/tenant/tenant.service';
-import { supabase, supabaseConfigured } from './supabase';
+import { roleFromDb, supabase, supabaseConfigured } from './supabase';
 
 export interface Membership {
   dahiraId: string;
@@ -45,7 +45,7 @@ export class AdminAuth {
     const c = this.current();
     const me = this._session()?.user.id;
     if (!c || !me) return false;
-    const { error } = await supabase().rpc('set_team_person', { d: c.dahiraId, member: me, person: personId });
+    const { error } = await supabase().rpc('site_lier_poste', { d: c.dahiraId, membre: me, personne: personId });
     if (error) return false;
     await this.loadMemberships();
     return true;
@@ -129,22 +129,24 @@ export class AdminAuth {
       this._memberships.set([]);
       return;
     }
-    const { data } = await supabase()
-      .from('dahira_admins')
-      .select('role, person_id, dahira:dahiras(id, slug, profile, board)');
+    // Équipe du site + responsable du dahira (base commune Saa-Dahira)
+    const { data } = await supabase().rpc('mes_sites');
     type Row = {
-      role: Membership['role'];
-      person_id: string | null;
-      dahira: { id: string; slug: string; profile: Dahira; board: Board | null };
+      dahira_id: string;
+      adresse: string;
+      role: string;
+      personne_bureau: string | null;
+      profil: Dahira;
+      bureau: Board | null;
     };
     this._memberships.set(
-      ((data ?? []) as unknown as Row[]).map((r) => ({
-        dahiraId: r.dahira.id,
-        slug: r.dahira.slug,
-        role: r.role,
-        profile: r.dahira.profile,
-        board: r.dahira.board,
-        personId: r.person_id,
+      ((data ?? []) as Row[]).map((r) => ({
+        dahiraId: r.dahira_id,
+        slug: r.adresse,
+        role: roleFromDb(r.role),
+        profile: r.profil,
+        board: r.bureau,
+        personId: r.personne_bureau,
       })),
     );
   }

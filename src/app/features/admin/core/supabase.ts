@@ -19,6 +19,29 @@ export function supabase(): SupabaseClient {
   return client;
 }
 
+/**
+ * Base commune Saa-Dahira : les colonnes et les statuts y sont en français
+ * (tables site_*). Le code du site garde ses noms anglais ; la traduction se fait ici
+ * et dans les `select` (alias PostgREST « nom_du_site:colonne »).
+ */
+export type DbStatut = 'brouillon' | 'publie' | 'programme';
+const TO_DB: Record<DocRow<unknown>['status'], DbStatut> = {
+  draft: 'brouillon',
+  published: 'publie',
+  scheduled: 'programme',
+};
+export const statutToDb = (s: DocRow<unknown>['status']): DbStatut => TO_DB[s];
+export const statutFromDb = (s: DbStatut): DocRow<unknown>['status'] =>
+  (Object.keys(TO_DB) as DocRow<unknown>['status'][]).find((k) => TO_DB[k] === s) ?? 'draft';
+
+/** Rôle dans l'équipe du site */
+export const roleFromDb = (r: string): 'owner' | 'editor' => (r === 'proprietaire' ? 'owner' : 'editor');
+export const roleToDb = (r: 'owner' | 'editor' | 'none') =>
+  r === 'owner' ? 'proprietaire' : r === 'editor' ? 'redacteur' : 'aucun';
+
+/** Bucket public des photos et messages vocaux (un dossier par adresse de site) */
+export const MEDIA_BUCKET = 'site';
+
 /** Ligne de table « document » : colonnes utiles + objet JSON du modèle */
 export interface DocRow<T> {
   id: string;

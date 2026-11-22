@@ -53,8 +53,8 @@ export const AUDIT_ACTIONS: Record<string, { verb: string; icon: string }> = {
 
 export interface AuditEntry {
   id: number;
-  user_email: string | null;
-  user_name?: string | null;
+  /** Auteur : prénom, sinon e-mail ou téléphone (colonne `auteur` du journal) */
+  user_name: string | null;
   action: string;
   entity: string;
   entity_id: string | null;
@@ -84,7 +84,8 @@ export function relativeTime(iso: string, now = Date.now()): string {
 }
 
 /** Qui : le prénom choisi, sinon le début de l'adresse e-mail */
-export const whoDid = (e: Pick<AuditEntry, 'user_email' | 'user_name'>) => e.user_name || shortEmail(e.user_email);
+export const whoDid = (e: Pick<AuditEntry, 'user_name'>) =>
+  e.user_name && !e.user_name.includes('@') ? e.user_name : shortEmail(e.user_name);
 
 /** 'aminata.ndiaye@gmail.com' → 'aminata.ndiaye' (plus court à lire) */
 export const shortEmail = (email: string | null) => (email ? email.split('@')[0] : 'Système');

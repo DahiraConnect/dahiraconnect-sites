@@ -124,7 +124,7 @@ export default class AdminEventFormPage {
   protected readonly participants = resource({
     params: () => this.id(),
     loader: async ({ params }) => {
-      const { data } = await supabase().from('event_registrations').select('people').eq('event_id', params);
+      const { data } = await supabase().from('site_inscriptions').select('people:personnes').eq('evenement_id', params);
       return (data ?? []).reduce((n, r) => n + (r.people as number), 0) || null;
     },
   });

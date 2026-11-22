@@ -6,7 +6,7 @@ import { AdminAuth } from '../core/admin-auth.service';
 import { postsOf } from '../../../core/data/board';
 import { relativeTime } from '../core/labels';
 import { PublishService } from '../core/publish.service';
-import { supabase } from '../core/supabase';
+import { roleFromDb, roleToDb, supabase } from '../core/supabase';
 import { HelpTip } from '../ui/help-tip/help-tip';
 import { PersonChoice, PersonPicker } from '../ui/person-picker/person-picker';
 import { DahiraDocStore } from '../core/dahira-doc.store';
@@ -81,10 +81,10 @@ export default class AdminTeamPage {
 
   /** Propriétaire : relier un responsable à une personne du bureau */
   protected async linkPerson(m: Member, personId: string): Promise<void> {
-    const { error } = await supabase().rpc('set_team_person', {
+    const { error } = await supabase().rpc('site_lier_poste', {
       d: this.auth.current()?.dahiraId,
-      member: m.user_id,
-      person: personId || null,
+      membre: m.user_id,
+      personne: personId || null,
     });
     if (error) {
       this.notices.show({ kind: 'warn', text: 'Le lien a échoué. Réessayez.' });
@@ -98,9 +98,28 @@ export default class AdminTeamPage {
   protected readonly members = resource({
     params: () => this.auth.current()?.dahiraId,
     loader: async ({ params }) => {
-      const { data, error } = await supabase().rpc('list_team', { d: params });
+      const { data, error } = await supabase().rpc('site_lister_equipe', { d: params });
       if (error) throw error;
-      return data as Member[];
+      type Row = {
+        profile_id: string;
+        email: string | null;
+        telephone: string | null;
+        role: string;
+        personne_bureau: string | null;
+        created_at: string;
+        derniere_connexion: string | null;
+      };
+      return (data as Row[]).map(
+        (r): Member => ({
+          user_id: r.profile_id,
+          // Compte créé sur le mobile : pas d'e-mail, on montre le numéro
+          email: r.email ?? (r.telephone ? `+${r.telephone.replace(/^\+/, '')}` : 'Compte sans e-mail'),
+          role: roleFromDb(r.role),
+          person_id: r.personne_bureau,
+          created_at: r.created_at,
+          last_sign_in_at: r.derniere_connexion,
+        }),
+      );
     },
   });
 
@@ -113,7 +132,7 @@ export default class AdminTeamPage {
     this.busy.set(true);
     this.error.set('');
     const personId = await this.ensurePerson();
-    const { data, error } = await supabase().functions.invoke<{ ok: boolean }>('team', {
+    const { data, error } = await supabase().functions.invoke<{ ok: boolean }>('site-equipe', {
       body: { dahiraId: this.auth.current()?.dahiraId, email, role: this.role, personId },
     });
     this.busy.set(false);
@@ -160,14 +179,18 @@ export default class AdminTeamPage {
     );
     if (!confirmed) return;
     this.busy.set(true);
-    const { error } = await supabase().rpc('set_team_role', { d: this.auth.current()?.dahiraId, member: m.user_id, new_role: role });
+    const { error } = await supabase().rpc('site_changer_role', {
+      d: this.auth.current()?.dahiraId,
+      membre: m.user_id,
+      nouveau_role: roleToDb(role),
+    });
     this.busy.set(false);
     if (error) {
       this.notices.show({
         kind: 'warn',
-        text: /autre propriétaire/.test(error.message)
+        text: /proprietaire_protege/.test(error.message)
           ? 'Un propriétaire ne peut pas être modifié par un autre propriétaire.'
-          : /au moins un propriétaire/.test(error.message)
+          : /dernier_proprietaire/.test(error.message)
             ? 'Il doit rester au moins un propriétaire.'
             : 'La modification a échoué.',
       });

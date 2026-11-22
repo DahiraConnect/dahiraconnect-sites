@@ -45,11 +45,16 @@ export class TrackService {
   private send(kind: 'view' | 'click', key: string): void {
     // Après l'affichage : ne ralentit jamais la page
     setTimeout(() => {
-      fetch(`${SUPABASE.url}/rest/v1/rpc/track`, {
+      fetch(`${SUPABASE.url}/rest/v1/rpc/site_compter`, {
         method: 'POST',
         keepalive: true,
         headers: { apikey: SUPABASE.anonKey, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ p_slug: this.tenant.dahira().slug, p_kind: kind, p_key: key, p_device: this.device }),
+        body: JSON.stringify({
+          p_adresse: this.tenant.dahira().slug,
+          p_genre: kind === 'view' ? 'vue' : 'clic',
+          p_cle: key,
+          p_appareil: this.device,
+        }),
       }).catch(() => undefined);
     }, kind === 'view' ? 1500 : 0);
   }

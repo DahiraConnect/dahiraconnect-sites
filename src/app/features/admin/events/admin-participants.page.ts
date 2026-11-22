@@ -67,11 +67,11 @@ export default class AdminParticipantsPage {
     params: () => this.id(),
     loader: async ({ params }) => {
       const { data, error } = await supabase()
-        .from('event_registrations')
-        .select('id, first_name, last_name, phone, people, source, created_at')
-        .eq('event_id', params)
-        .order('last_name')
-        .order('first_name');
+        .from('site_inscriptions')
+        .select('id, first_name:prenom, last_name:nom, phone:telephone, people:personnes, source, created_at')
+        .eq('evenement_id', params)
+        .order('nom')
+        .order('prenom');
       if (error) throw error;
       return data as Participant[];
     },
@@ -95,11 +95,11 @@ export default class AdminParticipantsPage {
     const ev = this.event.value();
     return {
       dahira_id: ev?.dahira_id ?? this.auth.current()?.dahiraId,
-      event_id: this.id(),
-      first_name: first,
-      last_name: last,
-      phone: phone || null,
-      people,
+      evenement_id: this.id(),
+      prenom: first,
+      nom: last,
+      telephone: phone || null,
+      personnes: people,
       source,
     };
   }
@@ -111,7 +111,7 @@ export default class AdminParticipantsPage {
     }
     this.busy.set(true);
     const { error } = await supabase()
-      .from('event_registrations')
+      .from('site_inscriptions')
       .insert(this.row(this.first.trim(), this.last.trim(), this.phone.trim(), this.people || 1, 'admin'));
     this.busy.set(false);
     if (error) {
@@ -169,9 +169,9 @@ export default class AdminParticipantsPage {
   private async insertMany(list: { first: string; last: string; phone?: string; people: number }[], ignored: number): Promise<void> {
     this.busy.set(true);
     const { data, error } = await supabase()
-      .from('event_registrations')
+      .from('site_inscriptions')
       .upsert(list.map((p) => this.row(p.first, p.last, p.phone, p.people, 'import')), {
-        onConflict: 'event_id,name_key',
+        onConflict: 'evenement_id,cle_nom',
         ignoreDuplicates: true,
       })
       .select('id');
@@ -213,7 +213,7 @@ export default class AdminParticipantsPage {
       icon: 'ph-user-minus',
     });
     if (!confirmed) return;
-    const { error } = await supabase().from('event_registrations').delete().eq('id', p.id);
+    const { error } = await supabase().from('site_inscriptions').delete().eq('id', p.id);
     if (error) this.notices.show({ kind: 'warn', text: 'La suppression a échoué.' });
     else this.list.reload();
   }

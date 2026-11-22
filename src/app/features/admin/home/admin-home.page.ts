@@ -52,20 +52,27 @@ export default class AdminHomePage {
     loader: async ({ params }) => {
       const since = new Date(Date.now() - (DAYS - 1) * 86_400_000).toISOString().slice(0, 10);
       const { data, error } = await supabase()
-        .from('stats_daily')
-        .select('day, kind, key, count')
+        .from('site_stats')
+        .select('day:jour, genre, cle, count:nombre')
         .eq('dahira_id', params)
-        .gte('day', since);
+        .gte('jour', since);
       if (error) throw error;
-      return data as StatRow[];
+      // Base commune : vue / clic / appareil (« vue:mobile ») → noms du site
+      const kinds: Record<string, StatRow['kind']> = { vue: 'view', clic: 'click', appareil: 'device' };
+      return (data as { day: string; genre: string; cle: string; count: number }[]).map((s) => ({
+        day: s.day,
+        kind: kinds[s.genre],
+        key: s.genre === 'appareil' ? s.cle.replace(/^vue:/, 'view:').replace(/^clic:/, 'click:') : s.cle,
+        count: s.count,
+      })) as StatRow[];
     },
   });
   protected readonly activity = resource({
     params: () => this.dahiraId(),
     loader: async ({ params }) => {
       const { data } = await supabase()
-        .from('audit_log')
-        .select('id, user_email, user_name, action, entity, entity_id, label, created_at')
+        .from('site_journal')
+        .select('id, user_name:auteur, action, entity:entite, entity_id:entite_id, label:libelle, created_at')
         .eq('dahira_id', params)
         .order('created_at', { ascending: false })
         .limit(5);
@@ -77,7 +84,7 @@ export default class AdminHomePage {
   private readonly registrations = resource({
     params: () => this.dahiraId(),
     loader: async ({ params }) => {
-      const { data } = await supabase().from('event_registrations').select('event_id, people').eq('dahira_id', params);
+      const { data } = await supabase().from('site_inscriptions').select('event_id:evenement_id, people:personnes').eq('dahira_id', params);
       const byEvent = new Map<string, number>();
       for (const r of (data ?? []) as { event_id: string; people: number }[]) byEvent.set(r.event_id, (byEvent.get(r.event_id) ?? 0) + r.people);
       return byEvent;

@@ -24,7 +24,11 @@ export class DahiraDocStore {
   async load(force = false): Promise<void> {
     const id = this.auth.current()?.dahiraId;
     if (!id || (!force && this.loadedFor === id)) return;
-    const { data, error } = await supabase().from('dahiras').select('profile, board, content, version').eq('id', id).single();
+    const { data, error } = await supabase()
+      .from('sites')
+      .select('profile:profil, board:bureau, content:contenu, version')
+      .eq('dahira_id', id)
+      .single();
     this.error.set(!!error);
     if (error) return;
     this.loadedFor = id;
@@ -65,13 +69,18 @@ export class DahiraDocStore {
   /** Modification refusée car un autre responsable a enregistré entre-temps */
   readonly conflict = signal(false);
 
-  private async update(patch: Record<string, unknown>): Promise<boolean> {
+  private async update(patch: { board?: Board; content?: PageContent; profile?: Dahira }): Promise<boolean> {
     const id = this.auth.current()?.dahiraId;
     if (!id) return false;
+    // Colonnes de la base commune (table sites)
+    const row: Record<string, unknown> = {};
+    if (patch.board) row['bureau'] = patch.board;
+    if (patch.content) row['contenu'] = patch.content;
+    if (patch.profile) row['profil'] = patch.profile;
     const { data, error } = await supabase()
-      .from('dahiras')
-      .update(patch)
-      .eq('id', id)
+      .from('sites')
+      .update(row)
+      .eq('dahira_id', id)
       .eq('version', this.version)
       .select('version');
     if (error) return false;

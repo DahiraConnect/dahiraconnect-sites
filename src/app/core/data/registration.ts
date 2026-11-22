@@ -21,7 +21,7 @@ async function rpc<T>(fn: string, body: object): Promise<T> {
 
 /** Les inscriptions sont-elles ouvertes en ce moment ? (lu au chargement de la page) */
 export const registrationStatus = (dahira: string, event: string) =>
-  rpc<RegistrationStatus>('registration_status', { p_dahira: dahira, p_event: event });
+  rpc<RegistrationStatus>('site_etat_inscriptions', { p_adresse: dahira, p_evenement: event });
 
 /** Inscription « Je viens » depuis le site public */
 export async function register(
@@ -30,13 +30,13 @@ export async function register(
   person: { first: string; last: string; phone?: string; people?: number },
 ): Promise<RegisterResult> {
   try {
-    const { status } = await rpc<{ status: RegisterResult }>('register_for_event', {
-      p_dahira: dahira,
-      p_event: event,
-      p_first: person.first,
-      p_last: person.last,
-      p_phone: person.phone || null,
-      p_people: person.people ?? 1,
+    const { status } = await rpc<{ status: RegisterResult }>('site_inscrire', {
+      p_adresse: dahira,
+      p_evenement: event,
+      p_prenom: person.first,
+      p_nom: person.last,
+      p_telephone: person.phone || null,
+      p_personnes: person.people ?? 1,
     });
     return status;
   } catch {

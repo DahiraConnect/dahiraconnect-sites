@@ -1,5 +1,5 @@
 import { Photo } from '../../../core/models';
-import { supabase } from './supabase';
+import { MEDIA_BUCKET, supabase } from './supabase';
 
 /** Taille maximale des images envoyées (photo pleine, vignette) */
 export const FULL_SIZE = 1600;
@@ -40,7 +40,7 @@ async function encode(bitmap: ImageBitmap, max: number): Promise<Encoded> {
 const randomId = () => Math.random().toString(36).slice(2, 8);
 
 /**
- * Envoie une photo dans le stockage du dahira (`media/<slug>/<dossier>/…`)
+ * Envoie une photo dans le stockage du dahira (`<bucket>/<adresse>/<dossier>/…`)
  * et renvoie l'objet `Photo` du site (URL, vignette, dimensions).
  */
 export async function uploadPhoto(
@@ -55,7 +55,7 @@ export async function uploadPhoto(
   try {
     const [full, thumb] = [await encode(bitmap, FULL_SIZE), await encode(bitmap, THUMB_SIZE)];
     const base = `${slug}/${folder}/${Date.now().toString(36)}-${randomId()}`;
-    const bucket = supabase().storage.from('media');
+    const bucket = supabase().storage.from(MEDIA_BUCKET);
     const put = async (path: string, e: Encoded) => {
       const { error } = await bucket.upload(path, e.blob, {
         contentType: e.blob.type,
@@ -82,11 +82,11 @@ export function formatBytes(bytes: number): string {
 
 /** Supprime du stockage une photo envoyée depuis le back-office (les images du dépôt sont ignorées) */
 export async function removePhoto(photo: Photo): Promise<void> {
-  const marker = '/storage/v1/object/public/media/';
+  const marker = `/storage/v1/object/public/${MEDIA_BUCKET}/`;
   const paths = [photo.url, photo.thumbUrl]
     .filter((u): u is string => !!u && u.includes(marker))
     .map((u) => decodeURIComponent(u.split(marker)[1]));
-  if (paths.length) await supabase().storage.from('media').remove(paths);
+  if (paths.length) await supabase().storage.from(MEDIA_BUCKET).remove(paths);
 }
 
 /** Extension de fichier selon le type audio (webm sur Android, mp4 sur iPhone) */
@@ -98,11 +98,11 @@ export function audioExtension(type: string): string {
   return 'm4a';
 }
 
-/** Envoie un message vocal dans le stockage du dahira (`media/<slug>/<dossier>/…`) */
+/** Envoie un message vocal dans le stockage du dahira (`<bucket>/<adresse>/<dossier>/…`) */
 export async function uploadAudio(blob: Blob, slug: string, folder: string): Promise<string> {
   const type = (blob.type || 'audio/mp4').split(';')[0];
   const path = `${slug}/${folder}/${Date.now().toString(36)}-${randomId()}.${audioExtension(type)}`;
-  const bucket = supabase().storage.from('media');
+  const bucket = supabase().storage.from(MEDIA_BUCKET);
   const { error } = await bucket.upload(path, blob, { contentType: type, cacheControl: '31536000', upsert: false });
   if (error) throw error;
   return bucket.getPublicUrl(path).data.publicUrl;
@@ -145,7 +145,7 @@ export async function uploadShareCard(src: string, slug: string, name: string): 
   try {
     const blob = await makeShareCard(src);
     const path = `${slug}/partage/${name}-${Date.now().toString(36)}.jpg`;
-    const bucket = supabase().storage.from('media');
+    const bucket = supabase().storage.from(MEDIA_BUCKET);
     const { error } = await bucket.upload(path, blob, { contentType: 'image/jpeg', cacheControl: '31536000' });
     if (error) return null;
     return bucket.getPublicUrl(path).data.publicUrl;

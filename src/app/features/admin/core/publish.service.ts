@@ -6,7 +6,7 @@ import { supabase } from './supabase';
 
 /**
  * Après chaque enregistrement : demande la republication du site
- * (fonction Supabase `publish` → crochet de déploiement Cloudflare, environ 2 minutes).
+ * (fonction Supabase `site-publier` → crochet de déploiement Cloudflare, environ 2 minutes).
  */
 @Injectable({ providedIn: 'root' })
 export class PublishService {
@@ -19,7 +19,7 @@ export class PublishService {
     const dahiraId = this.auth.current()?.dahiraId;
     let result: 'ok' | 'not-configured' | 'error' = 'error';
     try {
-      const { data, error } = await supabase().functions.invoke<{ published: boolean; reason?: string }>('publish', {
+      const { data, error } = await supabase().functions.invoke<{ published: boolean; reason?: string }>('site-publier', {
         body: { dahiraId },
       });
       if (!error) result = data?.published ? 'ok' : data?.reason === 'no-hook' ? 'not-configured' : 'error';
