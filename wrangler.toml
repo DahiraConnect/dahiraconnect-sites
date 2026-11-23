@@ -1,11 +1,25 @@
-# Cloudflare Workers — site statique pré-généré (npm run build)
-# Le nom doit être celui du Worker créé dans le tableau de bord Cloudflare.
+# Worker multi-dahira : npm run build:worker, puis npm run preview.
 name = "dahiraconnect"
-compatibility_date = "2026-11-13"
+main = "dist/dahiraconnect/server/server.mjs"
+compatibility_date = "2026-11-23"
+compatibility_flags = ["nodejs_compat"]
 
 [assets]
 directory = "./dist/dahiraconnect/browser"
-# Adresse inconnue : 404.html avec le statut 404
-not_found_handling = "404-page"
-# /agenda/index.html servi sur /agenda/
-html_handling = "auto-trailing-slash"
+binding = "ASSETS"
+run_worker_first = true
+
+[vars]
+SUPABASE_URL = "https://smphfvfxwiiddhpwvcqk.supabase.co"
+# Clé publique uniquement ; la lecture reste filtrée par les règles RLS.
+SUPABASE_ANON_KEY = "sb_publishable_HRTjrVPSRry6xWAP7WJ_kA_bYxA0H5j"
+
+[observability]
+enabled = true
+
+[observability.traces]
+enabled = true
+
+# Supabase West EU (Ireland).
+[placement]
+region = "aws:eu-west-1"

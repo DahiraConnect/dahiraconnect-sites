@@ -26,15 +26,26 @@ export function applyTenantTheme(): () => void {
   return () => {
     const dahira = tenant.dahira();
     writeTheme(document, dahira.theme);
-    writeIcons(document, dahira.slug, dahira.theme['color-primary']);
+    writeIcons(document, dahira.slug, dahira.theme['color-primary'], dahira.logoUrl);
   };
 }
 
 /** Favicon, icône iPhone et couleur de barre du dahira courant. */
-function writeIcons(document: Document, slug: string, primary?: string): void {
+function writeIcons(document: Document, slug: string, primary?: string, logoUrl?: string): void {
   const base = tenantIconBase(slug);
-  document.getElementById('tenant-icon')?.setAttribute('href', `${base}/favicon-96.png`);
-  document.getElementById('tenant-apple-icon')?.setAttribute('href', `${base}/apple-touch-icon.png`);
+  if (slug !== 'moutahabina') {
+    document.getElementById('tenant-icon')?.removeAttribute('type');
+    document.getElementById('tenant-icon')?.removeAttribute('sizes');
+  }
+  document
+    .getElementById('tenant-icon')
+    ?.setAttribute('href', slug === 'moutahabina' ? `${base}/favicon-96.png` : (logoUrl ?? ''));
+  document
+    .getElementById('tenant-apple-icon')
+    ?.setAttribute(
+      'href',
+      slug === 'moutahabina' ? `${base}/apple-touch-icon.png` : (logoUrl ?? ''),
+    );
   if (primary && SAFE_VALUE.test(primary)) {
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', primary);
   }

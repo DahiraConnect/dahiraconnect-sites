@@ -40,3 +40,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Cloudflare local runtime et secrets
+.wrangler/
+.dev.vars*
+.env*

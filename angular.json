@@ -75,6 +75,35 @@
                   "with": "src/environments/supabase.development.ts"
                 }
               ]
+            },
+            "worker": {
+              "ssr": {
+                "entry": "src/worker.ts",
+                "experimentalPlatform": "neutral"
+              },
+              "security": {
+                "allowedHosts": [
+                  "*.akkili.sn",
+                  "*.dahiraconnect.sn",
+                  "localhost",
+                  "127.0.0.1"
+                ]
+              },
+              "externalDependencies": [
+                "util",
+                "stream"
+              ],
+              "outputMode": "server",
+              "fileReplacements": [
+                {
+                  "replace": "src/app/app.routes.server.ts",
+                  "with": "src/app/app.routes.worker.ts"
+                },
+                {
+                  "replace": "src/app/app.config.ts",
+                  "with": "src/app/app.config.worker.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"

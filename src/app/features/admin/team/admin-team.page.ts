@@ -137,7 +137,7 @@ export default class AdminTeamPage {
     });
     this.busy.set(false);
     if (error || !data?.ok) {
-      const code = await (error as { context?: Response } | null)?.context?.json?.().then((b: { error?: string }) => b.error).catch(() => undefined);
+      const code = await (error as { context?: Response } | null)?.context?.json?.().then((b: unknown) => b && typeof b === 'object' && 'error' in b && typeof b.error === 'string' ? b.error : undefined).catch(() => undefined);
       this.error.set(
         code === 'owner_exists'
           ? 'Cette adresse est déjà propriétaire : un autre propriétaire ne peut pas la modifier.'
