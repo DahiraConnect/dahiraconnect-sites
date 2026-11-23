@@ -20,5 +20,11 @@ jobs:
       - run: npm ci
       - name: Tests
         run: npx ng test --watch=false --browsers=ChromeHeadless
+      - name: Tests du Worker
+        run: npm run test:worker
+      - name: Build du Worker
+        run: npm run build:worker
+      - name: Vérification multi-dahira locale
+        run: npm run test:worker:smoke
       - name: Build de production
         run: npm run build

@@ -8,9 +8,14 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "icons": "python3 scripts/subset-icons.py",
-    "preview": "npx wrangler dev",
+    "preview": "wrangler dev",
     "deploy": "npm run build && npx wrangler pages deploy dist/dahiraconnect/browser --project-name dahiraconnect-sites --branch main",
-    "seed": "node scripts/seed-from-mock.mjs"
+    "seed": "node scripts/seed-from-mock.mjs",
+    "build:worker": "ng build --configuration production,worker && node scripts/postbuild-worker.mjs",
+    "types:worker": "wrangler types",
+    "test:worker": "node --test scripts/worker.test.mjs",
+    "deploy:worker": "npm run build:worker && wrangler deploy",
+    "test:worker:smoke": "node scripts/smoke-worker.mjs"
   },
   "prettier": {
     "printWidth": 100,
@@ -58,6 +63,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.2",
+    "wrangler": "4.164.0"
   }
 }

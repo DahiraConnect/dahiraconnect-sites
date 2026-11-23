@@ -1,7 +1,19 @@
 import { isPlatformServer } from '@angular/common';
-import { DOCUMENT, Injectable, PLATFORM_ID, REQUEST, computed, inject, signal } from '@angular/core';
+import {
+  DOCUMENT,
+  Injectable,
+  PLATFORM_ID,
+  REQUEST,
+  REQUEST_CONTEXT,
+  TransferState,
+  makeStateKey,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import { MOCK_SOURCES, TenantBundle } from '../data/tenant-bundle';
-import { DEFAULT_TENANT, resolveTenantSlug } from './tenant.config';
+import { LIVE_SITE_RUNTIME } from './tenant-runtime';
+import { DEFAULT_TENANT, isLocalHost, resolveTenantSlug } from './tenant.config';
 
 /**
  * Dahira courant, déduit du host. Chargé une fois par l'initialiseur d'application :
@@ -12,6 +24,11 @@ export class TenantService {
   private readonly document = inject(DOCUMENT);
   private readonly request = inject(REQUEST, { optional: true });
   private readonly isServer = isPlatformServer(inject(PLATFORM_ID));
+  private readonly context = inject(REQUEST_CONTEXT, { optional: true }) as {
+    tenantBundle?: TenantBundle;
+  } | null;
+  private readonly transfer = inject(TransferState);
+  private readonly liveRuntime = inject(LIVE_SITE_RUNTIME);
   private readonly _bundle = signal<TenantBundle | null>(null);
 
   readonly bundle = computed(() => {
@@ -30,14 +47,33 @@ export class TenantService {
     const siteUrl = this._bundle()?.dahira.siteUrl;
     const current = this.currentUrl();
     const base =
-      this.isServer && siteUrl && !this.request ? new URL(current.pathname + current.search, siteUrl) : current;
+      this.isServer && siteUrl && !this.request
+        ? new URL(current.pathname + current.search, siteUrl)
+        : current;
     return new URL(path, base).toString();
   }
 
   async load(): Promise<void> {
-    const slug = resolveTenantSlug(this.currentUrl());
-    const loader = MOCK_SOURCES[slug] ?? MOCK_SOURCES[DEFAULT_TENANT];
-    this._bundle.set(await loader());
+    const key = makeStateKey<TenantBundle>('public-tenant');
+    let bundle = this.context?.tenantBundle ?? this.transfer.get(key, null);
+    // La découverte des routes au build ne correspond à aucune requête publique.
+    if (!bundle && (!this.liveRuntime || (this.isServer && !this.request))) {
+      const slug = resolveTenantSlug(this.currentUrl()) ?? DEFAULT_TENANT;
+      bundle = await (MOCK_SOURCES[slug] ?? MOCK_SOURCES[DEFAULT_TENANT])();
+    }
+    if (!bundle) {
+      const url = this.currentUrl();
+      const slug = resolveTenantSlug(url);
+      if (!slug) throw new Error('Site introuvable');
+      const api = new URL('/api/site', url);
+      if (isLocalHost(url.hostname)) api.searchParams.set('tenant', slug);
+      const response = await fetch(api);
+      if (!response.ok) throw new Error('Site indisponible');
+      bundle = (await response.json()) as TenantBundle;
+    }
+    this._bundle.set(bundle);
+    if (this.isServer) this.transfer.set(key, bundle);
+    else this.transfer.remove(key);
   }
 
   private currentUrl(): URL {

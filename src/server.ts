@@ -8,7 +8,7 @@ import express from 'express';
 import { join } from 'node:path';
 import { MOCK_SOURCES } from './app/core/data/tenant-bundle';
 import { buildManifest } from './app/core/tenant/manifest';
-import { DEFAULT_TENANT, resolveTenantSlug } from './app/core/tenant/tenant.config';
+import { resolveTenantSlug } from './app/core/tenant/tenant.config';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
@@ -23,7 +23,8 @@ app.get('/manifest.webmanifest', async (req, res, next) => {
   try {
     const url = new URL(req.originalUrl, `${req.protocol}://${req.get('host')}`);
     const slug = resolveTenantSlug(url);
-    const { dahira } = await (MOCK_SOURCES[slug] ?? MOCK_SOURCES[DEFAULT_TENANT])();
+    if (!slug || !MOCK_SOURCES[slug]) { res.sendStatus(404); return; }
+    const { dahira } = await MOCK_SOURCES[slug]();
     res
       .type('application/manifest+json')
       .set('Cache-Control', 'public, max-age=3600')

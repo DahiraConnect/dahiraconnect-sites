@@ -1,23 +1,22 @@
-/** Domaine racine : chaque dahira a son sous-domaine `<slug>.dahiraconnect.sn`. */
-export const ROOT_DOMAIN = 'dahiraconnect.sn';
-
-/** Dahira servi en local / sur un domaine inconnu (pilote). */
+/** Domaine public des sites ; l'ancien domaine reste reconnu pendant la transition. */
+export const ROOT_DOMAIN = 'akkili.sn';
 export const DEFAULT_TENANT = 'moutahabina';
 
-/**
- * Déduit le slug du dahira depuis l'URL :
- * 1. `?tenant=<slug>` (développement, aperçus) ;
- * 2. sous-domaine de `dahiraconnect.sn` ;
- * 3. dahira par défaut.
- */
-export function resolveTenantSlug(url: URL): string {
-  const fromQuery = url.searchParams.get('tenant');
-  if (fromQuery && /^[a-z0-9-]+$/.test(fromQuery)) return fromQuery;
+export function isLocalHost(host: string): boolean {
+  return host === 'localhost' || host === '127.0.0.1' || host === '[::1]';
+}
 
+/** Aucun repli vers le pilote pour une adresse publique inconnue. */
+export function resolveTenantSlug(url: URL): string | null {
   const host = url.hostname.toLowerCase();
-  if (host.endsWith(`.${ROOT_DOMAIN}`)) {
-    const sub = host.slice(0, -(ROOT_DOMAIN.length + 1)).split('.').pop();
-    if (sub && sub !== 'www') return sub;
+  if (isLocalHost(host)) {
+    const query = url.searchParams.get('tenant');
+    return query && /^[a-z0-9][a-z0-9-]{1,38}[a-z0-9]$/.test(query) ? query : DEFAULT_TENANT;
   }
-  return DEFAULT_TENANT;
+  for (const domain of [ROOT_DOMAIN, 'dahiraconnect.sn']) {
+    if (!host.endsWith(`.${domain}`)) continue;
+    const slug = host.slice(0, -(domain.length + 1));
+    return /^[a-z0-9][a-z0-9-]{1,38}[a-z0-9]$/.test(slug) && slug !== 'www' ? slug : null;
+  }
+  return null;
 }

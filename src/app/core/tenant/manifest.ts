@@ -26,17 +26,57 @@ export function buildManifest(dahira: Dahira) {
     background_color: primary,
     theme_color: primary,
     categories: ['lifestyle', 'social'],
-    icons: [
-      { src: `${icons}/icon-192.png`, sizes: '192x192', type: 'image/png', purpose: 'any' },
-      { src: `${icons}/icon-512.png`, sizes: '512x512', type: 'image/png', purpose: 'any' },
-      { src: `${icons}/maskable-192.png`, sizes: '192x192', type: 'image/png', purpose: 'maskable' },
-      { src: `${icons}/maskable-512.png`, sizes: '512x512', type: 'image/png', purpose: 'maskable' },
-    ],
+    icons:
+      dahira.slug !== 'moutahabina'
+        ? [{ src: dahira.logoUrl, sizes: 'any', purpose: 'any' }]
+        : [
+            { src: `${icons}/icon-192.png`, sizes: '192x192', type: 'image/png', purpose: 'any' },
+            { src: `${icons}/icon-512.png`, sizes: '512x512', type: 'image/png', purpose: 'any' },
+            {
+              src: `${icons}/maskable-192.png`,
+              sizes: '192x192',
+              type: 'image/png',
+              purpose: 'maskable',
+            },
+            {
+              src: `${icons}/maskable-512.png`,
+              sizes: '512x512',
+              type: 'image/png',
+              purpose: 'maskable',
+            },
+          ],
     // Appui long sur l'icône (Android)
     shortcuts: [
-      { name: 'Agenda', url: '/agenda', icons: [{ src: `${icons}/icon-192.png`, sizes: '192x192' }] },
-      { name: 'Galerie', url: '/galerie', icons: [{ src: `${icons}/icon-192.png`, sizes: '192x192' }] },
-      { name: 'Rejoindre', url: '/rejoindre', icons: [{ src: `${icons}/icon-192.png`, sizes: '192x192' }] },
+      {
+        name: 'Agenda',
+        url: '/agenda',
+        icons: [
+          {
+            src: dahira.slug === 'moutahabina' ? `${icons}/icon-192.png` : dahira.logoUrl,
+            sizes: 'any',
+          },
+        ],
+      },
+      {
+        name: 'Galerie',
+        url: '/galerie',
+        icons: [
+          {
+            src: dahira.slug === 'moutahabina' ? `${icons}/icon-192.png` : dahira.logoUrl,
+            sizes: 'any',
+          },
+        ],
+      },
+      {
+        name: 'Rejoindre',
+        url: '/rejoindre',
+        icons: [
+          {
+            src: dahira.slug === 'moutahabina' ? `${icons}/icon-192.png` : dahira.logoUrl,
+            sizes: 'any',
+          },
+        ],
+      },
     ],
   };
 }
