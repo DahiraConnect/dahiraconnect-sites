@@ -3,6 +3,8 @@ import { createServer } from 'node:http';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { Miniflare } from 'miniflare';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { mkdtemp } from 'node:fs/promises';
 import { readFile } from 'node:fs/promises';
 import assert from 'node:assert/strict';
@@ -52,12 +54,12 @@ const database = createServer((req, res) => {
 });
 await new Promise((resolve) => database.listen(0, '127.0.0.1', resolve));
 const dbPort = database.address().port;
-const packaged = await mkdtemp('/private/tmp/dahiraconnect-worker-smoke-');
+const packaged = await mkdtemp(join(tmpdir(), 'dahiraconnect-worker-smoke-'));
 await promisify(execFile)(
   process.execPath,
   ['node_modules/wrangler/bin/wrangler.js', 'deploy', '--dry-run', '--outdir', packaged],
   {
-    env: { ...process.env, WRANGLER_LOG_PATH: '/private/tmp/dahiraconnect-smoke-wrangler.log' },
+    env: { ...process.env, WRANGLER_LOG_PATH: join(tmpdir(), 'dahiraconnect-smoke-wrangler.log') },
   },
 );
 const worker = new Miniflare({
@@ -136,7 +138,7 @@ try {
   );
   if (process.env.CHROME_BIN) {
     const local = await worker.ready;
-    const profile = await mkdtemp('/private/tmp/dahiraconnect-browser-');
+    const profile = await mkdtemp(join(tmpdir(), 'dahiraconnect-browser-'));
     const { stdout: dom } = await promisify(execFile)(
       process.env.CHROME_BIN,
       [
