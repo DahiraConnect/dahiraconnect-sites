@@ -172,10 +172,20 @@ test('une erreur de lecture des événements échoue sans servir de contenu part
 
 test('la prévisualisation ne réécrit que son hôte configuré et garde le site imposé', () => {
   const host = 'preview.compte.workers.dev';
-  const original = new Request(`https://${host}/agenda/?tenant=autre`);
+  const original = new Request(`https://${host}/agenda/?tenant=autre`, {
+    headers: {
+      Host: host,
+      'X-Forwarded-Host': 'autre.example',
+      Forwarded: 'host=autre.example',
+    },
+  });
   const mapped = requestForPreview(original, host, 'moutahabina');
   assert.equal(new URL(mapped.url).hostname, 'moutahabina.akkili.sn');
   assert.equal(new URL(mapped.url).pathname, '/agenda/');
+  assert.equal(mapped.headers.get('Host'), 'moutahabina.akkili.sn');
+  assert.equal(mapped.headers.get('X-Forwarded-Host'), null);
+  assert.equal(mapped.headers.get('Forwarded'), null);
+  assert.equal(original.headers.get('Host'), host);
   assert.equal(new URL(original.url).hostname, host);
   for (const input of [
     new Request('https://autre.compte.workers.dev/'),

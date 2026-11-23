@@ -145,8 +145,15 @@ try {
     '✓ Isolation des sites et refus des sites hors ligne ; aucune base distante utilisée',
   );
   const preview = await worker.getWorker('dahiraconnect-preview-smoke');
-  const previewResponse = await preview.fetch(`https://${previewHost}/api/site?tenant=autre`);
+  const previewResponse = await preview.fetch(`https://${previewHost}/api/site?tenant=autre`, {
+    headers: { Host: previewHost },
+  });
   assert.equal(previewResponse.status, 200);
+  const previewPage = await preview.fetch(`https://${previewHost}/`, {
+    headers: { Host: previewHost },
+  });
+  assert.equal(previewPage.status, 200);
+  assert.ok((await previewPage.text()).includes(profil.name));
   assert.equal(previewResponse.headers.get('X-Robots-Tag'), 'noindex, nofollow');
   assert.equal((await previewResponse.json()).dahira.slug, 'moutahabina');
   assert.equal((await preview.fetch('https://autre.compte.workers.dev/')).status, 404);

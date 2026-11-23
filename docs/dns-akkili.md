@@ -31,3 +31,5 @@ La copie Cloudflare contient déjà le domaine racine, `www`, `ftp`, quatre MX O
 Le changement de serveurs DNS dépend de l’accès au gestionnaire actuel du domaine. Aucun accès OVH n’est connecté à cette session ; la recherche d’intégration n’a pas trouvé de plugin OVH pertinent. Ne pas supposer que les 11 entrées Cloudflare suffisent pour cette bascule.
 
 La prévisualisation Worker sur `workers.dev` permet de contrôler le rendu serveur avant cette opération ; elle ne remplace pas les vérifications sur les domaines publics. Voir [worker-multisite.md](worker-multisite.md).
+
+Pour fournir l’inventaire : dans OVHcloud, ouvrir **Domaines & DNS → akkili.sn → Zone DNS → Actions supplémentaires → Exporter la zone**, puis transmettre le fichier exporté. [Procédure officielle de sauvegarde de zone DNS](https://docs.ovhcloud.com/fr/guides/web-cloud/web-hosting/diagnostic-website-not-accessible).

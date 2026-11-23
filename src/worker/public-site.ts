@@ -194,5 +194,9 @@ export function requestForPreview(request: Request, host: string, site: string):
   if (!host || !site || url.hostname !== host || !host.endsWith('.workers.dev')) return request;
   if (!/^[a-z0-9][a-z0-9-]{1,38}[a-z0-9]$/.test(site)) return request;
   url.hostname = `${site}.akkili.sn`;
-  return new Request(url, request);
+  const mapped = new Request(url, request);
+  mapped.headers.set('Host', url.host);
+  mapped.headers.delete('X-Forwarded-Host');
+  mapped.headers.delete('Forwarded');
+  return mapped;
 }

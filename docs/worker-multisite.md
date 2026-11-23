@@ -33,7 +33,11 @@ npm run deploy:worker:preview
 
 Cette adresse est publique. Elle ne sert que le site publié `moutahabina`, lu anonymement dans Supabase, et répond avec `X-Robots-Tag: noindex, nofollow`. Seul l’hôte configuré peut être réécrit vers le site sélectionné ; ni un paramètre `tenant` ni un en-tête visiteur ne permettent de choisir un autre site. Les paramètres sont vides dans la configuration de production. Les clés de cache gardent l’hôte d’origine pour isoler la prévisualisation.
 
-Le build, 11 tests unitaires du Worker et le test du runtime couvrant les deux configurations ont été exécutés localement. Le déploiement de cette prévisualisation nécessite l’autorisation explicite d’envoyer le code et ses fichiers compilés sur cette destination Cloudflare ; il était en attente de cet accord lors de cette préparation.
+Le build, 11 tests unitaires du Worker et le test du runtime couvrant les deux configurations ont été exécutés localement. L’envoi vers Cloudflare a été explicitement autorisé le 23/11/2026. La prévisualisation a été déployée et vérifiée en ligne (version `c0af455a-b0ab-46aa-8143-1c2c61a6efc2`).
+
+Vérifié sur cette version : les huit pages publiques principales, une fiche événement et un album, le logo, le manifeste, le sitemap, les robots, le calendrier, l’API et une vraie 404. Les titres, adresses canoniques et métadonnées de partage des pages comparées correspondent au site Pages actuel. Supabase fournit 3 événements et 5 albums ; un paramètre `tenant` visiteur ne change pas le site de prévisualisation. Toutes les réponses testées portent l’en-tête `noindex, nofollow`. Le rendu et l’hydratation Angular ont aussi été vérifiés dans Chrome sur cette adresse publique.
+
+Le test en ligne a révélé qu’Angular valide aussi l’en-tête `Host`. La réécriture de prévisualisation aligne désormais cet en-tête avec l’URL et retire les en-têtes de transfert d’hôte. Le test du runtime reproduit cette requête, y compris le rendu HTML, pour éviter une régression.
 
 ## Préparer la bascule en production
 
