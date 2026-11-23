@@ -187,3 +187,12 @@ function unavailable(status: number, method: string): Response {
     },
   );
 }
+
+/** Hôte de prévisualisation fixé par configuration, jamais par un en-tête visiteur. */
+export function requestForPreview(request: Request, host: string, site: string): Request {
+  const url = new URL(request.url);
+  if (!host || !site || url.hostname !== host || !host.endsWith('.workers.dev')) return request;
+  if (!/^[a-z0-9][a-z0-9-]{1,38}[a-z0-9]$/.test(site)) return request;
+  url.hostname = `${site}.akkili.sn`;
+  return new Request(url, request);
+}

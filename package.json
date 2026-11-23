@@ -12,10 +12,11 @@
     "deploy": "npm run build && npx wrangler pages deploy dist/dahiraconnect/browser --project-name dahiraconnect-sites --branch main",
     "seed": "node scripts/seed-from-mock.mjs",
     "build:worker": "ng build --configuration production,worker && node scripts/postbuild-worker.mjs",
-    "types:worker": "wrangler types",
+    "types:worker": "wrangler types --strict-vars false --include-main-module false",
     "test:worker": "node --test scripts/worker.test.mjs",
     "deploy:worker": "npm run build:worker && wrangler deploy",
-    "test:worker:smoke": "node scripts/smoke-worker.mjs"
+    "test:worker:smoke": "node scripts/smoke-worker.mjs",
+    "deploy:worker:preview": "npm run build:worker && wrangler deploy --env preview"
   },
   "prettier": {
     "printWidth": 100,

@@ -1,6 +1,6 @@
 /// <reference path="../worker-configuration.d.ts" />
 import { AngularAppEngine, createRequestHandler } from '@angular/ssr';
-import { createSiteHandler, loadPublicSite } from './worker/public-site';
+import { createSiteHandler, loadPublicSite, requestForPreview } from './worker/public-site';
 import type { TenantBundle } from './app/core/data/tenant-bundle';
 import { buildIcs } from '../scripts/agenda-ics.mjs';
 
@@ -8,6 +8,8 @@ const angular = new AngularAppEngine();
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    const originalRequest = request;
+    request = requestForPreview(request, env.PREVIEW_HOST, env.PREVIEW_SITE);
     const cache = await caches.open('site-public-v1');
     const handler = createSiteHandler({
       assets: (request) => env.ASSETS.fetch(request),
@@ -15,7 +17,7 @@ export default {
       calendar: (bundle) => buildIcs(bundle.dahira, bundle.events, bundle.dahira.siteUrl ?? ''),
       load: async (slug, request) => {
         // Une seule clé publique par hôte : site-publier peut l'invalider par URL.
-        const cacheUrl = new URL('/api/site', request.url);
+        const cacheUrl = new URL('/api/site', originalRequest.url);
         if (cacheUrl.hostname === 'localhost' || cacheUrl.hostname === '127.0.0.1')
           cacheUrl.searchParams.set('tenant', slug);
         const key = new Request(cacheUrl, { method: 'GET' });
@@ -38,7 +40,11 @@ export default {
         return bundle;
       },
     });
-    return handler(request);
+    const response = await handler(request);
+    if (request === originalRequest) return response;
+    const headers = new Headers(response.headers);
+    headers.set('X-Robots-Tag', 'noindex, nofollow');
+    return new Response(response.body, { status: response.status, headers });
   },
 } satisfies ExportedHandler<Env>;
 

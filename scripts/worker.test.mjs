@@ -10,7 +10,7 @@ const compiled = await build({
   platform: 'neutral',
   format: 'esm',
 });
-const { loadPublicSite, createSiteHandler, SiteUnavailable } = await import(
+const { loadPublicSite, createSiteHandler, SiteUnavailable, requestForPreview } = await import(
   `data:text/javascript;base64,${Buffer.from(compiled.outputFiles[0].text).toString('base64')}`
 );
 const fixture = async (name) => JSON.parse(await readFile(`src/assets/mock/${name}.json`, 'utf8'));
@@ -168,4 +168,27 @@ test('une erreur de lecture des événements échoue sans servir de contenu part
     ),
     (error) => error.status === 503,
   );
+});
+
+test('la prévisualisation ne réécrit que son hôte configuré et garde le site imposé', () => {
+  const host = 'preview.compte.workers.dev';
+  const original = new Request(`https://${host}/agenda/?tenant=autre`);
+  const mapped = requestForPreview(original, host, 'moutahabina');
+  assert.equal(new URL(mapped.url).hostname, 'moutahabina.akkili.sn');
+  assert.equal(new URL(mapped.url).pathname, '/agenda/');
+  assert.equal(new URL(original.url).hostname, host);
+  for (const input of [
+    new Request('https://autre.compte.workers.dev/'),
+    new Request('https://moutahabina.akkili.sn/'),
+  ]) {
+    assert.equal(requestForPreview(input, host, 'moutahabina'), input);
+  }
+});
+
+test('le mode de prévisualisation est inactif en production et refuse une adresse invalide', () => {
+  const original = new Request('https://preview.compte.workers.dev/');
+  assert.equal(requestForPreview(original, '', ''), original);
+  assert.equal(requestForPreview(original, 'preview.compte.workers.dev', '../autre'), original);
+  const publicSite = new Request('https://moutahabina.akkili.sn/');
+  assert.equal(requestForPreview(publicSite, 'moutahabina.akkili.sn', 'autre'), publicSite);
 });

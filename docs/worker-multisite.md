@@ -23,9 +23,23 @@ Le contenu public est mis en cache 120 secondes sous l’URL `https://<adresse>.
 
 Le manifeste reste installable. Le service worker statique est désactivé dans le profil Worker ; son manifeste `/ngsw.json` répond 404 pour retirer les anciennes installations. L’usage hors ligne doit être réintroduit avec une stratégie adaptée aux données dynamiques. Les autres dahiras utilisent leur logo pour les icônes ; Moutahabina conserve ses icônes existantes.
 
+## Prévisualisation sans changer le DNS
+
+Le profil `preview` publie un Worker distinct, `dahiraconnect-preview`, sur `https://dahiraconnect-preview.diemelamine398.workers.dev` :
+
+```sh
+npm run deploy:worker:preview
+```
+
+Cette adresse est publique. Elle ne sert que le site publié `moutahabina`, lu anonymement dans Supabase, et répond avec `X-Robots-Tag: noindex, nofollow`. Seul l’hôte configuré peut être réécrit vers le site sélectionné ; ni un paramètre `tenant` ni un en-tête visiteur ne permettent de choisir un autre site. Les paramètres sont vides dans la configuration de production. Les clés de cache gardent l’hôte d’origine pour isoler la prévisualisation.
+
+Le build, 11 tests unitaires du Worker et le test du runtime couvrant les deux configurations ont été exécutés localement. Le déploiement de cette prévisualisation nécessite l’autorisation explicite d’envoyer le code et ses fichiers compilés sur cette destination Cloudflare ; il était en attente de cet accord lors de cette préparation.
+
 ## Préparer la bascule en production
 
-Constat du 23/11/2026 : la zone `akkili.sn` du compte Cloudflare connecté est `pending`. Le projet Pages `dahiraconnect-sites` sert encore `moutahabina.akkili.sn`. Le profil Worker n’est pas encore raccordé aux domaines ; aucune migration SQL n’est nécessaire.
+Constat du 23/11/2026 : la zone `akkili.sn` du compte Cloudflare connecté est `pending`. Le projet Pages `dahiraconnect-sites` sert encore `moutahabina.akkili.sn`. Le profil Worker n’est pas encore raccordé aux domaines ; aucune migration SQL n’est nécessaire. Les deux demandes de fusion initiales ont été fusionnées et leurs contrôles GitHub sont au vert.
+
+L’inventaire public et les précautions avant activation sont détaillés dans [dns-akkili.md](dns-akkili.md). Les sous-domaines des applications manquent dans la copie Cloudflare actuelle.
 
 1. Activer/vérifier la zone DNS faisant autorité pour `akkili.sn` avant de modifier le routage. Relever la configuration et le déploiement Pages actuels pour pouvoir revenir en arrière.
 2. Vérifier le compte cible et le nom `dahiraconnect` avant `npm run deploy:worker`. Ne pas remplacer un Worker homonyme sans contrôler ses usages et ses bindings.

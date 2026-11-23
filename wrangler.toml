@@ -1,5 +1,6 @@
 # Worker multi-dahira : npm run build:worker, puis npm run preview.
 name = "dahiraconnect"
+account_id = "00a00522c5a675a2e59da5e916e39c76"
 main = "dist/dahiraconnect/server/server.mjs"
 compatibility_date = "2026-11-23"
 compatibility_flags = ["nodejs_compat"]
@@ -10,6 +11,8 @@ binding = "ASSETS"
 run_worker_first = true
 
 [vars]
+PREVIEW_HOST = ""
+PREVIEW_SITE = ""
 SUPABASE_URL = "https://smphfvfxwiiddhpwvcqk.supabase.co"
 # Clé publique uniquement ; la lecture reste filtrée par les règles RLS.
 SUPABASE_ANON_KEY = "sb_publishable_HRTjrVPSRry6xWAP7WJ_kA_bYxA0H5j"
@@ -23,3 +26,20 @@ enabled = true
 # Supabase West EU (Ireland).
 [placement]
 region = "aws:eu-west-1"
+
+# Prévisualisation publique en lecture anonyme, indépendante du DNS akkili.sn.
+[env.preview]
+name = "dahiraconnect-preview"
+workers_dev = true
+preview_urls = false
+
+[env.preview.assets]
+directory = "./dist/dahiraconnect/browser"
+binding = "ASSETS"
+run_worker_first = true
+
+[env.preview.vars]
+SUPABASE_URL = "https://smphfvfxwiiddhpwvcqk.supabase.co"
+SUPABASE_ANON_KEY = "sb_publishable_HRTjrVPSRry6xWAP7WJ_kA_bYxA0H5j"
+PREVIEW_HOST = "dahiraconnect-preview.diemelamine398.workers.dev"
+PREVIEW_SITE = "moutahabina"
