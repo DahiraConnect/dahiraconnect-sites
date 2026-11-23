@@ -9,7 +9,7 @@
     "test": "ng test",
     "icons": "python3 scripts/subset-icons.py",
     "preview": "npx wrangler dev",
-    "deploy": "npm run build && npx wrangler pages deploy dist/dahiraconnect/browser --project-name dahiraconnect",
+    "deploy": "npm run build && npx wrangler pages deploy dist/dahiraconnect/browser --project-name dahiraconnect-sites --branch main",
     "seed": "node scripts/seed-from-mock.mjs"
   },
   "prettier": {
