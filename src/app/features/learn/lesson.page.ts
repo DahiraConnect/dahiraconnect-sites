@@ -82,6 +82,8 @@ export default class LessonPage {
   /** Écoute continue : une fois « Écouter » touché, toutes les cartes se lisent à la suite */
   private listening = false;
   private audio: HTMLAudioElement | null = null;
+  /** Lecture en cours : seule elle peut faire avancer (un arrêt peut déclencher la fin d'une ancienne lecture) */
+  private current: object | null = null;
   private nextTimer: ReturnType<typeof setTimeout> | undefined;
 
   private readonly heading = viewChild<ElementRef<HTMLElement>>('cardHeading');
@@ -106,6 +108,7 @@ export default class LessonPage {
   }
 
   protected setLang(lang: LessonLang): void {
+    this.listening = false;
     this.stop();
     this.lang.set(lang);
     this.quiz.setPreferredLessonLang(lang);
@@ -170,9 +173,10 @@ export default class LessonPage {
     this.stop();
     if (card.audio) {
       const audio = new Audio(card.audio);
-      audio.onended = () => this.ended();
-      audio.onerror = () => this.playing.set(false);
+      audio.onended = () => this.ended(audio);
+      audio.onerror = () => this.current === audio && this.playing.set(false);
       this.audio = audio;
+      this.current = audio;
       this.playing.set(true);
       audio.play().catch(() => this.playing.set(false));
       return;
@@ -181,15 +185,18 @@ export default class LessonPage {
     const utterance = new SpeechSynthesisUtterance([card.title, card.text].filter(Boolean).join(' ... '));
     utterance.lang = this.isAr() ? 'ar-SA' : 'fr-FR';
     utterance.rate = 0.9;
-    utterance.onend = () => this.ended();
-    utterance.onerror = () => this.playing.set(false);
+    utterance.onend = () => this.ended(utterance);
+    utterance.onerror = () => this.current === utterance && this.playing.set(false);
     speechSynthesis.cancel();
+    this.current = utterance;
     speechSynthesis.speak(utterance);
     this.playing.set(true);
   }
 
   /** Fin de la carte : en écoute continue, la suivante après un court silence */
-  private ended(): void {
+  private ended(source: object): void {
+    if (source !== this.current) return;
+    this.current = null;
     this.playing.set(false);
     if (!this.listening) return;
     clearTimeout(this.nextTimer);
@@ -200,6 +207,7 @@ export default class LessonPage {
 
   private stop(): void {
     clearTimeout(this.nextTimer);
+    this.current = null;
     this.audio?.pause();
     this.audio = null;
     if (typeof speechSynthesis !== 'undefined') speechSynthesis.cancel();
