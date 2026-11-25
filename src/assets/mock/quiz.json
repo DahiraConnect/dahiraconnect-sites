@@ -1,6 +1,182 @@
 {
-  "intro": "Apprenez en jouant : les ablutions, la prière, le dahira et sa charte. Pas besoin de compte.",
+  "intro": "Écoutez de courtes leçons, puis jouez : la Wazifa, le Lazim, les chartes, les ablutions, la prière et le dahira. Pas besoin de compte.",
   "themes": [
+    {
+      "id": "wazifa",
+      "title": "La Wazifa",
+      "description": "Ce que c’est, quand et comment la faire. En attente de validation.",
+      "icon": "ph-users",
+      "source": "des sites tidjanes (tidjaniya.com, Senego, Seneweb, Mhouda) — leçon en attente de validation par le moukadam",
+      "questions": [],
+      "lesson": {
+        "cards": [
+          {
+            "title": "Qu’est-ce que la Wazifa ?",
+            "text": "La Wazifa est une prière de la Tidjaniya. Elle fait partie des obligations du talibé. On la reçoit avec l’autorisation d’un moukadam."
+          },
+          {
+            "title": "Quand la faire ?",
+            "text": "Au moins une fois par jour. Deux fois, matin et soir, c’est mieux. Si on la fait une seule fois : entre Takussan et le Takussan du lendemain."
+          },
+          {
+            "title": "Ensemble, à voix haute",
+            "text": "Si possible, on fait la Wazifa en groupe, assis en rangs, à voix haute et ensemble. Seul, on la récite doucement mais en s’entendant, assis et tourné vers la qibla."
+          },
+          {
+            "title": "Les quatre parties",
+            "text": "D’abord 30 fois Astaghfirullah. Ensuite 50 fois Salatul Fatihi. Puis 100 fois Lâ ilâha illallâh. Enfin 12 fois Djawharatul Kamal."
+          },
+          {
+            "title": "La Djawharatul Kamal",
+            "text": "On la récite seulement avec les ablutions faites à l’eau, dans un lieu propre, assis, avec des habits propres. Si ce n’est pas possible, par exemple sans eau ou en voiture, on récite 20 fois Salatul Fatihi à la place."
+          },
+          {
+            "title": "À retenir",
+            "text": "Pendant la Wazifa, la seule prière sur le Prophète est la Salatul Fatihi. En groupe, il faut un lieu propre où tiennent au moins six personnes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "lazim",
+      "title": "Le Lazim",
+      "description": "Le wird du matin et du soir. En attente de validation.",
+      "icon": "ph-clock",
+      "source": "des sites tidjanes (tidjaniya.com, Senego, Seneweb, Mhouda) — leçon en attente de validation par le moukadam",
+      "questions": [],
+      "lesson": {
+        "cards": [
+          {
+            "title": "Qu’est-ce que le Lazim ?",
+            "text": "Le Lazim, c’est le wird obligatoire du talibé. On le fait deux fois par jour, le matin et le soir, seul et à voix basse. On le reçoit d’un moukadam autorisé."
+          },
+          {
+            "title": "Les trois parties",
+            "text": "D’abord 100 fois Astaghfirullah. Ensuite 100 fois la prière sur le Prophète ; la meilleure est la Salatul Fatihi. Enfin 100 fois Lâ ilâha illallâh, et on termine par Muhammadun Rasûlullâh, alayhi salâmullâh."
+          },
+          {
+            "title": "Le Lazim du matin",
+            "text": "Après la prière de Fajar, jusqu’au milieu de la matinée. Avec une bonne excuse, on peut encore le faire jusqu’à Timis. On peut aussi l’avancer la nuit, après Guéwé, mais il doit être fini avant l’appel de Fajar."
+          },
+          {
+            "title": "Le Lazim du soir",
+            "text": "Après Takussan, jusqu’à Guéwé. Avec une bonne excuse, on peut encore le faire jusqu’à Fajar."
+          },
+          {
+            "title": "Pour qu’il soit valable",
+            "text": "Avoir l’intention. Avoir fait ses ablutions. Corps, habits et lieu propres. Être bien couvert, comme pour la prière. Ne pas parler, sauf nécessité, et ne pas manger ni boire. S’il manque une de ces conditions, il faut le refaire."
+          },
+          {
+            "title": "Pour bien le faire",
+            "text": "S’asseoir. Se tourner vers la qibla. Réciter doucement, en bougeant les lèvres. Bien prononcer, sans aller trop vite. Un Lazim oublié doit être rattrapé."
+          }
+        ]
+      }
+    },
+    {
+      "id": "chartes-tariqa",
+      "title": "Les 23 chartes de la Tariqa",
+      "description": "Les règles du talibé tidjane. En attente de validation.",
+      "icon": "ph-shield-check",
+      "source": "la liste en 23 points publiée par Senego — leçon en attente de validation par le moukadam",
+      "questions": [],
+      "lesson": {
+        "cards": [
+          {
+            "title": "1. Le wird reçu d’un moukadam",
+            "text": "Recevoir le wird d’un moukadam autorisé, relié à la chaîne de transmission."
+          },
+          {
+            "title": "2. Un seul wird",
+            "text": "Ne pas prendre de wird d’une autre tariqa."
+          },
+          {
+            "title": "3. Le ziar",
+            "text": "Ne pas faire de ziar auprès d’un saint qui n’est pas tidjane, vivant ou mort. Respecter quand même les savants des autres voies."
+          },
+          {
+            "title": "4. Les cinq prières",
+            "text": "Faire les cinq prières en groupe, si possible."
+          },
+          {
+            "title": "5. Aimer Cheikh",
+            "text": "Aimer et respecter Cheikh Ahmed Tidjani et ses khalifes, toute sa vie."
+          },
+          {
+            "title": "6. Rester humble",
+            "text": "Ne pas se croire à l’abri de ses fautes."
+          },
+          {
+            "title": "7. Aucune hostilité",
+            "text": "N’avoir aucune hostilité envers Cheikh ou ses khalifes."
+          },
+          {
+            "title": "8. Jusqu’à la mort",
+            "text": "Faire le wird sans jamais l’abandonner, jusqu’à la mort."
+          },
+          {
+            "title": "9. Une foi ferme",
+            "text": "Avoir une foi ferme en Cheikh et en la tariqa."
+          },
+          {
+            "title": "10. Ne pas critiquer",
+            "text": "Ne pas critiquer Cheikh, la tariqa, les khalifes ni les talibés."
+          },
+          {
+            "title": "11. L’autorisation",
+            "text": "Faire le wird seulement après en avoir reçu l’autorisation."
+          },
+          {
+            "title": "12. En groupe",
+            "text": "Faire la Wazifa et la Hadratul Djouma du vendredi en groupe."
+          },
+          {
+            "title": "13. La Djawharatul Kamal",
+            "text": "Ne réciter la Djawharatul Kamal qu’avec les ablutions."
+          },
+          {
+            "title": "14. Garder les liens",
+            "text": "Ne pas couper les liens avec sa famille ni avec ses frères talibés."
+          },
+          {
+            "title": "15. Ne pas négliger",
+            "text": "Ne pas négliger le wird ni le faire en retard sans excuse."
+          },
+          {
+            "title": "16. Pas de faux titre",
+            "text": "Ne pas se faire passer pour un saint, ni donner le wird sans autorisation."
+          },
+          {
+            "title": "17. Le respect",
+            "text": "Respecter toute personne liée à Cheikh ou à la tariqa."
+          },
+          {
+            "title": "18. La fraternité",
+            "text": "Ne pas fâcher son frère talibé."
+          },
+          {
+            "title": "19. La pureté",
+            "text": "Être en état de pureté, avec des habits propres, dans un lieu propre."
+          },
+          {
+            "title": "20. La qibla",
+            "text": "S’asseoir tourné vers la qibla pendant le wird, sauf exceptions."
+          },
+          {
+            "title": "21. Le silence",
+            "text": "Ne pas parler pendant le wird, sauf nécessité : répondre à ses parents, l’épouse à son mari, le talibé à son guide."
+          },
+          {
+            "title": "22. La concentration",
+            "text": "Se concentrer sur les paroles du wird et bien les prononcer."
+          },
+          {
+            "title": "23. La présence",
+            "text": "Ressentir la présence du Prophète, paix et salut sur lui, de Cheikh ou de son guide."
+          }
+        ]
+      }
+    },
     {
       "id": "farata-ndiapp",
       "title": "Farata ndiapp",
