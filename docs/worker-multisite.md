@@ -41,9 +41,9 @@ Le test en ligne a révélé qu’Angular valide aussi l’en-tête `Host`. La r
 
 ## Préparer la bascule en production
 
-Constat du 23/11/2026 : la zone `akkili.sn` du compte Cloudflare connecté est `pending`. Le projet Pages `dahiraconnect-sites` sert encore `moutahabina.akkili.sn`. Le profil Worker n’est pas encore raccordé aux domaines ; aucune migration SQL n’est nécessaire. Les deux demandes de fusion initiales ont été fusionnées et leurs contrôles GitHub sont au vert.
+Constat du 23/11/2026 : la zone `akkili.sn` du compte Cloudflare connecté est maintenant `active` et le registre `.sn` confirme la délégation Cloudflare. Le projet Pages `dahiraconnect-sites` sert encore `moutahabina.akkili.sn`. Le profil Worker n’est pas encore raccordé aux domaines ; aucune migration SQL n’est nécessaire. Les deux demandes de fusion initiales ont été fusionnées et leurs contrôles GitHub sont au vert.
 
-L’inventaire public et les précautions avant activation sont détaillés dans [dns-akkili.md](dns-akkili.md). Les sous-domaines des applications manquent dans la copie Cloudflare actuelle.
+L’inventaire public et les précautions avant activation sont détaillés dans [dns-akkili.md](dns-akkili.md). La zone Cloudflare a été complétée après autorisation explicite : les 23 enregistrements de l’export OVH, dont les sous-domaines des applications, ont été vérifiés. Le changement des serveurs DNS chez OVH est effectué et la délégation Cloudflare est confirmée.
 
 1. Activer/vérifier la zone DNS faisant autorité pour `akkili.sn` avant de modifier le routage. Relever la configuration et le déploiement Pages actuels pour pouvoir revenir en arrière.
 2. Vérifier le compte cible et le nom `dahiraconnect` avant `npm run deploy:worker`. Ne pas remplacer un Worker homonyme sans contrôler ses usages et ses bindings.
