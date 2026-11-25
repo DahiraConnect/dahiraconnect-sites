@@ -179,6 +179,12 @@
               <i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i>
               {{ t()['replay'] }}
             </button>
+            @if (lesson()) {
+              <a class="btn btn--outline" [routerLink]="['/apprendre', d.id]">
+                <i class="ph ph-speaker-high" aria-hidden="true"></i>
+                {{ t()['relisten'] }}
+              </a>
+            }
             <a class="link-more" routerLink="/apprendre">{{ t()['others'] }}&nbsp;<span aria-hidden="true">{{ isAr() ? '←' : '→' }}</span></a>
           </div>
 

@@ -29,7 +29,7 @@ export class ThemeCard {
   protected readonly langs = computed(() => {
     const t = this.theme();
     const lesson = t.lesson && hasLesson(t) ? lessonLangs(t.lesson) : [];
-    return { ar: hasLesson(t) ? lesson.includes('ar') : hasArabic(t), wo: lesson.includes('wo') };
+    return { ar: lesson.includes('ar') || hasArabic(t), wo: lesson.includes('wo') };
   });
 
   /** Lu dans le navigateur seulement (pas au rendu serveur) */

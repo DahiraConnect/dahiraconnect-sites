@@ -6,7 +6,68 @@
       "title": "La Wazifa",
       "description": "Ce que c’est, quand et comment la faire.",
       "icon": "ph-users",
-      "questions": [],
+      "questions": [
+        {
+          "question": "Combien de fois dit-on Astaghfirullah dans la Wazifa ?",
+          "choices": [
+            "30 fois",
+            "100 fois",
+            "12 fois"
+          ],
+          "answer": 0,
+          "explanation": "Dans la Wazifa, on dit 30 fois Astaghfirullah."
+        },
+        {
+          "question": "Combien de fois récite-t-on la Salatul Fatihi ?",
+          "choices": [
+            "50 fois",
+            "30 fois",
+            "20 fois"
+          ],
+          "answer": 0,
+          "explanation": "On récite 50 fois la Salatul Fatihi."
+        },
+        {
+          "question": "Combien de fois dit-on Lâ ilâha illallâh ?",
+          "choices": [
+            "100 fois",
+            "50 fois",
+            "12 fois"
+          ],
+          "answer": 0,
+          "explanation": "On dit 100 fois Lâ ilâha illallâh."
+        },
+        {
+          "question": "Combien de fois récite-t-on la Djawharatul Kamal ?",
+          "choices": [
+            "12 fois",
+            "30 fois",
+            "100 fois"
+          ],
+          "answer": 0,
+          "explanation": "On récite 12 fois la Djawharatul Kamal."
+        },
+        {
+          "question": "Sans eau pour les ablutions, que récite-t-on à la place de la Djawharatul Kamal ?",
+          "choices": [
+            "20 fois Salatul Fatihi",
+            "Rien du tout",
+            "100 fois Astaghfirullah"
+          ],
+          "answer": 0,
+          "explanation": "On récite 20 fois la Salatul Fatihi à la place."
+        },
+        {
+          "question": "Comment fait-on la Wazifa, si possible ?",
+          "choices": [
+            "En groupe, à voix haute",
+            "Seul, sans parler",
+            "Debout en marchant"
+          ],
+          "answer": 0,
+          "explanation": "Si possible, en groupe, assis en rangs, à voix haute et ensemble."
+        }
+      ],
       "lesson": {
         "cards": [
           {
@@ -42,7 +103,68 @@
       "title": "Le Lazim",
       "description": "Le wird du matin et du soir.",
       "icon": "ph-clock",
-      "questions": [],
+      "questions": [
+        {
+          "question": "Combien de fois par jour fait-on le Lazim ?",
+          "choices": [
+            "2 fois",
+            "1 fois",
+            "5 fois"
+          ],
+          "answer": 0,
+          "explanation": "Deux fois par jour : le matin et le soir."
+        },
+        {
+          "question": "Combien de fois dit-on Astaghfirullah dans le Lazim ?",
+          "choices": [
+            "100 fois",
+            "30 fois",
+            "12 fois"
+          ],
+          "answer": 0,
+          "explanation": "Dans le Lazim, chaque partie se dit 100 fois."
+        },
+        {
+          "question": "Quelle est la meilleure prière sur le Prophète dans le Lazim ?",
+          "choices": [
+            "La Salatul Fatihi",
+            "La Djawharatul Kamal",
+            "La Fâtiha"
+          ],
+          "answer": 0,
+          "explanation": "La meilleure prière sur le Prophète, c’est la Salatul Fatihi."
+        },
+        {
+          "question": "Quand commence le Lazim du soir ?",
+          "choices": [
+            "Après Takussan",
+            "Après Timis",
+            "Après Fajar"
+          ],
+          "answer": 0,
+          "explanation": "Le Lazim du soir se fait après Takussan, jusqu’à Guéwé."
+        },
+        {
+          "question": "Peut-on parler pendant le Lazim ?",
+          "choices": [
+            "Non, sauf nécessité",
+            "Oui, librement",
+            "Seulement au téléphone"
+          ],
+          "answer": 0,
+          "explanation": "On ne parle pas pendant le Lazim, sauf nécessité."
+        },
+        {
+          "question": "On a oublié le Lazim. Que faire ?",
+          "choices": [
+            "Le rattraper",
+            "Rien, c’est perdu",
+            "Le faire deux fois le lendemain"
+          ],
+          "answer": 0,
+          "explanation": "Un Lazim oublié doit être rattrapé."
+        }
+      ],
       "lesson": {
         "cards": [
           {
@@ -79,7 +201,88 @@
       "description": "Les règles du talibé tidjane, en 5 parties.",
       "icon": "ph-shield-check",
       "category": "La Tariqa",
-      "questions": [],
+      "questions": [
+        {
+          "question": "De qui reçoit-on le wird ?",
+          "choices": [
+            "D’un moukadam autorisé",
+            "De n’importe quel ami",
+            "D’un livre"
+          ],
+          "answer": 0,
+          "explanation": "On reçoit le wird d’un moukadam autorisé, relié à la chaîne de transmission."
+        },
+        {
+          "question": "Peut-on prendre le wird d’une autre tariqa ?",
+          "choices": [
+            "Non",
+            "Oui",
+            "Seulement le vendredi"
+          ],
+          "answer": 0,
+          "explanation": "Le talibé tidjane ne prend pas de wird d’une autre tariqa."
+        },
+        {
+          "question": "Jusqu’à quand fait-on le wird ?",
+          "choices": [
+            "Jusqu’à la mort",
+            "Pendant un an",
+            "Pendant le Ramadan"
+          ],
+          "answer": 0,
+          "explanation": "On fait le wird sans jamais l’abandonner, jusqu’à la mort."
+        },
+        {
+          "question": "Avec quoi récite-t-on la Djawharatul Kamal ?",
+          "choices": [
+            "Avec les ablutions",
+            "Sans ablutions",
+            "En marchant"
+          ],
+          "answer": 0,
+          "explanation": "On ne récite la Djawharatul Kamal qu’avec les ablutions."
+        },
+        {
+          "question": "Comment fait-on la Wazifa et la Hadratul Djouma ?",
+          "choices": [
+            "En groupe",
+            "Seul, en cachette",
+            "On ne les fait pas"
+          ],
+          "answer": 0,
+          "explanation": "On les fait en groupe, si possible."
+        },
+        {
+          "question": "Vers où se tourne-t-on pendant le wird ?",
+          "choices": [
+            "Vers la qibla",
+            "Vers la porte",
+            "Peu importe"
+          ],
+          "answer": 0,
+          "explanation": "On s’assoit tourné vers la qibla, sauf exceptions."
+        },
+        {
+          "question": "Peut-on parler pendant le wird ?",
+          "choices": [
+            "Non, sauf nécessité",
+            "Oui, librement",
+            "Seulement pour rire"
+          ],
+          "answer": 0,
+          "explanation": "On ne parle pas pendant le wird, sauf nécessité : répondre à ses parents, l’épouse à son mari, le talibé à son guide."
+        },
+        {
+          "question": "Avec ses frères talibés, on doit…",
+          "choices": [
+            "Garder les liens et ne pas les fâcher",
+            "Les éviter",
+            "Les critiquer"
+          ],
+          "answer": 0,
+          "explanation": "On ne coupe pas les liens avec ses frères talibés et on ne les fâche pas."
+        }
+      ],
       "lesson": {
         "cards": [
           {
@@ -376,7 +579,51 @@
         "title": "فرائض الوضوء",
         "description": "فرائض الوضوء السبع."
       },
-      "category": "Ablutions et prière"
+      "category": "Ablutions et prière",
+      "lesson": {
+        "cards": [
+          {
+            "title": "Les sept farata",
+            "text": "Il y a sept farata dans les ablutions. Ce sont les gestes obligatoires : sans eux, les ablutions ne sont pas valables."
+          },
+          {
+            "title": "1. L’intention",
+            "text": "On commence par l’intention (niyya) : dans son cœur, on veut faire ses ablutions."
+          },
+          {
+            "title": "2. Le visage",
+            "text": "On lave tout le visage, des cheveux jusqu’au menton, et d’une oreille à l’autre.",
+            "image": "/assets/quiz/ablution-visage.svg",
+            "imageAlt": "Laver le visage"
+          },
+          {
+            "title": "3. Les bras jusqu’aux coudes",
+            "text": "On lave les mains et les bras jusqu’aux coudes, coudes compris. On lave aussi entre les doigts.",
+            "image": "/assets/quiz/ablution-bras-coudes.svg",
+            "imageAlt": "Laver les bras jusqu’aux coudes"
+          },
+          {
+            "title": "4. La tête : le massah",
+            "text": "On passe les mains mouillées sur la tête.",
+            "image": "/assets/quiz/ablution-tete.svg",
+            "imageAlt": "Passer les mains mouillées sur la tête"
+          },
+          {
+            "title": "5. Les pieds jusqu’aux chevilles",
+            "text": "On lave les pieds jusqu’aux chevilles, chevilles comprises.",
+            "image": "/assets/quiz/ablution-pieds-chevilles.svg",
+            "imageAlt": "Laver les pieds jusqu’aux chevilles"
+          },
+          {
+            "title": "6 et 7. Le dalk et le fawr",
+            "text": "On frotte chaque membre en le lavant : c’est le dalk. On enchaîne les ablutions sans longue pause : c’est le fawr."
+          },
+          {
+            "title": "Si on oublie une farata",
+            "text": "Si on s’en rend compte vite, on la fait, puis on refait ce qui vient après. Si on s’en rend compte tard, on la fait seule, et on refait les prières faites depuis."
+          }
+        ]
+      }
     },
     {
       "id": "sunna-ndiapp",
@@ -539,7 +786,57 @@
         "title": "سنن الوضوء",
         "description": "فرض أم سنة؟ سنن الوضوء."
       },
-      "category": "Ablutions et prière"
+      "category": "Ablutions et prière",
+      "lesson": {
+        "cards": [
+          {
+            "title": "Les sunna des ablutions",
+            "text": "Les sunna sont fortement recommandées. On ne les laisse pas exprès. Il y en a huit."
+          },
+          {
+            "title": "Les mains jusqu’aux poignets",
+            "text": "Au début, on se lave les mains jusqu’aux poignets.",
+            "image": "/assets/quiz/ablution-mains-poignets.svg",
+            "imageAlt": "Laver les mains jusqu’aux poignets"
+          },
+          {
+            "title": "La bouche : la madmada",
+            "text": "On met de l’eau dans la bouche, on la remue, puis on la recrache.",
+            "image": "/assets/quiz/ablution-bouche.svg",
+            "imageAlt": "Se rincer la bouche"
+          },
+          {
+            "title": "Le nez",
+            "text": "On aspire un peu d’eau par le nez (istinchâq), puis on la rejette (istinthâr).",
+            "image": "/assets/quiz/ablution-nez.svg",
+            "imageAlt": "Aspirer l’eau par le nez"
+          },
+          {
+            "title": "La tête, aller et retour",
+            "text": "Après le massah de la tête, on repasse les mains en sens inverse.",
+            "image": "/assets/quiz/ablution-tete.svg",
+            "imageAlt": "Passer les mains sur la tête"
+          },
+          {
+            "title": "Les oreilles",
+            "text": "On essuie les oreilles, en reprenant de l’eau pour elles.",
+            "image": "/assets/quiz/ablution-oreilles.svg",
+            "imageAlt": "Essuyer les oreilles"
+          },
+          {
+            "title": "L’ordre",
+            "text": "On fait les farata dans l’ordre : le visage, les bras, la tête, puis les pieds."
+          },
+          {
+            "title": "Si on oublie une sunna",
+            "text": "On fait seulement la sunna oubliée. Pas besoin de refaire la prière."
+          },
+          {
+            "title": "Les gestes qui apportent du mérite",
+            "text": "Dire « Bismillah », utiliser le cure-dents (siwak), laver le visage et les bras une deuxième et une troisième fois, commencer par la droite, et ne pas gaspiller l’eau."
+          }
+        ]
+      }
     },
     {
       "id": "farata-diouli",
@@ -709,7 +1006,49 @@
         "title": "فرائض الصلاة",
         "description": "فرائض الصلاة."
       },
-      "category": "Ablutions et prière"
+      "category": "Ablutions et prière",
+      "lesson": {
+        "cards": [
+          {
+            "title": "Les quatorze farata",
+            "text": "Al-Akhdari compte quatorze farata dans la prière. Ce sont les gestes et les paroles obligatoires."
+          },
+          {
+            "title": "L’intention et le premier « Allahou Akbar »",
+            "text": "On entre en prière par la takbîr d’entrée, debout. On fait l’intention de la prière à ce moment-là.",
+            "image": "/assets/quiz/priere-takbir.svg",
+            "imageAlt": "Dire Allahou Akbar, les mains levées"
+          },
+          {
+            "title": "La Fâtiha, debout",
+            "text": "On récite la Fâtiha en restant debout.",
+            "image": "/assets/quiz/priere-debout.svg",
+            "imageAlt": "Debout pendant la récitation"
+          },
+          {
+            "title": "L’inclinaison : le roukou’",
+            "text": "On s’incline (roukou’), puis on se redresse bien droit.",
+            "image": "/assets/quiz/priere-roukou.svg",
+            "imageAlt": "S’incliner, les mains sur les genoux"
+          },
+          {
+            "title": "La prosternation : le soujoud",
+            "text": "On se prosterne, le front posé au sol, puis on se relève.",
+            "image": "/assets/quiz/priere-soujoud.svg",
+            "imageAlt": "Front posé au sol"
+          },
+          {
+            "title": "Le calme dans chaque position",
+            "text": "On reste un instant calme dans chaque position : c’est la touma’nîna. Et on fait tout dans l’ordre."
+          },
+          {
+            "title": "Le salam, assis",
+            "text": "On sort de la prière par le salam, en étant assis.",
+            "image": "/assets/quiz/priere-salam.svg",
+            "imageAlt": "Tourner la tête pour le salam"
+          }
+        ]
+      }
     },
     {
       "id": "sunna-diouli",
@@ -866,7 +1205,45 @@
         "title": "سنن الصلاة",
         "description": "فرض أم سنة؟ سنن الصلاة."
       },
-      "category": "Ablutions et prière"
+      "category": "Ablutions et prière",
+      "lesson": {
+        "cards": [
+          {
+            "title": "Les sunna de la prière",
+            "text": "Les sunna sont fortement recommandées dans la prière. On ne les laisse pas exprès."
+          },
+          {
+            "title": "L’iqâma",
+            "text": "Avant la prière, on fait l’iqâma."
+          },
+          {
+            "title": "La sourate après la Fâtiha",
+            "text": "Après la Fâtiha, on récite une autre sourate, debout.",
+            "image": "/assets/quiz/priere-debout.svg",
+            "imageAlt": "Debout pendant la récitation"
+          },
+          {
+            "title": "À voix haute ou à voix basse",
+            "text": "On récite à voix haute dans les prières à voix haute, et à voix basse dans les autres."
+          },
+          {
+            "title": "Les autres « Allahou Akbar »",
+            "text": "Tous les « Allahou Akbar » sont des sunna, sauf le premier. En se relevant du roukou’, on dit « Sami’allâhou liman hamidah »."
+          },
+          {
+            "title": "Le tachahhoud, assis",
+            "text": "Les deux tachahhoud (attahiyyâtou), et la position assise pour les dire, sont des sunna. On y ajoute la prière sur le Prophète (PSL).",
+            "image": "/assets/quiz/priere-assis.svg",
+            "imageAlt": "Assis pour le tachahhoud"
+          },
+          {
+            "title": "La prosternation complète",
+            "text": "On se prosterne aussi sur le nez, les mains, les genoux et le bout des orteils.",
+            "image": "/assets/quiz/priere-soujoud.svg",
+            "imageAlt": "Prosternation"
+          }
+        ]
+      }
     },
     {
       "id": "notre-dahira",

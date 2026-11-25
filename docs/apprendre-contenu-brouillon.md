@@ -100,11 +100,11 @@ Un Lazim oublié doit être rattrapé.
 
 ---
 
-## Quiz possibles (après validation)
+## Déjà dans le site (à relire aussi)
 
-- Wazifa : « Combien de fois Astaghfirullah ? » (30) · « Combien de Djawharatul Kamal ? » (12) · « Sans eau, on remplace la Djawharatul Kamal par… » (20 Salatul Fatihi).
-- Lazim : « Combien de fois par jour ? » (2) · « Les trois parties, dans l'ordre » · « Peut-on parler pendant le Lazim ? » (non, sauf nécessité).
-- Chartes : « Peut-on prendre le wird d'une autre tariqa ? » (non) · « Avec quoi récite-t-on la Djawharatul Kamal ? » (avec les ablutions).
+- **Quiz** de la Wazifa (6 questions), du Lazim (6) et des 23 chartes (8), écrits uniquement à partir des leçons ci-dessus.
+- **Leçons des ablutions et de la prière** (Farata ndiapp, Sunna ndiapp, Farata diouli, Sunna diouli), d'après le *Mukhtasar d'Al-Akhdari* (rite malikite), traduction française arabe-français, sections « catégorisation légale des éléments du wuduu' » et « de la salaat » : 7 farata et 8 sunna des ablutions, gestes méritoires, oublis ; 14 farata et sunna de la prière.
+- Tout le texte est dans `src/assets/mock/quiz.json`.
 
 ## Sources consultées (novembre 2026)
 
@@ -113,4 +113,5 @@ Un Lazim oublié doit être rattrapé.
 - Sopnaby France — [Les 23 chartes](https://sopnabyfrance.com/tariqa-tidjane-les-23-chartes/)
 - Medina Cheikh — [Les conditions de la Tarîqa Tijâniya](https://www.medinacheikh.com/les-conditions-de-la-tariqa-tijaniya-chartes/)
 - Mhouda — [La Wazifa](https://mhouda.org/tijanya/wird-tijane/la-wazifa)
+- Al-Akhdari — [Le Mukhtasar d'al-Akhdari, arabe-français](https://www.mababio.universtechno.net/wp-content/uploads/2022/08/017-MUKHTASAR-AL-AKHDARI-ARABE-FRANCAIS.pdf)
 - Seneweb — [Wird, Wazifa, Salatul Fatihi, Jawharatul Kamal : les incontournables de la Tijania](https://www.seneweb.com/en/news/Religion/wird-wazifa-salatul-fatihi-jahwaratul-kamal-les-incontournables-de-la-tijania_n_232535.html) (2017)
