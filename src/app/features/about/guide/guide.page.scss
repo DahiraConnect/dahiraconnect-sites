@@ -83,13 +83,6 @@
 .hero__bio {
   font-size: 15px;
   color: var(--color-text-on-dark-soft);
-
-  &--todo {
-    padding: 14px var(--space-4);
-    border: 1px dashed rgb(217 178 76 / 0.6);
-    border-radius: var(--space-4);
-    color: var(--color-gold-soft);
-  }
 }
 
 .sheet {

@@ -5,73 +5,23 @@
     @if (quiz(); as q) {
       <p class="hero__lead rise" style="--i: 2">{{ q.intro }}</p>
     }
+    @if (categories().length > 1) {
+      <div class="hero__chips rise" style="--i: 3" role="group" aria-label="Filtrer par catégorie">
+        <button type="button" class="chip" [attr.aria-pressed]="category() === ''" (click)="category.set('')">Tout</button>
+        @for (c of categories(); track c) {
+          <button type="button" class="chip" [attr.aria-pressed]="category() === c" (click)="category.set(c)">{{ c }}</button>
+        }
+      </div>
+    }
   </div>
 </app-dark-hero>
 
 <div class="sheet container">
-  @if (themes().length) {
+  @if (shown().length) {
     <ul class="themes">
-      @for (t of themes(); track t.id; let i = $index) {
+      @for (t of shown(); track t.id; let i = $index) {
         <li appReveal [appRevealDelay]="i * 90">
-          <article class="theme" [attr.aria-labelledby]="'theme-' + t.id">
-            <div class="theme__head">
-              <span class="theme__icon" aria-hidden="true"><i class="ph {{ t.icon || 'ph-question' }}"></i></span>
-              <div class="theme__body">
-                <h2 class="theme__title" [id]="'theme-' + t.id">{{ t.title }}</h2>
-                @if (t.ar) {
-                  <span class="theme__ar" lang="ar" dir="rtl">{{ t.ar.title }}</span>
-                }
-                <p class="theme__desc">{{ t.description }}</p>
-                <p class="theme__meta">
-                  @if (hasLesson(t)) {
-                    {{ plural(t.lesson!.cards.length, 'carte') }}
-                  }
-                  @if (hasLesson(t) && hasQuiz(t)) {
-                    ·
-                  }
-                  @if (hasQuiz(t)) {
-                    {{ plural(t.questions.length, 'question') }}
-                  }
-                  @if (langs(t); as l) {
-                    @if (l.ar || l.wo) {
-                      · <span class="theme__badge">FR@if (l.ar) { · <span lang="ar">عربي</span>}@if (l.wo) { · Wolof}</span>
-                    }
-                  }
-                </p>
-                @if (listened()[t.id] || (best()[t.id] !== null && best()[t.id] !== undefined)) {
-                  <p class="theme__done">
-                    @if (listened()[t.id]) {
-                      <span><i class="ph ph-check-circle" aria-hidden="true"></i> Écoutée</span>
-                    }
-                    @if (best()[t.id] !== null && best()[t.id] !== undefined) {
-                      <span><i class="ph ph-trophy" aria-hidden="true"></i> {{ best()[t.id] }}/{{ t.questions.length }}</span>
-                    }
-                  </p>
-                }
-              </div>
-            </div>
-
-            <div class="theme__actions">
-              @if (hasLesson(t)) {
-                <a class="btn btn--dark theme__btn" [routerLink]="['/apprendre', t.id]" [attr.aria-label]="'Écouter la leçon « ' + t.title + ' »'">
-                  <i class="ph ph-speaker-high" aria-hidden="true"></i>
-                  Écouter
-                </a>
-              }
-              @if (hasQuiz(t)) {
-                <a
-                  class="btn theme__btn"
-                  [class.btn--outline]="hasLesson(t)"
-                  [class.btn--dark]="!hasLesson(t)"
-                  [routerLink]="['/quiz', t.id]"
-                  [attr.aria-label]="'Jouer au quiz « ' + t.title + ' »'"
-                >
-                  <i class="ph-fill ph-play" aria-hidden="true"></i>
-                  Jouer
-                </a>
-              }
-            </div>
-          </article>
+          <app-theme-card [theme]="t" />
         </li>
       }
     </ul>

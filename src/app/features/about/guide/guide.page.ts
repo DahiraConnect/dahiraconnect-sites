@@ -24,6 +24,9 @@ export default class GuidePage {
   protected readonly guidePhoto = computed(
     () => this.content().lineage.find((step) => step.highlight)?.photoUrl,
   );
-  /** Texte entre crochets = à fournir par le bureau : affiché en encadré pointillé */
-  protected readonly bioIsPlaceholder = computed(() => this.content().bio.startsWith('['));
+  /** Présentation du guide : rien d'affiché tant qu'elle est vide ou en attente (texte entre crochets) */
+  protected readonly bio = computed(() => {
+    const bio = this.content().bio?.trim() ?? '';
+    return bio.startsWith('[') ? '' : bio;
+  });
 }

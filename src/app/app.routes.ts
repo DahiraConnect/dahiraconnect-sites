@@ -7,7 +7,14 @@ import {
 } from './features/agenda/agenda.resolvers';
 import { albumExistsGuard, albumSeoResolver, albumTitleResolver } from './features/gallery/gallery.resolvers';
 import { quizExistsGuard, quizSeoResolver, quizTitleResolver } from './features/quiz/quiz.resolvers';
-import { lessonExistsGuard, lessonSeoResolver, lessonTitleResolver } from './features/learn/lesson.resolvers';
+import {
+  groupExistsMatch,
+  groupSeoResolver,
+  groupTitleResolver,
+  lessonExistsGuard,
+  lessonSeoResolver,
+  lessonTitleResolver,
+} from './features/learn/lesson.resolvers';
 
 export const routes: Routes = [
   { path: 'admin', loadChildren: () => import('./features/admin/admin.routes') },
@@ -90,6 +97,14 @@ export const routes: Routes = [
         loadComponent: () => import('./features/learn/learn.page'),
         title: 'Apprendre',
         data: { seo: { description: 'Écoutez de courtes leçons sur le dahira et la voie, puis testez-vous avec un quiz.' } },
+      },
+      {
+        // Groupe de leçons (ex. les 23 chartes) : même adresse, autre page
+        path: 'apprendre/:theme',
+        canMatch: [groupExistsMatch],
+        loadComponent: () => import('./features/learn/group.page'),
+        title: groupTitleResolver,
+        resolve: { seo: groupSeoResolver },
       },
       {
         path: 'apprendre/:theme',

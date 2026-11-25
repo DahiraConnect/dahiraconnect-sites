@@ -48,6 +48,11 @@ export default class LessonPage {
   protected readonly isAr = computed(() => this.lang() === 'ar');
   protected readonly t = computed(() => LESSON_TEXT[this.lang()]);
   protected readonly title = computed(() => (this.isAr() ? this.data()?.ar?.title : null) ?? this.data()?.title ?? '');
+  /** Retour : le groupe du thème (ex. les 23 chartes), sinon toute la rubrique */
+  protected readonly back = computed(() => {
+    const parent = this.quiz.parentOf(this.theme());
+    return parent ? { link: ['/apprendre', parent.id], label: parent.title } : { link: ['/apprendre'], label: null };
+  });
   protected readonly withQuiz = computed(() => {
     const d = this.data();
     return !!d && hasQuiz(d);

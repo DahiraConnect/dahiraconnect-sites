@@ -11,7 +11,9 @@ La rubrique remplace la liste du quiz. Chaque thème peut avoir **une leçon à 
 | `/quiz/<thème>` | Quiz (inchangé, les liens déjà partagés marchent) |
 | `/quiz` | Redirige vers `/apprendre` |
 
-Dans la liste, chaque thème a ses boutons : « Écouter » (leçon, bouton plein) et « Jouer » (quiz, bouton contour). S'il n'y a qu'une des deux, un seul bouton plein. Un badge rappelle ce qui est déjà fait : « ✓ Écoutée » (leçon finie) et le meilleur score.
+Dans la liste, chaque thème a ses boutons : « Écouter » (leçon, vert) et « Jouer » (quiz, jaune). La liste se filtre par catégorie (`category` du thème).
+
+Un thème peut en regrouper d'autres avec `parts` (liste d'id, dans l'ordre), comme « Les 23 chartes de la Tariqa » et ses 5 leçons. La liste principale n'affiche que le groupe ; `/apprendre/<groupe>` montre ses leçons, et le retour d'une leçon ramène au groupe. Un badge rappelle ce qui est déjà fait : « ✓ Écoutée » (leçon finie) et le meilleur score.
 
 Dans la leçon, sur ordinateur, un panneau fixe à droite donne le sommaire des cartes (cliquable, ✓ sur les cartes vues) et le bouton « Faire le quiz ». Sur téléphone, il n'y a pas de panneau : le quiz est proposé à la fin de la leçon.
 

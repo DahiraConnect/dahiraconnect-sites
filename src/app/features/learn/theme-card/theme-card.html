@@ -1,0 +1,63 @@
+@let t = theme();
+<article class="theme" [attr.aria-labelledby]="'theme-' + t.id">
+  <div class="theme__head">
+    <span class="theme__icon" aria-hidden="true"><i class="ph {{ t.icon || 'ph-question' }}"></i></span>
+    <div class="theme__body">
+      <h2 class="theme__title" [id]="'theme-' + t.id">{{ t.title }}</h2>
+      @if (t.ar) {
+        <span class="theme__ar" lang="ar" dir="rtl">{{ t.ar.title }}</span>
+      }
+      <p class="theme__desc">{{ t.description }}</p>
+      <p class="theme__meta">
+        @if (parts().length) {
+          {{ plural(parts().length, 'leçon') }} · {{ plural(partsCards(), 'carte') }}
+        } @else {
+          @if (lesson()) {
+            {{ plural(t.lesson!.cards.length, 'carte') }}
+          }
+          @if (lesson() && game()) {
+            ·
+          }
+          @if (game()) {
+            {{ plural(t.questions.length, 'question') }}
+          }
+          @if (langs().ar || langs().wo) {
+            · <span class="theme__badge">FR@if (langs().ar) { · <span lang="ar">عربي</span>}@if (langs().wo) { · Wolof}</span>
+          }
+        }
+      </p>
+      @if (listened() || best() !== null) {
+        <p class="theme__done">
+          @if (listened()) {
+            <span><i class="ph ph-check-circle" aria-hidden="true"></i> Écoutée</span>
+          }
+          @if (best() !== null) {
+            <span><i class="ph ph-trophy" aria-hidden="true"></i> {{ best() }}/{{ t.questions.length }}</span>
+          }
+        </p>
+      }
+    </div>
+  </div>
+
+  <div class="theme__actions">
+    @if (parts().length) {
+      <a class="btn btn--dark theme__btn" [routerLink]="['/apprendre', t.id]" [attr.aria-label]="'Voir les leçons « ' + t.title + ' »'">
+        Voir les leçons
+        <i class="ph ph-arrow-right" aria-hidden="true"></i>
+      </a>
+    } @else {
+      @if (lesson()) {
+        <a class="btn btn--dark theme__btn" [routerLink]="['/apprendre', t.id]" [attr.aria-label]="'Écouter la leçon « ' + t.title + ' »'">
+          <i class="ph ph-speaker-high" aria-hidden="true"></i>
+          Écouter
+        </a>
+      }
+      @if (game()) {
+        <a class="btn btn--gold theme__btn" [routerLink]="['/quiz', t.id]" [attr.aria-label]="'Jouer au quiz « ' + t.title + ' »'">
+          <i class="ph-fill ph-play" aria-hidden="true"></i>
+          Jouer
+        </a>
+      }
+    }
+  </div>
+</article>

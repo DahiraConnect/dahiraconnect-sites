@@ -26,7 +26,7 @@
   },
   "guide": {
     "intro": "Fils de Serigne Mansour Sy « Borom Daaraji », il guide le dahira depuis 2012, à la suite de son père qui l'accompagnait depuis sa fondation en 1999.",
-    "bio": "[Présentation de Serigne Mame Malick Sy : parcours, enseignement, lien avec le dahira. À rédiger et valider par le bureau.]",
+    "bio": "",
     "lineageTitle": "Quatre générations au service du savoir",
     "lineageIntro": "De Gaya à Tivaouane, puis jusqu'à notre dahira : une même école, celle de Seydi El Hadji Malick Sy, transmise de père en fils.",
     "lineage": [
@@ -103,7 +103,7 @@
       {
         "relation": "Notre guide",
         "name": "Serigne Mame Malick Sy",
-        "text": "Fils de Serigne Mansour Sy, il guide le dahira depuis 2012. [Parcours et enseignement : à fournir par le bureau.]",
+        "text": "Fils de Serigne Mansour Sy, il guide le dahira depuis 2012.",
         "highlight": true,
         "photoUrl": "/assets/tenants/moutahabina/lignee/serigne-mame-malick-sy.webp",
         "milestones": [
@@ -115,7 +115,7 @@
       }
     ],
     "didYouKnow": "Les premiers dahiras ont été initiés par Serigne Babacar Sy. Ils sont devenus des piliers de solidarité et d'éducation.",
-    "sources": "Textes établis d'après la presse sénégalaise. À faire relire et valider par le bureau.",
+    "sources": "Textes établis d'après la presse sénégalaise.",
     "sourceLinks": [
       {
         "label": "Le Soleil — Serigne Babacar Sy, « Borom bonnet carré »",

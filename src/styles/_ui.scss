@@ -65,6 +65,17 @@
     }
   }
 
+  // « Jouer » : jaune, pour le distinguer d'« Écouter » (vert)
+  &--gold {
+    background: var(--color-gold);
+    color: var(--color-on-brand);
+
+    &:hover {
+      background: var(--color-gold-line);
+      color: var(--color-on-brand);
+    }
+  }
+
   &--sm {
     min-height: 50px;
     font-size: var(--fs-body);

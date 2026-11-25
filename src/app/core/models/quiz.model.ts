@@ -59,6 +59,10 @@ export interface QuizTheme {
   questions: QuizQuestion[];
   /** Leçon à écouter avant de jouer */
   lesson?: Lesson;
+  /** Catégorie pour filtrer la liste (ex. « La Tariqa ») */
+  category?: string;
+  /** Thème qui regroupe d'autres thèmes (ex. les 23 chartes en 5 leçons) : leurs id, dans l'ordre */
+  parts?: string[];
 }
 
 export type QuizLang = 'fr' | 'ar';
@@ -68,6 +72,9 @@ export const hasArabic = (theme: QuizTheme) => !!theme.ar && theme.questions.eve
 
 /** Le thème a-t-il une leçon ? */
 export const hasLesson = (theme: QuizTheme) => !!theme.lesson?.cards.length;
+
+/** Le thème regroupe-t-il d'autres thèmes ? */
+export const hasParts = (theme: QuizTheme) => !!theme.parts?.length;
 
 /** Le thème a-t-il un quiz ? */
 export const hasQuiz = (theme: QuizTheme) => theme.questions.length > 0;

@@ -1,6 +1,6 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
 import { MOCK_SOURCES } from './core/data/tenant-bundle';
-import { hasLesson, hasQuiz } from './core/models';
+import { hasLesson, hasParts, hasQuiz } from './core/models';
 import { DEFAULT_TENANT } from './core/tenant/tenant.config';
 
 const bundle = () => MOCK_SOURCES[DEFAULT_TENANT]();
@@ -32,7 +32,7 @@ export const serverRoutes: ServerRoute[] = [
   {
     path: 'apprendre/:theme',
     renderMode: RenderMode.Prerender,
-    getPrerenderParams: async () => ((await bundle()).quiz?.themes ?? []).filter(hasLesson).map((t) => ({ theme: t.id })),
+    getPrerenderParams: async () => ((await bundle()).quiz?.themes ?? []).filter((t) => hasLesson(t) || hasParts(t)).map((t) => ({ theme: t.id })),
   },
   // Back-office (phase 2) : rendu dans le navigateur, aucune page pré-générée
   { path: 'admin/**', renderMode: RenderMode.Client },

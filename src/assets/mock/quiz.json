@@ -4,9 +4,8 @@
     {
       "id": "wazifa",
       "title": "La Wazifa",
-      "description": "Ce que c’est, quand et comment la faire. En attente de validation.",
+      "description": "Ce que c’est, quand et comment la faire.",
       "icon": "ph-users",
-      "source": "des sites tidjanes (tidjaniya.com, Senego, Seneweb, Mhouda) — leçon en attente de validation par le moukadam",
       "questions": [],
       "lesson": {
         "cards": [
@@ -35,14 +34,14 @@
             "text": "Pendant la Wazifa, la seule prière sur le Prophète est la Salatul Fatihi. En groupe, il faut un lieu propre où tiennent au moins six personnes."
           }
         ]
-      }
+      },
+      "category": "La Tariqa"
     },
     {
       "id": "lazim",
       "title": "Le Lazim",
-      "description": "Le wird du matin et du soir. En attente de validation.",
+      "description": "Le wird du matin et du soir.",
       "icon": "ph-clock",
-      "source": "des sites tidjanes (tidjaniya.com, Senego, Seneweb, Mhouda) — leçon en attente de validation par le moukadam",
       "questions": [],
       "lesson": {
         "cards": [
@@ -71,14 +70,29 @@
             "text": "S’asseoir. Se tourner vers la qibla. Réciter doucement, en bougeant les lèvres. Bien prononcer, sans aller trop vite. Un Lazim oublié doit être rattrapé."
           }
         ]
-      }
+      },
+      "category": "La Tariqa"
+    },
+    {
+      "id": "chartes-tariqa",
+      "title": "Les 23 chartes de la Tariqa",
+      "description": "Les règles du talibé tidjane, en 5 petites leçons.",
+      "icon": "ph-shield-check",
+      "category": "La Tariqa",
+      "questions": [],
+      "parts": [
+        "chartes-recevoir-le-wird",
+        "chartes-aimer-cheikh",
+        "chartes-le-wird-chaque-jour",
+        "chartes-la-fraternite",
+        "chartes-pendant-le-wird"
+      ]
     },
     {
       "id": "chartes-recevoir-le-wird",
-      "title": "Chartes · Recevoir le wird",
-      "description": "Qui donne le wird, et à qui on reste fidèle. En attente de validation.",
+      "title": "Recevoir le wird",
+      "description": "Qui donne le wird, et à qui on reste fidèle.",
       "icon": "ph-hand-heart",
-      "source": "la liste en 23 points publiée par Senego — leçon en attente de validation par le moukadam",
       "questions": [],
       "lesson": {
         "cards": [
@@ -107,10 +121,9 @@
     },
     {
       "id": "chartes-aimer-cheikh",
-      "title": "Chartes · Aimer Cheikh",
-      "description": "L’amour et le respect dus à Cheikh et à la voie. En attente de validation.",
+      "title": "Aimer Cheikh",
+      "description": "L’amour et le respect dus à Cheikh et à la voie.",
       "icon": "ph-crown-simple",
-      "source": "la liste en 23 points publiée par Senego — leçon en attente de validation par le moukadam",
       "questions": [],
       "lesson": {
         "cards": [
@@ -139,10 +152,9 @@
     },
     {
       "id": "chartes-le-wird-chaque-jour",
-      "title": "Chartes · Le wird chaque jour",
-      "description": "Ne jamais abandonner le wird, prier ensemble. En attente de validation.",
+      "title": "Le wird chaque jour",
+      "description": "Ne jamais abandonner le wird, prier ensemble.",
       "icon": "ph-calendar-check",
-      "source": "la liste en 23 points publiée par Senego — leçon en attente de validation par le moukadam",
       "questions": [],
       "lesson": {
         "cards": [
@@ -167,10 +179,9 @@
     },
     {
       "id": "chartes-la-fraternite",
-      "title": "Chartes · La fraternité",
-      "description": "Garder les liens avec sa famille et ses frères talibés. En attente de validation.",
+      "title": "La fraternité",
+      "description": "Garder les liens avec sa famille et ses frères talibés.",
       "icon": "ph-users-three",
-      "source": "la liste en 23 points publiée par Senego — leçon en attente de validation par le moukadam",
       "questions": [],
       "lesson": {
         "cards": [
@@ -191,10 +202,9 @@
     },
     {
       "id": "chartes-pendant-le-wird",
-      "title": "Chartes · Pendant le wird",
-      "description": "Pureté, qibla, silence et concentration. En attente de validation.",
+      "title": "Pendant le wird",
+      "description": "Pureté, qibla, silence et concentration.",
       "icon": "ph-hands-praying",
-      "source": "la liste en 23 points publiée par Senego — leçon en attente de validation par le moukadam",
       "questions": [],
       "lesson": {
         "cards": [
@@ -400,7 +410,8 @@
       "ar": {
         "title": "فرائض الوضوء",
         "description": "فرائض الوضوء السبع."
-      }
+      },
+      "category": "Ablutions et prière"
     },
     {
       "id": "sunna-ndiapp",
@@ -562,7 +573,8 @@
       "ar": {
         "title": "سنن الوضوء",
         "description": "فرض أم سنة؟ سنن الوضوء."
-      }
+      },
+      "category": "Ablutions et prière"
     },
     {
       "id": "farata-diouli",
@@ -731,7 +743,8 @@
       "ar": {
         "title": "فرائض الصلاة",
         "description": "فرائض الصلاة."
-      }
+      },
+      "category": "Ablutions et prière"
     },
     {
       "id": "sunna-diouli",
@@ -887,7 +900,8 @@
       "ar": {
         "title": "سنن الصلاة",
         "description": "فرض أم سنة؟ سنن الصلاة."
-      }
+      },
+      "category": "Ablutions et prière"
     },
     {
       "id": "notre-dahira",
@@ -962,7 +976,8 @@
           "answer": 0,
           "explanation": "« S'aimer pour Dieu, servir ensemble » : c'est le sens même de Moutahabina Fillahi."
         }
-      ]
+      ],
+      "category": "Le dahira"
     },
     {
       "id": "lignee-de-tivaouane",
@@ -1066,7 +1081,8 @@
             "/assets/tenants/moutahabina/lignee/seydi-el-hadji-malick-sy.webp"
           ]
         }
-      ]
+      ],
+      "category": "Le dahira"
     },
     {
       "id": "notre-charte",
@@ -1144,7 +1160,8 @@
           "answer": 0,
           "explanation": "« Téw tay téwal » : être présent, physiquement et financièrement."
         }
-      ]
+      ],
+      "category": "Le dahira"
     }
   ]
 }

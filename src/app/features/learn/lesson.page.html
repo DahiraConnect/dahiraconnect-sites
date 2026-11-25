@@ -1,9 +1,9 @@
 @if (data(); as d) {
   <app-dark-hero>
     <div class="hero">
-      <a class="hero__back" routerLink="/apprendre" [attr.lang]="lang()" [attr.dir]="isAr() ? 'rtl' : null">
+      <a class="hero__back" [routerLink]="back().link" [attr.lang]="lang()" [attr.dir]="isAr() ? 'rtl' : null">
         <i class="ph {{ isAr() ? 'ph-arrow-right' : 'ph-arrow-left' }}" aria-hidden="true"></i>
-        {{ t().back }}
+        {{ back().label ?? t().back }}
       </a>
       <h1 class="hero__title" [attr.lang]="isAr() ? 'ar' : null" [attr.dir]="isAr() ? 'rtl' : null">{{ title() }}</h1>
       <div class="progress">
@@ -64,13 +64,13 @@
             <span class="end__icon" aria-hidden="true"><i class="ph {{ d.icon || 'ph-question' }}"></i></span>
             @if (withQuiz()) {
               <p class="end__text">{{ t().quizHint }}</p>
-              <a class="btn btn--dark end__quiz" [routerLink]="['/quiz', d.id]">
+              <a class="btn btn--gold end__quiz" [routerLink]="['/quiz', d.id]">
                 <i class="ph-fill ph-play" aria-hidden="true"></i>
                 {{ t().quiz }}
               </a>
             } @else {
               <p class="end__text">{{ t().doneHint }}</p>
-              <a class="btn btn--dark end__quiz" routerLink="/apprendre">{{ t().finish }}</a>
+              <a class="btn btn--dark end__quiz" [routerLink]="back().link">{{ t().finish }}</a>
             }
             <button type="button" class="end__restart" (click)="restart()">
               <i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i>
@@ -110,7 +110,7 @@
           }
         </ol>
         @if (withQuiz()) {
-          <a class="btn btn--outline panel__quiz" [routerLink]="['/quiz', d.id]">
+          <a class="btn btn--gold panel__quiz" [routerLink]="['/quiz', d.id]">
             <i class="ph-fill ph-play" aria-hidden="true"></i>
             {{ t().quiz }}
           </a>

@@ -7,7 +7,9 @@
       </a>
       <h1 class="hero__title rise" style="--i: 1">{{ dahira().guideName }}</h1>
       <p class="hero__lead rise" style="--i: 2">{{ content().intro }}</p>
-      <p class="hero__bio rise" style="--i: 3" [class.hero__bio--todo]="bioIsPlaceholder()">{{ content().bio }}</p>
+      @if (bio()) {
+        <p class="hero__bio rise" style="--i: 3">{{ bio() }}</p>
+      }
     </div>
     <app-medallion
       class="hero__medallion pop"
