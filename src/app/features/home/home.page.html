@@ -88,15 +88,15 @@
   @if (quizThemes().length) {
     <section class="block quiz" aria-labelledby="quiz-title" appReveal>
       <div class="quiz__intro">
-        <span class="quiz__icon" aria-hidden="true"><i class="ph ph-question"></i></span>
+        <span class="quiz__icon" aria-hidden="true"><i class="ph ph-speaker-high"></i></span>
         <div>
-          <h2 id="quiz-title" class="quiz__title">Quiz du dahira</h2>
-          <p class="quiz__text">{{ plural(quizThemes().length, 'thème') }} pour apprendre en jouant, en français et en arabe.</p>
+          <h2 id="quiz-title" class="quiz__title">Apprendre</h2>
+          <p class="quiz__text">{{ plural(quizThemes().length, 'thème') }} à écouter et à jouer, en français et en arabe.</p>
         </div>
       </div>
-      <a class="btn btn--light quiz__play" routerLink="/quiz">
+      <a class="btn btn--light quiz__play" routerLink="/apprendre">
         <i class="ph-fill ph-play" aria-hidden="true"></i>
-        Jouer
+        Commencer
       </a>
     </section>
   }

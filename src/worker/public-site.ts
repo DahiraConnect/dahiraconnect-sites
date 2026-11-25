@@ -1,6 +1,7 @@
 import type { TenantBundle } from '../app/core/data/tenant-bundle';
 import { resolveTenantSlug } from '../app/core/tenant/tenant.config';
 import { buildManifest } from '../app/core/tenant/manifest';
+import { hasLesson, hasQuiz } from '../app/core/models/quiz.model';
 
 export class SiteUnavailable extends Error {
   constructor(readonly status: number) {
@@ -81,10 +82,11 @@ export function siteSitemap(bundle: TenantBundle): string {
     '/rejoindre/',
     '/mentions-legales/',
     '/confidentialite/',
-    '/quiz/',
+    '/apprendre/',
     ...bundle.events.map((e) => `/agenda/${encodeURIComponent(e.slug)}/`),
     ...bundle.albums.map((a) => `/galerie/${encodeURIComponent(a.slug)}/`),
-    ...(bundle.quiz?.themes ?? []).map((t) => `/quiz/${encodeURIComponent(t.id)}/`),
+    ...(bundle.quiz?.themes ?? []).filter(hasLesson).map((t) => `/apprendre/${encodeURIComponent(t.id)}/`),
+    ...(bundle.quiz?.themes ?? []).filter(hasQuiz).map((t) => `/quiz/${encodeURIComponent(t.id)}/`),
   ];
   return (
     '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +

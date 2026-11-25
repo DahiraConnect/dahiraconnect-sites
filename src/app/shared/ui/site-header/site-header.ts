@@ -25,7 +25,7 @@ export class SiteHeader {
     { path: '/le-dahira', label: 'Le dahira', exact: false },
     { path: '/agenda', label: 'Agenda', exact: false },
     { path: '/galerie', label: 'Galerie', exact: false },
-    { path: '/quiz', label: 'Quiz', exact: false },
+    { path: '/apprendre', label: 'Apprendre', exact: false },
   ];
 
   protected onScroll(): void {

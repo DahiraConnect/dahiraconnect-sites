@@ -1,0 +1,274 @@
+@use 'styles/mixins' as m;
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: 0 var(--gutter);
+
+  @include m.desktop {
+    max-width: 760px;
+    margin-inline: auto;
+    padding-top: var(--space-6);
+  }
+}
+
+.hero__back {
+  @include m.flex-row(6px);
+  align-self: flex-start;
+  min-height: var(--tap-min);
+  color: var(--color-text-on-dark-soft);
+  font-weight: 600;
+
+  &:hover {
+    color: var(--color-text-on-dark);
+  }
+}
+
+.hero__title {
+  @include m.display(var(--fs-hero), var(--lh-tight));
+
+  &[lang='ar'] {
+    font-family: var(--font-arabic-text);
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.progress__track {
+  flex: 1;
+  height: 10px;
+  border-radius: var(--radius-pill);
+  background: rgb(244 239 227 / 0.15);
+  overflow: hidden;
+}
+
+.progress__bar {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-brand));
+  transition: width var(--dur-slow) var(--ease-out);
+}
+
+.progress__count {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-gold-line);
+}
+
+.sheet {
+  @include m.overlap-sheet;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-6) var(--space-3) var(--space-11);
+
+  @include m.desktop {
+    margin-top: -64px;
+    padding: 64px var(--gutter) 112px;
+  }
+}
+
+// Arabe : police lisible du téléphone, texte plus grand
+.is-ar {
+  font-family: var(--font-arabic-text);
+
+  .card__title {
+    font-family: inherit;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  .card__text {
+    font-size: 21px;
+  }
+}
+
+// Choix de la langue : Français, العربية, Wolof (selon ce qui existe)
+.lang {
+  display: grid;
+  grid-template-columns: repeat(var(--lang-count, 2), minmax(0, 1fr));
+  gap: var(--space-2);
+  width: 100%;
+  max-width: 420px;
+  padding: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-muted);
+}
+
+.lang__btn {
+  @include m.focus-ring;
+  min-height: 52px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-weight: 700;
+  font-size: var(--fs-body-lg);
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast),
+    color var(--dur-fast);
+
+  &[lang='ar'] {
+    font-family: var(--font-arabic-text);
+    font-size: 20px;
+  }
+
+  &:hover {
+    color: var(--color-primary);
+  }
+
+  &[aria-pressed='true'] {
+    background: var(--color-primary);
+    color: var(--color-text-on-dark);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 760px;
+  padding: var(--space-6) var(--space-4);
+  border-radius: var(--radius-card);
+  background: var(--color-surface-card);
+  box-shadow: var(--shadow-float);
+  text-align: center;
+
+  @include m.desktop {
+    padding: var(--space-10);
+  }
+}
+
+.card__img {
+  width: 200px;
+  height: 200px;
+  border-radius: var(--radius-lg);
+  object-fit: contain;
+
+  @include m.desktop {
+    width: 240px;
+    height: 240px;
+  }
+}
+
+.card__title {
+  @include m.display(26px, 1.2);
+  outline: none;
+
+  @include m.desktop {
+    font-size: 32px;
+  }
+}
+
+.card__text {
+  max-width: 52ch;
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-body);
+  color: var(--color-text-secondary);
+}
+
+// Le bouton le plus important de la page : gros, au centre
+.listen {
+  @include m.focus-ring;
+  @include m.flex-row(10px);
+  justify-content: center;
+  min-width: 220px;
+  min-height: var(--btn-h-lg);
+  padding: 0 var(--space-6);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast),
+    color var(--dur-fast);
+
+  .ph {
+    font-size: 28px;
+  }
+
+  &:hover {
+    background: var(--color-surface-muted);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &.is-on {
+    background: var(--color-primary);
+    color: var(--color-text-on-dark);
+  }
+}
+
+.steps {
+  display: flex;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 760px;
+
+  .btn {
+    flex: 1;
+    min-height: var(--btn-h);
+  }
+}
+
+// ——— Fin de la leçon ———
+.end__icon {
+  display: grid;
+  place-items: center;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-gold-line);
+  font-size: 44px;
+}
+
+.end__text {
+  @include m.display(24px, 1.2);
+}
+
+.end__quiz {
+  min-width: 240px;
+  min-height: var(--btn-h-lg);
+  font-size: 20px;
+}
+
+.end__restart {
+  @include m.focus-ring;
+  @include m.flex-row(6px);
+  min-height: var(--tap-min);
+  padding: 0 var(--space-3);
+  border: 0;
+  background: none;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+.source {
+  max-width: 760px;
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}

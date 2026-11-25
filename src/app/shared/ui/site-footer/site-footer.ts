@@ -32,7 +32,7 @@ export class SiteFooter {
     ...(this.charter() ? [{ path: '/le-dahira/charte', label: 'Notre charte' }] : []),
     { path: '/agenda', label: 'Agenda' },
     { path: '/galerie', label: 'Galerie' },
-    { path: '/quiz', label: 'Quiz' },
+    { path: '/apprendre', label: 'Apprendre' },
   ]);
 
   protected toTop(): void {

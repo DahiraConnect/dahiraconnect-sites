@@ -1,17 +1,29 @@
 import { Injectable, computed, inject } from '@angular/core';
-import { QuizLang, QuizTheme } from '../models';
+import { LessonLang, QuizLang, QuizTheme, hasLesson, hasQuiz } from '../models';
 import { TenantService } from '../tenant/tenant.service';
 
-/** Quiz sans compte : thèmes et meilleur score gardé sur le téléphone. */
+/** Rubrique « Apprendre », sans compte : thèmes (leçon et/ou quiz), meilleur score gardé sur le téléphone. */
 @Injectable({ providedIn: 'root' })
 export class QuizService {
   private readonly tenant = inject(TenantService);
 
   readonly quiz = computed(() => this.tenant.bundle().quiz);
-  readonly themes = computed(() => (this.quiz()?.themes ?? []).filter((t) => t.questions.length));
+  readonly themes = computed(() => (this.quiz()?.themes ?? []).filter((t) => hasQuiz(t) || hasLesson(t)));
 
   byId(id: string): QuizTheme | undefined {
     return this.themes().find((t) => t.id === id);
+  }
+
+  /** Thème avec un quiz à jouer */
+  withQuiz(id: string): QuizTheme | undefined {
+    const theme = this.byId(id);
+    return theme && hasQuiz(theme) ? theme : undefined;
+  }
+
+  /** Thème avec une leçon à écouter */
+  withLesson(id: string): QuizTheme | undefined {
+    const theme = this.byId(id);
+    return theme && hasLesson(theme) ? theme : undefined;
   }
 
   /** Meilleur score enregistré (stockage local, peut être indisponible : navigation privée…) */
@@ -47,6 +59,24 @@ export class QuizService {
       localStorage.setItem('dc-quiz-lang', lang);
     } catch {
       /* pas de stockage : le choix vaut pour cette partie */
+    }
+  }
+
+  /** Langue préférée des leçons (le wolof en plus) */
+  preferredLessonLang(): LessonLang {
+    try {
+      const value = localStorage.getItem('dc-lecon-lang');
+      return value === 'ar' || value === 'wo' ? value : 'fr';
+    } catch {
+      return 'fr';
+    }
+  }
+
+  setPreferredLessonLang(lang: LessonLang): void {
+    try {
+      localStorage.setItem('dc-lecon-lang', lang);
+    } catch {
+      /* pas de stockage : le choix vaut pour cette leçon */
     }
   }
 

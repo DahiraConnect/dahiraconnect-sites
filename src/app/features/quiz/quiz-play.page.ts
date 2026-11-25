@@ -14,7 +14,7 @@ import {
 import { RouterLink } from '@angular/router';
 import { QuizService } from '../../core/data/quiz.service';
 import { QuizSoundService } from '../../core/data/quiz-sounds.service';
-import { QuizLang, hasArabic } from '../../core/models';
+import { QuizLang, hasArabic, hasLesson } from '../../core/models';
 import { QUIZ_TEXT, SOURCE_AR } from './quiz-i18n';
 import { TenantService } from '../../core/tenant/tenant.service';
 import { plural } from '../../core/utils/plural';
@@ -53,6 +53,11 @@ export default class QuizPlayPage {
     return !!d && hasArabic(d);
   });
   protected readonly t = computed(() => QUIZ_TEXT[this.lang()]);
+  /** Le thème a une leçon : on propose de l'écouter avant de jouer */
+  protected readonly lesson = computed(() => {
+    const d = this.data();
+    return !!d && hasLesson(d);
+  });
   protected readonly isAr = computed(() => this.lang() === 'ar');
   protected readonly title = computed(() => (this.isAr() ? this.data()?.ar?.title : this.data()?.title) ?? '');
   protected readonly description = computed(

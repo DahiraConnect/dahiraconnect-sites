@@ -3,11 +3,11 @@ import { CanActivateFn, ResolveFn, Router } from '@angular/router';
 import { QuizService } from '../../core/data/quiz.service';
 import { SeoData } from '../../core/seo/seo.service';
 
-const find = (id: string | null) => inject(QuizService).byId(id ?? '');
+const find = (id: string | null) => inject(QuizService).withQuiz(id ?? '');
 
-/** Thème inconnu → liste des thèmes. */
+/** Thème inconnu ou sans quiz → rubrique « Apprendre ». */
 export const quizExistsGuard: CanActivateFn = (route) =>
-  !!find(route.paramMap.get('theme')) || inject(Router).parseUrl('/quiz');
+  !!find(route.paramMap.get('theme')) || inject(Router).parseUrl('/apprendre');
 
 export const quizTitleResolver: ResolveFn<string> = (route) => {
   const theme = find(route.paramMap.get('theme'));

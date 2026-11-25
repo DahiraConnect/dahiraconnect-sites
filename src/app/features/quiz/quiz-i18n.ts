@@ -27,6 +27,7 @@ export const QUIZ_TEXT: Record<QuizLang, Record<string, string>> = {
     soundOn: 'Son',
     soundOff: 'Muet',
     soundLabel: 'Couper ou remettre le son',
+    lesson: 'Écouter la leçon d’abord',
   },
   ar: {
     back: 'كل المواضيع',
@@ -53,6 +54,7 @@ export const QUIZ_TEXT: Record<QuizLang, Record<string, string>> = {
     soundOn: 'الصوت',
     soundOff: 'صامت',
     soundLabel: 'تشغيل الصوت أو إيقافه',
+    lesson: 'استمع إلى الدرس أولا',
   },
 };
 

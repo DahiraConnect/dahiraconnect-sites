@@ -39,6 +39,7 @@
         "files": [
           "/**/*.(svg|jpg|jpeg|png|webp|avif|gif)",
           "/assets/quiz/sons/*.m4a",
+          "/assets/lecons/**/*.m4a",
           "/assets/fonts/amiri-arabic-*.woff2"
         ]
       }

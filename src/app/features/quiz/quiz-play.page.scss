@@ -251,6 +251,20 @@
   font-size: 20px;
 }
 
+// Lien vers la leçon du thème
+.intro__lesson {
+  @include m.focus-ring;
+  @include m.flex-row(6px);
+  min-height: var(--tap-min);
+  color: var(--color-primary);
+  font-weight: 700;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
 // ——— Question ———
 .question__head {
   display: flex;

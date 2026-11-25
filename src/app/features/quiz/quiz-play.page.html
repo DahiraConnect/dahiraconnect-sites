@@ -1,7 +1,7 @@
 @if (data(); as d) {
   <app-dark-hero>
     <div class="hero">
-      <a class="hero__back" routerLink="/quiz" [attr.lang]="lang()" [attr.dir]="isAr() ? 'rtl' : null">
+      <a class="hero__back" routerLink="/apprendre" [attr.lang]="lang()" [attr.dir]="isAr() ? 'rtl' : null">
         <i class="ph {{ isAr() ? 'ph-arrow-right' : 'ph-arrow-left' }}" aria-hidden="true"></i>
         {{ t()['back'] }}
       </a>
@@ -54,6 +54,12 @@
             <i class="ph-fill ph-play" aria-hidden="true"></i>
             {{ t()['start'] }}
           </button>
+          @if (lesson()) {
+            <a class="intro__lesson" [routerLink]="['/apprendre', d.id]">
+              <i class="ph ph-speaker-high" aria-hidden="true"></i>
+              {{ t()['lesson'] }}
+            </a>
+          }
           @if (source()) {
             <p class="source">{{ t()['source'] }} {{ source() }}.</p>
           }
@@ -173,7 +179,7 @@
               <i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i>
               {{ t()['replay'] }}
             </button>
-            <a class="link-more" routerLink="/quiz">{{ t()['others'] }}&nbsp;<span aria-hidden="true">{{ isAr() ? '←' : '→' }}</span></a>
+            <a class="link-more" routerLink="/apprendre">{{ t()['others'] }}&nbsp;<span aria-hidden="true">{{ isAr() ? '←' : '→' }}</span></a>
           </div>
 
           <details class="review">

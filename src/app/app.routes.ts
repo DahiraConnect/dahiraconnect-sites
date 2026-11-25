@@ -7,6 +7,7 @@ import {
 } from './features/agenda/agenda.resolvers';
 import { albumExistsGuard, albumSeoResolver, albumTitleResolver } from './features/gallery/gallery.resolvers';
 import { quizExistsGuard, quizSeoResolver, quizTitleResolver } from './features/quiz/quiz.resolvers';
+import { lessonExistsGuard, lessonSeoResolver, lessonTitleResolver } from './features/learn/lesson.resolvers';
 
 export const routes: Routes = [
   { path: 'admin', loadChildren: () => import('./features/admin/admin.routes') },
@@ -85,11 +86,20 @@ export const routes: Routes = [
         resolve: { seo: albumSeoResolver },
       },
       {
-        path: 'quiz',
-        loadComponent: () => import('./features/quiz/quiz.page'),
-        title: 'Quiz',
-        data: { seo: { description: 'Testez vos connaissances sur le dahira, sa lignée et sa charte.' } },
+        path: 'apprendre',
+        loadComponent: () => import('./features/learn/learn.page'),
+        title: 'Apprendre',
+        data: { seo: { description: 'Écoutez de courtes leçons sur le dahira et la voie, puis testez-vous avec un quiz.' } },
       },
+      {
+        path: 'apprendre/:theme',
+        loadComponent: () => import('./features/learn/lesson.page'),
+        canActivate: [lessonExistsGuard],
+        title: lessonTitleResolver,
+        resolve: { seo: lessonSeoResolver },
+      },
+      // Ancienne adresse de la liste du quiz (liens déjà partagés)
+      { path: 'quiz', pathMatch: 'full', redirectTo: 'apprendre' },
       {
         path: 'quiz/:theme',
         loadComponent: () => import('./features/quiz/quiz-play.page'),

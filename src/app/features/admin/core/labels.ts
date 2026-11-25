@@ -32,6 +32,7 @@ const PAGE_LABELS: Record<string, string> = {
   '/agenda': 'Agenda',
   '/galerie': 'Galerie',
   '/rejoindre': 'Rejoindre',
+  '/apprendre': 'Apprendre',
   '/quiz': 'Quiz',
 };
 
