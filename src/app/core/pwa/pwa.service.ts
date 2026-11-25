@@ -12,9 +12,6 @@ interface BeforeInstallPromptEvent extends Event {
 const DISMISS_KEY = 'dc-install-dismissed-until';
 const DISMISS_DAYS = 30;
 const SHOW_DELAY_MS = 15_000;
-/** L'invitation n'apparaît qu'à partir de la 2e visite (la personne revient : elle est intéressée) */
-const VISITS_KEY = 'dc-visits';
-const MIN_VISITS = 2;
 
 /**
  * Application installable (PWA) :
@@ -104,21 +101,8 @@ export class PwaService {
   }
 
   private scheduleInvite(mode: 'android' | 'ios'): void {
-    if (this.recentlyDismissed() || this.countVisit() < MIN_VISITS) return;
+    if (this.recentlyDismissed()) return;
     setTimeout(() => this.installMode.set(mode), SHOW_DELAY_MS);
-  }
-
-  /** Compte une visite par jour (au plus) et renvoie le total */
-  private countVisit(): number {
-    try {
-      const today = new Date().toISOString().slice(0, 10);
-      const [count, last] = (localStorage.getItem(VISITS_KEY) ?? '0|').split('|');
-      const total = Number(count) + (last === today ? 0 : 1);
-      localStorage.setItem(VISITS_KEY, `${total}|${today}`);
-      return total;
-    } catch {
-      return 0;
-    }
   }
 
   private recentlyDismissed(): boolean {
