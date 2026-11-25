@@ -15,7 +15,7 @@ import { ThemeCard } from './theme-card/theme-card';
 export default class LearnPage {
   private readonly quizService = inject(QuizService);
   protected readonly quiz = this.quizService.quiz;
-  private readonly themes = this.quizService.topThemes;
+  private readonly themes = this.quizService.themes;
 
   /** Catégories, dans l'ordre où elles apparaissent ('' = tout) */
   protected readonly categories = computed(() => [

@@ -1,7 +1,7 @@
 @if (data(); as d) {
   <app-dark-hero>
     <div class="hero">
-      <a class="hero__back" [routerLink]="backLink()" [attr.lang]="lang()" [attr.dir]="isAr() ? 'rtl' : null">
+      <a class="hero__back" routerLink="/apprendre" [attr.lang]="lang()" [attr.dir]="isAr() ? 'rtl' : null">
         <i class="ph {{ isAr() ? 'ph-arrow-right' : 'ph-arrow-left' }}" aria-hidden="true"></i>
         {{ t()['back'] }}
       </a>

@@ -119,8 +119,20 @@
 .panel__list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: var(--space-2);
   overflow-y: auto;
+}
+
+.panel__chapter {
+  margin-top: var(--space-2);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.panel__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
 }
 
 .panel__item {
@@ -159,12 +171,13 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
+  border: 2px solid var(--color-border);
   background: var(--color-surface);
   color: var(--color-primary);
-  font-size: var(--fs-small);
-  font-weight: 700;
 
+  // Carte en cours : rond plein
   .is-current & {
+    border-color: var(--color-primary);
     background: var(--color-primary);
     color: var(--color-text-on-dark);
   }
@@ -187,7 +200,12 @@
 .is-ar {
   font-family: var(--font-arabic-text);
 
-  .card__title {
+  // Partie de la leçon (ex. « Recevoir le wird »)
+.card__chapter {
+  @include m.overline;
+}
+
+.card__title {
     font-family: inherit;
     font-weight: 700;
     letter-spacing: 0;
@@ -320,6 +338,39 @@
     background: var(--color-primary);
     color: var(--color-text-on-dark);
   }
+}
+
+// « Vous reprenez à la carte 8. Recommencer au début »
+.resume {
+  @include m.flex-row(var(--space-2));
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 760px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-muted);
+  color: var(--color-text-secondary);
+  font-weight: 600;
+
+  .ph {
+    font-size: 22px;
+    color: var(--color-primary);
+  }
+}
+
+.resume__btn {
+  @include m.focus-ring;
+  min-height: var(--tap-min);
+  padding: 0 var(--space-2);
+  border: 0;
+  background: none;
+  color: var(--color-primary);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
 }
 
 .steps {

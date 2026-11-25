@@ -25,23 +25,6 @@
   color: var(--color-text-on-dark-soft);
 }
 
-// Page d'un groupe (ex. les 23 chartes)
-.hero__back {
-  @include m.flex-row(6px);
-  align-self: flex-start;
-  min-height: var(--tap-min);
-  color: var(--color-text-on-dark-soft);
-  font-weight: 600;
-
-  &:hover {
-    color: var(--color-text-on-dark);
-  }
-}
-
-.hero__title--group {
-  @include m.display(var(--fs-hero), var(--lh-tight));
-}
-
 .hero__chips {
   display: flex;
   flex-wrap: wrap;

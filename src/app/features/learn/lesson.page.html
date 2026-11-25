@@ -1,9 +1,9 @@
 @if (data(); as d) {
   <app-dark-hero>
     <div class="hero">
-      <a class="hero__back" [routerLink]="back().link" [attr.lang]="lang()" [attr.dir]="isAr() ? 'rtl' : null">
+      <a class="hero__back" routerLink="/apprendre" [attr.lang]="lang()" [attr.dir]="isAr() ? 'rtl' : null">
         <i class="ph {{ isAr() ? 'ph-arrow-right' : 'ph-arrow-left' }}" aria-hidden="true"></i>
-        {{ back().label ?? t().back }}
+        {{ t().back }}
       </a>
       <h1 class="hero__title" [attr.lang]="isAr() ? 'ar' : null" [attr.dir]="isAr() ? 'rtl' : null">{{ title() }}</h1>
       <div class="progress">
@@ -28,9 +28,20 @@
           </div>
         }
 
+        @if (resumed() && !done()) {
+          <p class="resume" role="status">
+            <i class="ph ph-clock-counter-clockwise" aria-hidden="true"></i>
+            <span>{{ t().resumed }} {{ index() + 1 }}.</span>
+            <button type="button" class="resume__btn" (click)="restart()">{{ t().fromStart }}</button>
+          </p>
+        }
+
         @if (!done()) {
           @if (card(); as c) {
             <article class="card">
+              @if (c.chapter) {
+                <p class="card__chapter" [attr.lang]="isAr() ? 'fr' : null" [attr.dir]="isAr() ? 'ltr' : null">{{ c.chapter }}</p>
+              }
               @if (c.image) {
                 <img class="card__img" [ngSrc]="c.image" [alt]="c.imageAlt ?? ''" width="240" height="240" />
               }
@@ -70,7 +81,7 @@
               </a>
             } @else {
               <p class="end__text">{{ t().doneHint }}</p>
-              <a class="btn btn--dark end__quiz" [routerLink]="back().link">{{ t().finish }}</a>
+              <a class="btn btn--dark end__quiz" routerLink="/apprendre">{{ t().finish }}</a>
             }
             <button type="button" class="end__restart" (click)="restart()">
               <i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i>
@@ -87,28 +98,33 @@
       <!-- Ordinateur : sommaire et quiz toujours à portée (masqué sur téléphone) -->
       <aside class="panel" [attr.aria-label]="t().contents">
         <p class="panel__title">{{ t().contents }}</p>
-        <ol class="panel__list">
-          @for (title of titles(); track $index; let i = $index) {
-            <li>
-              <button
-                type="button"
-                class="panel__item"
-                [class.is-current]="!done() && i === index()"
-                [attr.aria-current]="!done() && i === index() ? 'step' : null"
-                (click)="goTo(i)"
-              >
-                <span class="panel__mark" aria-hidden="true">
-                  @if (seen().has(i) && (done() || i !== index())) {
-                    <i class="ph ph-check"></i>
-                  } @else {
-                    {{ i + 1 }}
-                  }
-                </span>
-                <span class="panel__label">{{ title }}</span>
-              </button>
-            </li>
+        <div class="panel__list">
+          @for (part of outline(); track $index) {
+            @if (part.chapter) {
+              <p class="panel__chapter">{{ part.chapter }}</p>
+            }
+            <ol class="panel__items">
+              @for (item of part.items; track item.index) {
+                <li>
+                  <button
+                    type="button"
+                    class="panel__item"
+                    [class.is-current]="!done() && item.index === index()"
+                    [attr.aria-current]="!done() && item.index === index() ? 'step' : null"
+                    (click)="goTo(item.index)"
+                  >
+                    <span class="panel__mark" aria-hidden="true">
+                      @if (seen().has(item.index) && (done() || item.index !== index())) {
+                        <i class="ph ph-check"></i>
+                      }
+                    </span>
+                    <span class="panel__label">{{ item.title }}</span>
+                  </button>
+                </li>
+              }
+            </ol>
           }
-        </ol>
+        </div>
         @if (withQuiz()) {
           <a class="btn btn--gold panel__quiz" [routerLink]="['/quiz', d.id]">
             <i class="ph-fill ph-play" aria-hidden="true"></i>

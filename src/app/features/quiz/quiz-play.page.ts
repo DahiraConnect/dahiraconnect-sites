@@ -53,11 +53,6 @@ export default class QuizPlayPage {
     return !!d && hasArabic(d);
   });
   protected readonly t = computed(() => QUIZ_TEXT[this.lang()]);
-  /** Retour : le groupe du thème s'il en a un, sinon la rubrique */
-  protected readonly backLink = computed(() => {
-    const parent = this.quiz.parentOf(this.theme());
-    return parent ? ['/apprendre', parent.id] : ['/apprendre'];
-  });
   /** Le thème a une leçon : on propose de l'écouter avant de jouer */
   protected readonly lesson = computed(() => {
     const d = this.data();

@@ -45,6 +45,6 @@ export default class HomePage {
   protected readonly moments = computed(() => this.albums.all().slice(0, 3));
   /** Un seul numéro à copier quand Wave et Orange Money partagent le même */
   protected readonly payments = computed(() => groupPayments(this.dahira().support));
-  protected readonly quizThemes = inject(QuizService).topThemes;
+  protected readonly quizThemes = inject(QuizService).themes;
   protected readonly plural = plural;
 }

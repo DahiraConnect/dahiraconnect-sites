@@ -13,7 +13,9 @@ La rubrique remplace la liste du quiz. Chaque thème peut avoir **une leçon à 
 
 Dans la liste, chaque thème a ses boutons : « Écouter » (leçon, vert) et « Jouer » (quiz, jaune). La liste se filtre par catégorie (`category` du thème).
 
-Un thème peut en regrouper d'autres avec `parts` (liste d'id, dans l'ordre), comme « Les 23 chartes de la Tariqa » et ses 5 leçons. La liste principale n'affiche que le groupe ; `/apprendre/<groupe>` montre ses leçons, et le retour d'une leçon ramène au groupe. Un badge rappelle ce qui est déjà fait : « ✓ Écoutée » (leçon finie) et le meilleur score.
+Une longue leçon se découpe en parties avec `chapter` sur chaque carte (ex. les 23 chartes en 5 parties) : le nom de la partie s'affiche au-dessus de la carte et le sommaire (ordinateur) est regroupé par partie. On reste dans une seule leçon : pas de page en plus à ouvrir.
+
+**Écoute continue** : un seul appui sur « Écouter » lit toutes les cartes à la suite, jusqu'à « Arrêter ». **Reprise** : en revenant, la leçon reprend à la carte où l'on s'était arrêté (« Recommencer au début » est proposé).
 
 Dans la leçon, sur ordinateur, un panneau fixe à droite donne le sommaire des cartes (cliquable, ✓ sur les cartes vues) et le bouton « Faire le quiz ». Sur téléphone, il n'y a pas de panneau : le quiz est proposé à la fin de la leçon.
 

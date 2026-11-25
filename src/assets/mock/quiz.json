@@ -76,161 +76,126 @@
     {
       "id": "chartes-tariqa",
       "title": "Les 23 chartes de la Tariqa",
-      "description": "Les règles du talibé tidjane, en 5 petites leçons.",
+      "description": "Les règles du talibé tidjane, en 5 parties.",
       "icon": "ph-shield-check",
       "category": "La Tariqa",
-      "questions": [],
-      "parts": [
-        "chartes-recevoir-le-wird",
-        "chartes-aimer-cheikh",
-        "chartes-le-wird-chaque-jour",
-        "chartes-la-fraternite",
-        "chartes-pendant-le-wird"
-      ]
-    },
-    {
-      "id": "chartes-recevoir-le-wird",
-      "title": "Recevoir le wird",
-      "description": "Qui donne le wird, et à qui on reste fidèle.",
-      "icon": "ph-hand-heart",
       "questions": [],
       "lesson": {
         "cards": [
           {
             "title": "1. Le wird reçu d’un moukadam",
-            "text": "Recevoir le wird d’un moukadam autorisé, relié à la chaîne de transmission."
+            "text": "Recevoir le wird d’un moukadam autorisé, relié à la chaîne de transmission.",
+            "chapter": "Recevoir le wird"
           },
           {
             "title": "2. Un seul wird",
-            "text": "Ne pas prendre de wird d’une autre tariqa."
+            "text": "Ne pas prendre de wird d’une autre tariqa.",
+            "chapter": "Recevoir le wird"
           },
           {
             "title": "11. L’autorisation",
-            "text": "Faire le wird seulement après en avoir reçu l’autorisation."
+            "text": "Faire le wird seulement après en avoir reçu l’autorisation.",
+            "chapter": "Recevoir le wird"
           },
           {
             "title": "3. Le ziar",
-            "text": "Ne pas faire de ziar auprès d’un saint qui n’est pas tidjane, vivant ou mort. Respecter quand même les savants des autres voies."
+            "text": "Ne pas faire de ziar auprès d’un saint qui n’est pas tidjane, vivant ou mort. Respecter quand même les savants des autres voies.",
+            "chapter": "Recevoir le wird"
           },
           {
             "title": "16. Pas de faux titre",
-            "text": "Ne pas se faire passer pour un saint, ni donner le wird sans autorisation."
-          }
-        ]
-      }
-    },
-    {
-      "id": "chartes-aimer-cheikh",
-      "title": "Aimer Cheikh",
-      "description": "L’amour et le respect dus à Cheikh et à la voie.",
-      "icon": "ph-crown-simple",
-      "questions": [],
-      "lesson": {
-        "cards": [
+            "text": "Ne pas se faire passer pour un saint, ni donner le wird sans autorisation.",
+            "chapter": "Recevoir le wird"
+          },
           {
             "title": "5. Aimer Cheikh",
-            "text": "Aimer et respecter Cheikh Ahmed Tidjani et ses khalifes, toute sa vie."
+            "text": "Aimer et respecter Cheikh Ahmed Tidjani et ses khalifes, toute sa vie.",
+            "chapter": "Aimer Cheikh"
           },
           {
             "title": "9. Une foi ferme",
-            "text": "Avoir une foi ferme en Cheikh et en la tariqa."
+            "text": "Avoir une foi ferme en Cheikh et en la tariqa.",
+            "chapter": "Aimer Cheikh"
           },
           {
             "title": "7. Aucune hostilité",
-            "text": "N’avoir aucune hostilité envers Cheikh ou ses khalifes."
+            "text": "N’avoir aucune hostilité envers Cheikh ou ses khalifes.",
+            "chapter": "Aimer Cheikh"
           },
           {
             "title": "10. Ne pas critiquer",
-            "text": "Ne pas critiquer Cheikh, la tariqa, les khalifes ni les talibés."
+            "text": "Ne pas critiquer Cheikh, la tariqa, les khalifes ni les talibés.",
+            "chapter": "Aimer Cheikh"
           },
           {
             "title": "6. Rester humble",
-            "text": "Ne pas se croire à l’abri de ses fautes."
-          }
-        ]
-      }
-    },
-    {
-      "id": "chartes-le-wird-chaque-jour",
-      "title": "Le wird chaque jour",
-      "description": "Ne jamais abandonner le wird, prier ensemble.",
-      "icon": "ph-calendar-check",
-      "questions": [],
-      "lesson": {
-        "cards": [
+            "text": "Ne pas se croire à l’abri de ses fautes.",
+            "chapter": "Aimer Cheikh"
+          },
           {
             "title": "8. Jusqu’à la mort",
-            "text": "Faire le wird sans jamais l’abandonner, jusqu’à la mort."
+            "text": "Faire le wird sans jamais l’abandonner, jusqu’à la mort.",
+            "chapter": "Le wird chaque jour"
           },
           {
             "title": "15. Ne pas négliger",
-            "text": "Ne pas négliger le wird ni le faire en retard sans excuse."
+            "text": "Ne pas négliger le wird ni le faire en retard sans excuse.",
+            "chapter": "Le wird chaque jour"
           },
           {
             "title": "4. Les cinq prières",
-            "text": "Faire les cinq prières en groupe, si possible."
+            "text": "Faire les cinq prières en groupe, si possible.",
+            "chapter": "Le wird chaque jour"
           },
           {
             "title": "12. En groupe",
-            "text": "Faire la Wazifa et la Hadratul Djouma du vendredi en groupe."
-          }
-        ]
-      }
-    },
-    {
-      "id": "chartes-la-fraternite",
-      "title": "La fraternité",
-      "description": "Garder les liens avec sa famille et ses frères talibés.",
-      "icon": "ph-users-three",
-      "questions": [],
-      "lesson": {
-        "cards": [
+            "text": "Faire la Wazifa et la Hadratul Djouma du vendredi en groupe.",
+            "chapter": "Le wird chaque jour"
+          },
           {
             "title": "14. Garder les liens",
-            "text": "Ne pas couper les liens avec sa famille ni avec ses frères talibés."
+            "text": "Ne pas couper les liens avec sa famille ni avec ses frères talibés.",
+            "chapter": "La fraternité"
           },
           {
             "title": "17. Le respect",
-            "text": "Respecter toute personne liée à Cheikh ou à la tariqa."
+            "text": "Respecter toute personne liée à Cheikh ou à la tariqa.",
+            "chapter": "La fraternité"
           },
           {
             "title": "18. La fraternité",
-            "text": "Ne pas fâcher son frère talibé."
-          }
-        ]
-      }
-    },
-    {
-      "id": "chartes-pendant-le-wird",
-      "title": "Pendant le wird",
-      "description": "Pureté, qibla, silence et concentration.",
-      "icon": "ph-hands-praying",
-      "questions": [],
-      "lesson": {
-        "cards": [
+            "text": "Ne pas fâcher son frère talibé.",
+            "chapter": "La fraternité"
+          },
           {
             "title": "13. La Djawharatul Kamal",
-            "text": "Ne réciter la Djawharatul Kamal qu’avec les ablutions."
+            "text": "Ne réciter la Djawharatul Kamal qu’avec les ablutions.",
+            "chapter": "Pendant le wird"
           },
           {
             "title": "19. La pureté",
-            "text": "Être en état de pureté, avec des habits propres, dans un lieu propre."
+            "text": "Être en état de pureté, avec des habits propres, dans un lieu propre.",
+            "chapter": "Pendant le wird"
           },
           {
             "title": "20. La qibla",
-            "text": "S’asseoir tourné vers la qibla pendant le wird, sauf exceptions."
+            "text": "S’asseoir tourné vers la qibla pendant le wird, sauf exceptions.",
+            "chapter": "Pendant le wird"
           },
           {
             "title": "21. Le silence",
-            "text": "Ne pas parler pendant le wird, sauf nécessité : répondre à ses parents, l’épouse à son mari, le talibé à son guide."
+            "text": "Ne pas parler pendant le wird, sauf nécessité : répondre à ses parents, l’épouse à son mari, le talibé à son guide.",
+            "chapter": "Pendant le wird"
           },
           {
             "title": "22. La concentration",
-            "text": "Se concentrer sur les paroles du wird et bien les prononcer."
+            "text": "Se concentrer sur les paroles du wird et bien les prononcer.",
+            "chapter": "Pendant le wird"
           },
           {
             "title": "23. La présence",
-            "text": "Ressentir la présence du Prophète, paix et salut sur lui, de Cheikh ou de son guide."
+            "text": "Ressentir la présence du Prophète, paix et salut sur lui, de Cheikh ou de son guide.",
+            "chapter": "Pendant le wird"
           }
         ]
       }

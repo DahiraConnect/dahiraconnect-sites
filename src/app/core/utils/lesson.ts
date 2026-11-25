@@ -7,6 +7,7 @@ export interface ShownCard {
   audio?: string;
   image?: string;
   imageAlt?: string;
+  chapter?: string;
 }
 
 /**
@@ -26,8 +27,8 @@ export function lessonLangs(lesson: Lesson): LessonLang[] {
  * Wolof sans texte écrit : on montre le texte français, l'audio reste en wolof.
  */
 export function cardIn(card: LessonCard, lang: LessonLang): ShownCard {
-  const { image, imageAlt } = card;
-  if (lang === 'fr') return { title: card.title, text: card.text, audio: card.audio, image, imageAlt };
+  const { image, imageAlt, chapter } = card;
+  if (lang === 'fr') return { title: card.title, text: card.text, audio: card.audio, image, imageAlt, chapter };
   const v = card[lang] ?? {};
   return {
     title: v.title ?? card.title,
@@ -35,5 +36,18 @@ export function cardIn(card: LessonCard, lang: LessonLang): ShownCard {
     audio: v.audio,
     image,
     imageAlt,
+    chapter,
   };
+}
+
+/** Sommaire : les cartes regroupées par partie, dans l'ordre (une seule partie sans nom s'il n'y en a pas) */
+export function lessonOutline(titles: string[], chapters: (string | undefined)[]): { chapter?: string; items: { index: number; title: string }[] }[] {
+  const outline: { chapter?: string; items: { index: number; title: string }[] }[] = [];
+  titles.forEach((title, index) => {
+    const chapter = chapters[index];
+    const last = outline[outline.length - 1];
+    if (last && last.chapter === chapter) last.items.push({ index, title });
+    else outline.push({ chapter, items: [{ index, title }] });
+  });
+  return outline;
 }

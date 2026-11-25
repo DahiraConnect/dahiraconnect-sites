@@ -1,5 +1,5 @@
 import { Lesson } from '../models';
-import { cardIn, lessonLangs } from './lesson';
+import { cardIn, lessonLangs, lessonOutline } from './lesson';
 
 const lesson = (cards: Lesson['cards']): Lesson => ({ cards });
 
@@ -22,11 +22,19 @@ describe('lesson', () => {
 
   it('wolof sans texte : texte français, audio wolof', () => {
     const card = { title: 'Un', text: 'Texte', audio: '/fr.m4a', wo: { audio: '/wo.m4a' } };
-    expect(cardIn(card, 'wo')).toEqual({ title: 'Un', text: 'Texte', audio: '/wo.m4a', image: undefined, imageAlt: undefined });
+    expect(cardIn(card, 'wo')).toEqual({ title: 'Un', text: 'Texte', audio: '/wo.m4a', image: undefined, imageAlt: undefined, chapter: undefined });
   });
 
   it('ne reprend jamais le son d’une autre langue', () => {
     const card = { title: 'Un', audio: '/fr.m4a', ar: { title: 'واحد', text: 'نص' } };
-    expect(cardIn(card, 'ar')).toEqual({ title: 'واحد', text: 'نص', audio: undefined, image: undefined, imageAlt: undefined });
+    expect(cardIn(card, 'ar')).toEqual({ title: 'واحد', text: 'نص', audio: undefined, image: undefined, imageAlt: undefined, chapter: undefined });
+  });
+
+  it('regroupe le sommaire par partie, dans l’ordre', () => {
+    expect(lessonOutline(['a', 'b', 'c'], ['Un', 'Un', 'Deux'])).toEqual([
+      { chapter: 'Un', items: [{ index: 0, title: 'a' }, { index: 1, title: 'b' }] },
+      { chapter: 'Deux', items: [{ index: 2, title: 'c' }] },
+    ]);
+    expect(lessonOutline(['a'], [undefined])).toEqual([{ chapter: undefined, items: [{ index: 0, title: 'a' }] }]);
   });
 });
