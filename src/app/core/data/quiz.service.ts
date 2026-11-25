@@ -62,6 +62,23 @@ export class QuizService {
     }
   }
 
+  /** Leçon écoutée jusqu'au bout (gardé sur le téléphone) */
+  lessonDone(themeId: string): boolean {
+    try {
+      return localStorage.getItem(`${this.key(themeId)}-lecon`) === '1';
+    } catch {
+      return false;
+    }
+  }
+
+  markLessonDone(themeId: string): void {
+    try {
+      localStorage.setItem(`${this.key(themeId)}-lecon`, '1');
+    } catch {
+      /* pas de stockage : rien n'est mémorisé */
+    }
+  }
+
   /** Langue préférée des leçons (le wolof en plus) */
   preferredLessonLang(): LessonLang {
     try {

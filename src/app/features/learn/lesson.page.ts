@@ -61,6 +61,9 @@ export default class LessonPage {
     const c = this.cards()[this.index()];
     return c ? cardIn(c, this.lang()) : null;
   });
+  /** Cartes déjà vues (sommaire du panneau, sur ordinateur) */
+  protected readonly seen = signal<ReadonlySet<number>>(new Set([0]));
+  protected readonly titles = computed(() => this.cards().map((c) => cardIn(c, this.lang()).title));
   protected readonly progress = computed(() => ((this.done() ? this.total() : this.index() + 1) / Math.max(1, this.total())) * 100);
 
   /** Lecture à voix haute du téléphone (français et arabe seulement, s'il n'y a pas d'enregistrement) */
@@ -107,7 +110,14 @@ export default class LessonPage {
     if (this.index() < this.total() - 1) return this.go(this.index() + 1);
     this.stop();
     this.done.set(true);
+    this.quiz.markLessonDone(this.theme());
     this.scrollTop();
+  }
+
+  /** Sommaire : aller directement à une carte */
+  protected goTo(index: number): void {
+    this.done.set(false);
+    this.go(index);
   }
 
   protected restart(): void {
@@ -118,6 +128,7 @@ export default class LessonPage {
   private go(index: number): void {
     this.stop();
     this.index.set(index);
+    this.seen.update((s) => new Set(s).add(index));
     this.scrollTop();
     afterNextRender(
       () => {

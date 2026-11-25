@@ -13,44 +13,65 @@
     <ul class="themes">
       @for (t of themes(); track t.id; let i = $index) {
         <li appReveal [appRevealDelay]="i * 90">
-          <a class="theme" [routerLink]="link(t)">
-            <span class="theme__icon" aria-hidden="true"><i class="ph {{ t.icon || 'ph-question' }}"></i></span>
-            <span class="theme__body">
-              <span class="theme__title">{{ t.title }}</span>
-              @if (t.ar) {
-                <span class="theme__ar" lang="ar" dir="rtl">{{ t.ar.title }}</span>
-              }
-              <span class="theme__desc">{{ t.description }}</span>
-              <span class="theme__meta">
-                @if (hasLesson(t)) {
-                  {{ plural(t.lesson!.cards.length, 'carte') }}
+          <article class="theme" [attr.aria-labelledby]="'theme-' + t.id">
+            <div class="theme__head">
+              <span class="theme__icon" aria-hidden="true"><i class="ph {{ t.icon || 'ph-question' }}"></i></span>
+              <div class="theme__body">
+                <h2 class="theme__title" [id]="'theme-' + t.id">{{ t.title }}</h2>
+                @if (t.ar) {
+                  <span class="theme__ar" lang="ar" dir="rtl">{{ t.ar.title }}</span>
                 }
-                @if (hasLesson(t) && hasQuiz(t)) {
-                  ·
-                }
-                @if (hasQuiz(t)) {
-                  {{ plural(t.questions.length, 'question') }}
-                }
-                @if (langs(t); as l) {
-                  @if (l.ar || l.wo) {
-                    · <span class="theme__badge">FR@if (l.ar) { · <span lang="ar">عربي</span>}@if (l.wo) { · Wolof}</span>
+                <p class="theme__desc">{{ t.description }}</p>
+                <p class="theme__meta">
+                  @if (hasLesson(t)) {
+                    {{ plural(t.lesson!.cards.length, 'carte') }}
                   }
+                  @if (hasLesson(t) && hasQuiz(t)) {
+                    ·
+                  }
+                  @if (hasQuiz(t)) {
+                    {{ plural(t.questions.length, 'question') }}
+                  }
+                  @if (langs(t); as l) {
+                    @if (l.ar || l.wo) {
+                      · <span class="theme__badge">FR@if (l.ar) { · <span lang="ar">عربي</span>}@if (l.wo) { · Wolof}</span>
+                    }
+                  }
+                </p>
+                @if (listened()[t.id] || (best()[t.id] !== null && best()[t.id] !== undefined)) {
+                  <p class="theme__done">
+                    @if (listened()[t.id]) {
+                      <span><i class="ph ph-check-circle" aria-hidden="true"></i> Écoutée</span>
+                    }
+                    @if (best()[t.id] !== null && best()[t.id] !== undefined) {
+                      <span><i class="ph ph-trophy" aria-hidden="true"></i> {{ best()[t.id] }}/{{ t.questions.length }}</span>
+                    }
+                  </p>
                 }
-                @if (best()[t.id] !== null && best()[t.id] !== undefined) {
-                  · Meilleur score : {{ best()[t.id] }}/{{ t.questions.length }}
-                }
-              </span>
-            </span>
-            <span class="theme__play">
+              </div>
+            </div>
+
+            <div class="theme__actions">
               @if (hasLesson(t)) {
-                Écouter
-                <i class="ph ph-speaker-high" aria-hidden="true"></i>
-              } @else {
-                Jouer
-                <i class="ph ph-arrow-right" aria-hidden="true"></i>
+                <a class="btn btn--dark theme__btn" [routerLink]="['/apprendre', t.id]" [attr.aria-label]="'Écouter la leçon « ' + t.title + ' »'">
+                  <i class="ph ph-speaker-high" aria-hidden="true"></i>
+                  Écouter
+                </a>
               }
-            </span>
-          </a>
+              @if (hasQuiz(t)) {
+                <a
+                  class="btn theme__btn"
+                  [class.btn--outline]="hasLesson(t)"
+                  [class.btn--dark]="!hasLesson(t)"
+                  [routerLink]="['/quiz', t.id]"
+                  [attr.aria-label]="'Jouer au quiz « ' + t.title + ' »'"
+                >
+                  <i class="ph-fill ph-play" aria-hidden="true"></i>
+                  Jouer
+                </a>
+              }
+            </div>
+          </article>
         </li>
       }
     </ul>

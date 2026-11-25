@@ -16,68 +16,106 @@
   </app-dark-hero>
 
   <div class="sheet container" [class.is-ar]="isAr()" [attr.lang]="isAr() ? 'ar' : null" [attr.dir]="isAr() ? 'rtl' : null">
-    @if (langs().length > 1) {
-      <div class="lang" role="group" [attr.aria-label]="t().language" [style.--lang-count]="langs().length">
-        @for (l of langs(); track l) {
-          <button type="button" class="lang__btn" [attr.lang]="l === 'ar' ? 'ar' : l === 'wo' ? 'wo' : 'fr'" [attr.dir]="l === 'ar' ? 'rtl' : 'ltr'" [attr.aria-pressed]="lang() === l" (click)="setLang(l)">
-            {{ langNames[l] }}
-          </button>
+    <div class="layout">
+      <div class="main">
+        @if (langs().length > 1) {
+          <div class="lang" role="group" [attr.aria-label]="t().language" [style.--lang-count]="langs().length">
+            @for (l of langs(); track l) {
+              <button type="button" class="lang__btn" [attr.lang]="l === 'ar' ? 'ar' : l === 'wo' ? 'wo' : 'fr'" [attr.dir]="l === 'ar' ? 'rtl' : 'ltr'" [attr.aria-pressed]="lang() === l" (click)="setLang(l)">
+                {{ langNames[l] }}
+              </button>
+            }
+          </div>
+        }
+
+        @if (!done()) {
+          @if (card(); as c) {
+            <article class="card">
+              @if (c.image) {
+                <img class="card__img" [ngSrc]="c.image" [alt]="c.imageAlt ?? ''" width="240" height="240" />
+              }
+              <h2 #cardHeading class="card__title" tabindex="-1" [attr.lang]="lang() === 'wo' ? 'fr' : null">{{ c.title }}</h2>
+              @if (c.text) {
+                <p class="card__text" [attr.lang]="lang() === 'wo' ? 'fr' : null">{{ c.text }}</p>
+              }
+              @if (canListen()) {
+                <button type="button" class="listen" [class.is-on]="playing()" [attr.aria-pressed]="playing()" (click)="toggleListen()">
+                  <i class="ph {{ playing() ? 'ph-stop' : 'ph-speaker-high' }}" aria-hidden="true"></i>
+                  {{ playing() ? t().stop : t().listen }}
+                </button>
+              }
+            </article>
+
+            <nav class="steps" [attr.aria-label]="t().card + ' ' + (index() + 1) + ' ' + t().of + ' ' + total()">
+              @if (index() > 0) {
+                <button type="button" class="btn btn--outline steps__prev" (click)="previous()">
+                  <i class="ph {{ isAr() ? 'ph-arrow-right' : 'ph-arrow-left' }}" aria-hidden="true"></i>
+                  {{ t().previous }}
+                </button>
+              }
+              <button type="button" class="btn btn--dark steps__next" (click)="next()">
+                {{ t().next }}
+                <i class="ph {{ isAr() ? 'ph-arrow-left' : 'ph-arrow-right' }}" aria-hidden="true"></i>
+              </button>
+            </nav>
+          }
+        } @else {
+          <section class="card end">
+            <span class="end__icon" aria-hidden="true"><i class="ph {{ d.icon || 'ph-question' }}"></i></span>
+            @if (withQuiz()) {
+              <p class="end__text">{{ t().quizHint }}</p>
+              <a class="btn btn--dark end__quiz" [routerLink]="['/quiz', d.id]">
+                <i class="ph-fill ph-play" aria-hidden="true"></i>
+                {{ t().quiz }}
+              </a>
+            } @else {
+              <p class="end__text">{{ t().doneHint }}</p>
+              <a class="btn btn--dark end__quiz" routerLink="/apprendre">{{ t().finish }}</a>
+            }
+            <button type="button" class="end__restart" (click)="restart()">
+              <i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i>
+              {{ t().restart }}
+            </button>
+          </section>
+        }
+
+        @if (d.source) {
+          <p class="source">{{ t().source }} {{ d.source }}.</p>
         }
       </div>
-    }
 
-    @if (!done()) {
-      @if (card(); as c) {
-        <article class="card">
-          @if (c.image) {
-            <img class="card__img" [ngSrc]="c.image" [alt]="c.imageAlt ?? ''" width="240" height="240" />
+      <!-- Ordinateur : sommaire et quiz toujours à portée (masqué sur téléphone) -->
+      <aside class="panel" [attr.aria-label]="t().contents">
+        <p class="panel__title">{{ t().contents }}</p>
+        <ol class="panel__list">
+          @for (title of titles(); track $index; let i = $index) {
+            <li>
+              <button
+                type="button"
+                class="panel__item"
+                [class.is-current]="!done() && i === index()"
+                [attr.aria-current]="!done() && i === index() ? 'step' : null"
+                (click)="goTo(i)"
+              >
+                <span class="panel__mark" aria-hidden="true">
+                  @if (seen().has(i) && (done() || i !== index())) {
+                    <i class="ph ph-check"></i>
+                  } @else {
+                    {{ i + 1 }}
+                  }
+                </span>
+                <span class="panel__label">{{ title }}</span>
+              </button>
+            </li>
           }
-          <h2 #cardHeading class="card__title" tabindex="-1" [attr.lang]="lang() === 'wo' ? 'fr' : null">{{ c.title }}</h2>
-          @if (c.text) {
-            <p class="card__text" [attr.lang]="lang() === 'wo' ? 'fr' : null">{{ c.text }}</p>
-          }
-          @if (canListen()) {
-            <button type="button" class="listen" [class.is-on]="playing()" [attr.aria-pressed]="playing()" (click)="toggleListen()">
-              <i class="ph {{ playing() ? 'ph-stop' : 'ph-speaker-high' }}" aria-hidden="true"></i>
-              {{ playing() ? t().stop : t().listen }}
-            </button>
-          }
-        </article>
-
-        <nav class="steps" [attr.aria-label]="t().card + ' ' + (index() + 1) + ' ' + t().of + ' ' + total()">
-          @if (index() > 0) {
-            <button type="button" class="btn btn--outline steps__prev" (click)="previous()">
-              <i class="ph {{ isAr() ? 'ph-arrow-right' : 'ph-arrow-left' }}" aria-hidden="true"></i>
-              {{ t().previous }}
-            </button>
-          }
-          <button type="button" class="btn btn--dark steps__next" (click)="next()">
-            {{ t().next }}
-            <i class="ph {{ isAr() ? 'ph-arrow-left' : 'ph-arrow-right' }}" aria-hidden="true"></i>
-          </button>
-        </nav>
-      }
-    } @else {
-      <section class="card end">
-        <span class="end__icon" aria-hidden="true"><i class="ph {{ d.icon || 'ph-question' }}"></i></span>
+        </ol>
         @if (withQuiz()) {
-          <p class="end__text">{{ t().quizHint }}</p>
-          <a class="btn btn--dark end__quiz" [routerLink]="['/quiz', d.id]">
+          <a class="btn btn--outline panel__quiz" [routerLink]="['/quiz', d.id]">
             <i class="ph-fill ph-play" aria-hidden="true"></i>
             {{ t().quiz }}
           </a>
-        } @else {
-          <a class="btn btn--dark end__quiz" routerLink="/apprendre">{{ t().finish }}</a>
         }
-        <button type="button" class="end__restart" (click)="restart()">
-          <i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i>
-          {{ t().restart }}
-        </button>
-      </section>
-    }
-
-    @if (d.source) {
-      <p class="source">{{ t().source }} {{ d.source }}.</p>
-    }
+      </aside>
+    </div>
   </div>
 }

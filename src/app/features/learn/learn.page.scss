@@ -45,39 +45,31 @@
   }
 }
 
+// Carte de thème : pas un lien, mais deux vrais boutons (Écouter / Jouer)
 .theme {
-  @include m.focus-ring;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: var(--space-4);
   height: 100%;
   padding: var(--space-5);
   border-radius: var(--radius-card);
   background: var(--color-surface-card);
   color: var(--color-text-primary);
-  text-decoration: none;
-  transition:
-    transform var(--dur-base) var(--ease-out),
-    box-shadow var(--dur-base) var(--ease-out);
 
-  &:hover {
-    color: var(--color-text-primary);
+  @include m.desktop {
+    gap: var(--space-5);
+    padding: var(--space-8) var(--space-6);
   }
+}
 
-  @include m.hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-float);
-
-    .theme__play .ph {
-      transform: translateX(4px);
-    }
-  }
+.theme__head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  flex: 1;
 
   @include m.desktop {
     flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-5);
-    padding: var(--space-8) var(--space-6);
   }
 }
 
@@ -134,23 +126,37 @@
   color: var(--color-gold-text);
 }
 
-.theme__play {
-  @include m.flex-row(6px);
-  flex-shrink: 0;
-  font-weight: 700;
-  color: var(--color-primary-mid);
+// Déjà fait : leçon écoutée, meilleur score
+.theme__done {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
 
-  .ph {
-    transition: transform var(--dur-base) var(--ease-out);
+  span {
+    @include m.badge(var(--color-surface), var(--color-primary));
+    @include m.flex-row(4px);
   }
 
-  // Mobile : flèche seule, la carte entière est cliquable
-  @include m.mobile-only {
-    font-size: 0;
+  .ph {
+    font-size: 18px;
+  }
+}
 
-    .ph {
-      font-size: 22px;
-    }
+// Deux grands boutons côte à côte (un seul s'il n'y a qu'une action)
+.theme__actions {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.theme__btn {
+  flex: 1;
+  gap: var(--space-2);
+  min-height: var(--btn-h);
+
+  .ph,
+  .ph-fill {
+    font-size: 22px;
   }
 }
 

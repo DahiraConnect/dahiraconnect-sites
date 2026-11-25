@@ -22,18 +22,16 @@ export default class LearnPage {
   protected readonly plural = plural;
   protected readonly hasLesson = hasLesson;
   protected readonly hasQuiz = hasQuiz;
-  /** Meilleurs scores : lus dans le navigateur seulement (pas au rendu serveur) */
+  /** Meilleurs scores et leçons écoutées : lus dans le navigateur seulement (pas au rendu serveur) */
   protected readonly best = signal<Record<string, number | null>>({});
+  protected readonly listened = signal<Record<string, boolean>>({});
 
   constructor() {
     afterNextRender(() => {
-      this.best.set(Object.fromEntries(this.themes().map((t) => [t.id, this.quizService.bestScore(t.id)])));
+      const themes = this.themes();
+      this.best.set(Object.fromEntries(themes.map((t) => [t.id, this.quizService.bestScore(t.id)])));
+      this.listened.set(Object.fromEntries(themes.map((t) => [t.id, this.quizService.lessonDone(t.id)])));
     });
-  }
-
-  /** La leçon d'abord, s'il y en a une */
-  protected link(t: QuizTheme): string[] {
-    return hasLesson(t) ? ['/apprendre', t.id] : ['/quiz', t.id];
   }
 
   /** Langues disponibles, ex. « FR · عربي · Wolof » */

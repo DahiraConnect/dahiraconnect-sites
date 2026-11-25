@@ -6,8 +6,9 @@
   gap: var(--space-3);
   padding: 0 var(--gutter);
 
+  // Même largeur que la carte + le panneau en dessous
   @include m.desktop {
-    max-width: 760px;
+    max-width: calc(1120px + 2 * var(--gutter));
     margin-inline: auto;
     padding-top: var(--space-6);
   }
@@ -66,16 +67,120 @@
 
 .sheet {
   @include m.overlap-sheet;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-5);
   padding: var(--space-6) var(--space-3) var(--space-11);
 
   @include m.desktop {
     margin-top: -64px;
     padding: 64px var(--gutter) 112px;
   }
+}
+
+// Téléphone : une colonne. Ordinateur : la carte à gauche, le panneau à droite.
+.layout {
+  @include m.desktop {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    align-items: start;
+    gap: var(--space-8);
+    max-width: 1120px;
+    margin-inline: auto;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+// ——— Panneau (ordinateur seulement) ———
+.panel {
+  display: none;
+
+  @include m.desktop {
+    position: sticky;
+    top: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-height: calc(100vh - 2 * var(--space-6));
+    padding: var(--space-6);
+    border-radius: var(--radius-card);
+    background: var(--color-surface-card);
+    box-shadow: var(--shadow-float);
+  }
+}
+
+.panel__title {
+  @include m.overline;
+}
+
+.panel__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  overflow-y: auto;
+}
+
+.panel__item {
+  @include m.focus-ring;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: var(--tap-min);
+  padding: var(--space-2);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--color-text-secondary);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: background-color var(--dur-fast);
+
+  &:hover {
+    background: var(--color-surface);
+    color: var(--color-primary);
+  }
+
+  &.is-current {
+    background: var(--color-surface-muted);
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+}
+
+.panel__mark {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-size: var(--fs-small);
+  font-weight: 700;
+
+  .is-current & {
+    background: var(--color-primary);
+    color: var(--color-text-on-dark);
+  }
+
+  .ph {
+    font-size: 16px;
+  }
+}
+
+.panel__label {
+  min-width: 0;
+}
+
+.panel__quiz {
+  gap: var(--space-2);
+  margin-top: var(--space-2);
 }
 
 // Arabe : police lisible du téléphone, texte plus grand

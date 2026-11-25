@@ -74,10 +74,10 @@
       }
     },
     {
-      "id": "chartes-tariqa",
-      "title": "Les 23 chartes de la Tariqa",
-      "description": "Les règles du talibé tidjane. En attente de validation.",
-      "icon": "ph-shield-check",
+      "id": "chartes-recevoir-le-wird",
+      "title": "Chartes · Recevoir le wird",
+      "description": "Qui donne le wird, et à qui on reste fidèle. En attente de validation.",
+      "icon": "ph-hand-heart",
       "source": "la liste en 23 points publiée par Senego — leçon en attente de validation par le moukadam",
       "questions": [],
       "lesson": {
@@ -91,60 +91,92 @@
             "text": "Ne pas prendre de wird d’une autre tariqa."
           },
           {
+            "title": "11. L’autorisation",
+            "text": "Faire le wird seulement après en avoir reçu l’autorisation."
+          },
+          {
             "title": "3. Le ziar",
             "text": "Ne pas faire de ziar auprès d’un saint qui n’est pas tidjane, vivant ou mort. Respecter quand même les savants des autres voies."
           },
           {
-            "title": "4. Les cinq prières",
-            "text": "Faire les cinq prières en groupe, si possible."
-          },
+            "title": "16. Pas de faux titre",
+            "text": "Ne pas se faire passer pour un saint, ni donner le wird sans autorisation."
+          }
+        ]
+      }
+    },
+    {
+      "id": "chartes-aimer-cheikh",
+      "title": "Chartes · Aimer Cheikh",
+      "description": "L’amour et le respect dus à Cheikh et à la voie. En attente de validation.",
+      "icon": "ph-crown-simple",
+      "source": "la liste en 23 points publiée par Senego — leçon en attente de validation par le moukadam",
+      "questions": [],
+      "lesson": {
+        "cards": [
           {
             "title": "5. Aimer Cheikh",
             "text": "Aimer et respecter Cheikh Ahmed Tidjani et ses khalifes, toute sa vie."
-          },
-          {
-            "title": "6. Rester humble",
-            "text": "Ne pas se croire à l’abri de ses fautes."
-          },
-          {
-            "title": "7. Aucune hostilité",
-            "text": "N’avoir aucune hostilité envers Cheikh ou ses khalifes."
-          },
-          {
-            "title": "8. Jusqu’à la mort",
-            "text": "Faire le wird sans jamais l’abandonner, jusqu’à la mort."
           },
           {
             "title": "9. Une foi ferme",
             "text": "Avoir une foi ferme en Cheikh et en la tariqa."
           },
           {
+            "title": "7. Aucune hostilité",
+            "text": "N’avoir aucune hostilité envers Cheikh ou ses khalifes."
+          },
+          {
             "title": "10. Ne pas critiquer",
             "text": "Ne pas critiquer Cheikh, la tariqa, les khalifes ni les talibés."
           },
           {
-            "title": "11. L’autorisation",
-            "text": "Faire le wird seulement après en avoir reçu l’autorisation."
-          },
+            "title": "6. Rester humble",
+            "text": "Ne pas se croire à l’abri de ses fautes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "chartes-le-wird-chaque-jour",
+      "title": "Chartes · Le wird chaque jour",
+      "description": "Ne jamais abandonner le wird, prier ensemble. En attente de validation.",
+      "icon": "ph-calendar-check",
+      "source": "la liste en 23 points publiée par Senego — leçon en attente de validation par le moukadam",
+      "questions": [],
+      "lesson": {
+        "cards": [
           {
-            "title": "12. En groupe",
-            "text": "Faire la Wazifa et la Hadratul Djouma du vendredi en groupe."
-          },
-          {
-            "title": "13. La Djawharatul Kamal",
-            "text": "Ne réciter la Djawharatul Kamal qu’avec les ablutions."
-          },
-          {
-            "title": "14. Garder les liens",
-            "text": "Ne pas couper les liens avec sa famille ni avec ses frères talibés."
+            "title": "8. Jusqu’à la mort",
+            "text": "Faire le wird sans jamais l’abandonner, jusqu’à la mort."
           },
           {
             "title": "15. Ne pas négliger",
             "text": "Ne pas négliger le wird ni le faire en retard sans excuse."
           },
           {
-            "title": "16. Pas de faux titre",
-            "text": "Ne pas se faire passer pour un saint, ni donner le wird sans autorisation."
+            "title": "4. Les cinq prières",
+            "text": "Faire les cinq prières en groupe, si possible."
+          },
+          {
+            "title": "12. En groupe",
+            "text": "Faire la Wazifa et la Hadratul Djouma du vendredi en groupe."
+          }
+        ]
+      }
+    },
+    {
+      "id": "chartes-la-fraternite",
+      "title": "Chartes · La fraternité",
+      "description": "Garder les liens avec sa famille et ses frères talibés. En attente de validation.",
+      "icon": "ph-users-three",
+      "source": "la liste en 23 points publiée par Senego — leçon en attente de validation par le moukadam",
+      "questions": [],
+      "lesson": {
+        "cards": [
+          {
+            "title": "14. Garder les liens",
+            "text": "Ne pas couper les liens avec sa famille ni avec ses frères talibés."
           },
           {
             "title": "17. Le respect",
@@ -153,6 +185,22 @@
           {
             "title": "18. La fraternité",
             "text": "Ne pas fâcher son frère talibé."
+          }
+        ]
+      }
+    },
+    {
+      "id": "chartes-pendant-le-wird",
+      "title": "Chartes · Pendant le wird",
+      "description": "Pureté, qibla, silence et concentration. En attente de validation.",
+      "icon": "ph-hands-praying",
+      "source": "la liste en 23 points publiée par Senego — leçon en attente de validation par le moukadam",
+      "questions": [],
+      "lesson": {
+        "cards": [
+          {
+            "title": "13. La Djawharatul Kamal",
+            "text": "Ne réciter la Djawharatul Kamal qu’avec les ablutions."
           },
           {
             "title": "19. La pureté",
