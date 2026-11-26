@@ -15,7 +15,16 @@
             "12 fois"
           ],
           "answer": 0,
-          "explanation": "Dans la Wazifa, on dit 30 fois Astaghfirullah."
+          "explanation": "Dans la Wazifa, on dit 30 fois Astaghfirullah.",
+          "ar": {
+            "question": "كم مرة يقال «أستغفر الله» في الوظيفة؟",
+            "choices": [
+              "ثلاثين مرة",
+              "مائة مرة",
+              "اثنتي عشرة مرة"
+            ],
+            "explanation": "في الوظيفة يقال «أستغفر الله» ثلاثين مرة."
+          }
         },
         {
           "question": "Combien de fois récite-t-on la Salatul Fatihi ?",
@@ -25,7 +34,16 @@
             "20 fois"
           ],
           "answer": 0,
-          "explanation": "On récite 50 fois la Salatul Fatihi."
+          "explanation": "On récite 50 fois la Salatul Fatihi.",
+          "ar": {
+            "question": "كم مرة تُقرأ صلاة الفاتح؟",
+            "choices": [
+              "خمسين مرة",
+              "ثلاثين مرة",
+              "عشرين مرة"
+            ],
+            "explanation": "تُقرأ صلاة الفاتح خمسين مرة."
+          }
         },
         {
           "question": "Combien de fois dit-on Lâ ilâha illallâh ?",
@@ -35,7 +53,16 @@
             "12 fois"
           ],
           "answer": 0,
-          "explanation": "On dit 100 fois Lâ ilâha illallâh."
+          "explanation": "On dit 100 fois Lâ ilâha illallâh.",
+          "ar": {
+            "question": "كم مرة يقال «لا إله إلا الله»؟",
+            "choices": [
+              "مائة مرة",
+              "خمسين مرة",
+              "اثنتي عشرة مرة"
+            ],
+            "explanation": "يقال «لا إله إلا الله» مائة مرة."
+          }
         },
         {
           "question": "Combien de fois récite-t-on la Djawharatul Kamal ?",
@@ -45,7 +72,16 @@
             "100 fois"
           ],
           "answer": 0,
-          "explanation": "On récite 12 fois la Djawharatul Kamal."
+          "explanation": "On récite 12 fois la Djawharatul Kamal.",
+          "ar": {
+            "question": "كم مرة تُقرأ جوهرة الكمال؟",
+            "choices": [
+              "اثنتي عشرة مرة",
+              "ثلاثين مرة",
+              "مائة مرة"
+            ],
+            "explanation": "تُقرأ جوهرة الكمال اثنتي عشرة مرة."
+          }
         },
         {
           "question": "Sans eau pour les ablutions, que récite-t-on à la place de la Djawharatul Kamal ?",
@@ -55,7 +91,16 @@
             "100 fois Astaghfirullah"
           ],
           "answer": 0,
-          "explanation": "On récite 20 fois la Salatul Fatihi à la place."
+          "explanation": "On récite 20 fois la Salatul Fatihi à la place.",
+          "ar": {
+            "question": "عند فقد الماء، ماذا يُقرأ بدل جوهرة الكمال؟",
+            "choices": [
+              "صلاة الفاتح عشرين مرة",
+              "لا شيء",
+              "«أستغفر الله» مائة مرة"
+            ],
+            "explanation": "تُقرأ صلاة الفاتح عشرين مرة بدلها."
+          }
         },
         {
           "question": "Comment fait-on la Wazifa, si possible ?",
@@ -65,7 +110,16 @@
             "Debout en marchant"
           ],
           "answer": 0,
-          "explanation": "Si possible, en groupe, assis en rangs, à voix haute et ensemble."
+          "explanation": "Si possible, en groupe, assis en rangs, à voix haute et ensemble.",
+          "ar": {
+            "question": "كيف تؤدّى الوظيفة إن أمكن؟",
+            "choices": [
+              "جماعة وبصوت مرتفع",
+              "فرديا دون كلام",
+              "قياما مع المشي"
+            ],
+            "explanation": "تؤدّى جماعة إن أمكن، جلوسا في صفوف وبصوت واحد مرتفع."
+          }
         }
       ],
       "lesson": {
@@ -140,7 +194,16 @@
             "5 fois"
           ],
           "answer": 0,
-          "explanation": "Deux fois par jour : le matin et le soir."
+          "explanation": "Deux fois par jour : le matin et le soir.",
+          "ar": {
+            "question": "كم مرة يؤدّى اللازم في اليوم؟",
+            "choices": [
+              "مرتين",
+              "مرة واحدة",
+              "خمس مرات"
+            ],
+            "explanation": "مرتين في اليوم: صباحا ومساء."
+          }
         },
         {
           "question": "Combien de fois dit-on Astaghfirullah dans le Lazim ?",
@@ -150,7 +213,16 @@
             "12 fois"
           ],
           "answer": 0,
-          "explanation": "Dans le Lazim, chaque partie se dit 100 fois."
+          "explanation": "Dans le Lazim, chaque partie se dit 100 fois.",
+          "ar": {
+            "question": "كم مرة يقال «أستغفر الله» في اللازم؟",
+            "choices": [
+              "مائة مرة",
+              "ثلاثين مرة",
+              "اثنتي عشرة مرة"
+            ],
+            "explanation": "في اللازم يقال كل جزء مائة مرة."
+          }
         },
         {
           "question": "Quelle est la meilleure prière sur le Prophète dans le Lazim ?",
@@ -160,7 +232,16 @@
             "La Fâtiha"
           ],
           "answer": 0,
-          "explanation": "La meilleure prière sur le Prophète, c’est la Salatul Fatihi."
+          "explanation": "La meilleure prière sur le Prophète, c’est la Salatul Fatihi.",
+          "ar": {
+            "question": "ما أفضل صلاة على النبي ﷺ في اللازم؟",
+            "choices": [
+              "صلاة الفاتح",
+              "جوهرة الكمال",
+              "الفاتحة"
+            ],
+            "explanation": "أفضل الصلاة على النبي ﷺ صلاة الفاتح."
+          }
         },
         {
           "question": "Quand commence le Lazim du soir ?",
@@ -170,7 +251,16 @@
             "Après Fajar"
           ],
           "answer": 0,
-          "explanation": "Le Lazim du soir se fait après Takussan, jusqu’à Guéwé."
+          "explanation": "Le Lazim du soir se fait après Takussan, jusqu’à Guéwé.",
+          "ar": {
+            "question": "متى يبدأ لازم المساء؟",
+            "choices": [
+              "بعد العصر",
+              "بعد المغرب",
+              "بعد الفجر"
+            ],
+            "explanation": "لازم المساء من بعد العصر إلى العشاء."
+          }
         },
         {
           "question": "Peut-on parler pendant le Lazim ?",
@@ -180,7 +270,16 @@
             "Seulement au téléphone"
           ],
           "answer": 0,
-          "explanation": "On ne parle pas pendant le Lazim, sauf nécessité."
+          "explanation": "On ne parle pas pendant le Lazim, sauf nécessité.",
+          "ar": {
+            "question": "هل يجوز الكلام أثناء اللازم؟",
+            "choices": [
+              "لا، إلا لضرورة",
+              "نعم، بلا قيد",
+              "في الهاتف فقط"
+            ],
+            "explanation": "لا يتكلّم أثناء اللازم إلا لضرورة."
+          }
         },
         {
           "question": "On a oublié le Lazim. Que faire ?",
@@ -190,7 +289,16 @@
             "Le faire deux fois le lendemain"
           ],
           "answer": 0,
-          "explanation": "Un Lazim oublié doit être rattrapé."
+          "explanation": "Un Lazim oublié doit être rattrapé.",
+          "ar": {
+            "question": "من فاته اللازم، ماذا يفعل؟",
+            "choices": [
+              "يقضيه",
+              "لا شيء، فقد فات",
+              "يؤدّيه مرتين في الغد"
+            ],
+            "explanation": "من فاته اللازم قضاه."
+          }
         }
       ],
       "lesson": {
@@ -266,7 +374,16 @@
             "D’un livre"
           ],
           "answer": 0,
-          "explanation": "On reçoit le wird d’un moukadam autorisé, relié à la chaîne de transmission."
+          "explanation": "On reçoit le wird d’un moukadam autorisé, relié à la chaîne de transmission.",
+          "ar": {
+            "question": "عمّن يؤخذ الورد؟",
+            "choices": [
+              "عن مقدّم مأذون",
+              "عن أيّ صديق",
+              "من كتاب"
+            ],
+            "explanation": "يؤخذ الورد عن مقدّم مأذون، متّصل السند."
+          }
         },
         {
           "question": "Peut-on prendre le wird d’une autre tariqa ?",
@@ -276,7 +393,16 @@
             "Seulement le vendredi"
           ],
           "answer": 0,
-          "explanation": "Le talibé tidjane ne prend pas de wird d’une autre tariqa."
+          "explanation": "Le talibé tidjane ne prend pas de wird d’une autre tariqa.",
+          "ar": {
+            "question": "هل يجوز أخذ ورد من طريقة أخرى؟",
+            "choices": [
+              "لا",
+              "نعم",
+              "يوم الجمعة فقط"
+            ],
+            "explanation": "المريد التجاني لا يأخذ وردا من طريقة أخرى."
+          }
         },
         {
           "question": "Jusqu’à quand fait-on le wird ?",
@@ -286,7 +412,16 @@
             "Pendant le Ramadan"
           ],
           "answer": 0,
-          "explanation": "On fait le wird sans jamais l’abandonner, jusqu’à la mort."
+          "explanation": "On fait le wird sans jamais l’abandonner, jusqu’à la mort.",
+          "ar": {
+            "question": "إلى متى يداوم على الورد؟",
+            "choices": [
+              "إلى الممات",
+              "سنة واحدة",
+              "في رمضان فقط"
+            ],
+            "explanation": "يداوم على الورد دون تركه إلى الممات."
+          }
         },
         {
           "question": "Avec quoi récite-t-on la Djawharatul Kamal ?",
@@ -296,7 +431,16 @@
             "En marchant"
           ],
           "answer": 0,
-          "explanation": "On ne récite la Djawharatul Kamal qu’avec les ablutions."
+          "explanation": "On ne récite la Djawharatul Kamal qu’avec les ablutions.",
+          "ar": {
+            "question": "بماذا تُقرأ جوهرة الكمال؟",
+            "choices": [
+              "بالطهارة",
+              "بغير طهارة",
+              "مع المشي"
+            ],
+            "explanation": "لا تُقرأ جوهرة الكمال إلا بطهارة."
+          }
         },
         {
           "question": "Comment fait-on la Wazifa et la Hadratul Djouma ?",
@@ -306,7 +450,16 @@
             "On ne les fait pas"
           ],
           "answer": 0,
-          "explanation": "On les fait en groupe, si possible."
+          "explanation": "On les fait en groupe, si possible.",
+          "ar": {
+            "question": "كيف تؤدّى الوظيفة وهيللة الجمعة؟",
+            "choices": [
+              "جماعة",
+              "فرديا في الخفاء",
+              "لا تؤدّيان"
+            ],
+            "explanation": "تؤدّيان في جماعة إن أمكن."
+          }
         },
         {
           "question": "Vers où se tourne-t-on pendant le wird ?",
@@ -316,7 +469,16 @@
             "Peu importe"
           ],
           "answer": 0,
-          "explanation": "On s’assoit tourné vers la qibla, sauf exceptions."
+          "explanation": "On s’assoit tourné vers la qibla, sauf exceptions.",
+          "ar": {
+            "question": "إلى أين يتوجّه أثناء الورد؟",
+            "choices": [
+              "إلى القبلة",
+              "إلى الباب",
+              "لا يهمّ"
+            ],
+            "explanation": "يجلس مستقبل القبلة، إلا لعذر."
+          }
         },
         {
           "question": "Peut-on parler pendant le wird ?",
@@ -326,7 +488,16 @@
             "Seulement pour rire"
           ],
           "answer": 0,
-          "explanation": "On ne parle pas pendant le wird, sauf nécessité : répondre à ses parents, l’épouse à son mari, le talibé à son guide."
+          "explanation": "On ne parle pas pendant le wird, sauf nécessité : répondre à ses parents, l’épouse à son mari, le talibé à son guide.",
+          "ar": {
+            "question": "هل يجوز الكلام أثناء الورد؟",
+            "choices": [
+              "لا، إلا لضرورة",
+              "نعم، بلا قيد",
+              "للضحك فقط"
+            ],
+            "explanation": "لا يتكلّم أثناء الورد إلا لضرورة: كإجابة الوالدين، والزوجة لزوجها، والمريد لشيخه."
+          }
         },
         {
           "question": "Avec ses frères talibés, on doit…",
@@ -336,7 +507,16 @@
             "Les critiquer"
           ],
           "answer": 0,
-          "explanation": "On ne coupe pas les liens avec ses frères talibés et on ne les fâche pas."
+          "explanation": "On ne coupe pas les liens avec ses frères talibés et on ne les fâche pas.",
+          "ar": {
+            "question": "مع الإخوان في الطريقة، يجب…",
+            "choices": [
+              "صلتهم وعدم إغضابهم",
+              "اجتنابهم",
+              "انتقادهم"
+            ],
+            "explanation": "لا يقطع إخوانه في الطريقة ولا يغضبهم."
+          }
         }
       ],
       "lesson": {
@@ -1558,7 +1738,16 @@
             "1985"
           ],
           "answer": 0,
-          "explanation": "Le dahira est né à Yeumbeul en 1999."
+          "explanation": "Le dahira est né à Yeumbeul en 1999.",
+          "ar": {
+            "question": "في أي سنة تأسّست الدائرة؟",
+            "choices": [
+              "1999",
+              "2012",
+              "1985"
+            ],
+            "explanation": "وُلدت الدائرة في يمبول سنة 1999."
+          }
         },
         {
           "question": "Dans quelle localité le dahira est-il né ?",
@@ -1568,7 +1757,16 @@
             "Saint-Louis"
           ],
           "answer": 0,
-          "explanation": "Des fidèles de Yeumbeul ont fondé le dahira en 1999."
+          "explanation": "Des fidèles de Yeumbeul ont fondé le dahira en 1999.",
+          "ar": {
+            "question": "في أي بلدة وُلدت الدائرة؟",
+            "choices": [
+              "يمبول",
+              "تيواون",
+              "سان لويس"
+            ],
+            "explanation": "أسّس أهل يمبول الدائرة سنة 1999."
+          }
         },
         {
           "question": "Que signifie « Moutahabina Fillahi » ?",
@@ -1578,7 +1776,16 @@
             "Les gardiens du savoir"
           ],
           "answer": 0,
-          "explanation": "Moutahabina Fillahi : « ceux qui s'aiment pour Dieu »."
+          "explanation": "Moutahabina Fillahi : « ceux qui s'aiment pour Dieu ».",
+          "ar": {
+            "question": "ما معنى «متحابّين في الله»؟",
+            "choices": [
+              "الذين يتحابّون في الله",
+              "الذين يسافرون في الله",
+              "حرّاس العلم"
+            ],
+            "explanation": "متحابّين في الله: الذين يحبّ بعضهم بعضا في الله."
+          }
         },
         {
           "question": "Sous la guidance de qui le dahira a-t-il été fondé ?",
@@ -1593,7 +1800,16 @@
             "/assets/tenants/moutahabina/lignee/serigne-mansour-sy.webp",
             "/assets/tenants/moutahabina/lignee/serigne-babacar-sy.webp",
             "/assets/tenants/moutahabina/lignee/seydi-el-hadji-malick-sy.webp"
-          ]
+          ],
+          "ar": {
+            "question": "بإرشاد من تأسّست الدائرة؟",
+            "choices": [
+              "الشيخ منصور سي «بورم دارجي»",
+              "الشيخ أبو بكر سي",
+              "السيد الحاج مالك سي"
+            ],
+            "explanation": "كان الشيخ منصور سي «بورم دارجي» مرشد الدائرة منذ تأسيسها سنة 1999."
+          }
         },
         {
           "question": "Depuis quelle année Serigne Mame Malick Sy guide-t-il le dahira ?",
@@ -1605,7 +1821,16 @@
           "answer": 0,
           "explanation": "Après le rappel à Dieu de Serigne Mansour Sy en 2012, son fils Serigne Mame Malick Sy guide le dahira.",
           "image": "/assets/tenants/moutahabina/lignee/serigne-mame-malick-sy.webp",
-          "imageAlt": "Portrait de Serigne Mame Malick Sy"
+          "imageAlt": "Portrait de Serigne Mame Malick Sy",
+          "ar": {
+            "question": "منذ أي سنة يرشد الشيخ مام مالك سي الدائرة؟",
+            "choices": [
+              "2012",
+              "1999",
+              "2020"
+            ],
+            "explanation": "بعد انتقال الشيخ منصور سي إلى رحمة الله سنة 2012، يرشد ابنه الشيخ مام مالك سي الدائرة."
+          }
         },
         {
           "question": "Quelle est la devise du dahira ?",
@@ -1615,10 +1840,23 @@
             "Le travail avant tout."
           ],
           "answer": 0,
-          "explanation": "« S'aimer pour Dieu, servir ensemble » : c'est le sens même de Moutahabina Fillahi."
+          "explanation": "« S'aimer pour Dieu, servir ensemble » : c'est le sens même de Moutahabina Fillahi.",
+          "ar": {
+            "question": "ما شعار الدائرة؟",
+            "choices": [
+              "نتحابّ في الله، ونخدم معا.",
+              "تعلّم قبل أن تتكلّم.",
+              "العمل قبل كل شيء."
+            ],
+            "explanation": "«نتحابّ في الله، ونخدم معا»: هذا هو معنى متحابّين في الله."
+          }
         }
       ],
-      "category": "Le dahira"
+      "category": "Le dahira",
+      "ar": {
+        "title": "دائرتنا",
+        "description": "تاريخها واسمها ومرشدها."
+      }
     },
     {
       "id": "lignee-de-tivaouane",
@@ -1636,7 +1874,16 @@
           "answer": 0,
           "explanation": "Seydi El Hadji Malick Sy est appelé « Maodo ».",
           "image": "/assets/tenants/moutahabina/lignee/seydi-el-hadji-malick-sy.webp",
-          "imageAlt": "Portrait de Seydi El Hadji Malick Sy"
+          "imageAlt": "Portrait de Seydi El Hadji Malick Sy",
+          "ar": {
+            "question": "ما لقب السيد الحاج مالك سي؟",
+            "choices": [
+              "ماودو",
+              "بورم دارجي",
+              "صاحب القلنسوة المربّعة"
+            ],
+            "explanation": "يُلقّب السيد الحاج مالك سي بـ«ماودو»."
+          }
         },
         {
           "question": "Dans quelle ville Seydi El Hadji Malick Sy a-t-il fondé sa grande école ?",
@@ -1646,7 +1893,16 @@
             "Ziguinchor"
           ],
           "answer": 0,
-          "explanation": "À Tivaouane, il fonde la zawiya et une grande école. Beaucoup de muqaddams y ont été formés."
+          "explanation": "À Tivaouane, il fonde la zawiya et une grande école. Beaucoup de muqaddams y ont été formés.",
+          "ar": {
+            "question": "في أي مدينة أسّس السيد الحاج مالك سي مدرسته الكبرى؟",
+            "choices": [
+              "تيواون",
+              "كولخ",
+              "زيغنشور"
+            ],
+            "explanation": "في تيواون أسّس الزاوية ومدرسة كبرى، وتخرّج فيها كثير من المقدّمين."
+          }
         },
         {
           "question": "En quelle année Seydi El Hadji Malick Sy est-il rappelé à Dieu ?",
@@ -1656,7 +1912,16 @@
             "1902"
           ],
           "answer": 0,
-          "explanation": "Il est rappelé à Dieu le 27 juin 1922."
+          "explanation": "Il est rappelé à Dieu le 27 juin 1922.",
+          "ar": {
+            "question": "في أي سنة انتقل السيد الحاج مالك سي إلى رحمة الله؟",
+            "choices": [
+              "1922",
+              "1957",
+              "1902"
+            ],
+            "explanation": "انتقل إلى رحمة الله في 27 يونيو 1922."
+          }
         },
         {
           "question": "Qui fut le premier Khalife général des Tidianes ?",
@@ -1671,7 +1936,16 @@
             "/assets/tenants/moutahabina/lignee/serigne-babacar-sy.webp",
             "/assets/tenants/moutahabina/lignee/serigne-mansour-sy.webp",
             "/assets/tenants/moutahabina/lignee/serigne-mame-malick-sy.webp"
-          ]
+          ],
+          "ar": {
+            "question": "من كان أول خليفة عام للتجانيين؟",
+            "choices": [
+              "الشيخ أبو بكر سي",
+              "الشيخ منصور سي",
+              "الشيخ مام مالك سي"
+            ],
+            "explanation": "صار الشيخ أبو بكر سي أول خليفة عام للتجانيين سنة 1922، وعمره 37 سنة."
+          }
         },
         {
           "question": "Quel surnom porte Serigne Babacar Sy ?",
@@ -1683,7 +1957,16 @@
           "answer": 0,
           "explanation": "Serigne Babacar Sy est appelé « Borom bonnet carré ».",
           "image": "/assets/tenants/moutahabina/lignee/serigne-babacar-sy.webp",
-          "imageAlt": "Portrait de Serigne Babacar Sy"
+          "imageAlt": "Portrait de Serigne Babacar Sy",
+          "ar": {
+            "question": "ما لقب الشيخ أبو بكر سي؟",
+            "choices": [
+              "صاحب القلنسوة المربّعة",
+              "ماودو",
+              "بورم دارجي"
+            ],
+            "explanation": "يُلقّب الشيخ أبو بكر سي بـ«صاحب القلنسوة المربّعة»."
+          }
         },
         {
           "question": "Quel rôle Serigne Babacar Sy a-t-il joué pour les dahiras ?",
@@ -1693,7 +1976,16 @@
             "Aucun rôle particulier"
           ],
           "answer": 0,
-          "explanation": "Il a lancé les premiers dahiras, comme la Dahiratoul Kiram, pour s'entraider et apprendre ensemble."
+          "explanation": "Il a lancé les premiers dahiras, comme la Dahiratoul Kiram, pour s'entraider et apprendre ensemble.",
+          "ar": {
+            "question": "ما دور الشيخ أبو بكر سي في الدوائر؟",
+            "choices": [
+              "أسّس أولى الدوائر",
+              "منع الدوائر",
+              "لا دور خاص"
+            ],
+            "explanation": "أسّس أولى الدوائر، مثل دائرة الكرام، للتعاون والتعلّم معا."
+          }
         },
         {
           "question": "Pourquoi Serigne Mansour Sy est-il appelé « Borom Daaraji » ?",
@@ -1705,7 +1997,16 @@
           "answer": 0,
           "explanation": "Pendant de longues années, il a dirigé le grand daara de Tivaouane fondé par Maodo.",
           "image": "/assets/tenants/moutahabina/lignee/serigne-mansour-sy.webp",
-          "imageAlt": "Portrait de Serigne Mansour Sy"
+          "imageAlt": "Portrait de Serigne Mansour Sy",
+          "ar": {
+            "question": "لماذا يُلقّب الشيخ منصور سي بـ«بورم دارجي»؟",
+            "choices": [
+              "لأنه أدار الدار الكبرى التي أسّسها جدّه",
+              "هو اسم قريته",
+              "هو اسم أول كتبه"
+            ],
+            "explanation": "أدار سنوات طويلة دار تيواون الكبرى التي أسّسها ماودو."
+          }
         },
         {
           "question": "Qui est le père de notre guide, Serigne Mame Malick Sy ?",
@@ -1720,10 +2021,23 @@
             "/assets/tenants/moutahabina/lignee/serigne-mansour-sy.webp",
             "/assets/tenants/moutahabina/lignee/serigne-babacar-sy.webp",
             "/assets/tenants/moutahabina/lignee/seydi-el-hadji-malick-sy.webp"
-          ]
+          ],
+          "ar": {
+            "question": "من والد مرشدنا الشيخ مام مالك سي؟",
+            "choices": [
+              "الشيخ منصور سي",
+              "الشيخ أبو بكر سي",
+              "السيد الحاج مالك سي"
+            ],
+            "explanation": "الشيخ مام مالك سي هو ابن الشيخ منصور سي «بورم دارجي»."
+          }
         }
       ],
-      "category": "Le dahira"
+      "category": "Le dahira",
+      "ar": {
+        "title": "سلسلة تيواون",
+        "description": "أربعة أجيال في خدمة العلم."
+      }
     },
     {
       "id": "notre-charte",
@@ -1739,7 +2053,16 @@
             "Aucune tenue particulière"
           ],
           "answer": 0,
-          "explanation": "La charte demande une tenue blanche, ou à défaut une tenue correcte."
+          "explanation": "La charte demande une tenue blanche, ou à défaut une tenue correcte.",
+          "ar": {
+            "question": "ما اللباس المطلوب في الدائرة؟",
+            "choices": [
+              "اللباس الأبيض (أو لباس لائق)",
+              "لباس أخضر",
+              "لا لباس معيّن"
+            ],
+            "explanation": "يطلب الميثاق اللباس الأبيض، أو لباسا لائقا."
+          }
         },
         {
           "question": "À quelle heure commence le dahira ?",
@@ -1749,7 +2072,16 @@
             "22 h 10"
           ],
           "answer": 0,
-          "explanation": "Le dahira commence à 20 h 30 et se termine à 23 h 00."
+          "explanation": "Le dahira commence à 20 h 30 et se termine à 23 h 00.",
+          "ar": {
+            "question": "متى تبدأ الدائرة؟",
+            "choices": [
+              "الساعة 20:30",
+              "الساعة 20:00",
+              "الساعة 22:10"
+            ],
+            "explanation": "تبدأ الدائرة الساعة 20:30 وتنتهي الساعة 23:00."
+          }
         },
         {
           "question": "Que se passe-t-il de 22 h 10 à 22 h 50 ?",
@@ -1759,7 +2091,16 @@
             "Les informations"
           ],
           "answer": 0,
-          "explanation": "Nabiens de 20 h 30 à 22 h 10, puis l’Oustaz de 22 h 10 à 22 h 50, et les informations à 22 h 50."
+          "explanation": "Nabiens de 20 h 30 à 22 h 10, puis l’Oustaz de 22 h 10 à 22 h 50, et les informations à 22 h 50.",
+          "ar": {
+            "question": "ماذا يكون من الساعة 22:10 إلى 22:50؟",
+            "choices": [
+              "الأستاذ",
+              "المدائح النبوية",
+              "الإعلانات"
+            ],
+            "explanation": "المدائح النبوية من 20:30 إلى 22:10، ثم الأستاذ من 22:10 إلى 22:50، ثم الإعلانات الساعة 22:50."
+          }
         },
         {
           "question": "Combien chaque membre cotise-t-il pour un baptême ou un mariage ?",
@@ -1769,7 +2110,16 @@
             "4 000 F CFA"
           ],
           "answer": 0,
-          "explanation": "Pour un baptême ou un mariage, chaque membre cotise 1 000 F CFA."
+          "explanation": "Pour un baptême ou un mariage, chaque membre cotise 1 000 F CFA.",
+          "ar": {
+            "question": "كم يساهم كل عضو في العقيقة أو الزواج؟",
+            "choices": [
+              "1000 فرنك",
+              "2000 فرنك",
+              "4000 فرنك"
+            ],
+            "explanation": "في العقيقة أو الزواج يساهم كل عضو بـ1000 فرنك."
+          }
         },
         {
           "question": "Combien un membre donne-t-il le jour où il reçoit le dahira ?",
@@ -1779,7 +2129,16 @@
             "2 000 F CFA"
           ],
           "answer": 0,
-          "explanation": "4 000 F CFA : 2 000 pour la sonorisation et 2 000 pour le thé (ataya)."
+          "explanation": "4 000 F CFA : 2 000 pour la sonorisation et 2 000 pour le thé (ataya).",
+          "ar": {
+            "question": "كم يدفع العضو يوم استضافته للدائرة؟",
+            "choices": [
+              "4000 فرنك",
+              "1000 فرنك",
+              "2000 فرنك"
+            ],
+            "explanation": "4000 فرنك: 2000 للصوتيات و2000 للشاي (أتايا)."
+          }
         },
         {
           "question": "Que veut dire « Yar ak téguine » ?",
@@ -1789,7 +2148,16 @@
             "La tenue correcte"
           ],
           "answer": 0,
-          "explanation": "« Yar ak téguine » : la discipline, l'un des engagements de la charte."
+          "explanation": "« Yar ak téguine » : la discipline, l'un des engagements de la charte.",
+          "ar": {
+            "question": "ما معنى «يار اك تيغين»؟",
+            "choices": [
+              "الانضباط",
+              "الحضور",
+              "اللباس اللائق"
+            ],
+            "explanation": "«يار اك تيغين»: الانضباط، وهو من التزامات الميثاق."
+          }
         },
         {
           "question": "À quoi correspond « Téw tay téwal » ?",
@@ -1799,10 +2167,23 @@
             "La carte de membre"
           ],
           "answer": 0,
-          "explanation": "« Téw tay téwal » : être présent, physiquement et financièrement."
+          "explanation": "« Téw tay téwal » : être présent, physiquement et financièrement.",
+          "ar": {
+            "question": "ما المقصود بـ«تيو تاي تيوال»؟",
+            "choices": [
+              "الحضور بالبدن والمال",
+              "الانضباط",
+              "بطاقة العضوية"
+            ],
+            "explanation": "«تيو تاي تيوال»: الحضور بالبدن والمال."
+          }
         }
       ],
-      "category": "Le dahira"
+      "category": "Le dahira",
+      "ar": {
+        "title": "ميثاقنا",
+        "description": "التزامات الأعضاء وسير الدائرة."
+      }
     }
   ]
 }
