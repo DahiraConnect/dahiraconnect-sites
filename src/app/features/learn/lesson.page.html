@@ -1,8 +1,8 @@
 @if (data(); as d) {
   <app-dark-hero>
-    <div class="hero">
-      <a class="hero__back" routerLink="/apprendre" [attr.lang]="lang()" [attr.dir]="isAr() ? 'rtl' : null">
-        <i class="ph {{ isAr() ? 'ph-arrow-right' : 'ph-arrow-left' }}" aria-hidden="true"></i>
+    <div class="hero" [class.is-switching]="switching()">
+      <a class="hero__back" routerLink="/apprendre">
+        <i class="ph ph-arrow-left" aria-hidden="true"></i>
         {{ t().back }}
       </a>
       <h1 class="hero__title" [attr.lang]="isAr() ? 'ar' : null" [attr.dir]="isAr() ? 'rtl' : null">{{ title() }}</h1>
@@ -15,7 +15,7 @@
     </div>
   </app-dark-hero>
 
-  <div class="sheet container" [class.is-ar]="isAr()" [attr.lang]="isAr() ? 'ar' : null" [attr.dir]="isAr() ? 'rtl' : null">
+  <div class="sheet container" [class.is-ar]="isAr()" [class.is-switching]="switching()">
     <div class="layout">
       <div class="main">
         @if (langs().length > 1) {
@@ -38,7 +38,7 @@
 
         @if (!done()) {
           @if (card(); as c) {
-            <article class="card">
+            <article class="card" [attr.lang]="isAr() ? 'ar' : null" [attr.dir]="isAr() ? 'rtl' : null">
               @if (c.chapter) {
                 <p class="card__chapter">{{ c.chapter }}</p>
               }
@@ -60,18 +60,18 @@
             <nav class="steps" [attr.aria-label]="t().card + ' ' + (index() + 1) + ' ' + t().of + ' ' + total()">
               @if (index() > 0) {
                 <button type="button" class="btn btn--outline steps__prev" (click)="previous()">
-                  <i class="ph {{ isAr() ? 'ph-arrow-right' : 'ph-arrow-left' }}" aria-hidden="true"></i>
+                  <i class="ph ph-arrow-left" aria-hidden="true"></i>
                   {{ t().previous }}
                 </button>
               }
               <button type="button" class="btn btn--dark steps__next" (click)="next()">
                 {{ t().next }}
-                <i class="ph {{ isAr() ? 'ph-arrow-left' : 'ph-arrow-right' }}" aria-hidden="true"></i>
+                <i class="ph ph-arrow-right" aria-hidden="true"></i>
               </button>
             </nav>
           }
         } @else {
-          <section class="card end">
+          <section class="card end" [attr.lang]="isAr() ? 'ar' : null" [attr.dir]="isAr() ? 'rtl' : null">
             <span class="end__icon" aria-hidden="true"><i class="ph {{ d.icon || 'ph-question' }}"></i></span>
             @if (withQuiz()) {
               <p class="end__text">{{ t().quizHint }}</p>
@@ -94,8 +94,8 @@
           </section>
         }
 
-        @if (d.source) {
-          <p class="source">{{ t().source }} {{ d.source }}.</p>
+        @if (source()) {
+          <p class="source" [attr.lang]="isAr() ? 'ar' : null" [attr.dir]="isAr() ? 'rtl' : null">{{ t().source }} {{ source() }}.</p>
         }
       </div>
 
@@ -122,7 +122,7 @@
                         <i class="ph ph-check"></i>
                       }
                     </span>
-                    <span class="panel__label">{{ item.title }}</span>
+                    <span class="panel__label" [attr.lang]="isAr() ? 'ar' : null" [attr.dir]="isAr() ? 'rtl' : null">{{ item.title }}</span>
                   </button>
                 </li>
               }

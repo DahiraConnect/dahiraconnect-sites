@@ -7,6 +7,13 @@ import { DarkHero } from '../../shared/ui/dark-hero/dark-hero';
 import { LANG_NAMES } from './lesson-i18n';
 import { ThemeCard } from './theme-card/theme-card';
 
+/** Confirmation après le choix, dans la langue choisie */
+const LANG_NOTES: Record<LessonLang, string> = {
+  fr: 'Les leçons et les quiz s’ouvriront en français.',
+  ar: 'ستُفتح الدروس والاختبارات بالعربية.',
+  wo: 'Les leçons s’ouvriront en wolof (à écouter).',
+};
+
 /**
  * Rubrique « Apprendre » : thèmes à écouter et à jouer, filtrables par catégorie,
  * avec une liste déroulante pour la langue des leçons et des quiz (gardée sur le téléphone).
@@ -40,6 +47,9 @@ export default class LearnPage {
     return wolof ? ['fr', 'ar', 'wo'] : ['fr', 'ar'];
   });
   protected readonly names = LANG_NAMES;
+  /** Message de confirmation, affiché seulement après un changement de langue */
+  protected readonly note = signal('');
+  protected readonly noteLang = computed(() => (this.note() ? (this.language() === 'ar' ? 'ar' : 'fr') : null));
 
   constructor() {
     afterNextRender(() => this.language.set(this.quizService.preferredLessonLang()));
@@ -48,5 +58,6 @@ export default class LearnPage {
   protected choose(lang: LessonLang): void {
     this.quizService.setLanguage(lang);
     this.language.set(lang);
+    this.note.set(LANG_NOTES[lang]);
   }
 }

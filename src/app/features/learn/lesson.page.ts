@@ -20,6 +20,7 @@ import { buildWaShare } from '../../core/utils/whatsapp';
 import { TenantService } from '../../core/tenant/tenant.service';
 import { DarkHero } from '../../shared/ui/dark-hero/dark-hero';
 import { LANG_NAMES, LESSON_TEXT } from './lesson-i18n';
+import { SOURCE_AR } from '../quiz/quiz-i18n';
 
 /**
  * Leçon d'un thème, pour un public qui écoute plus qu'il ne lit :
@@ -50,6 +51,8 @@ export default class LessonPage {
   protected readonly langNames = LANG_NAMES;
   protected readonly lang = signal<LessonLang>('fr');
   protected readonly isAr = computed(() => this.lang() === 'ar');
+  /** Changement de langue en cours : le texte s'efface un instant puis revient */
+  protected readonly switching = signal(false);
   protected readonly t = computed(() => LESSON_TEXT[this.lang()]);
   protected readonly title = computed(() => (this.isAr() ? this.data()?.ar?.title : null) ?? this.data()?.title ?? '');
   /** Partager la leçon sur WhatsApp (le lien ouvre la leçon) */
@@ -61,6 +64,11 @@ export default class LessonPage {
       ? `استمع إلى درس «${this.title()}» – ${name}. درس قصير، يُقرأ لك بصوت عالٍ.`
       : `Écoute la leçon « ${d.title} » du ${name}. C'est court, et le téléphone la lit pour toi.`;
     return buildWaShare(text, this.tenant.absoluteUrl(`/apprendre/${d.id}`));
+  });
+  /** Source sous la leçon, en arabe si la leçon est en arabe (comme dans le quiz) */
+  protected readonly source = computed(() => {
+    const source = this.data()?.source;
+    return source && this.isAr() ? SOURCE_AR : (source ?? '');
   });
   protected readonly withQuiz = computed(() => {
     const d = this.data();
@@ -121,10 +129,19 @@ export default class LessonPage {
   }
 
   protected setLang(lang: LessonLang): void {
+    if (lang === this.lang()) return;
     this.listening = false;
     this.stop();
-    this.lang.set(lang);
     this.quiz.setLanguage(lang);
+    if (typeof window === 'undefined' || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      this.lang.set(lang);
+      return;
+    }
+    this.switching.set(true);
+    setTimeout(() => {
+      this.lang.set(lang);
+      requestAnimationFrame(() => this.switching.set(false));
+    }, 160);
   }
 
   protected toggleListen(): void {

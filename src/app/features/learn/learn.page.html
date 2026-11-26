@@ -28,6 +28,8 @@
       }
     </select>
   </div>
+  <!-- Après un changement : on confirme ce qui va se passer, dans la langue choisie -->
+  <p class="lang-select__note" role="status" [attr.lang]="noteLang()" [attr.dir]="noteLang() === 'ar' ? 'rtl' : null">{{ note() }}</p>
 
   @if (shown().length) {
     <ul class="themes">

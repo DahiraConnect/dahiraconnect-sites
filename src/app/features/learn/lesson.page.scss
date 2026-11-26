@@ -196,16 +196,50 @@
   margin-top: var(--space-2);
 }
 
+// Changement de langue : la page ne bouge pas, seul le texte fond puis revient
+.hero__title,
+.card,
+.end,
+.panel__list,
+.source {
+  transition:
+    opacity var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.is-switching {
+  .hero__title,
+  .card,
+  .end,
+  .panel__list,
+  .source {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-switching {
+    .hero__title,
+    .card,
+    .end,
+    .panel__list,
+    .source {
+      transform: none;
+    }
+  }
+}
+
+// Titre arabe : écrit de droite à gauche, mais à la même place que le titre français
+.hero__title[lang='ar'] {
+  text-align: left;
+}
+
 // Arabe : police lisible du téléphone, texte plus grand
 .is-ar {
   font-family: var(--font-arabic-text);
 
-  // Partie de la leçon (ex. « Recevoir le wird »)
-.card__chapter {
-  @include m.overline;
-}
-
-.card__title {
+  .card__title {
     font-family: inherit;
     font-weight: 700;
     letter-spacing: 0;
@@ -285,6 +319,11 @@
     width: 240px;
     height: 240px;
   }
+}
+
+// Partie de la leçon (ex. « Recevoir le wird »)
+.card__chapter {
+  @include m.overline;
 }
 
 .card__title {

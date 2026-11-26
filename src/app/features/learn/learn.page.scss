@@ -63,6 +63,23 @@
   }
 }
 
+.lang-select__note {
+  margin: calc(-1 * var(--space-3)) 0 var(--space-5);
+  text-align: right;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--color-primary-mid);
+
+  &:empty {
+    display: none;
+  }
+
+  &[lang='ar'] {
+    font-family: var(--font-arabic-text);
+    font-size: var(--fs-body);
+  }
+}
+
 .lang-select__field {
   @include m.focus-ring;
   min-height: var(--tap-min);
