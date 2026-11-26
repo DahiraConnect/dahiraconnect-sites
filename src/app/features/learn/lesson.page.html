@@ -83,6 +83,10 @@
               <p class="end__text">{{ t().doneHint }}</p>
               <a class="btn btn--dark end__quiz" routerLink="/apprendre">{{ t().finish }}</a>
             }
+            <a class="btn end__share" [href]="shareUrl()" target="_blank" rel="noopener">
+              <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+              {{ t().share }}
+            </a>
             <button type="button" class="end__restart" (click)="restart()">
               <i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i>
               {{ t().restart }}
@@ -125,6 +129,10 @@
             </ol>
           }
         </div>
+        <a class="btn panel__share" [href]="shareUrl()" target="_blank" rel="noopener">
+          <i class="ph ph-whatsapp-logo" aria-hidden="true"></i>
+          {{ t().share }}
+        </a>
         @if (withQuiz()) {
           <a class="btn btn--gold panel__quiz" [routerLink]="['/quiz', d.id]">
             <i class="ph-fill ph-play" aria-hidden="true"></i>

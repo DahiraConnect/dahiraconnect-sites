@@ -148,7 +148,7 @@ export default class AdminHomePage {
   protected readonly kpis = computed(() => [
     { icon: 'ph-eye', value: this.sum('view'), label: 'Visites', help: 'Chaque page ouverte sur le site compte pour 1. Anonyme : aucune donnée personnelle.' },
     { icon: 'ph-whatsapp-logo', value: this.sum('click', (k) => k.startsWith('rejoindre_')), label: 'Veulent nous rejoindre', help: 'Personnes qui ont touché « Rejoindre sur WhatsApp » ou le lien du groupe.' },
-    { icon: 'ph-share-network', value: this.sum('click', (k) => k === 'partage_whatsapp'), label: 'Partages', help: 'Événements, albums ou quiz partagés sur WhatsApp.' },
+    { icon: 'ph-share-network', value: this.sum('click', (k) => k === 'partage_whatsapp'), label: 'Partages', help: 'Événements, albums, leçons ou quiz partagés sur WhatsApp.' },
   ]);
 
   /** Bonjour + date du jour */

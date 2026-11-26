@@ -16,6 +16,8 @@ import { RouterLink } from '@angular/router';
 import { QuizService } from '../../core/data/quiz.service';
 import { LessonLang, hasQuiz } from '../../core/models';
 import { cardIn, lessonLangs, lessonOutline } from '../../core/utils/lesson';
+import { buildWaShare } from '../../core/utils/whatsapp';
+import { TenantService } from '../../core/tenant/tenant.service';
 import { DarkHero } from '../../shared/ui/dark-hero/dark-hero';
 import { LANG_NAMES, LESSON_TEXT } from './lesson-i18n';
 
@@ -35,6 +37,7 @@ import { LANG_NAMES, LESSON_TEXT } from './lesson-i18n';
 export default class LessonPage {
   private readonly quiz = inject(QuizService);
   private readonly injector = inject(Injector);
+  private readonly tenant = inject(TenantService);
 
   readonly theme = input.required<string>();
 
@@ -49,6 +52,16 @@ export default class LessonPage {
   protected readonly isAr = computed(() => this.lang() === 'ar');
   protected readonly t = computed(() => LESSON_TEXT[this.lang()]);
   protected readonly title = computed(() => (this.isAr() ? this.data()?.ar?.title : null) ?? this.data()?.title ?? '');
+  /** Partager la leçon sur WhatsApp (le lien ouvre la leçon) */
+  protected readonly shareUrl = computed(() => {
+    const d = this.data();
+    if (!d) return '';
+    const name = this.tenant.dahira().name;
+    const text = this.isAr()
+      ? `استمع إلى درس «${this.title()}» – ${name}. درس قصير، يُقرأ لك بصوت عالٍ.`
+      : `Écoute la leçon « ${d.title} » du ${name}. C'est court, et le téléphone la lit pour toi.`;
+    return buildWaShare(text, this.tenant.absoluteUrl(`/apprendre/${d.id}`));
+  });
   protected readonly withQuiz = computed(() => {
     const d = this.data();
     return !!d && hasQuiz(d);
