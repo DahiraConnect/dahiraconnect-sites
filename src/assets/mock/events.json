@@ -2,62 +2,61 @@
   {
     "id": "evt-dahira-2026-11-26",
     "slug": "dahira-jeudi-26-novembre-2026",
-    "title": "Dahira chez Yamar Diène",
-    "startsAt": "2026-11-26T20:30:00Z",
-    "endsAt": "2026-11-26T23:00:00Z",
     "place": "Tally Carreaux, côté pharmacie Saliou",
-    "description": "Rencontre hebdomadaire du dahira, accueillie par Yamar Diène. Tenue blanche obligatoire.",
+    "title": "Dahira chez Yamar Diène",
+    "endsAt": "2026-11-26T23:00:00Z",
     "images": [
       {
-        "url": "/assets/tenants/moutahabina/evenements/dahira-jeudi-26-11-2026.webp",
         "alt": "Affiche du dahira du jeudi 26 novembre chez Yamar Diène, de 20 h 30 à 23 h",
+        "url": "/assets/tenants/moutahabina/evenements/dahira-jeudi-26-11-2026.webp",
         "width": 707,
         "height": 1060
       }
-    ]
+    ],
+    "startsAt": "2026-11-26T20:30:00Z",
+    "description": "Rencontre hebdomadaire du dahira, accueillie par Yamar Diène. Tenue blanche obligatoire."
   },
   {
     "id": "evt-takussan-2026-12-12",
     "slug": "takussanu-serigne-babacar-sy-2026",
-    "title": "Takussanu Serigne Babacar Sy",
-    "startsAt": "2026-12-12T12:00:00Z",
-    "timeTbc": true,
     "place": "Yeumbeul Nèma",
-    "isMajor": true,
-    "description": "Organisé et animé par Abdou Aziz Diouf. Conférencier : Oustaz Issa Coly. Invité d'honneur : Abdou Aziz Ndiaye Djamil.",
+    "title": "Takussanu Serigne Babacar Sy",
     "images": [
       {
-        "url": "/assets/tenants/moutahabina/evenements/takkussan-babacar-sy-12-12-2026.webp",
         "alt": "Affiche du Takussanu Serigne Babacar Sy, samedi 12 décembre 2026 à Yeumbeul Nèma",
+        "url": "/assets/tenants/moutahabina/evenements/takkussan-babacar-sy-12-12-2026.webp",
         "width": 854,
         "height": 1280
       }
-    ]
+    ],
+    "isMajor": true,
+    "timeTbc": true,
+    "startsAt": "2026-12-12T12:00:00Z",
+    "description": "Organisé et animé par Abdou Aziz Diouf. Conférencier : Oustaz Issa Coly. Invité d'honneur : Abdou Aziz Ndiaye Djamil."
   },
   {
     "id": "evt-ziar-2026-12-20",
     "slug": "ziar-tivaouane-2026",
-    "title": "Ziar à Tivaouane",
-    "startsAt": "2026-12-20T12:00:00Z",
-    "timeTbc": true,
     "place": "Tivaouane, chez Serigne Mame Malick Sy Mansour",
-    "isMajor": true,
-    "description": "Visite du dahira chez notre guide, Serigne Mame Malick Sy Mansour. Transport : 5 000 F CFA, pour tous les membres.",
+    "title": "Ziar à Tivaouane",
     "images": [
       {
-        "url": "/assets/tenants/moutahabina/evenements/ziar-tivaoune-20-12-2026.webp",
         "alt": "Affiche de la ziar à Tivaouane chez Serigne Mame Malick Sy Mansour, dimanche 20 décembre",
+        "url": "/assets/tenants/moutahabina/evenements/ziar-tivaoune-20-12-2026.webp",
         "width": 720,
         "height": 1080
       }
-    ]
-  },
-  {
-    "id": "evt-0",
-    "slug": "don-de-sang-octobre-2026",
-    "title": "Journée de don de sang",
-    "startsAt": "2026-10-25T09:00:00Z",
-    "place": "Siège du dahira, Yeumbeul",
-    "albumSlug": "don-de-sang-octobre-2026"
+    ],
+    "isMajor": true,
+    "startsAt": "2026-12-20T08:00:00Z",
+    "description": "Visite du dahira chez notre guide, Serigne Mame Malick Sy Mansour. Transport : 5 000 F CFA, pour tous les membres.",
+    "registration": {
+      "limit": 88,
+      "phone": "optional",
+      "enabled": true,
+      "closesAt": "2026-12-17T00:00:00Z"
+    },
+    "shareImageUrl": "https://smphfvfxwiiddhpwvcqk.supabase.co/storage/v1/object/public/site/moutahabina/partage/evenement-ziar-tivaouane-2026-mwruqxoe.jpg",
+    "shareSourceUrl": "/assets/tenants/moutahabina/evenements/ziar-tivaoune-20-12-2026.webp"
   }
 ]

@@ -2,7 +2,8 @@
   "people": [
     {
       "id": "p01",
-      "name": "Seydi Djamil Fall"
+      "name": "Seydi Djamil Fall",
+      "photoUrl": "https://smphfvfxwiiddhpwvcqk.supabase.co/storage/v1/object/public/site/moutahabina/bureau/mwrpzfza-8l0ifv.640.webp"
     },
     {
       "id": "p02",
@@ -10,7 +11,8 @@
     },
     {
       "id": "p03",
-      "name": "Lamine Dièmè"
+      "name": "Lamine Diémé",
+      "photoUrl": "https://smphfvfxwiiddhpwvcqk.supabase.co/storage/v1/object/public/site/moutahabina/bureau/mwrq1nnz-ypmpnt.640.webp"
     },
     {
       "id": "p04",
@@ -42,7 +44,7 @@
     },
     {
       "id": "p11",
-      "name": "Mandou Konaté"
+      "name": "Madou Konaté"
     },
     {
       "id": "p12",
@@ -123,20 +125,20 @@
   ],
   "executive": [
     {
-      "personId": "p01",
-      "role": "Président"
+      "role": "Président",
+      "personId": "p01"
     },
     {
-      "personId": "p02",
-      "role": "Présidente"
+      "role": "Présidente",
+      "personId": "p02"
     },
     {
-      "personId": "p05",
-      "role": "Secrétaire général"
+      "role": "Secrétaire général",
+      "personId": "p05"
     },
     {
-      "personId": "p09",
-      "role": "Trésorier"
+      "role": "Trésorier",
+      "personId": "p09"
     }
   ],
   "commissions": [
@@ -145,12 +147,12 @@
       "name": "Vice-présidence",
       "members": [
         {
-          "personId": "p03",
-          "role": "Vice-président(e)"
+          "role": "Vice-président",
+          "personId": "p03"
         },
         {
-          "personId": "p04",
-          "role": "Vice-président(e)"
+          "role": "Vice-président(e)",
+          "personId": "p04"
         }
       ]
     },
@@ -159,9 +161,9 @@
       "name": "Secrétariat général",
       "members": [
         {
-          "personId": "p05",
+          "lead": true,
           "role": "Secrétaire général",
-          "lead": true
+          "personId": "p05"
         },
         {
           "personId": "p06"
@@ -177,42 +179,42 @@
     {
       "id": "tresorerie",
       "name": "Trésorerie",
-      "description": "Tient les finances du dahira.",
       "members": [
         {
-          "personId": "p09",
+          "lead": true,
           "role": "Trésorier",
-          "lead": true
+          "personId": "p09"
         },
         {
-          "personId": "p10",
-          "role": "Trésorier adjoint"
+          "role": "Trésorier adjoint",
+          "personId": "p10"
         }
-      ]
+      ],
+      "description": "Tient les finances du dahira."
     },
     {
       "id": "organisation",
       "name": "Organisation",
-      "description": "Prépare les dahiras, l'accueil et les déplacements.",
       "members": [
         {
-          "personId": "p11",
+          "lead": true,
           "role": "Président(e) organisation",
-          "lead": true
+          "personId": "p11"
         },
         {
-          "personId": "p12",
-          "role": "Président(e) organisation"
+          "role": "Président(e) organisation",
+          "personId": "p12"
         },
         {
-          "personId": "p13",
-          "role": "Vice-président(e) organisation"
+          "role": "Vice-président(e) organisation",
+          "personId": "p13"
         },
         {
-          "personId": "p14",
-          "role": "Vice-président(e) organisation"
+          "role": "Vice-président(e) organisation",
+          "personId": "p14"
         }
-      ]
+      ],
+      "description": "Prépare les dahiras, l'accueil et les déplacements."
     },
     {
       "id": "coordination",
@@ -235,7 +237,6 @@
     {
       "id": "commissaires-aux-comptes",
       "name": "Commissaires aux comptes",
-      "description": "Contrôlent les comptes du dahira.",
       "members": [
         {
           "personId": "p19"
@@ -249,12 +250,12 @@
         {
           "personId": "p22"
         }
-      ]
+      ],
+      "description": "Contrôlent les comptes du dahira."
     },
     {
       "id": "social",
       "name": "Social",
-      "description": "Accompagne les membres lors des baptêmes, mariages, maladies et deuils.",
       "members": [
         {
           "personId": "p23"
@@ -271,7 +272,8 @@
         {
           "personId": "p27"
         }
-      ]
+      ],
+      "description": "Accompagne les membres lors des baptêmes, mariages, maladies et deuils."
     },
     {
       "id": "micro-centrale-des-nabiens",
@@ -300,7 +302,6 @@
     {
       "id": "sonorisation",
       "name": "Sonorisation",
-      "description": "Installe et gère le son pendant les dahiras.",
       "members": [
         {
           "personId": "p05"
@@ -311,7 +312,8 @@
         {
           "personId": "p06"
         }
-      ]
+      ],
+      "description": "Installe et gère le son pendant les dahiras."
     }
   ]
 }

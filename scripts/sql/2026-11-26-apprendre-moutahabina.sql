@@ -1,0 +1,1543 @@
+-- Rubrique « Apprendre » du site Moutahabina (26/11/2026)
+-- À lancer une seule fois dans Supabase > SQL Editor.
+--
+-- 1. Remplace le quiz par la nouvelle version : leçons (Wazifa, Lazim, 23 chartes,
+--    ablutions et prière), catégories, quiz de la charte aligné sur les horaires 20 h 30 – 23 h 00.
+--    Sécurité : seulement si le quiz en base est encore l'ancien (sinon 0 ligne modifiée,
+--    rien n'est écrasé : prévenir avant de relancer).
+-- 2. Retire du contenu les trois mentions internes (« À rédiger… », « à fournir… », « À faire relire… »).
+--    Le reste du contenu (horaires, textes modifiés depuis le bureau) n'est pas touché.
+--
+-- Après : publier depuis le bureau (ou pousser main) relance le build avec ce contenu.
+
+begin;
+
+update public.sites
+set quiz = $quiz${
+  "intro": "Écoutez de courtes leçons, puis jouez : la Wazifa, le Lazim, les chartes, les ablutions, la prière et le dahira. Pas besoin de compte.",
+  "themes": [
+    {
+      "id": "wazifa",
+      "title": "La Wazifa",
+      "description": "Ce que c’est, quand et comment la faire.",
+      "icon": "ph-users",
+      "questions": [
+        {
+          "question": "Combien de fois dit-on Astaghfirullah dans la Wazifa ?",
+          "choices": [
+            "30 fois",
+            "100 fois",
+            "12 fois"
+          ],
+          "answer": 0,
+          "explanation": "Dans la Wazifa, on dit 30 fois Astaghfirullah."
+        },
+        {
+          "question": "Combien de fois récite-t-on la Salatul Fatihi ?",
+          "choices": [
+            "50 fois",
+            "30 fois",
+            "20 fois"
+          ],
+          "answer": 0,
+          "explanation": "On récite 50 fois la Salatul Fatihi."
+        },
+        {
+          "question": "Combien de fois dit-on Lâ ilâha illallâh ?",
+          "choices": [
+            "100 fois",
+            "50 fois",
+            "12 fois"
+          ],
+          "answer": 0,
+          "explanation": "On dit 100 fois Lâ ilâha illallâh."
+        },
+        {
+          "question": "Combien de fois récite-t-on la Djawharatul Kamal ?",
+          "choices": [
+            "12 fois",
+            "30 fois",
+            "100 fois"
+          ],
+          "answer": 0,
+          "explanation": "On récite 12 fois la Djawharatul Kamal."
+        },
+        {
+          "question": "Sans eau pour les ablutions, que récite-t-on à la place de la Djawharatul Kamal ?",
+          "choices": [
+            "20 fois Salatul Fatihi",
+            "Rien du tout",
+            "100 fois Astaghfirullah"
+          ],
+          "answer": 0,
+          "explanation": "On récite 20 fois la Salatul Fatihi à la place."
+        },
+        {
+          "question": "Comment fait-on la Wazifa, si possible ?",
+          "choices": [
+            "En groupe, à voix haute",
+            "Seul, sans parler",
+            "Debout en marchant"
+          ],
+          "answer": 0,
+          "explanation": "Si possible, en groupe, assis en rangs, à voix haute et ensemble."
+        }
+      ],
+      "lesson": {
+        "cards": [
+          {
+            "title": "Qu’est-ce que la Wazifa ?",
+            "text": "La Wazifa est une prière de la Tidjaniya. Elle fait partie des obligations du talibé. On la reçoit avec l’autorisation d’un moukadam."
+          },
+          {
+            "title": "Quand la faire ?",
+            "text": "Au moins une fois par jour. Deux fois, matin et soir, c’est mieux. Si on la fait une seule fois : entre Takussan et le Takussan du lendemain."
+          },
+          {
+            "title": "Ensemble, à voix haute",
+            "text": "Si possible, on fait la Wazifa en groupe, assis en rangs, à voix haute et ensemble. Seul, on la récite doucement mais en s’entendant, assis et tourné vers la qibla."
+          },
+          {
+            "title": "Les quatre parties",
+            "text": "D’abord 30 fois Astaghfirullah. Ensuite 50 fois Salatul Fatihi. Puis 100 fois Lâ ilâha illallâh. Enfin 12 fois Djawharatul Kamal."
+          },
+          {
+            "title": "La Djawharatul Kamal",
+            "text": "On la récite seulement avec les ablutions faites à l’eau, dans un lieu propre, assis, avec des habits propres. Si ce n’est pas possible, par exemple sans eau ou en voiture, on récite 20 fois Salatul Fatihi à la place."
+          },
+          {
+            "title": "À retenir",
+            "text": "Pendant la Wazifa, la seule prière sur le Prophète est la Salatul Fatihi. En groupe, il faut un lieu propre où tiennent au moins six personnes."
+          }
+        ]
+      },
+      "category": "La Tariqa"
+    },
+    {
+      "id": "lazim",
+      "title": "Le Lazim",
+      "description": "Le wird du matin et du soir.",
+      "icon": "ph-clock",
+      "questions": [
+        {
+          "question": "Combien de fois par jour fait-on le Lazim ?",
+          "choices": [
+            "2 fois",
+            "1 fois",
+            "5 fois"
+          ],
+          "answer": 0,
+          "explanation": "Deux fois par jour : le matin et le soir."
+        },
+        {
+          "question": "Combien de fois dit-on Astaghfirullah dans le Lazim ?",
+          "choices": [
+            "100 fois",
+            "30 fois",
+            "12 fois"
+          ],
+          "answer": 0,
+          "explanation": "Dans le Lazim, chaque partie se dit 100 fois."
+        },
+        {
+          "question": "Quelle est la meilleure prière sur le Prophète dans le Lazim ?",
+          "choices": [
+            "La Salatul Fatihi",
+            "La Djawharatul Kamal",
+            "La Fâtiha"
+          ],
+          "answer": 0,
+          "explanation": "La meilleure prière sur le Prophète, c’est la Salatul Fatihi."
+        },
+        {
+          "question": "Quand commence le Lazim du soir ?",
+          "choices": [
+            "Après Takussan",
+            "Après Timis",
+            "Après Fajar"
+          ],
+          "answer": 0,
+          "explanation": "Le Lazim du soir se fait après Takussan, jusqu’à Guéwé."
+        },
+        {
+          "question": "Peut-on parler pendant le Lazim ?",
+          "choices": [
+            "Non, sauf nécessité",
+            "Oui, librement",
+            "Seulement au téléphone"
+          ],
+          "answer": 0,
+          "explanation": "On ne parle pas pendant le Lazim, sauf nécessité."
+        },
+        {
+          "question": "On a oublié le Lazim. Que faire ?",
+          "choices": [
+            "Le rattraper",
+            "Rien, c’est perdu",
+            "Le faire deux fois le lendemain"
+          ],
+          "answer": 0,
+          "explanation": "Un Lazim oublié doit être rattrapé."
+        }
+      ],
+      "lesson": {
+        "cards": [
+          {
+            "title": "Qu’est-ce que le Lazim ?",
+            "text": "Le Lazim, c’est le wird obligatoire du talibé. On le fait deux fois par jour, le matin et le soir, seul et à voix basse. On le reçoit d’un moukadam autorisé."
+          },
+          {
+            "title": "Les trois parties",
+            "text": "D’abord 100 fois Astaghfirullah. Ensuite 100 fois la prière sur le Prophète ; la meilleure est la Salatul Fatihi. Enfin 100 fois Lâ ilâha illallâh, et on termine par Muhammadun Rasûlullâh, alayhi salâmullâh."
+          },
+          {
+            "title": "Le Lazim du matin",
+            "text": "Après la prière de Fajar, jusqu’au milieu de la matinée. Avec une bonne excuse, on peut encore le faire jusqu’à Timis. On peut aussi l’avancer la nuit, après Guéwé, mais il doit être fini avant l’appel de Fajar."
+          },
+          {
+            "title": "Le Lazim du soir",
+            "text": "Après Takussan, jusqu’à Guéwé. Avec une bonne excuse, on peut encore le faire jusqu’à Fajar."
+          },
+          {
+            "title": "Pour qu’il soit valable",
+            "text": "Avoir l’intention. Avoir fait ses ablutions. Corps, habits et lieu propres. Être bien couvert, comme pour la prière. Ne pas parler, sauf nécessité, et ne pas manger ni boire. S’il manque une de ces conditions, il faut le refaire."
+          },
+          {
+            "title": "Pour bien le faire",
+            "text": "S’asseoir. Se tourner vers la qibla. Réciter doucement, en bougeant les lèvres. Bien prononcer, sans aller trop vite. Un Lazim oublié doit être rattrapé."
+          }
+        ]
+      },
+      "category": "La Tariqa"
+    },
+    {
+      "id": "chartes-tariqa",
+      "title": "Les 23 chartes de la Tariqa",
+      "description": "Les règles du talibé tidjane, en 5 parties.",
+      "icon": "ph-shield-check",
+      "category": "La Tariqa",
+      "questions": [
+        {
+          "question": "De qui reçoit-on le wird ?",
+          "choices": [
+            "D’un moukadam autorisé",
+            "De n’importe quel ami",
+            "D’un livre"
+          ],
+          "answer": 0,
+          "explanation": "On reçoit le wird d’un moukadam autorisé, relié à la chaîne de transmission."
+        },
+        {
+          "question": "Peut-on prendre le wird d’une autre tariqa ?",
+          "choices": [
+            "Non",
+            "Oui",
+            "Seulement le vendredi"
+          ],
+          "answer": 0,
+          "explanation": "Le talibé tidjane ne prend pas de wird d’une autre tariqa."
+        },
+        {
+          "question": "Jusqu’à quand fait-on le wird ?",
+          "choices": [
+            "Jusqu’à la mort",
+            "Pendant un an",
+            "Pendant le Ramadan"
+          ],
+          "answer": 0,
+          "explanation": "On fait le wird sans jamais l’abandonner, jusqu’à la mort."
+        },
+        {
+          "question": "Avec quoi récite-t-on la Djawharatul Kamal ?",
+          "choices": [
+            "Avec les ablutions",
+            "Sans ablutions",
+            "En marchant"
+          ],
+          "answer": 0,
+          "explanation": "On ne récite la Djawharatul Kamal qu’avec les ablutions."
+        },
+        {
+          "question": "Comment fait-on la Wazifa et la Hadratul Djouma ?",
+          "choices": [
+            "En groupe",
+            "Seul, en cachette",
+            "On ne les fait pas"
+          ],
+          "answer": 0,
+          "explanation": "On les fait en groupe, si possible."
+        },
+        {
+          "question": "Vers où se tourne-t-on pendant le wird ?",
+          "choices": [
+            "Vers la qibla",
+            "Vers la porte",
+            "Peu importe"
+          ],
+          "answer": 0,
+          "explanation": "On s’assoit tourné vers la qibla, sauf exceptions."
+        },
+        {
+          "question": "Peut-on parler pendant le wird ?",
+          "choices": [
+            "Non, sauf nécessité",
+            "Oui, librement",
+            "Seulement pour rire"
+          ],
+          "answer": 0,
+          "explanation": "On ne parle pas pendant le wird, sauf nécessité : répondre à ses parents, l’épouse à son mari, le talibé à son guide."
+        },
+        {
+          "question": "Avec ses frères talibés, on doit…",
+          "choices": [
+            "Garder les liens et ne pas les fâcher",
+            "Les éviter",
+            "Les critiquer"
+          ],
+          "answer": 0,
+          "explanation": "On ne coupe pas les liens avec ses frères talibés et on ne les fâche pas."
+        }
+      ],
+      "lesson": {
+        "cards": [
+          {
+            "title": "1. Le wird reçu d’un moukadam",
+            "text": "Recevoir le wird d’un moukadam autorisé, relié à la chaîne de transmission.",
+            "chapter": "Recevoir le wird"
+          },
+          {
+            "title": "2. Un seul wird",
+            "text": "Ne pas prendre de wird d’une autre tariqa.",
+            "chapter": "Recevoir le wird"
+          },
+          {
+            "title": "11. L’autorisation",
+            "text": "Faire le wird seulement après en avoir reçu l’autorisation.",
+            "chapter": "Recevoir le wird"
+          },
+          {
+            "title": "3. Le ziar",
+            "text": "Ne pas faire de ziar auprès d’un saint qui n’est pas tidjane, vivant ou mort. Respecter quand même les savants des autres voies.",
+            "chapter": "Recevoir le wird"
+          },
+          {
+            "title": "16. Pas de faux titre",
+            "text": "Ne pas se faire passer pour un saint, ni donner le wird sans autorisation.",
+            "chapter": "Recevoir le wird"
+          },
+          {
+            "title": "5. Aimer Cheikh",
+            "text": "Aimer et respecter Cheikh Ahmed Tidjani et ses khalifes, toute sa vie.",
+            "chapter": "Aimer Cheikh"
+          },
+          {
+            "title": "9. Une foi ferme",
+            "text": "Avoir une foi ferme en Cheikh et en la tariqa.",
+            "chapter": "Aimer Cheikh"
+          },
+          {
+            "title": "7. Aucune hostilité",
+            "text": "N’avoir aucune hostilité envers Cheikh ou ses khalifes.",
+            "chapter": "Aimer Cheikh"
+          },
+          {
+            "title": "10. Ne pas critiquer",
+            "text": "Ne pas critiquer Cheikh, la tariqa, les khalifes ni les talibés.",
+            "chapter": "Aimer Cheikh"
+          },
+          {
+            "title": "6. Rester humble",
+            "text": "Ne pas se croire à l’abri de ses fautes.",
+            "chapter": "Aimer Cheikh"
+          },
+          {
+            "title": "8. Jusqu’à la mort",
+            "text": "Faire le wird sans jamais l’abandonner, jusqu’à la mort.",
+            "chapter": "Le wird chaque jour"
+          },
+          {
+            "title": "15. Ne pas négliger",
+            "text": "Ne pas négliger le wird ni le faire en retard sans excuse.",
+            "chapter": "Le wird chaque jour"
+          },
+          {
+            "title": "4. Les cinq prières",
+            "text": "Faire les cinq prières en groupe, si possible.",
+            "chapter": "Le wird chaque jour"
+          },
+          {
+            "title": "12. En groupe",
+            "text": "Faire la Wazifa et la Hadratul Djouma du vendredi en groupe.",
+            "chapter": "Le wird chaque jour"
+          },
+          {
+            "title": "14. Garder les liens",
+            "text": "Ne pas couper les liens avec sa famille ni avec ses frères talibés.",
+            "chapter": "La fraternité"
+          },
+          {
+            "title": "17. Le respect",
+            "text": "Respecter toute personne liée à Cheikh ou à la tariqa.",
+            "chapter": "La fraternité"
+          },
+          {
+            "title": "18. La fraternité",
+            "text": "Ne pas fâcher son frère talibé.",
+            "chapter": "La fraternité"
+          },
+          {
+            "title": "13. La Djawharatul Kamal",
+            "text": "Ne réciter la Djawharatul Kamal qu’avec les ablutions.",
+            "chapter": "Pendant le wird"
+          },
+          {
+            "title": "19. La pureté",
+            "text": "Être en état de pureté, avec des habits propres, dans un lieu propre.",
+            "chapter": "Pendant le wird"
+          },
+          {
+            "title": "20. La qibla",
+            "text": "S’asseoir tourné vers la qibla pendant le wird, sauf exceptions.",
+            "chapter": "Pendant le wird"
+          },
+          {
+            "title": "21. Le silence",
+            "text": "Ne pas parler pendant le wird, sauf nécessité : répondre à ses parents, l’épouse à son mari, le talibé à son guide.",
+            "chapter": "Pendant le wird"
+          },
+          {
+            "title": "22. La concentration",
+            "text": "Se concentrer sur les paroles du wird et bien les prononcer.",
+            "chapter": "Pendant le wird"
+          },
+          {
+            "title": "23. La présence",
+            "text": "Ressentir la présence du Prophète, paix et salut sur lui, de Cheikh ou de son guide.",
+            "chapter": "Pendant le wird"
+          }
+        ]
+      }
+    },
+    {
+      "id": "farata-ndiapp",
+      "title": "Farata ndiapp",
+      "description": "Ce qui est obligatoire dans les ablutions.",
+      "icon": "ph-drop",
+      "source": "Mukhtasar d'Al-Akhdari (rite malikite)",
+      "questions": [
+        {
+          "question": "Combien y a-t-il de farata dans les ablutions ?",
+          "choices": [
+            "7",
+            "5",
+            "10"
+          ],
+          "answer": 0,
+          "explanation": "Il y a sept farata dans les ablutions.",
+          "ar": {
+            "question": "كم عدد فرائض الوضوء؟",
+            "choices": [
+              "سبع",
+              "خمس",
+              "عشر"
+            ],
+            "explanation": "فرائض الوضوء سبع."
+          }
+        },
+        {
+          "question": "Quelle est la première farata des ablutions ?",
+          "choices": [
+            "L'intention (niyya)",
+            "Se rincer la bouche",
+            "Se laver les oreilles"
+          ],
+          "answer": 0,
+          "explanation": "La première farata, c'est l'intention, au début des ablutions.",
+          "ar": {
+            "question": "ما أول فرائض الوضوء؟",
+            "choices": [
+              "النية",
+              "المضمضة",
+              "مسح الأذنين"
+            ],
+            "explanation": "أول فرائض الوضوء النية، تكون عند الشروع فيه."
+          }
+        },
+        {
+          "question": "Jusqu'où faut-il laver les bras ?",
+          "choices": [
+            "Jusqu'aux coudes",
+            "Jusqu'aux poignets",
+            "Jusqu'aux épaules"
+          ],
+          "answer": 0,
+          "explanation": "On lave les bras jusqu'aux coudes.",
+          "ar": {
+            "question": "إلى أين تُغسل اليدان؟",
+            "choices": [
+              "إلى المرفقين",
+              "إلى الكوعين",
+              "إلى المنكبين"
+            ],
+            "explanation": "من فرائض الوضوء غسل اليدين إلى المرفقين."
+          },
+          "choiceImages": [
+            "/assets/quiz/ablution-bras-coudes.svg",
+            "/assets/quiz/ablution-mains-poignets.svg",
+            "/assets/quiz/ablution-bras-epaules.svg"
+          ]
+        },
+        {
+          "question": "Pour la tête, que faut-il faire ?",
+          "choices": [
+            "Passer les mains mouillées dessus (massah)",
+            "La laver entièrement",
+            "Rien"
+          ],
+          "answer": 0,
+          "explanation": "On passe les mains mouillées sur la tête : c'est le massah.",
+          "ar": {
+            "question": "ماذا يُفعل بالرأس في الوضوء؟",
+            "choices": [
+              "يُمسح باليدين المبلولتين",
+              "يُغسل كله",
+              "لا شيء"
+            ],
+            "explanation": "من فرائض الوضوء مسح الرأس."
+          },
+          "image": "/assets/quiz/ablution-tete.svg",
+          "imageAlt": "Les mains mouillées passent sur la tête"
+        },
+        {
+          "question": "Jusqu'où faut-il laver les pieds ?",
+          "choices": [
+            "Jusqu'aux chevilles",
+            "Jusqu'aux genoux",
+            "Seulement les orteils"
+          ],
+          "answer": 0,
+          "explanation": "On lave les pieds jusqu'aux chevilles.",
+          "ar": {
+            "question": "إلى أين تُغسل الرجلان؟",
+            "choices": [
+              "إلى الكعبين",
+              "إلى الركبتين",
+              "الأصابع فقط"
+            ],
+            "explanation": "من فرائض الوضوء غسل الرجلين إلى الكعبين."
+          },
+          "choiceImages": [
+            "/assets/quiz/ablution-pieds-chevilles.svg",
+            "/assets/quiz/ablution-pieds-genoux.svg",
+            "/assets/quiz/ablution-orteils.svg"
+          ]
+        },
+        {
+          "question": "Que veut dire « dalk » ?",
+          "choices": [
+            "Frotter les membres en les lavant",
+            "Laver trois fois",
+            "Commencer par la droite"
+          ],
+          "answer": 0,
+          "explanation": "Le dalk, c'est frotter chaque membre en le lavant. C'est une obligation.",
+          "ar": {
+            "question": "ما هو الدلك؟",
+            "choices": [
+              "إمرار اليد على العضو مع الغسل",
+              "الغسل ثلاث مرات",
+              "البداية باليمنى"
+            ],
+            "explanation": "الدلك من فرائض الوضوء."
+          }
+        },
+        {
+          "question": "Que veut dire « fawr » ?",
+          "choices": [
+            "Enchaîner les ablutions sans s'arrêter longtemps",
+            "Faire très vite",
+            "Utiliser beaucoup d'eau"
+          ],
+          "answer": 0,
+          "explanation": "Le fawr, c'est enchaîner les ablutions sans s'arrêter longtemps.",
+          "ar": {
+            "question": "ما هو الفور؟",
+            "choices": [
+              "الموالاة بين الأعضاء دون تفريق طويل",
+              "الإسراع الشديد",
+              "كثرة الماء"
+            ],
+            "explanation": "الفور من فرائض الوضوء."
+          }
+        },
+        {
+          "question": "On a oublié une farata et on s'en souvient tout de suite. Que faire ?",
+          "choices": [
+            "La faire, puis ce qui vient après",
+            "Ne rien faire",
+            "Attendre la prochaine prière"
+          ],
+          "answer": 0,
+          "explanation": "Si on s'en souvient vite, on fait la farata oubliée, puis ce qui vient après.",
+          "ar": {
+            "question": "من نسي فرضا من أعضائه وتذكره بالقرب، ماذا يفعل؟",
+            "choices": [
+              "يفعله ويفعل ما بعده",
+              "لا شيء عليه",
+              "ينتظر الصلاة القادمة"
+            ],
+            "explanation": "من نسي فرضا فإن تذكره بالقرب فعله وما بعده."
+          }
+        }
+      ],
+      "ar": {
+        "title": "فرائض الوضوء",
+        "description": "فرائض الوضوء السبع."
+      },
+      "category": "Ablutions et prière",
+      "lesson": {
+        "cards": [
+          {
+            "title": "Les sept farata",
+            "text": "Il y a sept farata dans les ablutions. Ce sont les gestes obligatoires : sans eux, les ablutions ne sont pas valables."
+          },
+          {
+            "title": "1. L’intention",
+            "text": "On commence par l’intention (niyya) : dans son cœur, on veut faire ses ablutions."
+          },
+          {
+            "title": "2. Le visage",
+            "text": "On lave tout le visage, des cheveux jusqu’au menton, et d’une oreille à l’autre.",
+            "image": "/assets/quiz/ablution-visage.svg",
+            "imageAlt": "Laver le visage"
+          },
+          {
+            "title": "3. Les bras jusqu’aux coudes",
+            "text": "On lave les mains et les bras jusqu’aux coudes, coudes compris. On lave aussi entre les doigts.",
+            "image": "/assets/quiz/ablution-bras-coudes.svg",
+            "imageAlt": "Laver les bras jusqu’aux coudes"
+          },
+          {
+            "title": "4. La tête : le massah",
+            "text": "On passe les mains mouillées sur la tête.",
+            "image": "/assets/quiz/ablution-tete.svg",
+            "imageAlt": "Passer les mains mouillées sur la tête"
+          },
+          {
+            "title": "5. Les pieds jusqu’aux chevilles",
+            "text": "On lave les pieds jusqu’aux chevilles, chevilles comprises.",
+            "image": "/assets/quiz/ablution-pieds-chevilles.svg",
+            "imageAlt": "Laver les pieds jusqu’aux chevilles"
+          },
+          {
+            "title": "6 et 7. Le dalk et le fawr",
+            "text": "On frotte chaque membre en le lavant : c’est le dalk. On enchaîne les ablutions sans longue pause : c’est le fawr."
+          },
+          {
+            "title": "Si on oublie une farata",
+            "text": "Si on s’en rend compte vite, on la fait, puis on refait ce qui vient après. Si on s’en rend compte tard, on la fait seule, et on refait les prières faites depuis."
+          }
+        ]
+      }
+    },
+    {
+      "id": "sunna-ndiapp",
+      "title": "Sunna ndiapp",
+      "description": "Farata ou sunna ? Ce qui est recommandé dans les ablutions.",
+      "icon": "ph-drop-half",
+      "source": "Mukhtasar d'Al-Akhdari (rite malikite)",
+      "keepOrder": true,
+      "questions": [
+        {
+          "question": "Se rincer la bouche (madmada)",
+          "choices": [
+            "Farata (obligatoire)",
+            "Sunna (recommandée)"
+          ],
+          "answer": 1,
+          "explanation": "Se rincer la bouche est une sunna des ablutions.",
+          "ar": {
+            "question": "المضمضة",
+            "choices": [
+              "فرض",
+              "سنة"
+            ],
+            "explanation": "المضمضة من سنن الوضوء."
+          },
+          "image": "/assets/quiz/ablution-bouche.svg",
+          "imageAlt": "Se rincer la bouche"
+        },
+        {
+          "question": "Aspirer l'eau par le nez (istinchâq)",
+          "choices": [
+            "Farata (obligatoire)",
+            "Sunna (recommandée)"
+          ],
+          "answer": 1,
+          "explanation": "Aspirer l'eau par le nez est une sunna.",
+          "ar": {
+            "question": "الاستنشاق",
+            "choices": [
+              "فرض",
+              "سنة"
+            ],
+            "explanation": "الاستنشاق من سنن الوضوء."
+          },
+          "image": "/assets/quiz/ablution-nez.svg",
+          "imageAlt": "Aspirer l’eau par le nez"
+        },
+        {
+          "question": "Laver le visage",
+          "choices": [
+            "Farata (obligatoire)",
+            "Sunna (recommandée)"
+          ],
+          "answer": 0,
+          "explanation": "Laver le visage est une farata.",
+          "ar": {
+            "question": "غسل الوجه",
+            "choices": [
+              "فرض",
+              "سنة"
+            ],
+            "explanation": "غسل الوجه من فرائض الوضوء."
+          },
+          "image": "/assets/quiz/ablution-visage.svg",
+          "imageAlt": "Laver le visage"
+        },
+        {
+          "question": "Essuyer les oreilles",
+          "choices": [
+            "Farata (obligatoire)",
+            "Sunna (recommandée)"
+          ],
+          "answer": 1,
+          "explanation": "Essuyer les oreilles est une sunna. On reprend de l'eau pour elles.",
+          "ar": {
+            "question": "مسح الأذنين",
+            "choices": [
+              "فرض",
+              "سنة"
+            ],
+            "explanation": "مسح الأذنين وتجديد الماء لهما من سنن الوضوء."
+          },
+          "image": "/assets/quiz/ablution-oreilles.svg",
+          "imageAlt": "Essuyer les oreilles"
+        },
+        {
+          "question": "Se laver les mains jusqu'aux poignets au début",
+          "choices": [
+            "Farata (obligatoire)",
+            "Sunna (recommandée)"
+          ],
+          "answer": 1,
+          "explanation": "Se laver les mains jusqu'aux poignets en commençant est une sunna.",
+          "ar": {
+            "question": "غسل اليدين إلى الكوعين عند الشروع",
+            "choices": [
+              "فرض",
+              "سنة"
+            ],
+            "explanation": "غسل اليدين إلى الكوعين عند الشروع من سنن الوضوء."
+          },
+          "image": "/assets/quiz/ablution-mains-poignets.svg",
+          "imageAlt": "Laver les mains jusqu’aux poignets"
+        },
+        {
+          "question": "Frotter les membres (dalk)",
+          "choices": [
+            "Farata (obligatoire)",
+            "Sunna (recommandée)"
+          ],
+          "answer": 0,
+          "explanation": "Le dalk est une farata.",
+          "ar": {
+            "question": "الدلك",
+            "choices": [
+              "فرض",
+              "سنة"
+            ],
+            "explanation": "الدلك من فرائض الوضوء."
+          }
+        },
+        {
+          "question": "Respecter l'ordre des farata",
+          "choices": [
+            "Farata (obligatoire)",
+            "Sunna (recommandée)"
+          ],
+          "answer": 1,
+          "explanation": "Faire les farata dans l'ordre est une sunna.",
+          "ar": {
+            "question": "الترتيب بين الفرائض",
+            "choices": [
+              "فرض",
+              "سنة"
+            ],
+            "explanation": "الترتيب بين الفرائض من سنن الوضوء."
+          }
+        },
+        {
+          "question": "On a oublié une sunna des ablutions. Que faire ?",
+          "choices": [
+            "La faire, sans refaire la prière",
+            "Refaire toutes ses prières",
+            "Recommencer les ablutions et la prière"
+          ],
+          "answer": 0,
+          "explanation": "Si on oublie une sunna, on la fait. Pas besoin de refaire la prière.",
+          "ar": {
+            "question": "من ترك سنة من سنن الوضوء، ماذا يفعل؟",
+            "choices": [
+              "يفعلها ولا يعيد الصلاة",
+              "يعيد كل صلواته",
+              "يعيد الوضوء والصلاة"
+            ],
+            "explanation": "وإن ترك سنة فعلها ولا يعيد الصلاة."
+          }
+        }
+      ],
+      "ar": {
+        "title": "سنن الوضوء",
+        "description": "فرض أم سنة؟ سنن الوضوء."
+      },
+      "category": "Ablutions et prière",
+      "lesson": {
+        "cards": [
+          {
+            "title": "Les sunna des ablutions",
+            "text": "Les sunna sont fortement recommandées. On ne les laisse pas exprès. Il y en a huit."
+          },
+          {
+            "title": "Les mains jusqu’aux poignets",
+            "text": "Au début, on se lave les mains jusqu’aux poignets.",
+            "image": "/assets/quiz/ablution-mains-poignets.svg",
+            "imageAlt": "Laver les mains jusqu’aux poignets"
+          },
+          {
+            "title": "La bouche : la madmada",
+            "text": "On met de l’eau dans la bouche, on la remue, puis on la recrache.",
+            "image": "/assets/quiz/ablution-bouche.svg",
+            "imageAlt": "Se rincer la bouche"
+          },
+          {
+            "title": "Le nez",
+            "text": "On aspire un peu d’eau par le nez (istinchâq), puis on la rejette (istinthâr).",
+            "image": "/assets/quiz/ablution-nez.svg",
+            "imageAlt": "Aspirer l’eau par le nez"
+          },
+          {
+            "title": "La tête, aller et retour",
+            "text": "Après le massah de la tête, on repasse les mains en sens inverse.",
+            "image": "/assets/quiz/ablution-tete.svg",
+            "imageAlt": "Passer les mains sur la tête"
+          },
+          {
+            "title": "Les oreilles",
+            "text": "On essuie les oreilles, en reprenant de l’eau pour elles.",
+            "image": "/assets/quiz/ablution-oreilles.svg",
+            "imageAlt": "Essuyer les oreilles"
+          },
+          {
+            "title": "L’ordre",
+            "text": "On fait les farata dans l’ordre : le visage, les bras, la tête, puis les pieds."
+          },
+          {
+            "title": "Si on oublie une sunna",
+            "text": "On fait seulement la sunna oubliée. Pas besoin de refaire la prière."
+          },
+          {
+            "title": "Les gestes qui apportent du mérite",
+            "text": "Dire « Bismillah », utiliser le cure-dents (siwak), laver le visage et les bras une deuxième et une troisième fois, commencer par la droite, et ne pas gaspiller l’eau."
+          }
+        ]
+      }
+    },
+    {
+      "id": "farata-diouli",
+      "title": "Farata diouli",
+      "description": "Ce qui est obligatoire dans la prière.",
+      "icon": "ph-hands-praying",
+      "source": "Mukhtasar d'Al-Akhdari (rite malikite)",
+      "questions": [
+        {
+          "question": "Combien y a-t-il de farata dans la prière ?",
+          "choices": [
+            "14",
+            "7",
+            "5"
+          ],
+          "answer": 0,
+          "explanation": "Al-Akhdari compte quatorze farata dans la prière.",
+          "ar": {
+            "question": "كم عدد فرائض الصلاة عند الأخضري؟",
+            "choices": [
+              "أربع عشرة",
+              "سبع",
+              "خمس"
+            ],
+            "explanation": "ذكر الأخضري أربع عشرة فريضة."
+          }
+        },
+        {
+          "question": "Par quoi entre-t-on en prière ?",
+          "choices": [
+            "La takbîr d'entrée « Allahou Akbar »",
+            "Le salam",
+            "Une sourate"
+          ],
+          "answer": 0,
+          "explanation": "On entre en prière par la takbîr d'entrée (takbîratoul ihrâm), dite debout.",
+          "ar": {
+            "question": "بمَ يدخل المصلي في الصلاة؟",
+            "choices": [
+              "بتكبيرة الإحرام",
+              "بالسلام",
+              "بالسورة"
+            ],
+            "explanation": "من فرائض الصلاة تكبيرة الإحرام والقيام لها."
+          },
+          "image": "/assets/quiz/priere-takbir.svg",
+          "imageAlt": "Takbîr d’entrée, mains levées"
+        },
+        {
+          "question": "Quand faut-il faire l'intention de la prière ?",
+          "choices": [
+            "Au moment de la takbîr d'entrée",
+            "Après la Fâtiha",
+            "À la fin de la prière"
+          ],
+          "answer": 0,
+          "explanation": "On fait l'intention en disant la takbîr d'entrée.",
+          "ar": {
+            "question": "متى تكون نية الصلاة؟",
+            "choices": [
+              "مقارنة لتكبيرة الإحرام",
+              "بعد الفاتحة",
+              "في آخر الصلاة"
+            ],
+            "explanation": "وشروط النية مقارنتها لتكبيرة الإحرام."
+          }
+        },
+        {
+          "question": "Réciter la Fâtiha",
+          "choices": [
+            "Farata (obligatoire)",
+            "Sunna (recommandée)"
+          ],
+          "answer": 0,
+          "explanation": "Réciter la Fâtiha, debout, est une farata.",
+          "ar": {
+            "question": "قراءة الفاتحة",
+            "choices": [
+              "فرض",
+              "سنة"
+            ],
+            "explanation": "الفاتحة والقيام لها من فرائض الصلاة."
+          },
+          "image": "/assets/quiz/priere-debout.svg",
+          "imageAlt": "Debout pour réciter la Fâtiha"
+        },
+        {
+          "question": "Se redresser après l'inclinaison (roukou')",
+          "choices": [
+            "Farata (obligatoire)",
+            "Sunna (recommandée)"
+          ],
+          "answer": 0,
+          "explanation": "S'incliner (roukou') puis se redresser : ce sont des farata.",
+          "ar": {
+            "question": "الرفع من الركوع",
+            "choices": [
+              "فرض",
+              "سنة"
+            ],
+            "explanation": "الركوع والرفع منه من فرائض الصلاة."
+          },
+          "image": "/assets/quiz/priere-roukou.svg",
+          "imageAlt": "Inclinaison (roukou’)"
+        },
+        {
+          "question": "Que veut dire « touma'nîna » ?",
+          "choices": [
+            "Marquer un temps de calme dans chaque position",
+            "Prier vite",
+            "Prier à voix haute"
+          ],
+          "answer": 0,
+          "explanation": "La touma'nîna, c'est rester calme un instant dans chaque position. C'est une farata.",
+          "ar": {
+            "question": "ما هي الطمأنينة؟",
+            "choices": [
+              "السكون في كل ركن قليلا",
+              "الإسراع في الصلاة",
+              "الجهر بالقراءة"
+            ],
+            "explanation": "الطمأنينة من فرائض الصلاة."
+          }
+        },
+        {
+          "question": "Poser le front au sol pendant la prosternation",
+          "choices": [
+            "Farata (obligatoire)",
+            "Sunna (recommandée)"
+          ],
+          "answer": 0,
+          "explanation": "Poser le front au sol est une farata.",
+          "ar": {
+            "question": "السجود على الجبهة",
+            "choices": [
+              "فرض",
+              "سنة"
+            ],
+            "explanation": "السجود على الجبهة والرفع منه من فرائض الصلاة."
+          },
+          "image": "/assets/quiz/priere-soujoud.svg",
+          "imageAlt": "Prosternation, le front au sol"
+        },
+        {
+          "question": "Comment sort-on de la prière ?",
+          "choices": [
+            "Par le salam, en étant assis",
+            "Par la takbîr",
+            "En se levant"
+          ],
+          "answer": 0,
+          "explanation": "Le salam est une farata, et la position assise pour le dire aussi.",
+          "ar": {
+            "question": "بمَ يخرج المصلي من الصلاة؟",
+            "choices": [
+              "بالسلام مع الجلوس له",
+              "بالتكبير",
+              "بالقيام"
+            ],
+            "explanation": "السلام وجلوسه الذي يقارنه من فرائض الصلاة."
+          },
+          "image": "/assets/quiz/priere-salam.svg",
+          "imageAlt": "Salam, en position assise"
+        }
+      ],
+      "ar": {
+        "title": "فرائض الصلاة",
+        "description": "فرائض الصلاة."
+      },
+      "category": "Ablutions et prière",
+      "lesson": {
+        "cards": [
+          {
+            "title": "Les quatorze farata",
+            "text": "Al-Akhdari compte quatorze farata dans la prière. Ce sont les gestes et les paroles obligatoires."
+          },
+          {
+            "title": "L’intention et le premier « Allahou Akbar »",
+            "text": "On entre en prière par la takbîr d’entrée, debout. On fait l’intention de la prière à ce moment-là.",
+            "image": "/assets/quiz/priere-takbir.svg",
+            "imageAlt": "Dire Allahou Akbar, les mains levées"
+          },
+          {
+            "title": "La Fâtiha, debout",
+            "text": "On récite la Fâtiha en restant debout.",
+            "image": "/assets/quiz/priere-debout.svg",
+            "imageAlt": "Debout pendant la récitation"
+          },
+          {
+            "title": "L’inclinaison : le roukou’",
+            "text": "On s’incline (roukou’), puis on se redresse bien droit.",
+            "image": "/assets/quiz/priere-roukou.svg",
+            "imageAlt": "S’incliner, les mains sur les genoux"
+          },
+          {
+            "title": "La prosternation : le soujoud",
+            "text": "On se prosterne, le front posé au sol, puis on se relève.",
+            "image": "/assets/quiz/priere-soujoud.svg",
+            "imageAlt": "Front posé au sol"
+          },
+          {
+            "title": "Le calme dans chaque position",
+            "text": "On reste un instant calme dans chaque position : c’est la touma’nîna. Et on fait tout dans l’ordre."
+          },
+          {
+            "title": "Le salam, assis",
+            "text": "On sort de la prière par le salam, en étant assis.",
+            "image": "/assets/quiz/priere-salam.svg",
+            "imageAlt": "Tourner la tête pour le salam"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sunna-diouli",
+      "title": "Sunna diouli",
+      "description": "Farata ou sunna ? Ce qui est recommandé dans la prière.",
+      "icon": "ph-mosque",
+      "source": "Mukhtasar d'Al-Akhdari (rite malikite)",
+      "keepOrder": true,
+      "questions": [
+        {
+          "question": "Réciter une sourate après la Fâtiha",
+          "choices": [
+            "Farata (obligatoire)",
+            "Sunna (recommandée)"
+          ],
+          "answer": 1,
+          "explanation": "La sourate après la Fâtiha est une sunna.",
+          "ar": {
+            "question": "السورة التي بعد الفاتحة",
+            "choices": [
+              "فرض",
+              "سنة"
+            ],
+            "explanation": "السورة التي بعد الفاتحة من سنن الصلاة."
+          },
+          "image": "/assets/quiz/priere-debout.svg",
+          "imageAlt": "Debout pour réciter la sourate"
+        },
+        {
+          "question": "Les « Allahou Akbar » après celui d'entrée",
+          "choices": [
+            "Farata (obligatoire)",
+            "Sunna (recommandée)"
+          ],
+          "answer": 1,
+          "explanation": "Toutes les takbîr sont des sunnas, sauf la première.",
+          "ar": {
+            "question": "التكبير بعد تكبيرة الإحرام",
+            "choices": [
+              "فرض",
+              "سنة"
+            ],
+            "explanation": "كل تكبيرة سنة إلا الأولى."
+          }
+        },
+        {
+          "question": "Dire « Sami'allâhou liman hamidah »",
+          "choices": [
+            "Farata (obligatoire)",
+            "Sunna (recommandée)"
+          ],
+          "answer": 1,
+          "explanation": "C'est une sunna.",
+          "ar": {
+            "question": "قول: سمع الله لمن حمده",
+            "choices": [
+              "فرض",
+              "سنة"
+            ],
+            "explanation": "سمع الله لمن حمده من سنن الصلاة."
+          }
+        },
+        {
+          "question": "Le tachahhoud (attahiyyâtou)",
+          "choices": [
+            "Farata (obligatoire)",
+            "Sunna (recommandée)"
+          ],
+          "answer": 1,
+          "explanation": "Les deux tachahhoud, et la position assise pour les dire, sont des sunnas.",
+          "ar": {
+            "question": "التشهد",
+            "choices": [
+              "فرض",
+              "سنة"
+            ],
+            "explanation": "التشهدان والجلوس لهما من سنن الصلاة."
+          },
+          "image": "/assets/quiz/priere-assis.svg",
+          "imageAlt": "Assis pour le tachahhoud"
+        },
+        {
+          "question": "La takbîr d'entrée « Allahou Akbar »",
+          "choices": [
+            "Farata (obligatoire)",
+            "Sunna (recommandée)"
+          ],
+          "answer": 0,
+          "explanation": "La takbîr d'entrée est une farata.",
+          "ar": {
+            "question": "تكبيرة الإحرام",
+            "choices": [
+              "فرض",
+              "سنة"
+            ],
+            "explanation": "تكبيرة الإحرام من فرائض الصلاة."
+          },
+          "image": "/assets/quiz/priere-takbir.svg",
+          "imageAlt": "Takbîr d’entrée, mains levées"
+        },
+        {
+          "question": "La prière sur le Prophète (PSL)",
+          "choices": [
+            "Farata (obligatoire)",
+            "Sunna (recommandée)"
+          ],
+          "answer": 1,
+          "explanation": "La prière sur le Prophète (PSL) est une sunna.",
+          "ar": {
+            "question": "الصلاة على رسول الله ﷺ",
+            "choices": [
+              "فرض",
+              "سنة"
+            ],
+            "explanation": "الصلاة على رسول الله ﷺ من سنن الصلاة."
+          }
+        },
+        {
+          "question": "L'iqâma avant la prière",
+          "choices": [
+            "Farata (obligatoire)",
+            "Sunna (recommandée)"
+          ],
+          "answer": 1,
+          "explanation": "L'iqâma est une sunna.",
+          "ar": {
+            "question": "الإقامة",
+            "choices": [
+              "فرض",
+              "سنة"
+            ],
+            "explanation": "الإقامة من سنن الصلاة."
+          }
+        },
+        {
+          "question": "Réciter à voix haute dans les prières à voix haute",
+          "choices": [
+            "Farata (obligatoire)",
+            "Sunna (recommandée)"
+          ],
+          "answer": 1,
+          "explanation": "Réciter à voix haute là où c'est prévu est une sunna.",
+          "ar": {
+            "question": "الجهر فيما يجهر فيه",
+            "choices": [
+              "فرض",
+              "سنة"
+            ],
+            "explanation": "الجهر فيما يجهر فيه من سنن الصلاة."
+          }
+        }
+      ],
+      "ar": {
+        "title": "سنن الصلاة",
+        "description": "فرض أم سنة؟ سنن الصلاة."
+      },
+      "category": "Ablutions et prière",
+      "lesson": {
+        "cards": [
+          {
+            "title": "Les sunna de la prière",
+            "text": "Les sunna sont fortement recommandées dans la prière. On ne les laisse pas exprès."
+          },
+          {
+            "title": "L’iqâma",
+            "text": "Avant la prière, on fait l’iqâma."
+          },
+          {
+            "title": "La sourate après la Fâtiha",
+            "text": "Après la Fâtiha, on récite une autre sourate, debout.",
+            "image": "/assets/quiz/priere-debout.svg",
+            "imageAlt": "Debout pendant la récitation"
+          },
+          {
+            "title": "À voix haute ou à voix basse",
+            "text": "On récite à voix haute dans les prières à voix haute, et à voix basse dans les autres."
+          },
+          {
+            "title": "Les autres « Allahou Akbar »",
+            "text": "Tous les « Allahou Akbar » sont des sunna, sauf le premier. En se relevant du roukou’, on dit « Sami’allâhou liman hamidah »."
+          },
+          {
+            "title": "Le tachahhoud, assis",
+            "text": "Les deux tachahhoud (attahiyyâtou), et la position assise pour les dire, sont des sunna. On y ajoute la prière sur le Prophète (PSL).",
+            "image": "/assets/quiz/priere-assis.svg",
+            "imageAlt": "Assis pour le tachahhoud"
+          },
+          {
+            "title": "La prosternation complète",
+            "text": "On se prosterne aussi sur le nez, les mains, les genoux et le bout des orteils.",
+            "image": "/assets/quiz/priere-soujoud.svg",
+            "imageAlt": "Prosternation"
+          }
+        ]
+      }
+    },
+    {
+      "id": "notre-dahira",
+      "title": "Notre dahira",
+      "description": "Son histoire, son nom et son guide.",
+      "icon": "ph-users-three",
+      "questions": [
+        {
+          "question": "En quelle année le dahira a-t-il été fondé ?",
+          "choices": [
+            "1999",
+            "2012",
+            "1985"
+          ],
+          "answer": 0,
+          "explanation": "Le dahira est né à Yeumbeul en 1999."
+        },
+        {
+          "question": "Dans quelle localité le dahira est-il né ?",
+          "choices": [
+            "Yeumbeul",
+            "Tivaouane",
+            "Saint-Louis"
+          ],
+          "answer": 0,
+          "explanation": "Des fidèles de Yeumbeul ont fondé le dahira en 1999."
+        },
+        {
+          "question": "Que signifie « Moutahabina Fillahi » ?",
+          "choices": [
+            "Ceux qui s'aiment pour Dieu",
+            "Ceux qui voyagent pour Dieu",
+            "Les gardiens du savoir"
+          ],
+          "answer": 0,
+          "explanation": "Moutahabina Fillahi : « ceux qui s'aiment pour Dieu »."
+        },
+        {
+          "question": "Sous la guidance de qui le dahira a-t-il été fondé ?",
+          "choices": [
+            "Serigne Mansour Sy « Borom Daaraji »",
+            "Serigne Babacar Sy",
+            "Seydi El Hadji Malick Sy"
+          ],
+          "answer": 0,
+          "explanation": "Serigne Mansour Sy « Borom Daaraji » guidait le dahira dès sa fondation en 1999.",
+          "choiceImages": [
+            "/assets/tenants/moutahabina/lignee/serigne-mansour-sy.webp",
+            "/assets/tenants/moutahabina/lignee/serigne-babacar-sy.webp",
+            "/assets/tenants/moutahabina/lignee/seydi-el-hadji-malick-sy.webp"
+          ]
+        },
+        {
+          "question": "Depuis quelle année Serigne Mame Malick Sy guide-t-il le dahira ?",
+          "choices": [
+            "2012",
+            "1999",
+            "2020"
+          ],
+          "answer": 0,
+          "explanation": "Après le rappel à Dieu de Serigne Mansour Sy en 2012, son fils Serigne Mame Malick Sy guide le dahira.",
+          "image": "/assets/tenants/moutahabina/lignee/serigne-mame-malick-sy.webp",
+          "imageAlt": "Portrait de Serigne Mame Malick Sy"
+        },
+        {
+          "question": "Quelle est la devise du dahira ?",
+          "choices": [
+            "S'aimer pour Dieu, servir ensemble.",
+            "Apprendre avant de parler.",
+            "Le travail avant tout."
+          ],
+          "answer": 0,
+          "explanation": "« S'aimer pour Dieu, servir ensemble » : c'est le sens même de Moutahabina Fillahi."
+        }
+      ],
+      "category": "Le dahira"
+    },
+    {
+      "id": "lignee-de-tivaouane",
+      "title": "La lignée de Tivaouane",
+      "description": "Quatre générations au service du savoir.",
+      "icon": "ph-book-open-text",
+      "questions": [
+        {
+          "question": "Quel surnom donne-t-on à Seydi El Hadji Malick Sy ?",
+          "choices": [
+            "Maodo",
+            "Borom Daaraji",
+            "Borom bonnet carré"
+          ],
+          "answer": 0,
+          "explanation": "Seydi El Hadji Malick Sy est appelé « Maodo ».",
+          "image": "/assets/tenants/moutahabina/lignee/seydi-el-hadji-malick-sy.webp",
+          "imageAlt": "Portrait de Seydi El Hadji Malick Sy"
+        },
+        {
+          "question": "Dans quelle ville Seydi El Hadji Malick Sy a-t-il fondé sa grande école ?",
+          "choices": [
+            "Tivaouane",
+            "Kaolack",
+            "Ziguinchor"
+          ],
+          "answer": 0,
+          "explanation": "À Tivaouane, il fonde la zawiya et une grande école. Beaucoup de muqaddams y ont été formés."
+        },
+        {
+          "question": "En quelle année Seydi El Hadji Malick Sy est-il rappelé à Dieu ?",
+          "choices": [
+            "1922",
+            "1957",
+            "1902"
+          ],
+          "answer": 0,
+          "explanation": "Il est rappelé à Dieu le 27 juin 1922."
+        },
+        {
+          "question": "Qui fut le premier Khalife général des Tidianes ?",
+          "choices": [
+            "Serigne Babacar Sy",
+            "Serigne Mansour Sy",
+            "Serigne Mame Malick Sy"
+          ],
+          "answer": 0,
+          "explanation": "Serigne Babacar Sy devient le premier Khalife général des Tidianes en 1922, à 37 ans.",
+          "choiceImages": [
+            "/assets/tenants/moutahabina/lignee/serigne-babacar-sy.webp",
+            "/assets/tenants/moutahabina/lignee/serigne-mansour-sy.webp",
+            "/assets/tenants/moutahabina/lignee/serigne-mame-malick-sy.webp"
+          ]
+        },
+        {
+          "question": "Quel surnom porte Serigne Babacar Sy ?",
+          "choices": [
+            "Borom bonnet carré",
+            "Maodo",
+            "Borom Daaraji"
+          ],
+          "answer": 0,
+          "explanation": "Serigne Babacar Sy est appelé « Borom bonnet carré ».",
+          "image": "/assets/tenants/moutahabina/lignee/serigne-babacar-sy.webp",
+          "imageAlt": "Portrait de Serigne Babacar Sy"
+        },
+        {
+          "question": "Quel rôle Serigne Babacar Sy a-t-il joué pour les dahiras ?",
+          "choices": [
+            "Il a initié les premiers dahiras",
+            "Il a interdit les dahiras",
+            "Aucun rôle particulier"
+          ],
+          "answer": 0,
+          "explanation": "Il a lancé les premiers dahiras, comme la Dahiratoul Kiram, pour s'entraider et apprendre ensemble."
+        },
+        {
+          "question": "Pourquoi Serigne Mansour Sy est-il appelé « Borom Daaraji » ?",
+          "choices": [
+            "Il a dirigé le grand daara fondé par son grand-père",
+            "C'est le nom de son village natal",
+            "C'est le nom de son premier livre"
+          ],
+          "answer": 0,
+          "explanation": "Pendant de longues années, il a dirigé le grand daara de Tivaouane fondé par Maodo.",
+          "image": "/assets/tenants/moutahabina/lignee/serigne-mansour-sy.webp",
+          "imageAlt": "Portrait de Serigne Mansour Sy"
+        },
+        {
+          "question": "Qui est le père de notre guide, Serigne Mame Malick Sy ?",
+          "choices": [
+            "Serigne Mansour Sy",
+            "Serigne Babacar Sy",
+            "Seydi El Hadji Malick Sy"
+          ],
+          "answer": 0,
+          "explanation": "Serigne Mame Malick Sy est le fils de Serigne Mansour Sy « Borom Daaraji ».",
+          "choiceImages": [
+            "/assets/tenants/moutahabina/lignee/serigne-mansour-sy.webp",
+            "/assets/tenants/moutahabina/lignee/serigne-babacar-sy.webp",
+            "/assets/tenants/moutahabina/lignee/seydi-el-hadji-malick-sy.webp"
+          ]
+        }
+      ],
+      "category": "Le dahira"
+    },
+    {
+      "id": "notre-charte",
+      "title": "Notre charte",
+      "description": "Les engagements des membres et le déroulement d'un dahira.",
+      "icon": "ph-scroll",
+      "questions": [
+        {
+          "question": "Quelle tenue est obligatoire au dahira ?",
+          "choices": [
+            "La tenue blanche (ou une tenue correcte)",
+            "Une tenue verte",
+            "Aucune tenue particulière"
+          ],
+          "answer": 0,
+          "explanation": "La charte demande une tenue blanche, ou à défaut une tenue correcte."
+        },
+        {
+          "question": "À quelle heure commence le dahira ?",
+          "choices": [
+            "20 h 30",
+            "20 h 00",
+            "22 h 10"
+          ],
+          "answer": 0,
+          "explanation": "Le dahira commence à 20 h 30 et se termine à 23 h 00."
+        },
+        {
+          "question": "Que se passe-t-il de 22 h 10 à 22 h 50 ?",
+          "choices": [
+            "L'Oustaz",
+            "Les nabiens",
+            "Les informations"
+          ],
+          "answer": 0,
+          "explanation": "Nabiens de 20 h 30 à 22 h 10, puis l’Oustaz de 22 h 10 à 22 h 50, et les informations à 22 h 50."
+        },
+        {
+          "question": "Combien chaque membre cotise-t-il pour un baptême ou un mariage ?",
+          "choices": [
+            "1 000 F CFA",
+            "2 000 F CFA",
+            "4 000 F CFA"
+          ],
+          "answer": 0,
+          "explanation": "Pour un baptême ou un mariage, chaque membre cotise 1 000 F CFA."
+        },
+        {
+          "question": "Combien un membre donne-t-il le jour où il reçoit le dahira ?",
+          "choices": [
+            "4 000 F CFA",
+            "1 000 F CFA",
+            "2 000 F CFA"
+          ],
+          "answer": 0,
+          "explanation": "4 000 F CFA : 2 000 pour la sonorisation et 2 000 pour le thé (ataya)."
+        },
+        {
+          "question": "Que veut dire « Yar ak téguine » ?",
+          "choices": [
+            "La discipline",
+            "La présence",
+            "La tenue correcte"
+          ],
+          "answer": 0,
+          "explanation": "« Yar ak téguine » : la discipline, l'un des engagements de la charte."
+        },
+        {
+          "question": "À quoi correspond « Téw tay téwal » ?",
+          "choices": [
+            "La présence physique et financière",
+            "La discipline",
+            "La carte de membre"
+          ],
+          "answer": 0,
+          "explanation": "« Téw tay téwal » : être présent, physiquement et financièrement."
+        }
+      ],
+      "category": "Le dahira"
+    }
+  ]
+}$quiz$::jsonb
+where adresse = 'moutahabina'
+  and quiz = $ancien${"intro": "Apprenez en jouant : les ablutions, la prière, le dahira et sa charte. Pas besoin de compte.", "themes": [{"id": "farata-ndiapp", "title": "Farata ndiapp", "description": "Ce qui est obligatoire dans les ablutions.", "icon": "ph-drop", "source": "Mukhtasar d'Al-Akhdari (rite malikite)", "questions": [{"question": "Combien y a-t-il de farata dans les ablutions ?", "choices": ["7", "5", "10"], "answer": 0, "explanation": "Il y a sept farata dans les ablutions.", "ar": {"question": "كم عدد فرائض الوضوء؟", "choices": ["سبع", "خمس", "عشر"], "explanation": "فرائض الوضوء سبع."}}, {"question": "Quelle est la première farata des ablutions ?", "choices": ["L'intention (niyya)", "Se rincer la bouche", "Se laver les oreilles"], "answer": 0, "explanation": "La première farata, c'est l'intention, au début des ablutions.", "ar": {"question": "ما أول فرائض الوضوء؟", "choices": ["النية", "المضمضة", "مسح الأذنين"], "explanation": "أول فرائض الوضوء النية، تكون عند الشروع فيه."}}, {"question": "Jusqu'où faut-il laver les bras ?", "choices": ["Jusqu'aux coudes", "Jusqu'aux poignets", "Jusqu'aux épaules"], "answer": 0, "explanation": "On lave les bras jusqu'aux coudes.", "ar": {"question": "إلى أين تُغسل اليدان؟", "choices": ["إلى المرفقين", "إلى الكوعين", "إلى المنكبين"], "explanation": "من فرائض الوضوء غسل اليدين إلى المرفقين."}, "choiceImages": ["/assets/quiz/ablution-bras-coudes.svg", "/assets/quiz/ablution-mains-poignets.svg", "/assets/quiz/ablution-bras-epaules.svg"]}, {"question": "Pour la tête, que faut-il faire ?", "choices": ["Passer les mains mouillées dessus (massah)", "La laver entièrement", "Rien"], "answer": 0, "explanation": "On passe les mains mouillées sur la tête : c'est le massah.", "ar": {"question": "ماذا يُفعل بالرأس في الوضوء؟", "choices": ["يُمسح باليدين المبلولتين", "يُغسل كله", "لا شيء"], "explanation": "من فرائض الوضوء مسح الرأس."}, "image": "/assets/quiz/ablution-tete.svg", "imageAlt": "Les mains mouillées passent sur la tête"}, {"question": "Jusqu'où faut-il laver les pieds ?", "choices": ["Jusqu'aux chevilles", "Jusqu'aux genoux", "Seulement les orteils"], "answer": 0, "explanation": "On lave les pieds jusqu'aux chevilles.", "ar": {"question": "إلى أين تُغسل الرجلان؟", "choices": ["إلى الكعبين", "إلى الركبتين", "الأصابع فقط"], "explanation": "من فرائض الوضوء غسل الرجلين إلى الكعبين."}, "choiceImages": ["/assets/quiz/ablution-pieds-chevilles.svg", "/assets/quiz/ablution-pieds-genoux.svg", "/assets/quiz/ablution-orteils.svg"]}, {"question": "Que veut dire « dalk » ?", "choices": ["Frotter les membres en les lavant", "Laver trois fois", "Commencer par la droite"], "answer": 0, "explanation": "Le dalk, c'est frotter chaque membre en le lavant. C'est une obligation.", "ar": {"question": "ما هو الدلك؟", "choices": ["إمرار اليد على العضو مع الغسل", "الغسل ثلاث مرات", "البداية باليمنى"], "explanation": "الدلك من فرائض الوضوء."}}, {"question": "Que veut dire « fawr » ?", "choices": ["Enchaîner les ablutions sans s'arrêter longtemps", "Faire très vite", "Utiliser beaucoup d'eau"], "answer": 0, "explanation": "Le fawr, c'est enchaîner les ablutions sans s'arrêter longtemps.", "ar": {"question": "ما هو الفور؟", "choices": ["الموالاة بين الأعضاء دون تفريق طويل", "الإسراع الشديد", "كثرة الماء"], "explanation": "الفور من فرائض الوضوء."}}, {"question": "On a oublié une farata et on s'en souvient tout de suite. Que faire ?", "choices": ["La faire, puis ce qui vient après", "Ne rien faire", "Attendre la prochaine prière"], "answer": 0, "explanation": "Si on s'en souvient vite, on fait la farata oubliée, puis ce qui vient après.", "ar": {"question": "من نسي فرضا من أعضائه وتذكره بالقرب، ماذا يفعل؟", "choices": ["يفعله ويفعل ما بعده", "لا شيء عليه", "ينتظر الصلاة القادمة"], "explanation": "من نسي فرضا فإن تذكره بالقرب فعله وما بعده."}}], "ar": {"title": "فرائض الوضوء", "description": "فرائض الوضوء السبع."}}, {"id": "sunna-ndiapp", "title": "Sunna ndiapp", "description": "Farata ou sunna ? Ce qui est recommandé dans les ablutions.", "icon": "ph-drop-half", "source": "Mukhtasar d'Al-Akhdari (rite malikite)", "keepOrder": true, "questions": [{"question": "Se rincer la bouche (madmada)", "choices": ["Farata (obligatoire)", "Sunna (recommandée)"], "answer": 1, "explanation": "Se rincer la bouche est une sunna des ablutions.", "ar": {"question": "المضمضة", "choices": ["فرض", "سنة"], "explanation": "المضمضة من سنن الوضوء."}, "image": "/assets/quiz/ablution-bouche.svg", "imageAlt": "Se rincer la bouche"}, {"question": "Aspirer l'eau par le nez (istinchâq)", "choices": ["Farata (obligatoire)", "Sunna (recommandée)"], "answer": 1, "explanation": "Aspirer l'eau par le nez est une sunna.", "ar": {"question": "الاستنشاق", "choices": ["فرض", "سنة"], "explanation": "الاستنشاق من سنن الوضوء."}, "image": "/assets/quiz/ablution-nez.svg", "imageAlt": "Aspirer l’eau par le nez"}, {"question": "Laver le visage", "choices": ["Farata (obligatoire)", "Sunna (recommandée)"], "answer": 0, "explanation": "Laver le visage est une farata.", "ar": {"question": "غسل الوجه", "choices": ["فرض", "سنة"], "explanation": "غسل الوجه من فرائض الوضوء."}, "image": "/assets/quiz/ablution-visage.svg", "imageAlt": "Laver le visage"}, {"question": "Essuyer les oreilles", "choices": ["Farata (obligatoire)", "Sunna (recommandée)"], "answer": 1, "explanation": "Essuyer les oreilles est une sunna. On reprend de l'eau pour elles.", "ar": {"question": "مسح الأذنين", "choices": ["فرض", "سنة"], "explanation": "مسح الأذنين وتجديد الماء لهما من سنن الوضوء."}, "image": "/assets/quiz/ablution-oreilles.svg", "imageAlt": "Essuyer les oreilles"}, {"question": "Se laver les mains jusqu'aux poignets au début", "choices": ["Farata (obligatoire)", "Sunna (recommandée)"], "answer": 1, "explanation": "Se laver les mains jusqu'aux poignets en commençant est une sunna.", "ar": {"question": "غسل اليدين إلى الكوعين عند الشروع", "choices": ["فرض", "سنة"], "explanation": "غسل اليدين إلى الكوعين عند الشروع من سنن الوضوء."}, "image": "/assets/quiz/ablution-mains-poignets.svg", "imageAlt": "Laver les mains jusqu’aux poignets"}, {"question": "Frotter les membres (dalk)", "choices": ["Farata (obligatoire)", "Sunna (recommandée)"], "answer": 0, "explanation": "Le dalk est une farata.", "ar": {"question": "الدلك", "choices": ["فرض", "سنة"], "explanation": "الدلك من فرائض الوضوء."}}, {"question": "Respecter l'ordre des farata", "choices": ["Farata (obligatoire)", "Sunna (recommandée)"], "answer": 1, "explanation": "Faire les farata dans l'ordre est une sunna.", "ar": {"question": "الترتيب بين الفرائض", "choices": ["فرض", "سنة"], "explanation": "الترتيب بين الفرائض من سنن الوضوء."}}, {"question": "On a oublié une sunna des ablutions. Que faire ?", "choices": ["La faire, sans refaire la prière", "Refaire toutes ses prières", "Recommencer les ablutions et la prière"], "answer": 0, "explanation": "Si on oublie une sunna, on la fait. Pas besoin de refaire la prière.", "ar": {"question": "من ترك سنة من سنن الوضوء، ماذا يفعل؟", "choices": ["يفعلها ولا يعيد الصلاة", "يعيد كل صلواته", "يعيد الوضوء والصلاة"], "explanation": "وإن ترك سنة فعلها ولا يعيد الصلاة."}}], "ar": {"title": "سنن الوضوء", "description": "فرض أم سنة؟ سنن الوضوء."}}, {"id": "farata-diouli", "title": "Farata diouli", "description": "Ce qui est obligatoire dans la prière.", "icon": "ph-hands-praying", "source": "Mukhtasar d'Al-Akhdari (rite malikite)", "questions": [{"question": "Combien y a-t-il de farata dans la prière ?", "choices": ["14", "7", "5"], "answer": 0, "explanation": "Al-Akhdari compte quatorze farata dans la prière.", "ar": {"question": "كم عدد فرائض الصلاة عند الأخضري؟", "choices": ["أربع عشرة", "سبع", "خمس"], "explanation": "ذكر الأخضري أربع عشرة فريضة."}}, {"question": "Par quoi entre-t-on en prière ?", "choices": ["La takbîr d'entrée « Allahou Akbar »", "Le salam", "Une sourate"], "answer": 0, "explanation": "On entre en prière par la takbîr d'entrée (takbîratoul ihrâm), dite debout.", "ar": {"question": "بمَ يدخل المصلي في الصلاة؟", "choices": ["بتكبيرة الإحرام", "بالسلام", "بالسورة"], "explanation": "من فرائض الصلاة تكبيرة الإحرام والقيام لها."}, "image": "/assets/quiz/priere-takbir.svg", "imageAlt": "Takbîr d’entrée, mains levées"}, {"question": "Quand faut-il faire l'intention de la prière ?", "choices": ["Au moment de la takbîr d'entrée", "Après la Fâtiha", "À la fin de la prière"], "answer": 0, "explanation": "On fait l'intention en disant la takbîr d'entrée.", "ar": {"question": "متى تكون نية الصلاة؟", "choices": ["مقارنة لتكبيرة الإحرام", "بعد الفاتحة", "في آخر الصلاة"], "explanation": "وشروط النية مقارنتها لتكبيرة الإحرام."}}, {"question": "Réciter la Fâtiha", "choices": ["Farata (obligatoire)", "Sunna (recommandée)"], "answer": 0, "explanation": "Réciter la Fâtiha, debout, est une farata.", "ar": {"question": "قراءة الفاتحة", "choices": ["فرض", "سنة"], "explanation": "الفاتحة والقيام لها من فرائض الصلاة."}, "image": "/assets/quiz/priere-debout.svg", "imageAlt": "Debout pour réciter la Fâtiha"}, {"question": "Se redresser après l'inclinaison (roukou')", "choices": ["Farata (obligatoire)", "Sunna (recommandée)"], "answer": 0, "explanation": "S'incliner (roukou') puis se redresser : ce sont des farata.", "ar": {"question": "الرفع من الركوع", "choices": ["فرض", "سنة"], "explanation": "الركوع والرفع منه من فرائض الصلاة."}, "image": "/assets/quiz/priere-roukou.svg", "imageAlt": "Inclinaison (roukou’)"}, {"question": "Que veut dire « touma'nîna » ?", "choices": ["Marquer un temps de calme dans chaque position", "Prier vite", "Prier à voix haute"], "answer": 0, "explanation": "La touma'nîna, c'est rester calme un instant dans chaque position. C'est une farata.", "ar": {"question": "ما هي الطمأنينة؟", "choices": ["السكون في كل ركن قليلا", "الإسراع في الصلاة", "الجهر بالقراءة"], "explanation": "الطمأنينة من فرائض الصلاة."}}, {"question": "Poser le front au sol pendant la prosternation", "choices": ["Farata (obligatoire)", "Sunna (recommandée)"], "answer": 0, "explanation": "Poser le front au sol est une farata.", "ar": {"question": "السجود على الجبهة", "choices": ["فرض", "سنة"], "explanation": "السجود على الجبهة والرفع منه من فرائض الصلاة."}, "image": "/assets/quiz/priere-soujoud.svg", "imageAlt": "Prosternation, le front au sol"}, {"question": "Comment sort-on de la prière ?", "choices": ["Par le salam, en étant assis", "Par la takbîr", "En se levant"], "answer": 0, "explanation": "Le salam est une farata, et la position assise pour le dire aussi.", "ar": {"question": "بمَ يخرج المصلي من الصلاة؟", "choices": ["بالسلام مع الجلوس له", "بالتكبير", "بالقيام"], "explanation": "السلام وجلوسه الذي يقارنه من فرائض الصلاة."}, "image": "/assets/quiz/priere-salam.svg", "imageAlt": "Salam, en position assise"}], "ar": {"title": "فرائض الصلاة", "description": "فرائض الصلاة."}}, {"id": "sunna-diouli", "title": "Sunna diouli", "description": "Farata ou sunna ? Ce qui est recommandé dans la prière.", "icon": "ph-mosque", "source": "Mukhtasar d'Al-Akhdari (rite malikite)", "keepOrder": true, "questions": [{"question": "Réciter une sourate après la Fâtiha", "choices": ["Farata (obligatoire)", "Sunna (recommandée)"], "answer": 1, "explanation": "La sourate après la Fâtiha est une sunna.", "ar": {"question": "السورة التي بعد الفاتحة", "choices": ["فرض", "سنة"], "explanation": "السورة التي بعد الفاتحة من سنن الصلاة."}, "image": "/assets/quiz/priere-debout.svg", "imageAlt": "Debout pour réciter la sourate"}, {"question": "Les « Allahou Akbar » après celui d'entrée", "choices": ["Farata (obligatoire)", "Sunna (recommandée)"], "answer": 1, "explanation": "Toutes les takbîr sont des sunnas, sauf la première.", "ar": {"question": "التكبير بعد تكبيرة الإحرام", "choices": ["فرض", "سنة"], "explanation": "كل تكبيرة سنة إلا الأولى."}}, {"question": "Dire « Sami'allâhou liman hamidah »", "choices": ["Farata (obligatoire)", "Sunna (recommandée)"], "answer": 1, "explanation": "C'est une sunna.", "ar": {"question": "قول: سمع الله لمن حمده", "choices": ["فرض", "سنة"], "explanation": "سمع الله لمن حمده من سنن الصلاة."}}, {"question": "Le tachahhoud (attahiyyâtou)", "choices": ["Farata (obligatoire)", "Sunna (recommandée)"], "answer": 1, "explanation": "Les deux tachahhoud, et la position assise pour les dire, sont des sunnas.", "ar": {"question": "التشهد", "choices": ["فرض", "سنة"], "explanation": "التشهدان والجلوس لهما من سنن الصلاة."}, "image": "/assets/quiz/priere-assis.svg", "imageAlt": "Assis pour le tachahhoud"}, {"question": "La takbîr d'entrée « Allahou Akbar »", "choices": ["Farata (obligatoire)", "Sunna (recommandée)"], "answer": 0, "explanation": "La takbîr d'entrée est une farata.", "ar": {"question": "تكبيرة الإحرام", "choices": ["فرض", "سنة"], "explanation": "تكبيرة الإحرام من فرائض الصلاة."}, "image": "/assets/quiz/priere-takbir.svg", "imageAlt": "Takbîr d’entrée, mains levées"}, {"question": "La prière sur le Prophète (PSL)", "choices": ["Farata (obligatoire)", "Sunna (recommandée)"], "answer": 1, "explanation": "La prière sur le Prophète (PSL) est une sunna.", "ar": {"question": "الصلاة على رسول الله ﷺ", "choices": ["فرض", "سنة"], "explanation": "الصلاة على رسول الله ﷺ من سنن الصلاة."}}, {"question": "L'iqâma avant la prière", "choices": ["Farata (obligatoire)", "Sunna (recommandée)"], "answer": 1, "explanation": "L'iqâma est une sunna.", "ar": {"question": "الإقامة", "choices": ["فرض", "سنة"], "explanation": "الإقامة من سنن الصلاة."}}, {"question": "Réciter à voix haute dans les prières à voix haute", "choices": ["Farata (obligatoire)", "Sunna (recommandée)"], "answer": 1, "explanation": "Réciter à voix haute là où c'est prévu est une sunna.", "ar": {"question": "الجهر فيما يجهر فيه", "choices": ["فرض", "سنة"], "explanation": "الجهر فيما يجهر فيه من سنن الصلاة."}}], "ar": {"title": "سنن الصلاة", "description": "فرض أم سنة؟ سنن الصلاة."}}, {"id": "notre-dahira", "title": "Notre dahira", "description": "Son histoire, son nom et son guide.", "icon": "ph-users-three", "questions": [{"question": "En quelle année le dahira a-t-il été fondé ?", "choices": ["1999", "2012", "1985"], "answer": 0, "explanation": "Le dahira est né à Yeumbeul en 1999."}, {"question": "Dans quelle localité le dahira est-il né ?", "choices": ["Yeumbeul", "Tivaouane", "Saint-Louis"], "answer": 0, "explanation": "Des fidèles de Yeumbeul ont fondé le dahira en 1999."}, {"question": "Que signifie « Moutahabina Fillahi » ?", "choices": ["Ceux qui s'aiment pour Dieu", "Ceux qui voyagent pour Dieu", "Les gardiens du savoir"], "answer": 0, "explanation": "Moutahabina Fillahi : « ceux qui s'aiment pour Dieu »."}, {"question": "Sous la guidance de qui le dahira a-t-il été fondé ?", "choices": ["Serigne Mansour Sy « Borom Daaraji »", "Serigne Babacar Sy", "Seydi El Hadji Malick Sy"], "answer": 0, "explanation": "Serigne Mansour Sy « Borom Daaraji » guidait le dahira dès sa fondation en 1999.", "choiceImages": ["/assets/tenants/moutahabina/lignee/serigne-mansour-sy.webp", "/assets/tenants/moutahabina/lignee/serigne-babacar-sy.webp", "/assets/tenants/moutahabina/lignee/seydi-el-hadji-malick-sy.webp"]}, {"question": "Depuis quelle année Serigne Mame Malick Sy guide-t-il le dahira ?", "choices": ["2012", "1999", "2020"], "answer": 0, "explanation": "Après le rappel à Dieu de Serigne Mansour Sy en 2012, son fils Serigne Mame Malick Sy guide le dahira.", "image": "/assets/tenants/moutahabina/lignee/serigne-mame-malick-sy.webp", "imageAlt": "Portrait de Serigne Mame Malick Sy"}, {"question": "Quelle est la devise du dahira ?", "choices": ["S'aimer pour Dieu, servir ensemble.", "Apprendre avant de parler.", "Le travail avant tout."], "answer": 0, "explanation": "« S'aimer pour Dieu, servir ensemble » : c'est le sens même de Moutahabina Fillahi."}]}, {"id": "lignee-de-tivaouane", "title": "La lignée de Tivaouane", "description": "Quatre générations au service du savoir.", "icon": "ph-book-open-text", "questions": [{"question": "Quel surnom donne-t-on à Seydi El Hadji Malick Sy ?", "choices": ["Maodo", "Borom Daaraji", "Borom bonnet carré"], "answer": 0, "explanation": "Seydi El Hadji Malick Sy est appelé « Maodo ».", "image": "/assets/tenants/moutahabina/lignee/seydi-el-hadji-malick-sy.webp", "imageAlt": "Portrait de Seydi El Hadji Malick Sy"}, {"question": "Dans quelle ville Seydi El Hadji Malick Sy a-t-il fondé sa grande école ?", "choices": ["Tivaouane", "Kaolack", "Ziguinchor"], "answer": 0, "explanation": "À Tivaouane, il fonde la zawiya et une grande école. Beaucoup de muqaddams y ont été formés."}, {"question": "En quelle année Seydi El Hadji Malick Sy est-il rappelé à Dieu ?", "choices": ["1922", "1957", "1902"], "answer": 0, "explanation": "Il est rappelé à Dieu le 27 juin 1922."}, {"question": "Qui fut le premier Khalife général des Tidianes ?", "choices": ["Serigne Babacar Sy", "Serigne Mansour Sy", "Serigne Mame Malick Sy"], "answer": 0, "explanation": "Serigne Babacar Sy devient le premier Khalife général des Tidianes en 1922, à 37 ans.", "choiceImages": ["/assets/tenants/moutahabina/lignee/serigne-babacar-sy.webp", "/assets/tenants/moutahabina/lignee/serigne-mansour-sy.webp", "/assets/tenants/moutahabina/lignee/serigne-mame-malick-sy.webp"]}, {"question": "Quel surnom porte Serigne Babacar Sy ?", "choices": ["Borom bonnet carré", "Maodo", "Borom Daaraji"], "answer": 0, "explanation": "Serigne Babacar Sy est appelé « Borom bonnet carré ».", "image": "/assets/tenants/moutahabina/lignee/serigne-babacar-sy.webp", "imageAlt": "Portrait de Serigne Babacar Sy"}, {"question": "Quel rôle Serigne Babacar Sy a-t-il joué pour les dahiras ?", "choices": ["Il a initié les premiers dahiras", "Il a interdit les dahiras", "Aucun rôle particulier"], "answer": 0, "explanation": "Il a lancé les premiers dahiras, comme la Dahiratoul Kiram, pour s'entraider et apprendre ensemble."}, {"question": "Pourquoi Serigne Mansour Sy est-il appelé « Borom Daaraji » ?", "choices": ["Il a dirigé le grand daara fondé par son grand-père", "C'est le nom de son village natal", "C'est le nom de son premier livre"], "answer": 0, "explanation": "Pendant de longues années, il a dirigé le grand daara de Tivaouane fondé par Maodo.", "image": "/assets/tenants/moutahabina/lignee/serigne-mansour-sy.webp", "imageAlt": "Portrait de Serigne Mansour Sy"}, {"question": "Qui est le père de notre guide, Serigne Mame Malick Sy ?", "choices": ["Serigne Mansour Sy", "Serigne Babacar Sy", "Seydi El Hadji Malick Sy"], "answer": 0, "explanation": "Serigne Mame Malick Sy est le fils de Serigne Mansour Sy « Borom Daaraji ».", "choiceImages": ["/assets/tenants/moutahabina/lignee/serigne-mansour-sy.webp", "/assets/tenants/moutahabina/lignee/serigne-babacar-sy.webp", "/assets/tenants/moutahabina/lignee/seydi-el-hadji-malick-sy.webp"]}]}, {"id": "notre-charte", "title": "Notre charte", "description": "Les engagements des membres et le déroulement d'un dahira.", "icon": "ph-scroll", "questions": [{"question": "Quelle tenue est obligatoire au dahira ?", "choices": ["La tenue blanche (ou une tenue correcte)", "Une tenue verte", "Aucune tenue particulière"], "answer": 0, "explanation": "La charte demande une tenue blanche, ou à défaut une tenue correcte."}, {"question": "À quelle heure commence le dahira ?", "choices": ["21 h 00", "20 h 00", "22 h 40"], "answer": 0, "explanation": "Le dahira commence à 21 h 00 et se termine à 23 h 30."}, {"question": "Que se passe-t-il de 22 h 40 à 23 h 20 ?", "choices": ["L'Oustaz", "Les nabiens", "Les informations"], "answer": 0, "explanation": "Nabiens de 21 h 00 à 22 h 40, puis l'Oustaz de 22 h 40 à 23 h 20, et les informations à 23 h 20."}, {"question": "Combien chaque membre cotise-t-il pour un baptême ou un mariage ?", "choices": ["1 000 F CFA", "2 000 F CFA", "4 000 F CFA"], "answer": 0, "explanation": "Pour un baptême ou un mariage, chaque membre cotise 1 000 F CFA."}, {"question": "Combien un membre donne-t-il le jour où il reçoit le dahira ?", "choices": ["4 000 F CFA", "1 000 F CFA", "2 000 F CFA"], "answer": 0, "explanation": "4 000 F CFA : 2 000 pour la sonorisation et 2 000 pour le thé (ataya)."}, {"question": "Que veut dire « Yar ak téguine » ?", "choices": ["La discipline", "La présence", "La tenue correcte"], "answer": 0, "explanation": "« Yar ak téguine » : la discipline, l'un des engagements de la charte."}, {"question": "À quoi correspond « Téw tay téwal » ?", "choices": ["La présence physique et financière", "La discipline", "La carte de membre"], "answer": 0, "explanation": "« Téw tay téwal » : être présent, physiquement et financièrement."}]}]}$ancien$::jsonb;
+
+update public.sites
+set contenu = replace(replace(replace(contenu::text,
+      '[Présentation de Serigne Mame Malick Sy : parcours, enseignement, lien avec le dahira. À rédiger et valider par le bureau.]', ''),
+      ' [Parcours et enseignement : à fournir par le bureau.]', ''),
+      ' À faire relire et valider par le bureau.', '')::jsonb
+where adresse = 'moutahabina';
+
+-- Vérification : 10 thèmes, 7 avec leçon, plus aucune mention interne
+select
+  jsonb_array_length(quiz -> 'themes') as themes,
+  (select count(*) from jsonb_array_elements(quiz -> 'themes') t where t ? 'lesson') as avec_lecon,
+  contenu::text like '%à fournir%' or contenu::text like '%À rédiger%' or contenu::text like '%valider par le bureau%' as reste_des_mentions
+from public.sites
+where adresse = 'moutahabina';
+
+commit;

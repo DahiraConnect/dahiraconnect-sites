@@ -1445,22 +1445,22 @@
         {
           "question": "À quelle heure commence le dahira ?",
           "choices": [
-            "21 h 00",
+            "20 h 30",
             "20 h 00",
-            "22 h 40"
+            "22 h 10"
           ],
           "answer": 0,
-          "explanation": "Le dahira commence à 21 h 00 et se termine à 23 h 30."
+          "explanation": "Le dahira commence à 20 h 30 et se termine à 23 h 00."
         },
         {
-          "question": "Que se passe-t-il de 22 h 40 à 23 h 20 ?",
+          "question": "Que se passe-t-il de 22 h 10 à 22 h 50 ?",
           "choices": [
             "L'Oustaz",
             "Les nabiens",
             "Les informations"
           ],
           "answer": 0,
-          "explanation": "Nabiens de 21 h 00 à 22 h 40, puis l'Oustaz de 22 h 40 à 23 h 20, et les informations à 23 h 20."
+          "explanation": "Nabiens de 20 h 30 à 22 h 10, puis l’Oustaz de 22 h 10 à 22 h 50, et les informations à 22 h 50."
         },
         {
           "question": "Combien chaque membre cotise-t-il pour un baptême ou un mariage ?",

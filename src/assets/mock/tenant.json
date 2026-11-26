@@ -1,44 +1,64 @@
 {
   "id": "dahira-moutahabina",
-  "slug": "moutahabina",
-  "siteUrl": "https://moutahabina.akkili.sn",
-  "name": "Dahira Moutahabina Fillahi",
-  "shortName": "MOUTAHABINA",
-  "nameArabic": "دائرة المتحبن في اللّه",
-  "nameMeaning": "ceux qui s'aiment pour Dieu",
-  "motto": "S'aimer pour Dieu, servir ensemble.",
-  "ringText": "S'AIMER POUR DIEU • SERVIR ENSEMBLE • DEPUIS 1999 •",
-  "guideName": "Serigne Mame Malick Sy",
-  "guidePhotoUrl": "/assets/tenants/moutahabina/lignee/serigne-mame-malick-sy-portrait.webp",
-  "foundedYear": 1999,
-  "foundedPlace": "Yeumbeul",
-  "membersApprox": 150,
-  "logoUrl": "/assets/tenants/moutahabina/logo.webp",
-  "logoSmallUrl": "/assets/tenants/moutahabina/logo-128.webp",
-  "shareImageUrl": "/assets/tenants/moutahabina/partage.jpg",
-  "logoAlt": "Médaillon du dahira avec le portrait de Serigne Mame Malick Sy",
-  "theme": {},
-  "contact": {
-    "address": "Yeumbeul, Dakar",
-    "phone": "+221 77 440 44 36"
-  },
   "join": {
     "mode": "chat",
+    "callNumber": "+221774404436",
     "whatsappNumber": "221774404436",
-    "prefilledMessage": "Assalamou aleykoum, je souhaite rejoindre le Dahira Moutahabina Fillahi.",
-    "callNumber": "+221774404436"
+    "prefilledMessage": "Assalamou aleykoum, je souhaite rejoindre le Dahira Moutahabina Fillahi de Yeumbeul."
   },
-  "support": {
-    "text": "Votre soutien finance nos activités et nos actions sociales.",
-    "wave": "77 440 44 36",
-    "orangeMoney": "77 440 44 36",
-    "blessing": "Qu'Allah vous le rende."
+  "name": "Dahira Moutahabina Fillahi",
+  "slug": "moutahabina",
+  "motto": "S'aimer pour Dieu, servir ensemble.",
+  "theme": {
+    "color-gold": "#E2B743",
+    "color-brand": "#1BB13E",
+    "color-primary": "#0A3A1B",
+    "color-on-brand": "#072612",
+    "color-gold-line": "#D7AE40",
+    "color-gold-text": "#796224",
+    "focus-ring-color": "#A38430",
+    "color-primary-mid": "#275236",
+    "color-primary-deep": "#072612",
+    "color-text-primary": "#0A3A1B"
   },
   "social": [
     {
-      "platform": "tiktok",
       "url": "https://www.tiktok.com/@dahiramoutahabinafilah0",
-      "handle": "@dahiramoutahabinafilah0"
+      "handle": "@dahiramoutahabinafilah0",
+      "platform": "tiktok"
     }
-  ]
+  ],
+  "contact": {
+    "phone": "+221 77 440 44 36",
+    "others": [],
+    "address": "Yeumbeul, Dakar"
+  },
+  "logoAlt": "Logo du Dahira Moutahabina Fillahi",
+  "logoUrl": "/assets/tenants/moutahabina/logo.webp",
+  "siteUrl": "https://moutahabina.akkili.sn",
+  "support": {
+    "text": "Votre soutien finance nos activités et nos actions sociales.",
+    "wave": "77 440 44 36",
+    "blessing": "Qu'Allah vous le rende.",
+    "orangeMoney": "77 440 44 36"
+  },
+  "ringText": "S'AIMER POUR DIEU • SERVIR ENSEMBLE • DEPUIS 1999 •",
+  "guideName": "Serigne Mame Malick Sy",
+  "shortName": "MOUTAHABINA",
+  "nameArabic": "دائرة متحابين فِي الله",
+  "foundedYear": 1999,
+  "nameMeaning": "ceux qui s'aiment pour Dieu",
+  "announcement": {
+    "text": "Rappel sur le ziar tivaoune",
+    "tone": "info",
+    "until": "2026-11-23",
+    "active": false,
+    "linkUrl": "/agenda/ziar-tivaouane-2026",
+    "linkLabel": "Voir le détail"
+  },
+  "foundedPlace": "Yeumbeul",
+  "logoSmallUrl": "/assets/tenants/moutahabina/logo-128.webp",
+  "guidePhotoUrl": "/assets/tenants/moutahabina/lignee/serigne-mame-malick-sy-portrait.webp",
+  "membersApprox": 150,
+  "shareImageUrl": "/assets/tenants/moutahabina/partage.jpg"
 }

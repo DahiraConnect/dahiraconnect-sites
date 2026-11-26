@@ -1,42 +1,48 @@
 {
   "home": {
-    "aboutTitle": "Apprendre, prier et servir, ensemble.",
-    "aboutText": "Né à Yeumbeul en 1999 sous la guidance de Serigne Mansour Sy « Borom Daaraji », le dahira est guidé depuis 2012 par son fils, Serigne Mame Malick Sy."
+    "aboutText": "Né à Yeumbeul en 1999, sous la guidance de Serigne Mansour Sy « Borom Daaraji », le dahira est guidé depuis 2012 par son fils, Serigne Mame Malick Sy.",
+    "aboutTitle": "Apprendre, prier et servir, ensemble."
   },
-  "about": {
-    "heroTitle": "Une famille née à Yeumbeul en 1999.",
-    "history": [
-      {
-        "year": "1999",
-        "title": "Naissance à Yeumbeul",
-        "text": "Des fidèles de Yeumbeul fondent le dahira sous la guidance de Serigne Mansour Sy « Borom Daaraji »."
-      },
-      {
-        "year": "2012",
-        "title": "Une guidance qui continue",
-        "text": "Après le rappel à Dieu de Serigne Mansour Sy, le dahira poursuit son chemin avec son fils, Serigne Mame Malick Sy."
-      },
-      {
-        "year": "Aujourd'hui",
-        "title": "Une grande famille",
-        "text": "Près de 150 membres, à Yeumbeul, à Dakar et dans la diaspora, réunis pour apprendre, prier et servir.",
-        "highlight": true
-      }
+  "join": {
+    "intro": "Pas de formulaire. Un message sur WhatsApp, et un responsable vous répond.",
+    "steps": [
+      "Vous appuyez sur « Rejoindre sur WhatsApp ».",
+      "Vous envoyez le message déjà écrit.",
+      "Un responsable vous répond et vous ajoute au groupe du dahira."
     ]
   },
+  "about": {
+    "history": [
+      {
+        "text": "Des fidèles de Yeumbeul fondent le dahira sous la guidance de Serigne Mansour Sy « Borom Daaraji ».",
+        "year": "1999",
+        "title": "Naissance à Yeumbeul"
+      },
+      {
+        "text": "Après le rappel à Dieu de Serigne Mansour Sy, le dahira poursuit son chemin avec son fils, Serigne Mame Malick Sy.",
+        "year": "2012",
+        "title": "Une guidance qui continue"
+      },
+      {
+        "text": "Près de 150 membres, à Yeumbeul, à Dakar et dans la diaspora, réunis pour apprendre, prier et servir.",
+        "year": "Aujourd'hui",
+        "title": "Une grande famille",
+        "highlight": true
+      }
+    ],
+    "heroTitle": "Une famille née à Yeumbeul en 1999."
+  },
   "guide": {
-    "intro": "Fils de Serigne Mansour Sy « Borom Daaraji », il guide le dahira depuis 2012, à la suite de son père qui l'accompagnait depuis sa fondation en 1999.",
     "bio": "",
-    "lineageTitle": "Quatre générations au service du savoir",
-    "lineageIntro": "De Gaya à Tivaouane, puis jusqu'à notre dahira : une même école, celle de Seydi El Hadji Malick Sy, transmise de père en fils.",
+    "intro": "Fils de Serigne Mansour Sy « Borom Daaraji », il guide le dahira depuis 2012, à la suite de son père qui l'accompagnait depuis sa fondation en 1999.",
     "lineage": [
       {
-        "relation": "Arrière-grand-père",
         "name": "Seydi El Hadji Malick Sy",
+        "text": "Né à Gaya, dans le Walo, il étudie en Mauritanie puis à Saint-Louis. Installé à Tivaouane au début du XXᵉ siècle, il y fonde la zawiya et une grande école d'où sortent de nombreux muqaddams de la Tijaniyya.",
         "alias": "Maodo",
         "years": "† 27 juin 1922",
-        "text": "Né à Gaya, dans le Walo, il étudie en Mauritanie puis à Saint-Louis. Installé à Tivaouane au début du XXᵉ siècle, il y fonde la zawiya et une grande école d'où sortent de nombreux muqaddams de la Tijaniyya.",
         "photoUrl": "/assets/tenants/moutahabina/lignee/seydi-el-hadji-malick-sy.webp",
+        "relation": "Arrière-grand-père",
         "milestones": [
           {
             "year": "1884",
@@ -53,12 +59,12 @@
         ]
       },
       {
-        "relation": "Grand-père",
         "name": "Serigne Babacar Sy",
+        "text": "Fils aîné de Maodo et de Sokhna Rokhaya Ndiaye, né à Saint-Louis. Devenu à 37 ans le premier Khalife général des Tidianes, il initie les dahiras, comme la Dahiratoul Kiram, qui structurent la communauté autour de l'entraide et de l'enseignement.",
         "alias": "Borom bonnet carré",
         "years": "1885 – 1957",
-        "text": "Fils aîné de Maodo et de Sokhna Rokhaya Ndiaye, né à Saint-Louis. Devenu à 37 ans le premier Khalife général des Tidianes, il initie les dahiras, comme la Dahiratoul Kiram, qui structurent la communauté autour de l'entraide et de l'enseignement.",
         "photoUrl": "/assets/tenants/moutahabina/lignee/serigne-babacar-sy.webp",
+        "relation": "Grand-père",
         "milestones": [
           {
             "year": "1885",
@@ -75,12 +81,12 @@
         ]
       },
       {
-        "relation": "Père",
         "name": "Serigne Mansour Sy",
+        "text": "Fils de Serigne Babacar Sy et de Sokhna Aïssatou Seck. Il dirige pendant de longues années le grand daara fondé par son grand-père, d'où son surnom. Khalife général des Tidianes, il guide notre dahira dès sa fondation en 1999.",
         "alias": "Borom Daaraji",
         "years": "1925 – 2012",
-        "text": "Fils de Serigne Babacar Sy et de Sokhna Aïssatou Seck. Il dirige pendant de longues années le grand daara fondé par son grand-père, d'où son surnom. Khalife général des Tidianes, il guide notre dahira dès sa fondation en 1999.",
         "photoUrl": "/assets/tenants/moutahabina/lignee/serigne-mansour-sy.webp",
+        "relation": "Père",
         "milestones": [
           {
             "year": "1925",
@@ -101,11 +107,11 @@
         ]
       },
       {
-        "relation": "Notre guide",
         "name": "Serigne Mame Malick Sy",
         "text": "Fils de Serigne Mansour Sy, il guide le dahira depuis 2012.",
-        "highlight": true,
         "photoUrl": "/assets/tenants/moutahabina/lignee/serigne-mame-malick-sy.webp",
+        "relation": "Notre guide",
+        "highlight": true,
         "milestones": [
           {
             "year": "2012",
@@ -114,34 +120,28 @@
         ]
       }
     ],
-    "didYouKnow": "Les premiers dahiras ont été initiés par Serigne Babacar Sy. Ils sont devenus des piliers de solidarité et d'éducation.",
     "sources": "Textes établis d'après la presse sénégalaise.",
+    "didYouKnow": "Les premiers dahiras ont été initiés par Serigne Babacar Sy. Ils sont devenus des piliers de solidarité et d'éducation.",
     "sourceLinks": [
       {
-        "label": "Le Soleil — Serigne Babacar Sy, « Borom bonnet carré »",
-        "url": "https://lesoleil.sn/actualites/societe-fait-divers/religion/serigne-babacar-sy-borom-bonnet-carre-le-batisseur-de-la-tidianiyya-moderne/"
+        "url": "https://lesoleil.sn/actualites/societe-fait-divers/religion/serigne-babacar-sy-borom-bonnet-carre-le-batisseur-de-la-tidianiyya-moderne/",
+        "label": "Le Soleil — Serigne Babacar Sy, « Borom bonnet carré »"
       },
       {
-        "label": "Le Soleil — Serigne Mansour Sy « Borom Daraadji »",
-        "url": "https://lesoleil.sn/actualites/serigne-mansour-sy-borom-daraadji-le-grand-savant-pedagogue/"
+        "url": "https://lesoleil.sn/actualites/serigne-mansour-sy-borom-daraadji-le-grand-savant-pedagogue/",
+        "label": "Le Soleil — Serigne Mansour Sy « Borom Daraadji »"
       },
       {
-        "label": "Senego — La vie et l'œuvre de Seydi El Hadji Malick Sy",
-        "url": "https://senego.com/la-vie-et-loeuvre-de-seydil-hadj-malick-sy-passee-au-peigne-fin_599663.html"
+        "url": "https://senego.com/la-vie-et-loeuvre-de-seydil-hadj-malick-sy-passee-au-peigne-fin_599663.html",
+        "label": "Senego — La vie et l'œuvre de Seydi El Hadji Malick Sy"
       },
       {
-        "label": "Senego — La Dahiratoul Kiram",
-        "url": "https://senego.com/serigne-babacar-sy-la-dahiratoul-kiram-socle-de-la-structuration-tidiane_1996849.html"
+        "url": "https://senego.com/serigne-babacar-sy-la-dahiratoul-kiram-socle-de-la-structuration-tidiane_1996849.html",
+        "label": "Senego — La Dahiratoul Kiram"
       }
-    ]
-  },
-  "join": {
-    "intro": "Pas de formulaire. Un message sur WhatsApp, et un responsable vous répond.",
-    "steps": [
-      "Vous appuyez sur « Rejoindre sur WhatsApp ».",
-      "Vous envoyez le message déjà écrit.",
-      "Un responsable vous répond et vous ajoute au groupe du dahira."
-    ]
+    ],
+    "lineageIntro": "De Gaya à Tivaouane, puis jusqu'à notre dahira : une même école, celle de Seydi El Hadji Malick Sy, transmise de père en fils.",
+    "lineageTitle": "Quatre générations au service du savoir"
   },
   "charter": {
     "intro": "Les règles de vie du dahira, pour les nouveaux comme pour les anciens membres.",
@@ -193,26 +193,26 @@
     ],
     "schedule": [
       {
-        "time": "21 h 00",
+        "time": "20 h 30",
         "label": "Début du dahira"
       },
       {
-        "time": "21 h 00 – 22 h 40",
+        "time": "20 h 30 – 22 h 10",
         "label": "Nabiens"
       },
       {
-        "time": "22 h 40 – 23 h 20",
+        "time": "22 h 10 – 22 h 50",
         "label": "Oustaz"
       },
       {
-        "time": "23 h 20",
+        "time": "22 h 50",
         "label": "Informations"
       },
       {
-        "time": "23 h 30",
+        "time": "23 h 00",
         "label": "Fin du dahira"
       }
     ],
-    "scheduleNote": "Le dahira commence à 21 h 00 et se termine à 23 h 30."
+    "scheduleNote": "Le dahira commence à 20 h 30 et se termine à 23 h 00."
   }
 }
