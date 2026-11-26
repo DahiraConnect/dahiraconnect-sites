@@ -106,6 +106,14 @@ Un Lazim oublié doit être rattrapé.
 - **Leçons des ablutions et de la prière** (Farata ndiapp, Sunna ndiapp, Farata diouli, Sunna diouli), d'après le *Mukhtasar d'Al-Akhdari* (rite malikite), traduction française arabe-français, sections « catégorisation légale des éléments du wuduu' » et « de la salaat » : 7 farata et 8 sunna des ablutions, gestes méritoires, oublis ; 14 farata et sunna de la prière.
 - Tout le texte est dans `src/assets/mock/quiz.json`.
 
+## Vérification avec le texte arabe d'Al-Akhdari (26/11/2026)
+
+Leçons et quiz des ablutions et de la prière comparés au texte arabe du *Mukhtasar* ([islamicbook.ws](https://www.islamicbook.ws/asol/maliki/mkhtsr-abd-alrhmn.html)) : chapitres « فرائض الوضوء » (farata, sunna, fadâ'il, oublis) et « فرائض الصلاة » (farata, sunna).
+
+- Conformes : 7 farata et 8 sunna des ablutions ; 14 farata de la prière ; règles d'oubli ; condition de l'intention ; explications arabes des quiz (reprises du texte).
+- Corrigé pour suivre le texte : « وأعاد ما صلّى قبله » (oubli d'une farata) ; fadâ'il complétées (commencer la tête par l'avant, ordre des sunna) ; règle de la bouche et du nez oubliés après le visage ; « نية الصلاة المعيّنة » ; « الكفّين » ; carte ajoutée pour les sunna manquantes (Fâtiha avant la sourate, salam à voix haute, 2ᵉ et 3ᵉ salam derrière l'imam, sutra).
+- Hors Al-Akhdari, ajouté pour expliquer : limites du visage, définitions du dalk et du fawr, rinçage de la bouche (« on la remue puis on la recrache »). Usage malikite courant, à confirmer par l'Oustaz.
+
 ## Sources consultées (novembre 2026)
 
 - tidjaniya.com — [Fiqh de la Tariqa](https://tidjaniya.com/en/tariqa-fiqh/) (Lazim, Wazifa, Haylala) et [Conditions de la Tariqa](https://tidjaniya.com/fr/conditions-de-la-tariqa-tidjaniya/) (d'après le Qasd Sabil)

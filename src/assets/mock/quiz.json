@@ -1006,7 +1006,7 @@
             "text": "Si on s’en rend compte vite, on la fait, puis on refait ce qui vient après. Si on s’en rend compte tard, on la fait seule, et on refait les prières faites depuis.",
             "ar": {
               "title": "من نسي فرضا",
-              "text": "إن تذكّره بالقرب فعله وما بعده. وإن طال فعله وحده، وأعاد ما صلّى بعده."
+              "text": "إن تذكّره بالقرب فعله وما بعده. وإن طال فعله وحده، وأعاد ما صلّى قبله."
             }
           }
         ]
@@ -1244,18 +1244,18 @@
           },
           {
             "title": "Si on oublie une sunna",
-            "text": "On fait seulement la sunna oubliée. Pas besoin de refaire la prière.",
+            "text": "On fait seulement la sunna oubliée. Pas besoin de refaire la prière. Si on se souvient de la bouche ou du nez après avoir commencé le visage, on finit d’abord les ablutions.",
             "ar": {
               "title": "من نسي سنّة",
-              "text": "يفعلها وحدها، ولا يعيد الصلاة."
+              "text": "يفعلها وحدها، ولا يعيد الصلاة. ومن تذكّر المضمضة والاستنشاق بعد أن شرع في الوجه، فلا يرجع إليهما حتى يتمّ وضوءه."
             }
           },
           {
             "title": "Les gestes qui apportent du mérite",
-            "text": "Dire « Bismillah », utiliser le cure-dents (siwak), laver le visage et les bras une deuxième et une troisième fois, commencer par la droite, et ne pas gaspiller l’eau.",
+            "text": "Dire « Bismillah », utiliser le cure-dents (siwak), laver le visage et les bras une deuxième et une troisième fois, commencer la tête par l’avant, faire les sunna dans l’ordre, peu d’eau, et commencer par la droite.",
             "ar": {
               "title": "الفضائل",
-              "text": "التسمية، والسواك، والغسلة الثانية والثالثة للوجه واليدين، والبدء بالميامن، وقلّة الماء."
+              "text": "التسمية، والسواك، والزائد على الغسلة الأولى في الوجه واليدين، والبداءة بمقدّم الرأس، وترتيب السنن، وقلّة الماء على العضو، وتقديم اليمنى على اليسرى."
             }
           }
         ]
@@ -1442,12 +1442,12 @@
           },
           {
             "title": "L’intention et le premier « Allahou Akbar »",
-            "text": "On entre en prière par la takbîr d’entrée, debout. On fait l’intention de la prière à ce moment-là.",
+            "text": "On entre en prière par la takbîr d’entrée, debout. On a l’intention de la prière précise (Fajar, Tisbar…), au moment même de cette takbîr.",
             "image": "/assets/quiz/priere-takbir.svg",
             "imageAlt": "Dire Allahou Akbar, les mains levées",
             "ar": {
               "title": "النية وتكبيرة الإحرام",
-              "text": "يدخل في الصلاة بتكبيرة الإحرام قائما، وينوي الصلاة عندها."
+              "text": "يدخل في الصلاة بتكبيرة الإحرام قائما، وينوي الصلاة المعيّنة. وشرط النية مقارنتها لتكبيرة الإحرام."
             }
           },
           {
@@ -1713,12 +1713,20 @@
           },
           {
             "title": "La prosternation complète",
-            "text": "On se prosterne aussi sur le nez, les mains, les genoux et le bout des orteils.",
+            "text": "On se prosterne aussi sur le nez, les paumes des mains, les genoux et le bout des orteils.",
             "image": "/assets/quiz/priere-soujoud.svg",
             "imageAlt": "Prosternation",
             "ar": {
               "title": "السجود على الأعضاء",
-              "text": "يسجد أيضا على الأنف واليدين والركبتين وأطراف القدمين."
+              "text": "يسجد أيضا على الأنف والكفّين والركبتين وأطراف القدمين."
+            }
+          },
+          {
+            "title": "D’autres sunna",
+            "text": "Réciter la Fâtiha avant la sourate. Dire à voix haute le salam qui termine la prière. Derrière l’imam, faire aussi le deuxième et le troisième salam. Prier devant une sutra (un objet posé devant soi), sauf derrière l’imam.",
+            "ar": {
+              "title": "سنن أخرى",
+              "text": "تقديم الفاتحة على السورة، والجهر بالتسليمة الواجبة، والتسليمة الثانية والثالثة للمأموم، والسترة لغير المأموم."
             }
           }
         ]
