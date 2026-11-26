@@ -81,7 +81,7 @@ export default class LessonPage {
   protected readonly outline = computed(() =>
     lessonOutline(
       this.cards().map((c) => cardIn(c, this.lang()).title),
-      this.cards().map((c) => c.chapter),
+      this.cards().map((c) => cardIn(c, this.lang()).chapter),
     ),
   );
   /** On a repris la leçon en cours de route : proposer de recommencer */

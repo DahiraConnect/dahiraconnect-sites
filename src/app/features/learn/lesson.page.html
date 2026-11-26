@@ -40,7 +40,7 @@
           @if (card(); as c) {
             <article class="card">
               @if (c.chapter) {
-                <p class="card__chapter" [attr.lang]="isAr() ? 'fr' : null" [attr.dir]="isAr() ? 'ltr' : null">{{ c.chapter }}</p>
+                <p class="card__chapter">{{ c.chapter }}</p>
               }
               @if (c.image) {
                 <img class="card__img" [ngSrc]="c.image" [alt]="c.imageAlt ?? ''" width="240" height="240" />

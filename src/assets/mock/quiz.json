@@ -72,31 +72,59 @@
         "cards": [
           {
             "title": "Qu’est-ce que la Wazifa ?",
-            "text": "La Wazifa est une prière de la Tidjaniya. Elle fait partie des obligations du talibé. On la reçoit avec l’autorisation d’un moukadam."
+            "text": "La Wazifa est une prière de la Tidjaniya. Elle fait partie des obligations du talibé. On la reçoit avec l’autorisation d’un moukadam.",
+            "ar": {
+              "title": "ما هي الوظيفة؟",
+              "text": "الوظيفة ذكر من أذكار الطريقة التجانية، وهي من الأوراد اللازمة للمريد. تؤخذ بإذن من مقدّم مأذون."
+            }
           },
           {
             "title": "Quand la faire ?",
-            "text": "Au moins une fois par jour. Deux fois, matin et soir, c’est mieux. Si on la fait une seule fois : entre Takussan et le Takussan du lendemain."
+            "text": "Au moins une fois par jour. Deux fois, matin et soir, c’est mieux. Si on la fait une seule fois : entre Takussan et le Takussan du lendemain.",
+            "ar": {
+              "title": "متى تؤدّى؟",
+              "text": "مرة في اليوم على الأقل، ومرتين صباحا ومساء أفضل. ومن أدّاها مرة واحدة فوقتها من العصر إلى عصر اليوم التالي."
+            }
           },
           {
             "title": "Ensemble, à voix haute",
-            "text": "Si possible, on fait la Wazifa en groupe, assis en rangs, à voix haute et ensemble. Seul, on la récite doucement mais en s’entendant, assis et tourné vers la qibla."
+            "text": "Si possible, on fait la Wazifa en groupe, assis en rangs, à voix haute et ensemble. Seul, on la récite doucement mais en s’entendant, assis et tourné vers la qibla.",
+            "ar": {
+              "title": "جماعة وبصوت مرتفع",
+              "text": "تؤدّى الوظيفة جماعة إن أمكن، جلوسا في صفوف وبصوت واحد مرتفع. ومن كان وحده قرأها بصوت يُسمع به نفسه، جالسا مستقبل القبلة."
+            }
           },
           {
             "title": "Les quatre parties",
-            "text": "D’abord 30 fois Astaghfirullah. Ensuite 50 fois Salatul Fatihi. Puis 100 fois Lâ ilâha illallâh. Enfin 12 fois Djawharatul Kamal."
+            "text": "D’abord 30 fois Astaghfirullah. Ensuite 50 fois Salatul Fatihi. Puis 100 fois Lâ ilâha illallâh. Enfin 12 fois Djawharatul Kamal.",
+            "ar": {
+              "title": "أجزاؤها الأربعة",
+              "text": "أولا: أستغفر الله ثلاثين مرة. ثم صلاة الفاتح خمسين مرة. ثم لا إله إلا الله مائة مرة. وأخيرا جوهرة الكمال اثنتي عشرة مرة."
+            }
           },
           {
             "title": "La Djawharatul Kamal",
-            "text": "On la récite seulement avec les ablutions faites à l’eau, dans un lieu propre, assis, avec des habits propres. Si ce n’est pas possible, par exemple sans eau ou en voiture, on récite 20 fois Salatul Fatihi à la place."
+            "text": "On la récite seulement avec les ablutions faites à l’eau, dans un lieu propre, assis, avec des habits propres. Si ce n’est pas possible, par exemple sans eau ou en voiture, on récite 20 fois Salatul Fatihi à la place.",
+            "ar": {
+              "title": "جوهرة الكمال",
+              "text": "لا تُقرأ إلا بطهارة مائية، في مكان طاهر، جلوسا، بثياب طاهرة. فإن تعذّر ذلك، كفقد الماء أو الركوب، قُرئت صلاة الفاتح عشرين مرة بدلها."
+            }
           },
           {
             "title": "À retenir",
-            "text": "Pendant la Wazifa, la seule prière sur le Prophète est la Salatul Fatihi. En groupe, il faut un lieu propre où tiennent au moins six personnes."
+            "text": "Pendant la Wazifa, la seule prière sur le Prophète est la Salatul Fatihi. En groupe, il faut un lieu propre où tiennent au moins six personnes.",
+            "ar": {
+              "title": "للحفظ",
+              "text": "لا يُصلّى على النبي ﷺ في الوظيفة إلا بصلاة الفاتح. وفي الجماعة يلزم مكان طاهر يسع ستة أشخاص على الأقل."
+            }
           }
         ]
       },
-      "category": "La Tariqa"
+      "category": "La Tariqa",
+      "ar": {
+        "title": "الوظيفة",
+        "description": "ما هي، ومتى وكيف تؤدّى."
+      }
     },
     {
       "id": "lazim",
@@ -169,31 +197,59 @@
         "cards": [
           {
             "title": "Qu’est-ce que le Lazim ?",
-            "text": "Le Lazim, c’est le wird obligatoire du talibé. On le fait deux fois par jour, le matin et le soir, seul et à voix basse. On le reçoit d’un moukadam autorisé."
+            "text": "Le Lazim, c’est le wird obligatoire du talibé. On le fait deux fois par jour, le matin et le soir, seul et à voix basse. On le reçoit d’un moukadam autorisé.",
+            "ar": {
+              "title": "ما هو اللازم؟",
+              "text": "اللازم هو الورد الواجب على المريد. يؤدّى مرتين في اليوم، صباحا ومساء، فرديا وسرّا. ويؤخذ عن مقدّم مأذون."
+            }
           },
           {
             "title": "Les trois parties",
-            "text": "D’abord 100 fois Astaghfirullah. Ensuite 100 fois la prière sur le Prophète ; la meilleure est la Salatul Fatihi. Enfin 100 fois Lâ ilâha illallâh, et on termine par Muhammadun Rasûlullâh, alayhi salâmullâh."
+            "text": "D’abord 100 fois Astaghfirullah. Ensuite 100 fois la prière sur le Prophète ; la meilleure est la Salatul Fatihi. Enfin 100 fois Lâ ilâha illallâh, et on termine par Muhammadun Rasûlullâh, alayhi salâmullâh.",
+            "ar": {
+              "title": "أجزاؤه الثلاثة",
+              "text": "أولا: أستغفر الله مائة مرة. ثم الصلاة على النبي ﷺ مائة مرة، وأفضلها صلاة الفاتح. ثم لا إله إلا الله مائة مرة، ويختم بقول: محمد رسول الله عليه سلام الله."
+            }
           },
           {
             "title": "Le Lazim du matin",
-            "text": "Après la prière de Fajar, jusqu’au milieu de la matinée. Avec une bonne excuse, on peut encore le faire jusqu’à Timis. On peut aussi l’avancer la nuit, après Guéwé, mais il doit être fini avant l’appel de Fajar."
+            "text": "Après la prière de Fajar, jusqu’au milieu de la matinée. Avec une bonne excuse, on peut encore le faire jusqu’à Timis. On peut aussi l’avancer la nuit, après Guéwé, mais il doit être fini avant l’appel de Fajar.",
+            "ar": {
+              "title": "لازم الصباح",
+              "text": "من بعد صلاة الصبح إلى الضحى. ولصاحب العذر أن يؤدّيه إلى المغرب. ويجوز تقديمه ليلا بعد العشاء، على أن يتمّ قبل أذان الفجر."
+            }
           },
           {
             "title": "Le Lazim du soir",
-            "text": "Après Takussan, jusqu’à Guéwé. Avec une bonne excuse, on peut encore le faire jusqu’à Fajar."
+            "text": "Après Takussan, jusqu’à Guéwé. Avec une bonne excuse, on peut encore le faire jusqu’à Fajar.",
+            "ar": {
+              "title": "لازم المساء",
+              "text": "من بعد صلاة العصر إلى العشاء. ولصاحب العذر أن يؤدّيه إلى الفجر."
+            }
           },
           {
             "title": "Pour qu’il soit valable",
-            "text": "Avoir l’intention. Avoir fait ses ablutions. Corps, habits et lieu propres. Être bien couvert, comme pour la prière. Ne pas parler, sauf nécessité, et ne pas manger ni boire. S’il manque une de ces conditions, il faut le refaire."
+            "text": "Avoir l’intention. Avoir fait ses ablutions. Corps, habits et lieu propres. Être bien couvert, comme pour la prière. Ne pas parler, sauf nécessité, et ne pas manger ni boire. S’il manque une de ces conditions, il faut le refaire.",
+            "ar": {
+              "title": "شروط صحّته",
+              "text": "النية، والطهارة، وطهارة البدن والثوب والمكان، وستر العورة كما في الصلاة. وترك الكلام إلا لضرورة، وترك الأكل والشرب. فإن اختلّ شرط منها وجبت إعادته."
+            }
           },
           {
             "title": "Pour bien le faire",
-            "text": "S’asseoir. Se tourner vers la qibla. Réciter doucement, en bougeant les lèvres. Bien prononcer, sans aller trop vite. Un Lazim oublié doit être rattrapé."
+            "text": "S’asseoir. Se tourner vers la qibla. Réciter doucement, en bougeant les lèvres. Bien prononcer, sans aller trop vite. Un Lazim oublié doit être rattrapé.",
+            "ar": {
+              "title": "آدابه",
+              "text": "الجلوس، واستقبال القبلة، والذكر بصوت خفيّ مع تحريك الشفتين، وحسن النطق دون إسراع. ومن فاته اللازم قضاه."
+            }
           }
         ]
       },
-      "category": "La Tariqa"
+      "category": "La Tariqa",
+      "ar": {
+        "title": "اللازم",
+        "description": "الورد اللازم صباحا ومساء."
+      }
     },
     {
       "id": "chartes-tariqa",
@@ -288,119 +344,238 @@
           {
             "title": "1. Le wird reçu d’un moukadam",
             "text": "Recevoir le wird d’un moukadam autorisé, relié à la chaîne de transmission.",
-            "chapter": "Recevoir le wird"
+            "chapter": "Recevoir le wird",
+            "ar": {
+              "title": "1. أخذ الورد عن مقدّم",
+              "text": "تلقّي الورد عن مقدّم مأذون، متّصل السند.",
+              "chapter": "تلقّي الورد"
+            }
           },
           {
             "title": "2. Un seul wird",
             "text": "Ne pas prendre de wird d’une autre tariqa.",
-            "chapter": "Recevoir le wird"
+            "chapter": "Recevoir le wird",
+            "ar": {
+              "title": "2. ورد واحد",
+              "text": "عدم أخذ ورد من طريقة أخرى.",
+              "chapter": "تلقّي الورد"
+            }
           },
           {
             "title": "11. L’autorisation",
             "text": "Faire le wird seulement après en avoir reçu l’autorisation.",
-            "chapter": "Recevoir le wird"
+            "chapter": "Recevoir le wird",
+            "ar": {
+              "title": "11. الإذن",
+              "text": "عدم ذكر الورد إلا بعد الإذن فيه.",
+              "chapter": "تلقّي الورد"
+            }
           },
           {
             "title": "3. Le ziar",
             "text": "Ne pas faire de ziar auprès d’un saint qui n’est pas tidjane, vivant ou mort. Respecter quand même les savants des autres voies.",
-            "chapter": "Recevoir le wird"
+            "chapter": "Recevoir le wird",
+            "ar": {
+              "title": "3. الزيارة",
+              "text": "عدم زيارة وليّ من غير أهل الطريقة، حيّا أو ميّتا، مع احترام علماء الطرق الأخرى.",
+              "chapter": "تلقّي الورد"
+            }
           },
           {
             "title": "16. Pas de faux titre",
             "text": "Ne pas se faire passer pour un saint, ni donner le wird sans autorisation.",
-            "chapter": "Recevoir le wird"
+            "chapter": "Recevoir le wird",
+            "ar": {
+              "title": "16. لا ادّعاء",
+              "text": "عدم ادّعاء الولاية، ولا إعطاء الورد بغير إذن.",
+              "chapter": "تلقّي الورد"
+            }
           },
           {
             "title": "5. Aimer Cheikh",
             "text": "Aimer et respecter Cheikh Ahmed Tidjani et ses khalifes, toute sa vie.",
-            "chapter": "Aimer Cheikh"
+            "chapter": "Aimer Cheikh",
+            "ar": {
+              "title": "5. محبّة الشيخ",
+              "text": "محبّة الشيخ أحمد التجاني وخلفائه وتعظيمهم مدى الحياة.",
+              "chapter": "محبّة الشيخ"
+            }
           },
           {
             "title": "9. Une foi ferme",
             "text": "Avoir une foi ferme en Cheikh et en la tariqa.",
-            "chapter": "Aimer Cheikh"
+            "chapter": "Aimer Cheikh",
+            "ar": {
+              "title": "9. الاعتقاد الجازم",
+              "text": "الاعتقاد الجازم في الشيخ وفي الطريقة.",
+              "chapter": "محبّة الشيخ"
+            }
           },
           {
             "title": "7. Aucune hostilité",
             "text": "N’avoir aucune hostilité envers Cheikh ou ses khalifes.",
-            "chapter": "Aimer Cheikh"
+            "chapter": "Aimer Cheikh",
+            "ar": {
+              "title": "7. ترك العداوة",
+              "text": "عدم معاداة الشيخ أو خلفائه.",
+              "chapter": "محبّة الشيخ"
+            }
           },
           {
             "title": "10. Ne pas critiquer",
             "text": "Ne pas critiquer Cheikh, la tariqa, les khalifes ni les talibés.",
-            "chapter": "Aimer Cheikh"
+            "chapter": "Aimer Cheikh",
+            "ar": {
+              "title": "10. ترك الانتقاد",
+              "text": "عدم انتقاد الشيخ ولا الطريقة ولا الخلفاء ولا الإخوان.",
+              "chapter": "محبّة الشيخ"
+            }
           },
           {
             "title": "6. Rester humble",
             "text": "Ne pas se croire à l’abri de ses fautes.",
-            "chapter": "Aimer Cheikh"
+            "chapter": "Aimer Cheikh",
+            "ar": {
+              "title": "6. الخشية",
+              "text": "عدم الأمن من مكر الله.",
+              "chapter": "محبّة الشيخ"
+            }
           },
           {
             "title": "8. Jusqu’à la mort",
             "text": "Faire le wird sans jamais l’abandonner, jusqu’à la mort.",
-            "chapter": "Le wird chaque jour"
+            "chapter": "Le wird chaque jour",
+            "ar": {
+              "title": "8. حتى الممات",
+              "text": "المداومة على الورد دون تركه إلى الممات.",
+              "chapter": "الورد كل يوم"
+            }
           },
           {
             "title": "15. Ne pas négliger",
             "text": "Ne pas négliger le wird ni le faire en retard sans excuse.",
-            "chapter": "Le wird chaque jour"
+            "chapter": "Le wird chaque jour",
+            "ar": {
+              "title": "15. عدم التهاون",
+              "text": "عدم التهاون في الورد، ولا تأخيره عن وقته بغير عذر.",
+              "chapter": "الورد كل يوم"
+            }
           },
           {
             "title": "4. Les cinq prières",
             "text": "Faire les cinq prières en groupe, si possible.",
-            "chapter": "Le wird chaque jour"
+            "chapter": "Le wird chaque jour",
+            "ar": {
+              "title": "4. الصلوات الخمس",
+              "text": "أداء الصلوات الخمس في جماعة إن أمكن.",
+              "chapter": "الورد كل يوم"
+            }
           },
           {
             "title": "12. En groupe",
             "text": "Faire la Wazifa et la Hadratul Djouma du vendredi en groupe.",
-            "chapter": "Le wird chaque jour"
+            "chapter": "Le wird chaque jour",
+            "ar": {
+              "title": "12. الاجتماع",
+              "text": "أداء الوظيفة وهيللة الجمعة في جماعة.",
+              "chapter": "الورد كل يوم"
+            }
           },
           {
             "title": "14. Garder les liens",
             "text": "Ne pas couper les liens avec sa famille ni avec ses frères talibés.",
-            "chapter": "La fraternité"
+            "chapter": "La fraternité",
+            "ar": {
+              "title": "14. صلة الرحم",
+              "text": "عدم قطع الرحم، ولا قطيعة الإخوان في الطريقة.",
+              "chapter": "الأخوّة"
+            }
           },
           {
             "title": "17. Le respect",
             "text": "Respecter toute personne liée à Cheikh ou à la tariqa.",
-            "chapter": "La fraternité"
+            "chapter": "La fraternité",
+            "ar": {
+              "title": "17. الاحترام",
+              "text": "احترام كل من ينتسب إلى الشيخ أو إلى الطريقة.",
+              "chapter": "الأخوّة"
+            }
           },
           {
             "title": "18. La fraternité",
             "text": "Ne pas fâcher son frère talibé.",
-            "chapter": "La fraternité"
+            "chapter": "La fraternité",
+            "ar": {
+              "title": "18. الأخوّة",
+              "text": "عدم إغضاب الأخ في الطريقة.",
+              "chapter": "الأخوّة"
+            }
           },
           {
             "title": "13. La Djawharatul Kamal",
             "text": "Ne réciter la Djawharatul Kamal qu’avec les ablutions.",
-            "chapter": "Pendant le wird"
+            "chapter": "Pendant le wird",
+            "ar": {
+              "title": "13. جوهرة الكمال",
+              "text": "عدم قراءة جوهرة الكمال إلا بطهارة.",
+              "chapter": "أثناء الورد"
+            }
           },
           {
             "title": "19. La pureté",
             "text": "Être en état de pureté, avec des habits propres, dans un lieu propre.",
-            "chapter": "Pendant le wird"
+            "chapter": "Pendant le wird",
+            "ar": {
+              "title": "19. الطهارة",
+              "text": "الطهارة، وطهارة الثوب والمكان.",
+              "chapter": "أثناء الورد"
+            }
           },
           {
             "title": "20. La qibla",
             "text": "S’asseoir tourné vers la qibla pendant le wird, sauf exceptions.",
-            "chapter": "Pendant le wird"
+            "chapter": "Pendant le wird",
+            "ar": {
+              "title": "20. القبلة",
+              "text": "الجلوس مستقبل القبلة أثناء الورد، إلا لعذر.",
+              "chapter": "أثناء الورد"
+            }
           },
           {
             "title": "21. Le silence",
             "text": "Ne pas parler pendant le wird, sauf nécessité : répondre à ses parents, l’épouse à son mari, le talibé à son guide.",
-            "chapter": "Pendant le wird"
+            "chapter": "Pendant le wird",
+            "ar": {
+              "title": "21. الصمت",
+              "text": "ترك الكلام أثناء الورد إلا لضرورة: كإجابة الوالدين، والزوجة لزوجها، والمريد لشيخه.",
+              "chapter": "أثناء الورد"
+            }
           },
           {
             "title": "22. La concentration",
             "text": "Se concentrer sur les paroles du wird et bien les prononcer.",
-            "chapter": "Pendant le wird"
+            "chapter": "Pendant le wird",
+            "ar": {
+              "title": "22. التدبّر",
+              "text": "التدبّر في ألفاظ الورد وحسن النطق بها.",
+              "chapter": "أثناء الورد"
+            }
           },
           {
             "title": "23. La présence",
             "text": "Ressentir la présence du Prophète, paix et salut sur lui, de Cheikh ou de son guide.",
-            "chapter": "Pendant le wird"
+            "chapter": "Pendant le wird",
+            "ar": {
+              "title": "23. الاستحضار",
+              "text": "استحضار صورة النبي ﷺ أو الشيخ أو المرشد.",
+              "chapter": "أثناء الورد"
+            }
           }
         ]
+      },
+      "ar": {
+        "title": "شروط الطريقة الثلاثة والعشرون",
+        "description": "آداب المريد التجاني في خمسة أجزاء."
       }
     },
     {
@@ -584,43 +759,75 @@
         "cards": [
           {
             "title": "Les sept farata",
-            "text": "Il y a sept farata dans les ablutions. Ce sont les gestes obligatoires : sans eux, les ablutions ne sont pas valables."
+            "text": "Il y a sept farata dans les ablutions. Ce sont les gestes obligatoires : sans eux, les ablutions ne sont pas valables.",
+            "ar": {
+              "title": "فرائض الوضوء السبع",
+              "text": "فرائض الوضوء سبع، وهي أفعال واجبة لا يصحّ الوضوء بدونها."
+            }
           },
           {
             "title": "1. L’intention",
-            "text": "On commence par l’intention (niyya) : dans son cœur, on veut faire ses ablutions."
+            "text": "On commence par l’intention (niyya) : dans son cœur, on veut faire ses ablutions.",
+            "ar": {
+              "title": "1. النية",
+              "text": "يبدأ بالنية: أن يقصد بقلبه أداء الوضوء."
+            }
           },
           {
             "title": "2. Le visage",
             "text": "On lave tout le visage, des cheveux jusqu’au menton, et d’une oreille à l’autre.",
             "image": "/assets/quiz/ablution-visage.svg",
-            "imageAlt": "Laver le visage"
+            "imageAlt": "Laver le visage",
+            "ar": {
+              "title": "2. غسل الوجه",
+              "text": "يغسل الوجه كلّه، من منابت شعر الرأس إلى الذقن، ومن الأذن إلى الأذن."
+            }
           },
           {
             "title": "3. Les bras jusqu’aux coudes",
             "text": "On lave les mains et les bras jusqu’aux coudes, coudes compris. On lave aussi entre les doigts.",
             "image": "/assets/quiz/ablution-bras-coudes.svg",
-            "imageAlt": "Laver les bras jusqu’aux coudes"
+            "imageAlt": "Laver les bras jusqu’aux coudes",
+            "ar": {
+              "title": "3. غسل اليدين إلى المرفقين",
+              "text": "يغسل اليدين إلى المرفقين، والمرفقان داخلان، مع تخليل أصابع اليدين."
+            }
           },
           {
             "title": "4. La tête : le massah",
             "text": "On passe les mains mouillées sur la tête.",
             "image": "/assets/quiz/ablution-tete.svg",
-            "imageAlt": "Passer les mains mouillées sur la tête"
+            "imageAlt": "Passer les mains mouillées sur la tête",
+            "ar": {
+              "title": "4. مسح الرأس",
+              "text": "يمسح الرأس باليدين المبلولتين."
+            }
           },
           {
             "title": "5. Les pieds jusqu’aux chevilles",
             "text": "On lave les pieds jusqu’aux chevilles, chevilles comprises.",
             "image": "/assets/quiz/ablution-pieds-chevilles.svg",
-            "imageAlt": "Laver les pieds jusqu’aux chevilles"
+            "imageAlt": "Laver les pieds jusqu’aux chevilles",
+            "ar": {
+              "title": "5. غسل الرجلين إلى الكعبين",
+              "text": "يغسل الرجلين إلى الكعبين، والكعبان داخلان."
+            }
           },
           {
             "title": "6 et 7. Le dalk et le fawr",
-            "text": "On frotte chaque membre en le lavant : c’est le dalk. On enchaîne les ablutions sans longue pause : c’est le fawr."
+            "text": "On frotte chaque membre en le lavant : c’est le dalk. On enchaîne les ablutions sans longue pause : c’est le fawr.",
+            "ar": {
+              "title": "6 و7. الدلك والفور",
+              "text": "الدلك: إمرار اليد على العضو مع الغسل. والفور: الموالاة بين الأعضاء دون تفريق طويل."
+            }
           },
           {
             "title": "Si on oublie une farata",
-            "text": "Si on s’en rend compte vite, on la fait, puis on refait ce qui vient après. Si on s’en rend compte tard, on la fait seule, et on refait les prières faites depuis."
+            "text": "Si on s’en rend compte vite, on la fait, puis on refait ce qui vient après. Si on s’en rend compte tard, on la fait seule, et on refait les prières faites depuis.",
+            "ar": {
+              "title": "من نسي فرضا",
+              "text": "إن تذكّره بالقرب فعله وما بعده. وإن طال فعله وحده، وأعاد ما صلّى بعده."
+            }
           }
         ]
       }
@@ -791,49 +998,85 @@
         "cards": [
           {
             "title": "Les sunna des ablutions",
-            "text": "Les sunna sont fortement recommandées. On ne les laisse pas exprès. Il y en a huit."
+            "text": "Les sunna sont fortement recommandées. On ne les laisse pas exprès. Il y en a huit.",
+            "ar": {
+              "title": "سنن الوضوء",
+              "text": "السنن مؤكّدة، فلا تُترك عمدا. وهي ثمان."
+            }
           },
           {
             "title": "Les mains jusqu’aux poignets",
             "text": "Au début, on se lave les mains jusqu’aux poignets.",
             "image": "/assets/quiz/ablution-mains-poignets.svg",
-            "imageAlt": "Laver les mains jusqu’aux poignets"
+            "imageAlt": "Laver les mains jusqu’aux poignets",
+            "ar": {
+              "title": "غسل اليدين إلى الكوعين",
+              "text": "يغسل اليدين إلى الكوعين عند الشروع."
+            }
           },
           {
             "title": "La bouche : la madmada",
             "text": "On met de l’eau dans la bouche, on la remue, puis on la recrache.",
             "image": "/assets/quiz/ablution-bouche.svg",
-            "imageAlt": "Se rincer la bouche"
+            "imageAlt": "Se rincer la bouche",
+            "ar": {
+              "title": "المضمضة",
+              "text": "يُدخل الماء في فمه ويحرّكه ثم يمجّه."
+            }
           },
           {
             "title": "Le nez",
             "text": "On aspire un peu d’eau par le nez (istinchâq), puis on la rejette (istinthâr).",
             "image": "/assets/quiz/ablution-nez.svg",
-            "imageAlt": "Aspirer l’eau par le nez"
+            "imageAlt": "Aspirer l’eau par le nez",
+            "ar": {
+              "title": "الأنف",
+              "text": "يجذب الماء بأنفه وهو الاستنشاق، ثم ينثره وهو الاستنثار."
+            }
           },
           {
             "title": "La tête, aller et retour",
             "text": "Après le massah de la tête, on repasse les mains en sens inverse.",
             "image": "/assets/quiz/ablution-tete.svg",
-            "imageAlt": "Passer les mains sur la tête"
+            "imageAlt": "Passer les mains sur la tête",
+            "ar": {
+              "title": "ردّ مسح الرأس",
+              "text": "بعد مسح الرأس يردّ يديه من مؤخّر الرأس إلى مقدّمه."
+            }
           },
           {
             "title": "Les oreilles",
             "text": "On essuie les oreilles, en reprenant de l’eau pour elles.",
             "image": "/assets/quiz/ablution-oreilles.svg",
-            "imageAlt": "Essuyer les oreilles"
+            "imageAlt": "Essuyer les oreilles",
+            "ar": {
+              "title": "الأذنان",
+              "text": "يمسح الأذنين ويجدّد لهما الماء."
+            }
           },
           {
             "title": "L’ordre",
-            "text": "On fait les farata dans l’ordre : le visage, les bras, la tête, puis les pieds."
+            "text": "On fait les farata dans l’ordre : le visage, les bras, la tête, puis les pieds.",
+            "ar": {
+              "title": "الترتيب",
+              "text": "الترتيب بين الفرائض: الوجه، ثم اليدان، ثم الرأس، ثم الرجلان."
+            }
           },
           {
             "title": "Si on oublie une sunna",
-            "text": "On fait seulement la sunna oubliée. Pas besoin de refaire la prière."
+            "text": "On fait seulement la sunna oubliée. Pas besoin de refaire la prière.",
+            "ar": {
+              "title": "من نسي سنّة",
+              "text": "يفعلها وحدها، ولا يعيد الصلاة."
+            }
           },
           {
             "title": "Les gestes qui apportent du mérite",
-            "text": "Dire « Bismillah », utiliser le cure-dents (siwak), laver le visage et les bras une deuxième et une troisième fois, commencer par la droite, et ne pas gaspiller l’eau."
+            "text": "Dire « Bismillah », utiliser le cure-dents (siwak), laver le visage et les bras une deuxième et une troisième fois, commencer par la droite, et ne pas gaspiller l’eau.",
+            "ar": {
+              "title": "الفضائل",
+              "text": "التسمية، والسواك، والغسلة الثانية والثالثة للوجه واليدين، والبدء بالميامن، وقلّة الماء."
+            }
           }
         ]
       }
@@ -1011,41 +1254,69 @@
         "cards": [
           {
             "title": "Les quatorze farata",
-            "text": "Al-Akhdari compte quatorze farata dans la prière. Ce sont les gestes et les paroles obligatoires."
+            "text": "Al-Akhdari compte quatorze farata dans la prière. Ce sont les gestes et les paroles obligatoires.",
+            "ar": {
+              "title": "فرائض الصلاة الأربع عشرة",
+              "text": "ذكر الأخضري أربع عشرة فريضة في الصلاة، وهي أفعال وأقوال واجبة."
+            }
           },
           {
             "title": "L’intention et le premier « Allahou Akbar »",
             "text": "On entre en prière par la takbîr d’entrée, debout. On fait l’intention de la prière à ce moment-là.",
             "image": "/assets/quiz/priere-takbir.svg",
-            "imageAlt": "Dire Allahou Akbar, les mains levées"
+            "imageAlt": "Dire Allahou Akbar, les mains levées",
+            "ar": {
+              "title": "النية وتكبيرة الإحرام",
+              "text": "يدخل في الصلاة بتكبيرة الإحرام قائما، وينوي الصلاة عندها."
+            }
           },
           {
             "title": "La Fâtiha, debout",
             "text": "On récite la Fâtiha en restant debout.",
             "image": "/assets/quiz/priere-debout.svg",
-            "imageAlt": "Debout pendant la récitation"
+            "imageAlt": "Debout pendant la récitation",
+            "ar": {
+              "title": "الفاتحة والقيام لها",
+              "text": "يقرأ الفاتحة وهو قائم."
+            }
           },
           {
             "title": "L’inclinaison : le roukou’",
             "text": "On s’incline (roukou’), puis on se redresse bien droit.",
             "image": "/assets/quiz/priere-roukou.svg",
-            "imageAlt": "S’incliner, les mains sur les genoux"
+            "imageAlt": "S’incliner, les mains sur les genoux",
+            "ar": {
+              "title": "الركوع",
+              "text": "يركع، ثم يرفع منه معتدلا."
+            }
           },
           {
             "title": "La prosternation : le soujoud",
             "text": "On se prosterne, le front posé au sol, puis on se relève.",
             "image": "/assets/quiz/priere-soujoud.svg",
-            "imageAlt": "Front posé au sol"
+            "imageAlt": "Front posé au sol",
+            "ar": {
+              "title": "السجود",
+              "text": "يسجد على جبهته، ثم يرفع منه."
+            }
           },
           {
             "title": "Le calme dans chaque position",
-            "text": "On reste un instant calme dans chaque position : c’est la touma’nîna. Et on fait tout dans l’ordre."
+            "text": "On reste un instant calme dans chaque position : c’est la touma’nîna. Et on fait tout dans l’ordre.",
+            "ar": {
+              "title": "الطمأنينة",
+              "text": "يطمئنّ في كل ركن قليلا، ويرتّب الفرائض."
+            }
           },
           {
             "title": "Le salam, assis",
             "text": "On sort de la prière par le salam, en étant assis.",
             "image": "/assets/quiz/priere-salam.svg",
-            "imageAlt": "Tourner la tête pour le salam"
+            "imageAlt": "Tourner la tête pour le salam",
+            "ar": {
+              "title": "السلام والجلوس له",
+              "text": "يخرج من الصلاة بالسلام وهو جالس."
+            }
           }
         ]
       }
@@ -1210,37 +1481,65 @@
         "cards": [
           {
             "title": "Les sunna de la prière",
-            "text": "Les sunna sont fortement recommandées dans la prière. On ne les laisse pas exprès."
+            "text": "Les sunna sont fortement recommandées dans la prière. On ne les laisse pas exprès.",
+            "ar": {
+              "title": "سنن الصلاة",
+              "text": "السنن مؤكّدة في الصلاة، فلا تُترك عمدا."
+            }
           },
           {
             "title": "L’iqâma",
-            "text": "Avant la prière, on fait l’iqâma."
+            "text": "Avant la prière, on fait l’iqâma.",
+            "ar": {
+              "title": "الإقامة",
+              "text": "يقيم قبل الصلاة."
+            }
           },
           {
             "title": "La sourate après la Fâtiha",
             "text": "Après la Fâtiha, on récite une autre sourate, debout.",
             "image": "/assets/quiz/priere-debout.svg",
-            "imageAlt": "Debout pendant la récitation"
+            "imageAlt": "Debout pendant la récitation",
+            "ar": {
+              "title": "السورة بعد الفاتحة",
+              "text": "يقرأ بعد الفاتحة سورة وهو قائم."
+            }
           },
           {
             "title": "À voix haute ou à voix basse",
-            "text": "On récite à voix haute dans les prières à voix haute, et à voix basse dans les autres."
+            "text": "On récite à voix haute dans les prières à voix haute, et à voix basse dans les autres.",
+            "ar": {
+              "title": "الجهر والسرّ",
+              "text": "يجهر فيما يُجهر فيه، ويُسرّ فيما يُسرّ فيه."
+            }
           },
           {
             "title": "Les autres « Allahou Akbar »",
-            "text": "Tous les « Allahou Akbar » sont des sunna, sauf le premier. En se relevant du roukou’, on dit « Sami’allâhou liman hamidah »."
+            "text": "Tous les « Allahou Akbar » sont des sunna, sauf le premier. En se relevant du roukou’, on dit « Sami’allâhou liman hamidah ».",
+            "ar": {
+              "title": "التكبير والتسميع",
+              "text": "كل تكبيرة سنّة إلا تكبيرة الإحرام. ويقول عند الرفع من الركوع: سمع الله لمن حمده."
+            }
           },
           {
             "title": "Le tachahhoud, assis",
             "text": "Les deux tachahhoud (attahiyyâtou), et la position assise pour les dire, sont des sunna. On y ajoute la prière sur le Prophète (PSL).",
             "image": "/assets/quiz/priere-assis.svg",
-            "imageAlt": "Assis pour le tachahhoud"
+            "imageAlt": "Assis pour le tachahhoud",
+            "ar": {
+              "title": "التشهّد والجلوس له",
+              "text": "التشهّدان والجلوس لهما سنّة، ومعهما الصلاة على النبي ﷺ."
+            }
           },
           {
             "title": "La prosternation complète",
             "text": "On se prosterne aussi sur le nez, les mains, les genoux et le bout des orteils.",
             "image": "/assets/quiz/priere-soujoud.svg",
-            "imageAlt": "Prosternation"
+            "imageAlt": "Prosternation",
+            "ar": {
+              "title": "السجود على الأعضاء",
+              "text": "يسجد أيضا على الأنف واليدين والركبتين وأطراف القدمين."
+            }
           }
         ]
       }

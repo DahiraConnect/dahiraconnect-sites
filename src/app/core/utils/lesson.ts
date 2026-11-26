@@ -36,7 +36,7 @@ export function cardIn(card: LessonCard, lang: LessonLang): ShownCard {
     audio: v.audio,
     image,
     imageAlt,
-    chapter,
+    chapter: v.chapter ?? chapter,
   };
 }
 

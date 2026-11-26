@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, afterNextRender, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, afterNextRender, computed, inject, signal } from '@angular/core';
 import { QuizService } from '../../core/data/quiz.service';
 import { LessonLang, hasLesson } from '../../core/models';
 import { lessonLangs } from '../../core/utils/lesson';
@@ -7,16 +7,9 @@ import { DarkHero } from '../../shared/ui/dark-hero/dark-hero';
 import { LANG_NAMES } from './lesson-i18n';
 import { ThemeCard } from './theme-card/theme-card';
 
-/** Ce que chaque langue propose, écrit dans cette langue */
-const LANG_HINTS: Record<LessonLang, string> = {
-  fr: 'Lire et écouter en français',
-  ar: 'اقرأ واستمع بالعربية',
-  wo: 'Écouter en wolof',
-};
-
 /**
- * Rubrique « Apprendre » : thèmes à écouter et à jouer, filtrables par catégorie.
- * À la première visite, on demande la langue (une seule fois, gardée sur le téléphone).
+ * Rubrique « Apprendre » : thèmes à écouter et à jouer, filtrables par catégorie,
+ * avec une liste déroulante pour la langue des leçons et des quiz (gardée sur le téléphone).
  */
 @Component({
   selector: 'app-learn-page',
@@ -39,48 +32,21 @@ export default class LearnPage {
     this.category() ? this.themes().filter((t) => t.category === this.category()) : this.themes(),
   );
 
-  /** Langue choisie : undefined avant lecture du téléphone (rien d'affiché), null si jamais choisie */
-  protected readonly language = signal<LessonLang | null | undefined>(undefined);
+  /** Langue des leçons et des quiz (français tant qu'on n'a rien choisi) */
+  protected readonly language = signal<LessonLang>('fr');
   /** Langues proposées : français et arabe ; wolof dès qu'une leçon a ses enregistrements */
   protected readonly offered = computed<LessonLang[]>(() => {
     const wolof = this.themes().some((t) => hasLesson(t) && lessonLangs(t.lesson!).includes('wo'));
     return wolof ? ['fr', 'ar', 'wo'] : ['fr', 'ar'];
   });
   protected readonly names = LANG_NAMES;
-  protected readonly hints = LANG_HINTS;
-  protected readonly canSpeak = signal(false);
 
   constructor() {
-    afterNextRender(() => {
-      this.language.set(this.quizService.language());
-      this.canSpeak.set(typeof speechSynthesis !== 'undefined' && typeof SpeechSynthesisUtterance !== 'undefined');
-    });
-    inject(DestroyRef).onDestroy(() => {
-      if (typeof speechSynthesis !== 'undefined') speechSynthesis.cancel();
-    });
+    afterNextRender(() => this.language.set(this.quizService.preferredLessonLang()));
   }
 
   protected choose(lang: LessonLang): void {
-    if (typeof speechSynthesis !== 'undefined') speechSynthesis.cancel();
     this.quizService.setLanguage(lang);
     this.language.set(lang);
-  }
-
-  protected change(): void {
-    this.language.set(null);
-  }
-
-  /** Lit la question à voix haute, en français puis en arabe */
-  protected speakQuestion(): void {
-    if (!this.canSpeak()) return;
-    speechSynthesis.cancel();
-    const say = (text: string, lang: string) => {
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = lang;
-      u.rate = 0.9;
-      speechSynthesis.speak(u);
-    };
-    say('Dans quelle langue voulez-vous apprendre ? Français, ou arabe.', 'fr-FR');
-    say('بأي لغة تريد أن تتعلم؟ الفرنسية أو العربية.', 'ar-SA');
   }
 }

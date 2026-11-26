@@ -23,6 +23,8 @@ export interface LessonVersion {
   text?: string;
   /** Enregistrement par une vraie voix (ex. '/assets/lecons/wazifa/1-wo.m4a') */
   audio?: string;
+  /** Nom de la partie dans cette langue */
+  chapter?: string;
 }
 
 /** Une carte de leçon : une idée courte, une image, un son. */

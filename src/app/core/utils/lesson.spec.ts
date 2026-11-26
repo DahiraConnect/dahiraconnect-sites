@@ -37,4 +37,10 @@ describe('lesson', () => {
     ]);
     expect(lessonOutline(['a'], [undefined])).toEqual([{ chapter: undefined, items: [{ index: 0, title: 'a' }] }]);
   });
+
+  it('donne le nom de la partie dans la langue choisie, sinon en français', () => {
+    const card = { title: 'Un', chapter: 'Partie', ar: { title: 'واحد', chapter: 'جزء' }, wo: { audio: '/wo.m4a' } };
+    expect(cardIn(card, 'ar').chapter).toBe('جزء');
+    expect(cardIn(card, 'wo').chapter).toBe('Partie');
+  });
 });
