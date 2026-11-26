@@ -110,7 +110,7 @@
             "Debout en marchant"
           ],
           "answer": 0,
-          "explanation": "Si possible, en groupe, assis en rangs, à voix haute et ensemble.",
+          "explanation": "Si possible, les hommes la font ensemble, à voix haute, assis en cercle.",
           "ar": {
             "question": "كيف تؤدّى الوظيفة إن أمكن؟",
             "choices": [
@@ -118,7 +118,7 @@
               "فرديا دون كلام",
               "قياما مع المشي"
             ],
-            "explanation": "تؤدّى جماعة إن أمكن، جلوسا في صفوف وبصوت واحد مرتفع."
+            "explanation": "يجتمع لها الرجال إن أمكن، جهرا، جلوسا في حلقة."
           }
         }
       ],
@@ -134,42 +134,42 @@
           },
           {
             "title": "Quand la faire ?",
-            "text": "Au moins une fois par jour. Deux fois, matin et soir, c’est mieux. Si on la fait une seule fois : entre Takussan et le Takussan du lendemain.",
+            "text": "Au moins une fois par jour : le matin ou le soir. Deux fois, matin et soir, c’est mieux.",
             "ar": {
               "title": "متى تؤدّى؟",
-              "text": "مرة في اليوم على الأقل، ومرتين صباحا ومساء أفضل. ومن أدّاها مرة واحدة فوقتها من العصر إلى عصر اليوم التالي."
+              "text": "مرة في اليوم والليلة على الأقل، إما صباحا وإما مساء. ومرتين، صباحا ومساء، أفضل."
             }
           },
           {
             "title": "Ensemble, à voix haute",
-            "text": "Si possible, on fait la Wazifa en groupe, assis en rangs, à voix haute et ensemble. Seul, on la récite doucement mais en s’entendant, assis et tourné vers la qibla.",
+            "text": "Les hommes la font ensemble, à voix haute, assis en cercle. Les femmes ne la récitent pas à voix haute. Seul, on la récite en s’entendant, assis et tourné vers la qibla.",
             "ar": {
               "title": "جماعة وبصوت مرتفع",
-              "text": "تؤدّى الوظيفة جماعة إن أمكن، جلوسا في صفوف وبصوت واحد مرتفع. ومن كان وحده قرأها بصوت يُسمع به نفسه، جالسا مستقبل القبلة."
+              "text": "يجتمع لها الرجال، جهرا، جلوسا في حلقة. والنساء لا يجهرن بها. ومن كان وحده قرأها بصوت يُسمع به نفسه، جالسا مستقبل القبلة."
             }
           },
           {
             "title": "Les quatre parties",
-            "text": "D’abord 30 fois Astaghfirullah. Ensuite 50 fois Salatul Fatihi. Puis 100 fois Lâ ilâha illallâh. Enfin 12 fois Djawharatul Kamal.",
+            "text": "D’abord 30 fois « Astaghfirullah al-‘Azîm, alladhî lâ ilâha illâ Huwa al-Hayyu al-Qayyûm ». Ensuite 50 fois Salatul Fatihi. Puis 100 fois Lâ ilâha illallâh. Enfin 12 fois Djawharatul Kamal.",
             "ar": {
               "title": "أجزاؤها الأربعة",
-              "text": "أولا: أستغفر الله ثلاثين مرة. ثم صلاة الفاتح خمسين مرة. ثم لا إله إلا الله مائة مرة. وأخيرا جوهرة الكمال اثنتي عشرة مرة."
+              "text": "أولا: «أستغفر الله العظيم الذي لا إله إلا هو الحيّ القيّوم» ثلاثين مرة. ثم صلاة الفاتح خمسين مرة. ثم لا إله إلا الله مائة مرة. وأخيرا جوهرة الكمال اثنتي عشرة مرة."
             }
           },
           {
             "title": "La Djawharatul Kamal",
-            "text": "On la récite seulement avec les ablutions faites à l’eau, dans un lieu propre, assis, avec des habits propres. Si ce n’est pas possible, par exemple sans eau ou en voiture, on récite 20 fois Salatul Fatihi à la place.",
+            "text": "On la récite seulement avec les ablutions faites à l’eau, dans un lieu propre, assis, tourné vers la qibla, avec des habits propres. Si ce n’est pas possible (sans eau, en voyage), on récite 20 fois Salatul Fatihi à la place.",
             "ar": {
               "title": "جوهرة الكمال",
-              "text": "لا تُقرأ إلا بطهارة مائية، في مكان طاهر، جلوسا، بثياب طاهرة. فإن تعذّر ذلك، كفقد الماء أو الركوب، قُرئت صلاة الفاتح عشرين مرة بدلها."
+              "text": "لا تُقرأ إلا بالطهارة المائية، في مكان طاهر، جلوسا مستقبل القبلة، بثياب طاهرة. فإن تعذّر ذلك، كالتيمّم أو السفر، قُرئت صلاة الفاتح عشرين مرة بدلها."
             }
           },
           {
             "title": "À retenir",
-            "text": "Pendant la Wazifa, la seule prière sur le Prophète est la Salatul Fatihi. En groupe, il faut un lieu propre où tiennent au moins six personnes.",
+            "text": "Pendant la Wazifa, la seule prière sur le Prophète est la Salatul Fatihi. En groupe, il faut un lieu propre où tiennent au moins six personnes. Une Wazifa oubliée se rattrape.",
             "ar": {
               "title": "للحفظ",
-              "text": "لا يُصلّى على النبي ﷺ في الوظيفة إلا بصلاة الفاتح. وفي الجماعة يلزم مكان طاهر يسع ستة أشخاص على الأقل."
+              "text": "لا يُصلّى على النبي ﷺ في الوظيفة إلا بصلاة الفاتح. وفي الجماعة يلزم مكان طاهر يسع ستة أشخاص على الأقل. والوظيفة إذا فاتت تُقضى."
             }
           }
         ]
@@ -321,10 +321,10 @@
           },
           {
             "title": "Le Lazim du matin",
-            "text": "Après la prière de Fajar, jusqu’au milieu de la matinée. Avec une bonne excuse, on peut encore le faire jusqu’à Timis. On peut aussi l’avancer la nuit, après Guéwé, mais il doit être fini avant l’appel de Fajar.",
+            "text": "Après la prière de Fajar, jusqu’à un peu avant Tisbar. Avec une bonne excuse, on peut encore le faire jusqu’à Timis. On peut aussi l’avancer la nuit, après Guéwé : si Fajar arrive avant la fin, on le termine, puis on le refait à son heure.",
             "ar": {
               "title": "لازم الصباح",
-              "text": "من بعد صلاة الصبح إلى الضحى. ولصاحب العذر أن يؤدّيه إلى المغرب. ويجوز تقديمه ليلا بعد العشاء، على أن يتمّ قبل أذان الفجر."
+              "text": "من بعد صلاة الصبح إلى قُبيل الظهر. ولصاحب العذر أن يؤدّيه إلى المغرب. ويجوز تقديمه ليلا بعد العشاء، فإن طلع الفجر قبل تمامه أكمله وأعاده في وقته."
             }
           },
           {
@@ -337,10 +337,10 @@
           },
           {
             "title": "Pour qu’il soit valable",
-            "text": "Avoir l’intention. Avoir fait ses ablutions. Corps, habits et lieu propres. Être bien couvert, comme pour la prière. Ne pas parler, sauf nécessité, et ne pas manger ni boire. S’il manque une de ces conditions, il faut le refaire.",
+            "text": "Avoir l’intention. Avoir fait ses ablutions. Corps, habits et lieu propres. Être bien couvert, comme pour la prière. Ne pas parler, sauf nécessité, si un geste ne suffit pas. S’il manque une de ces conditions, il faut le refaire.",
             "ar": {
               "title": "شروط صحّته",
-              "text": "النية، والطهارة، وطهارة البدن والثوب والمكان، وستر العورة كما في الصلاة. وترك الكلام إلا لضرورة، وترك الأكل والشرب. فإن اختلّ شرط منها وجبت إعادته."
+              "text": "النية، والطهارة، وطهارة البدن والثوب والمكان، وستر العورة كما في الصلاة، وترك الكلام إلا لضرورة إن لم تكفِ الإشارة. فإن اختلّ شرط منها وجبت إعادته."
             }
           },
           {
@@ -553,11 +553,11 @@
           },
           {
             "title": "3. Le ziar",
-            "text": "Ne pas faire de ziar auprès d’un saint qui n’est pas tidjane, vivant ou mort. Respecter quand même les savants des autres voies.",
+            "text": "Ne pas faire de ziar auprès d’un saint qui n’est pas tidjane, vivant ou mort, pour chercher sa bénédiction. Les aimer et les respecter tous quand même. Rendre visite à sa famille ou à quelqu’un pour Dieu reste permis.",
             "chapter": "Recevoir le wird",
             "ar": {
               "title": "3. الزيارة",
-              "text": "عدم زيارة وليّ من غير أهل الطريقة، حيّا أو ميّتا، مع احترام علماء الطرق الأخرى.",
+              "text": "عدم زيارة الأولياء من غير أهل الطريقة، أحياء وأمواتا، للتبرّك والاستمداد، مع محبّتهم وتعظيمهم جميعا. ولا يُمنع التواصل في الله وصلة الرحم.",
               "chapter": "تلقّي الورد"
             }
           },
@@ -643,11 +643,11 @@
           },
           {
             "title": "4. Les cinq prières",
-            "text": "Faire les cinq prières en groupe, si possible.",
+            "text": "Faire les cinq prières en groupe, si possible, et être bon envers ses parents.",
             "chapter": "Le wird chaque jour",
             "ar": {
               "title": "4. الصلوات الخمس",
-              "text": "أداء الصلوات الخمس في جماعة إن أمكن.",
+              "text": "أداء الصلوات الخمس في جماعة إن أمكن، وبرّ الوالدين.",
               "chapter": "الورد كل يوم"
             }
           },

@@ -106,6 +106,14 @@ Un Lazim oublié doit être rattrapé.
 - **Leçons des ablutions et de la prière** (Farata ndiapp, Sunna ndiapp, Farata diouli, Sunna diouli), d'après le *Mukhtasar d'Al-Akhdari* (rite malikite), traduction française arabe-français, sections « catégorisation légale des éléments du wuduu' » et « de la salaat » : 7 farata et 8 sunna des ablutions, gestes méritoires, oublis ; 14 farata et sunna de la prière.
 - Tout le texte est dans `src/assets/mock/quiz.json`.
 
+## Vérification avec les sources tidjanes en arabe (26/11/2026)
+
+Sources : [فقه الطريقة التجانية](https://tidjaniya.com/ar/fiqh-tariqa-tidjaniya/) et [شروط الطريقة التجانية](https://tidjaniya.com/ar/%D8%B4%D8%B1%D9%88%D8%B7-%D8%A7%D9%84%D8%B7%D8%B1%D9%8A%D9%82%D8%A9-%D8%A7%D9%84%D8%AA%D8%AC%D8%A7%D9%86%D9%8A%D8%A9/) (tidjaniya.com), [الأوراد اللازمة](https://www.tidjania.ma/%D8%A7%D9%84%D8%A3%D9%8E%D9%88%D8%B1%D9%8E%D8%A7%D8%AF%D9%8F-%D8%A7%D9%84%D9%84%D8%A7%D8%B2%D9%85%D9%8E%D8%A9-%D9%81%D9%8A-%D8%A7%D9%84%D8%B7%D8%B1%D9%8A%D9%82%D8%A9-%D8%A7%D9%84%D8%AA%D8%AC%D8%A7/) (direction tidjane du Maroc).
+
+- Points « À valider » tranchés : **20** Salatul Fatihi à la place de la Djawharatul Kamal (les deux sources) ; Wazifa **au moins une fois par jour, deux fois mieux** ; Lazim et Wazifa oubliés **se rattrapent toujours** (« يقضيان أبدا ») ; la page arabe annonce elle-même **23 conditions**.
+- Corrigé : Wazifa le matin ou le soir (pas « de Takussan à Takussan ») ; en **cercle** (التحليق), pour les hommes, les femmes sans voix haute ; formule longue de l'istighfar ; qibla pour la Djawharatul Kamal ; Lazim du matin jusqu'à **un peu avant Tisbar** ; boire n'est pas une condition de validité ; charte 4 avec la bonté envers les parents ; charte 3 précisée (visite pour la bénédiction, pas les liens de famille).
+- Reste au moukadam : l'ordre et le regroupement des 23 chartes (la page arabe les classe autrement : transmission, compagnonnage, conditions générales, validité, perfection) ; le « lieu pour six personnes » (source française seulement).
+
 ## Vérification avec le texte arabe d'Al-Akhdari (26/11/2026)
 
 Leçons et quiz des ablutions et de la prière comparés au texte arabe du *Mukhtasar* ([islamicbook.ws](https://www.islamicbook.ws/asol/maliki/mkhtsr-abd-alrhmn.html)) : chapitres « فرائض الوضوء » (farata, sunna, fadâ'il, oublis) et « فرائض الصلاة » (farata, sunna).
