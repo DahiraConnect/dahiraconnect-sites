@@ -17,6 +17,39 @@
 </app-dark-hero>
 
 <div class="sheet container">
+  @if (language() === null) {
+    <section class="lang-choice" aria-labelledby="lang-title">
+      <h2 id="lang-title" class="lang-choice__title">Dans quelle langue voulez-vous apprendre&nbsp;?</h2>
+      <p class="lang-choice__title lang-choice__title--ar" lang="ar" dir="rtl">بأي لغة تريد أن تتعلم؟</p>
+      @if (canSpeak()) {
+        <button type="button" class="lang-choice__listen" (click)="speakQuestion()">
+          <i class="ph ph-speaker-high" aria-hidden="true"></i>
+          Écouter
+        </button>
+      }
+      <div class="lang-choice__options">
+        @for (l of offered(); track l) {
+          <button
+            type="button"
+            class="lang-choice__btn"
+            [attr.lang]="l === 'ar' ? 'ar' : l === 'wo' ? 'wo' : 'fr'"
+            [attr.dir]="l === 'ar' ? 'rtl' : 'ltr'"
+            (click)="choose(l)"
+          >
+            <span class="lang-choice__name">{{ names[l] }}</span>
+            <span class="lang-choice__hint">{{ hints[l] }}</span>
+          </button>
+        }
+      </div>
+    </section>
+  } @else if (language(); as l) {
+    <p class="lang-current">
+      <i class="ph ph-globe-simple" aria-hidden="true"></i>
+      Langue&nbsp;: <strong [attr.lang]="l === 'ar' ? 'ar' : null">{{ names[l] }}</strong>
+      <button type="button" class="lang-current__change" (click)="change()">Changer</button>
+    </p>
+  }
+
   @if (shown().length) {
     <ul class="themes">
       @for (t of shown(); track t.id; let i = $index) {

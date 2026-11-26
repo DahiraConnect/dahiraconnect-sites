@@ -123,7 +123,7 @@ export default class QuizPlayPage {
 
   protected setLang(lang: QuizLang): void {
     this.lang.set(lang);
-    this.quiz.setPreferredLang(lang);
+    this.quiz.setLanguage(lang);
   }
 
   protected start(): void {

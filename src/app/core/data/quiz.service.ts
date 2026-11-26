@@ -2,6 +2,8 @@ import { Injectable, computed, inject } from '@angular/core';
 import { LessonLang, QuizLang, QuizTheme, hasLesson, hasQuiz } from '../models';
 import { TenantService } from '../tenant/tenant.service';
 
+const LANG_KEY = 'dc-langue';
+
 /** Rubrique « Apprendre », sans compte : thèmes (leçon et/ou quiz), meilleur score gardé sur le téléphone. */
 @Injectable({ providedIn: 'root' })
 export class QuizService {
@@ -45,23 +47,6 @@ export class QuizService {
     }
   }
 
-  /** Langue préférée pour les thèmes disponibles en arabe */
-  preferredLang(): QuizLang {
-    try {
-      return localStorage.getItem('dc-quiz-lang') === 'ar' ? 'ar' : 'fr';
-    } catch {
-      return 'fr';
-    }
-  }
-
-  setPreferredLang(lang: QuizLang): void {
-    try {
-      localStorage.setItem('dc-quiz-lang', lang);
-    } catch {
-      /* pas de stockage : le choix vaut pour cette partie */
-    }
-  }
-
   /** Leçon écoutée jusqu'au bout (gardé sur le téléphone) */
   lessonDone(themeId: string): boolean {
     try {
@@ -96,22 +81,37 @@ export class QuizService {
     }
   }
 
-  /** Langue préférée des leçons (le wolof en plus) */
-  preferredLessonLang(): LessonLang {
+  /**
+   * Langue choisie pour apprendre (leçons et quiz), une seule pour toute la rubrique.
+   * null : jamais choisie (on la demande à la première visite).
+   * Reprend les anciens réglages séparés du quiz et des leçons.
+   */
+  language(): LessonLang | null {
     try {
-      const value = localStorage.getItem('dc-lecon-lang');
-      return value === 'ar' || value === 'wo' ? value : 'fr';
+      const value =
+        localStorage.getItem(LANG_KEY) ?? localStorage.getItem('dc-lecon-lang') ?? localStorage.getItem('dc-quiz-lang');
+      return value === 'fr' || value === 'ar' || value === 'wo' ? value : null;
     } catch {
-      return 'fr';
+      return null;
     }
   }
 
-  setPreferredLessonLang(lang: LessonLang): void {
+  setLanguage(lang: LessonLang): void {
     try {
-      localStorage.setItem('dc-lecon-lang', lang);
+      localStorage.setItem(LANG_KEY, lang);
     } catch {
-      /* pas de stockage : le choix vaut pour cette leçon */
+      /* pas de stockage : le choix vaut pour cette visite */
     }
+  }
+
+  /** Langue du quiz (français ou arabe) */
+  preferredLang(): QuizLang {
+    return this.language() === 'ar' ? 'ar' : 'fr';
+  }
+
+  /** Langue des leçons (le wolof en plus) */
+  preferredLessonLang(): LessonLang {
+    return this.language() ?? 'fr';
   }
 
   private key(themeId: string): string {

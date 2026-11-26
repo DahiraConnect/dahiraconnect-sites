@@ -124,7 +124,7 @@ export default class LessonPage {
     this.listening = false;
     this.stop();
     this.lang.set(lang);
-    this.quiz.setPreferredLessonLang(lang);
+    this.quiz.setLanguage(lang);
   }
 
   protected toggleListen(): void {
