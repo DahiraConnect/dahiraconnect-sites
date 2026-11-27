@@ -62,29 +62,37 @@ await promisify(execFile)(
     env: { ...process.env, WRANGLER_LOG_PATH: join(tmpdir(), 'dahiraconnect-smoke-wrangler.log') },
   },
 );
+const workerConfig = {
+  compatibilityDate: '2026-11-23',
+  compatibilityFlags: ['nodejs_compat'],
+  manifest: {
+    mainModule: 'server.js',
+    modules: {
+      'server.js': { type: 'esm', contents: await readFile(`${packaged}/server.js`, 'utf8') },
+    },
+  },
+  assets: { directory: 'dist/dahiraconnect/browser', runWorkerFirst: true, hasUserWorker: true },
+  env: {
+    ASSETS: { type: 'assets' },
+    SUPABASE_URL: { type: 'text', value: `http://127.0.0.1:${dbPort}` },
+    SUPABASE_ANON_KEY: { type: 'text', value: 'local-public-key' },
+    PREVIEW_HOST: { type: 'text', value: '' },
+    PREVIEW_SITE: { type: 'text', value: '' },
+  },
+};
+const previewHost = 'dahiraconnect-preview.diemelamine398.workers.dev';
 const worker = new Miniflare({
   telemetry: { enabled: false },
   workers: [
+    { config: { ...workerConfig, name: 'dahiraconnect-smoke' } },
     {
       config: {
-        name: 'dahiraconnect-smoke',
-        compatibilityDate: '2026-11-23',
-        compatibilityFlags: ['nodejs_compat'],
-        manifest: {
-          mainModule: 'server.js',
-          modules: {
-            'server.js': { type: 'esm', contents: await readFile(`${packaged}/server.js`, 'utf8') },
-          },
-        },
-        assets: {
-          directory: 'dist/dahiraconnect/browser',
-          runWorkerFirst: true,
-          hasUserWorker: true,
-        },
+        ...workerConfig,
+        name: 'dahiraconnect-preview-smoke',
         env: {
-          ASSETS: { type: 'assets' },
-          SUPABASE_URL: { type: 'text', value: `http://127.0.0.1:${dbPort}` },
-          SUPABASE_ANON_KEY: { type: 'text', value: 'local-public-key' },
+          ...workerConfig.env,
+          PREVIEW_HOST: { type: 'text', value: previewHost },
+          PREVIEW_SITE: { type: 'text', value: 'moutahabina' },
         },
       },
     },
@@ -135,6 +143,23 @@ try {
   assert.ok(calls.some((url) => url.searchParams.get('adresse') === 'eq.nouveau-dahira'));
   console.log(
     '✓ Isolation des sites et refus des sites hors ligne ; aucune base distante utilisée',
+  );
+  const preview = await worker.getWorker('dahiraconnect-preview-smoke');
+  const previewResponse = await preview.fetch(`https://${previewHost}/api/site?tenant=autre`, {
+    headers: { Host: previewHost },
+  });
+  assert.equal(previewResponse.status, 200);
+  const previewPage = await preview.fetch(`https://${previewHost}/`, {
+    headers: { Host: previewHost },
+  });
+  assert.equal(previewPage.status, 200);
+  assert.ok((await previewPage.text()).includes(profil.name));
+  assert.equal(previewResponse.headers.get('X-Robots-Tag'), 'noindex, nofollow');
+  assert.equal((await previewResponse.json()).dahira.slug, 'moutahabina');
+  assert.equal((await preview.fetch('https://autre.compte.workers.dev/')).status, 404);
+  assert.equal((await worker.dispatchFetch(`https://${previewHost}/`)).status, 404);
+  console.log(
+    '✓ Prévisualisation isolée : site imposé, pas d’indexation et aucun accès sur le Worker de production',
   );
   if (process.env.CHROME_BIN) {
     const local = await worker.ready;

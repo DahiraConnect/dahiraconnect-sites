@@ -23,9 +23,27 @@ Le contenu public est mis en cache 120 secondes sous l’URL `https://<adresse>.
 
 Le manifeste reste installable. Le service worker statique est désactivé dans le profil Worker ; son manifeste `/ngsw.json` répond 404 pour retirer les anciennes installations. L’usage hors ligne doit être réintroduit avec une stratégie adaptée aux données dynamiques. Les autres dahiras utilisent leur logo pour les icônes ; Moutahabina conserve ses icônes existantes.
 
+## Prévisualisation sans changer le DNS
+
+Le profil `preview` publie un Worker distinct, `dahiraconnect-preview`, sur `https://dahiraconnect-preview.diemelamine398.workers.dev` :
+
+```sh
+npm run deploy:worker:preview
+```
+
+Cette adresse est publique. Elle ne sert que le site publié `moutahabina`, lu anonymement dans Supabase, et répond avec `X-Robots-Tag: noindex, nofollow`. Seul l’hôte configuré peut être réécrit vers le site sélectionné ; ni un paramètre `tenant` ni un en-tête visiteur ne permettent de choisir un autre site. Les paramètres sont vides dans la configuration de production. Les clés de cache gardent l’hôte d’origine pour isoler la prévisualisation.
+
+Le build, 11 tests unitaires du Worker et le test du runtime couvrant les deux configurations ont été exécutés localement. L’envoi vers Cloudflare a été explicitement autorisé le 23/11/2026. La prévisualisation a été déployée et vérifiée en ligne (version `c0af455a-b0ab-46aa-8143-1c2c61a6efc2`).
+
+Vérifié sur cette version : les huit pages publiques principales, une fiche événement et un album, le logo, le manifeste, le sitemap, les robots, le calendrier, l’API et une vraie 404. Les titres, adresses canoniques et métadonnées de partage des pages comparées correspondent au site Pages actuel. Supabase fournit 3 événements et 5 albums ; un paramètre `tenant` visiteur ne change pas le site de prévisualisation. Toutes les réponses testées portent l’en-tête `noindex, nofollow`. Le rendu et l’hydratation Angular ont aussi été vérifiés dans Chrome sur cette adresse publique.
+
+Le test en ligne a révélé qu’Angular valide aussi l’en-tête `Host`. La réécriture de prévisualisation aligne désormais cet en-tête avec l’URL et retire les en-têtes de transfert d’hôte. Le test du runtime reproduit cette requête, y compris le rendu HTML, pour éviter une régression.
+
 ## Préparer la bascule en production
 
-Constat du 23/11/2026 : la zone `akkili.sn` du compte Cloudflare connecté est `pending`. Le projet Pages `dahiraconnect-sites` sert encore `moutahabina.akkili.sn`. Le profil Worker n’est pas encore raccordé aux domaines ; aucune migration SQL n’est nécessaire.
+Constat du 23/11/2026 : la zone `akkili.sn` du compte Cloudflare connecté est maintenant `active` et le registre `.sn` confirme la délégation Cloudflare. Le projet Pages `dahiraconnect-sites` sert encore `moutahabina.akkili.sn`. Le profil Worker n’est pas encore raccordé aux domaines ; aucune migration SQL n’est nécessaire. Les deux demandes de fusion initiales ont été fusionnées et leurs contrôles GitHub sont au vert.
+
+L’inventaire public et les précautions avant activation sont détaillés dans [dns-akkili.md](dns-akkili.md). La zone Cloudflare a été complétée après autorisation explicite : les 23 enregistrements de l’export OVH, dont les sous-domaines des applications, ont été vérifiés. Le changement des serveurs DNS chez OVH est effectué et la délégation Cloudflare est confirmée.
 
 1. Activer/vérifier la zone DNS faisant autorité pour `akkili.sn` avant de modifier le routage. Relever la configuration et le déploiement Pages actuels pour pouvoir revenir en arrière.
 2. Vérifier le compte cible et le nom `dahiraconnect` avant `npm run deploy:worker`. Ne pas remplacer un Worker homonyme sans contrôler ses usages et ses bindings.
